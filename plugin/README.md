@@ -1,8 +1,13 @@
 # Hermes — a scripting language inside Minecraft
 
+> This is the plugin's README — see the repo root [README](../README.md) for
+> the full documentation, legal info, and license.
+
 Hermes is a Skript-like language for Paper servers. Scripts are plain-text
 `.her` files — no plugins per feature. Write a trigger, drop it in the
 scripts folder, run `/hermes reload`.
+
+Not affiliated with Mojang/Microsoft or SkriptLang. MIT licensed.
 
 ## Install
 
