@@ -14,6 +14,8 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -54,12 +56,14 @@ public final class HermesPlugin extends JavaPlugin implements TabCompleter {
         getCommand("hermes").setTabCompleter(this);
 
         int loaded = loadScripts();
+        registerScriptCommands();
         getLogger().info("Loaded " + loaded + " script" + (loaded == 1 ? "" : "s") + " from "
                 + scriptsFolder().toAbsolutePath());
     }
 
     @Override
     public void onDisable() {
+        unregisterScriptCommands();
         if (tickTaskId >= 0) {
             Bukkit.getScheduler().cancelTask(tickTaskId);
             tickTaskId = -1;
@@ -146,6 +150,7 @@ public final class HermesPlugin extends JavaPlugin implements TabCompleter {
 
     /** Drops everything and reloads all scripts. */
     public void reloadAll() {
+        unregisterScriptCommands();
         if (tickTaskId >= 0) {
             Bukkit.getScheduler().cancelTask(tickTaskId);
             tickTaskId = -1;
@@ -155,7 +160,69 @@ public final class HermesPlugin extends JavaPlugin implements TabCompleter {
         engine = new TaleEngine(world, new HermesScheduler(this));
         startTickTask();
         int loaded = loadScripts();
+        registerScriptCommands();
         getLogger().info("Reloaded " + loaded + " script(s).");
+    }
+
+    // ------------------------------------------------------------------
+    // script-defined commands
+    // ------------------------------------------------------------------
+
+    /** Every Bukkit command registered from the loaded scripts. */
+    private final List<Command> scriptCommands = new ArrayList<>();
+
+    private void registerScriptCommands() {
+        for (TaleEngine.RegisteredCommand rc : engine.commands()) {
+            String name = rc.def.name.startsWith("/")
+                    ? rc.def.name.substring(1).trim() : rc.def.name.trim();
+            if (name.isEmpty() || name.contains(" ")) {
+                getLogger().warning("Script command '" + rc.def.name
+                        + "' can't be registered (use a single word, e.g. /quest).");
+                continue;
+            }
+            Command cmd = new HermesCommand(name, rc);
+            Bukkit.getCommandMap().register("hermes", cmd);
+            scriptCommands.add(cmd);
+            getLogger().info("Registered script command /" + name);
+        }
+    }
+
+    private void unregisterScriptCommands() {
+        for (Command cmd : scriptCommands) {
+            cmd.unregister(Bukkit.getCommandMap());
+        }
+        scriptCommands.clear();
+    }
+
+    /** A command defined by a .her script. */
+    private final class HermesCommand extends Command {
+        private final TaleEngine.RegisteredCommand rc;
+
+        HermesCommand(String name, TaleEngine.RegisteredCommand rc) {
+            super(name);
+            this.rc = rc;
+            setDescription("A command defined by a Hermes script.");
+            setUsage("/" + name + (rc.def.argNames.isEmpty() ? "" : " <" + String.join("> <", rc.def.argNames) + ">"));
+        }
+
+        @Override
+        public boolean execute(CommandSender sender, String commandLabel, String[] args) {
+            if (!(sender instanceof Player player)) {
+                sender.sendMessage("§cOnly players can use this command.");
+                return true;
+            }
+            if (rc.def.permission != null && !player.hasPermission(rc.def.permission)) {
+                player.sendMessage("§cYou don't have permission to use this command.");
+                return true;
+            }
+            engine.fireCommand(rc, new BukkitWorld.BukkitPlayer(player), Arrays.asList(args));
+            return true;
+        }
+
+        @Override
+        public List<String> tabComplete(CommandSender sender, String alias, String[] args) {
+            return Collections.emptyList();
+        }
     }
 
     private void startTickTask() {

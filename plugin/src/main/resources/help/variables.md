@@ -132,19 +132,41 @@ clear list "quests"
 
 ---
 
-## 5. Temporary variables — from loops
+## 5. Temporary variables — from loops and commands
 
 When a loop runs, each item is placed in a temporary variable you choose
 with `as <name>`. It only exists inside that loop.
 
 ```
 loop over list "quests" as task
-    tell player "Next up: "
-    tell player task
+    tell player "Next up: ${task}"
 ```
 
 If the list holds text, `task` is text; if it holds numbers, `task` is a
 number.
+
+Loops can run over more than lists:
+
+```
+loop over all players as p
+    give player 1 bread
+
+loop over numbers from 1 to 10 as i
+    tell player "Counting ${i}..."
+
+loop over player's inventory as item
+    tell player "You have ${item}"
+```
+
+Inside `loop over all players`, `player` means the looped player — so
+`give player 1 bread` gives bread to every online player, one at a time.
+
+Script commands bind their arguments the same way:
+
+```
+command "/pay" with argument <amount> and argument <target>
+    tell player "You paid ${amount} to ${target}!"
+```
 
 ---
 

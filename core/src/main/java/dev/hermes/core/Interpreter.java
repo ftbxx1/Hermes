@@ -89,6 +89,8 @@ public final class Interpreter {
                 validateCalls(l.body);
             } else if (s instanceof ActionDef a) {
                 validateCalls(a.body);
+            } else if (s instanceof CommandDef c) {
+                validateCalls(c.body);
             }
         }
     }
@@ -113,6 +115,52 @@ public final class Interpreter {
         }
     }
 
+    /** Loops: over a list, over all players, over a range of numbers, or over an inventory. */
+    private void runLoop(LoopStmt loop, RunContext ctx) {
+        switch (loop.kind) {
+            case "players": {
+                for (PlayerRef lp : world.onlinePlayers()) {
+                    if (ctx.stopped) break;
+                    RunContext sub = new RunContext(ctx.scriptName, lp, ctx.mob);
+                    sub.temps.put(loop.itemName, Value.text(lp.name()));
+                    runBlock(loop.body, sub);
+                }
+                break;
+            }
+            case "numbers": {
+                int step = loop.from <= loop.to ? 1 : -1;
+                for (double i = loop.from; step > 0 ? i <= loop.to : i >= loop.to; i += step) {
+                    if (ctx.stopped) break;
+                    ctx.temps.put(loop.itemName, Value.number(i));
+                    runBlock(loop.body, ctx);
+                }
+                ctx.temps.remove(loop.itemName);
+                break;
+            }
+            case "inventory": {
+                PlayerRef p = needPlayer(loop, ctx);
+                for (String item : Dictionary.canonicalItems()) {
+                    if (ctx.stopped) break;
+                    if (world.countItem(p, item) <= 0) continue;
+                    ctx.temps.put(loop.itemName, Value.text(item));
+                    runBlock(loop.body, ctx);
+                }
+                ctx.temps.remove(loop.itemName);
+                break;
+            }
+            default: {
+                Value list = engine.vars.list(loop.listName);
+                for (Value item : list.items) {
+                    if (ctx.stopped) break;
+                    ctx.temps.put(loop.itemName, item);
+                    runBlock(loop.body, ctx);
+                }
+                ctx.temps.remove(loop.itemName);
+                break;
+            }
+        }
+    }
+
     private void run(Stmt s, RunContext ctx) {
         if (s instanceof IfStmt ifs) {
             if (evalCond(ifs.cond, ctx)) runBlock(ifs.thenBody, ctx);
@@ -122,13 +170,7 @@ public final class Interpreter {
                 runBlock(rep.body, ctx);
             }
         } else if (s instanceof LoopStmt loop) {
-            Value list = engine.vars.list(loop.listName);
-            for (Value item : list.items) {
-                if (ctx.stopped) break;
-                ctx.temps.put(loop.itemName, item);
-                runBlock(loop.body, ctx);
-            }
-            ctx.temps.remove(loop.itemName);
+            runLoop(loop, ctx);
         } else if (s instanceof StopStmt) {
             ctx.stopped = true;
         } else if (s instanceof SetStmt set) {
@@ -290,12 +332,14 @@ public final class Interpreter {
                         "There is no action called '" + call.action + "'.",
                         "Define it first:\n\naction " + call.action + " the player\n    tell the player \"Hi!\"");
             }
-            if (call.passPlayer) {
-                runBlock(def.body, ctx);
-            } else {
-                RunContext sub = new RunContext(ctx.scriptName, null, null);
-                runBlock(def.body, sub);
+            RunContext sub = new RunContext(ctx.scriptName,
+                    call.passPlayer ? ctx.player : null,
+                    call.passPlayer ? ctx.mob : null);
+            if (call.passPlayer) sub.temps.putAll(ctx.temps);
+            for (int i = 0; i < def.params.size() && i < call.args.size(); i++) {
+                sub.temps.put(def.params.get(i), eval(call.args.get(i), ctx));
             }
+            runBlock(def.body, sub);
         } else {
             throw new VerseError(s.line, "I don't know how to do that yet.");
         }

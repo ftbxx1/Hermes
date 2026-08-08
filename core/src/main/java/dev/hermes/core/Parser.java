@@ -197,6 +197,12 @@ public final class Parser {
                 }
                 return actionDef();
             }
+            case "command": {
+                if (blockDepth > 0) {
+                    throw err("'command' can only appear at the top of the script.");
+                }
+                return commandDef();
+            }
             case "region": {
                 if (blockDepth > 0) throw err("'region' can only appear at the top of the script.");
                 return regionDef();
@@ -547,6 +553,13 @@ public final class Parser {
     private Stmt actionCall(int line) {
         String name = cur().text;
         pos++;
+        List<ValueExpr> args = new ArrayList<>();
+        eatNoise();
+        while (!atEndOfLine() && !at("the") && !at("player") && !at("mob")
+                && !at("a") && !at("an")) {
+            args.add(value("an argument for " + name));
+            eatNoise();
+        }
         boolean passPlayer = false;
         if (at("the") || at("a") || at("an")) {
             pos++;
@@ -563,7 +576,7 @@ public final class Parser {
                     sourceLine(line));
         }
         endStatement();
-        return new ActionCallStmt(line, name, passPlayer);
+        return new ActionCallStmt(line, name, args, passPlayer);
     }
 
     // ------------------------------------------------------------------
@@ -800,9 +813,40 @@ public final class Parser {
         pos++;
         String name = word("an action name");
         eatNoise();
+        List<String> params = new ArrayList<>();
+        while (cur().type == Type.WORD && !at("player") && !at("mob")
+                && !at("the") && !at("a") && !at("an")) {
+            params.add(cur().text);
+            pos++;
+            eatNoise();
+        }
         if (at("player") || at("mob")) pos++;
         List<Stmt> body = block();
-        return new ActionDef(line, name, body);
+        return new ActionDef(line, name, params, body);
+    }
+
+    /** command "/pay" with argument <amount> and argument <target> permission "vip" */
+    private Stmt commandDef() {
+        int line = cur().line;
+        pos++;
+        String name = string("a command like \"/quest\"");
+        List<String> args = new ArrayList<>();
+        while (at("with") || at("and")) {
+            pos++;
+            expect("argument", "command \"/quest\" with argument <quest>");
+            args.add(word("an argument name"));
+        }
+        String permission = null;
+        if (eat("permission")) {
+            permission = cur().type == Type.STRING ? string("a permission") : word("a permission");
+        }
+        if (!atEndOfLine()) {
+            throw err("I don't understand this after the command. Try:\n"
+                    + "command \"/quest\" with argument <quest>\n"
+                    + "    tell player \"Quest: ${quest}\"");
+        }
+        List<Stmt> body = block();
+        return new CommandDef(line, name, args, permission, body);
     }
 
     private Stmt ifStmt() {
@@ -829,13 +873,33 @@ public final class Parser {
     private Stmt loopStmt() {
         int line = cur().line;
         pos++;
-        expect("over", "loop over list \"quests\" as task");
-        if (cur().type == Type.WORD && cur().text.equals("list")) pos++;
-        String listName = string("the list name");
+        expect("over", "loop over all players as p");
+        String kind;
+        String listName = null;
+        double from = 0, to = 0;
+        if (eat("all")) {
+            expect("players", "loop over all players as p");
+            kind = "players";
+        } else if (at("numbers")) {
+            pos++;
+            expect("from", "loop over numbers from 1 to 10 as i");
+            from = number("a number");
+            expect("to", "loop over numbers from 1 to 10 as i");
+            to = number("a number");
+            kind = "numbers";
+        } else if (at("player") && peek(1).type == Type.POSSESSIVE
+                && peek(2).type == Type.WORD && peek(2).text.equals("inventory")) {
+            pos += 3;
+            kind = "inventory";
+        } else {
+            if (at("list")) pos++;
+            listName = string("the list name");
+            kind = "list";
+        }
         expect("as", "loop over list \"quests\" as task");
         String itemName = word("a name for each item");
         List<Stmt> body = block();
-        return new LoopStmt(line, listName, itemName, body);
+        return new LoopStmt(line, kind, listName, from, to, itemName, body);
     }
 
     private Stmt whenBlock() {
@@ -1514,14 +1578,21 @@ public final class Parser {
                         op, new NumExpr(line, v)), true);
             }
             pos++;
+            boolean firstJoin = false;
+            if (eat("first")) firstJoin = true;
             String w = word("an event");
             switch (w) {
                 case "joins": {
                     eatNoise(); eat("world"); eat("server"); eat("game");
-                    return eventTrigger("joins", null, Trigger.Filter.NONE);
+                    Trigger t = eventTrigger("joins", null, Trigger.Filter.NONE);
+                    if (firstJoin) t.first = true;
+                    return t;
                 }
                 case "leaves": {
                     eatNoise(); eat("world"); eat("server"); eat("game");
+                    if (firstJoin) throw new VerseError(line,
+                            "'first' only works with 'when player joins'.",
+                            "when player first joins\n    give player 1 diamond", null);
                     return eventTrigger("leaves", null, Trigger.Filter.NONE);
                 }
                 case "dies": return eventTrigger("dies", null, Trigger.Filter.NONE);

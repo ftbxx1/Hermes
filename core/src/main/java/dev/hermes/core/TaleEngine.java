@@ -53,6 +53,14 @@ public final class TaleEngine {
     private final Map<String, Boolean> stateEdges = new HashMap<>();
     private final List<LoadedScript> loaded = new ArrayList<>();
     private final List<VerseError> loadErrors = new ArrayList<>();
+    private final Map<String, RegisteredCommand> commands = new LinkedHashMap<>();
+
+    /** A command defined by a script, ready to be executed. */
+    public static final class RegisteredCommand {
+        public final CommandDef def;
+        public final Interpreter interp;
+        RegisteredCommand(CommandDef def, Interpreter interp) { this.def = def; this.interp = interp; }
+    }
 
     public static final class LoadedScript {
         public final String fileName;
@@ -106,7 +114,8 @@ public final class TaleEngine {
             List<Stmt> startup = new ArrayList<>();
             for (Stmt s : script.body) {
                 if (s instanceof WhenBlock || s instanceof EveryBlock
-                        || s instanceof ActionDef || s instanceof RegionDef || s instanceof MarkDef) {
+                        || s instanceof ActionDef || s instanceof RegionDef || s instanceof MarkDef
+                        || s instanceof CommandDef) {
                     register(s, interp, fileName + "#" + idx.getAndIncrement());
                 } else {
                     startup.add(s);
@@ -145,6 +154,28 @@ public final class TaleEngine {
             world.defineRegion(r.name, WorldAPI.Vec3.of(minX, minY, minZ), WorldAPI.Vec3.of(maxX, maxY, maxZ));
         } else if (s instanceof MarkDef m) {
             marks.put(m.name, m.loc);
+        } else if (s instanceof CommandDef c) {
+            commands.put(c.name.toLowerCase(), new RegisteredCommand(c, interp));
+        }
+    }
+
+    /** Every command defined by the loaded scripts. */
+    public List<RegisteredCommand> commands() {
+        return new ArrayList<>(commands.values());
+    }
+
+    /** Runs a script command: binds the raw arguments as temporary variables. */
+    public void fireCommand(RegisteredCommand rc, PlayerRef p, List<String> rawArgs) {
+        Interpreter.RunContext ctx = new Interpreter.RunContext(rc.interp.scriptName(), p, null);
+        List<String> args = new ArrayList<>(rawArgs);
+        for (int i = 0; i < rc.def.argNames.size(); i++) {
+            String value = i < args.size() ? args.get(i) : "";
+            ctx.temps.put(rc.def.argNames.get(i), Value.text(value));
+        }
+        try {
+            rc.interp.runBlock(rc.def.body, ctx);
+        } catch (VerseError e) {
+            reportError(rc.interp, e, p);
         }
     }
 
@@ -206,9 +237,17 @@ public final class TaleEngine {
     private void dispatch(String event, Trigger.Filter filterType, String filter, PlayerRef p, MobRef m) {
         List<Handler> hs = handlers.get(event);
         if (hs == null) return;
+        boolean firstSeen = false;
         for (Handler h : hs) {
             Trigger t = h.trig;
             if (!matches(t, filterType, filter, m)) continue;
+            if (t.first && p != null) {
+                String seen = "hermes-seen-before";
+                boolean first = !firstSeen && vars.getPlayer(p.name(), seen).isNone();
+                if (!first) continue;
+                firstSeen = true;
+                vars.setPlayer(p.name(), seen, Value.number(1));
+            }
             try {
                 Interpreter.RunContext ctx = new Interpreter.RunContext(h.interp.scriptName(), p, m);
                 if (allConditions(t, h.interp, ctx)) {

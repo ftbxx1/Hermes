@@ -99,6 +99,61 @@ spawn particles "flame" near player
 delete list "quests"
 ```
 
+### Your own commands — `command`
+
+Scripts can register real player commands:
+
+```
+command "/kit" with argument <name>
+    permission "kits.vip"
+    give player 1 diamond
+    tell player "Kit ${name} claimed!"
+
+command "/pay" with argument <amount> and argument <target>
+    tell player "You paid ${amount} to ${target}!"
+```
+
+`with argument <name>` binds the typed argument as a temporary variable
+(see `${...}` above), `permission "..."` is optional and limits who can use
+the command. The command appears on the server the moment the script loads.
+
+### Reusable actions with arguments
+
+```
+action greet <name> the player
+    tell player "Hi ${name}!"
+
+when player joins
+    greet "Steve" the player
+```
+
+### Loops over everything
+
+```
+loop over list "quests" as task
+    tell player "TODO: ${task}"
+
+loop over all players as p
+    give player 1 bread
+
+loop over numbers from 1 to 10 as i
+    tell player "Counting ${i}..."
+
+loop over player's inventory as item
+    tell player "You have ${item}"
+```
+
+### First joins
+
+`when player first joins` runs only the first time a player ever joins the
+server (tracked per player, survives restarts):
+
+```
+when player first joins
+    give player 1 diamond sword
+    announce "${player's name} joined for the first time!"
+```
+
 Values: `player's name`, `player's world`, `player's x/y/z`,
 `player's gamemode`, `random number between 1 and 10`,
 `number of players`, `count of "diamond" in player's inventory`.

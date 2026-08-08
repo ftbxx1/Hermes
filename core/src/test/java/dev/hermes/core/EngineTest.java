@@ -64,6 +64,84 @@ class EngineTest {
     }
 
     @Test
+    void firstJoinsFiresOnlyOnce() {
+        Harness h = new Harness("""
+                when player first joins
+                    give player 1 diamond
+                when player joins
+                    add 1 to world's joins
+                """);
+        h.engine.playerEvent("joins", h.p1);
+        h.engine.playerEvent("joins", h.p1);
+        assertEquals(1, h.p1.inventory.getOrDefault("diamond", 0));
+        assertEquals(2, h.engine.vars.getWorld("joins").num);
+    }
+
+    @Test
+    void loopsOverAllPlayers() {
+        Harness h = new Harness("""
+                when player joins
+                    loop over all players as p
+                        give player 1 bread
+                """);
+        MockWorld.MockPlayer p2 = h.world.addPlayer("PlayerTwo");
+        h.engine.playerEvent("joins", h.p1);
+        assertEquals(1, h.p1.inventory.getOrDefault("bread", 0));
+        assertEquals(1, p2.inventory.getOrDefault("bread", 0));
+    }
+
+    @Test
+    void loopsOverNumbers() {
+        Harness h = new Harness("""
+                when player joins
+                    loop over numbers from 1 to 3 as i
+                        tell player "Number ${i}"
+                """);
+        h.engine.playerEvent("joins", h.p1);
+        assertTrue(h.world.messageContains("PlayerOne", "Number 1"));
+        assertTrue(h.world.messageContains("PlayerOne", "Number 3"));
+        assertFalse(h.world.messageContains("PlayerOne", "Number 4"));
+    }
+
+    @Test
+    void loopsOverInventory() {
+        Harness h = new Harness("""
+                when player joins
+                    loop over player's inventory as item
+                        tell player "You have ${item}"
+                """);
+        h.world.giveItem(h.p1, "bread", 1);
+        h.world.giveItem(h.p1, "diamond", 2);
+        h.engine.playerEvent("joins", h.p1);
+        assertTrue(h.world.messageContains("PlayerOne", "You have bread"));
+        assertTrue(h.world.messageContains("PlayerOne", "You have diamond"));
+    }
+
+    @Test
+    void scriptCommandBindsArguments() {
+        Harness h = new Harness("""
+                command "/pay" with argument <amount> and argument <target>
+                    tell player "You paid ${amount} to ${target}!"
+                """);
+        TaleEngine.RegisteredCommand rc = h.engine.commands().get(0);
+        assertEquals("/pay", rc.def.name);
+        h.engine.fireCommand(rc, h.p1, java.util.List.of("5", "Steve"));
+        assertTrue(h.world.messageContains("PlayerOne", "You paid 5 to Steve!"));
+    }
+
+    @Test
+    void actionWithParameters() {
+        Harness h = new Harness("""
+                action greet <name> the player
+                    tell player "Hi ${name}!"
+                when player joins
+                    greet "Steve" the player
+                """);
+        h.engine.playerEvent("joins", h.p1);
+        assertTrue(h.world.messageContains("PlayerOne", "Hi Steve!"));
+    }
+
+    @Test
     void killsPlayerWhoTouchesWater() {
         Harness h = new Harness("""
                 when player touches water

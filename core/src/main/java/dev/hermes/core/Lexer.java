@@ -118,6 +118,10 @@ public final class Lexer {
                 i++;
                 continue;
             }
+            if (c == '<' || c == '>') {
+                i++;
+                continue;
+            }
             if (c == '#') {
                 return;
             }

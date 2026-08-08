@@ -56,8 +56,10 @@ public final class Ast {
     }
 
     public static final class ActionDef extends Stmt {
-        public final String name; public final List<Stmt> body;
-        public ActionDef(int line, String name, List<Stmt> body) { super(line); this.name = name; this.body = body; }
+        public final String name; public final List<String> params; public final List<Stmt> body;
+        public ActionDef(int line, String name, List<String> params, List<Stmt> body) {
+            super(line); this.name = name; this.params = params; this.body = body;
+        }
     }
 
     public static final class IfStmt extends Stmt {
@@ -73,9 +75,27 @@ public final class Ast {
     }
 
     public static final class LoopStmt extends Stmt {
-        public final String listName; public final String itemName; public final List<Stmt> body;
-        public LoopStmt(int line, String listName, String itemName, List<Stmt> body) {
-            super(line); this.listName = listName; this.itemName = itemName; this.body = body;
+        /** "list", "players", "numbers" or "inventory". */
+        public final String kind;
+        public final String listName;   // kind == "list"
+        public final double from, to;   // kind == "numbers"
+        public final String itemName; public final List<Stmt> body;
+        public LoopStmt(int line, String kind, String listName, double from, double to,
+                        String itemName, List<Stmt> body) {
+            super(line); this.kind = kind; this.listName = listName;
+            this.from = from; this.to = to; this.itemName = itemName; this.body = body;
+        }
+    }
+
+    /** A player-facing command defined in a script: command "/quest" with argument <name>. */
+    public static final class CommandDef extends Stmt {
+        public final String name;          // "/quest"
+        public final List<String> argNames;
+        public final String permission;    // null = anyone
+        public final List<Stmt> body;
+        public CommandDef(int line, String name, List<String> argNames, String permission, List<Stmt> body) {
+            super(line); this.name = name; this.argNames = argNames;
+            this.permission = permission; this.body = body;
         }
     }
 
@@ -343,8 +363,10 @@ public final class Ast {
     }
 
     public static final class ActionCallStmt extends Stmt {
-        public final String action; public final boolean passPlayer;
-        public ActionCallStmt(int line, String action, boolean passPlayer) { super(line); this.action = action; this.passPlayer = passPlayer; }
+        public final String action; public final List<ValueExpr> args; public final boolean passPlayer;
+        public ActionCallStmt(int line, String action, List<ValueExpr> args, boolean passPlayer) {
+            super(line); this.action = action; this.args = args; this.passPlayer = passPlayer;
+        }
     }
 
     // ------------------------------------------------------------------
@@ -575,6 +597,8 @@ public final class Ast {
         public final List<Condition> conditions;
         /** STATE triggers with a player subject are evaluated for every online player. */
         public final boolean playerSubject;
+        /** "when player first joins": fires only the first time a player joins. */
+        public boolean first;
 
         public Trigger(Kind kind, String event, String filter, Filter filterType,
                        List<Condition> conditions, boolean playerSubject) {
