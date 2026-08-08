@@ -1,0 +1,17 @@
+name: Hermes
+version: ${project.version}
+main: dev.hermes.plugin.HermesPlugin
+api-version: 1.21
+description: A Skript-like scripting language that runs inside Minecraft.
+authors: [Hermes]
+
+commands:
+  hermes:
+    description: Manage Hermes scripts
+    usage: /hermes <reload|scripts|run|events|vars>
+    permission: hermes.admin
+
+permissions:
+  hermes.admin:
+    description: Reload scripts and manage Hermes
+    default: op

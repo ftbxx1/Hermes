@@ -1,0 +1,11 @@
+# ---------------------------------------------------------------------------
+# Hermes plugin configuration
+# ---------------------------------------------------------------------------
+
+# Folder (inside plugins/Hermes/) where .her scripts live. Subfolders are
+# loaded too, so you can organize your scripts by map or minigame.
+scripts-folder: hermes
+
+# How often state triggers ("when player touches water", "when it is
+# nighttime" ...) are checked, in ticks. 10 ticks = half a second.
+state-tick-interval: 10
