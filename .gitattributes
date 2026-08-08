@@ -1,0 +1,6 @@
+* text=auto
+*.java text eol=crlf
+*.md text eol=crlf
+*.her text eol=crlf
+*.png binary
+*.jar binary

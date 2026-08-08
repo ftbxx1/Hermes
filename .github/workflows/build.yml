@@ -1,0 +1,27 @@
+name: Build
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    name: Build and test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+          cache: maven
+      - name: Build with Maven
+        run: mvn -B -ntp clean package
+      - name: Upload Hermes.jar
+        uses: actions/upload-artifact@v4
+        with:
+          name: Hermes.jar
+          path: target/Hermes.jar
+          if-no-files-found: error

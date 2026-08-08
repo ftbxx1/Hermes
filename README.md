@@ -1,9 +1,14 @@
 # Hermes
 
-A Skript-like scripting language for Paper servers. Write plain-text `.her`
-files, drop them in the scripts folder, and Hermes turns them into real
-gameplay: triggers, commands, loops, variables, and everything in between —
-no plugins per feature.
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Paper](https://img.shields.io/badge/Paper-1.21%2B-orange.svg)](#requirements)
+[![Java](https://img.shields.io/badge/Java-21-blue.svg)](#compiling)
+[![Build](https://github.com/ftbxx1/Hermes/actions/workflows/build.yml/badge.svg)](https://github.com/ftbxx1/Hermes/actions/workflows/build.yml)
+
+**Hermes** is a Minecraft plugin for Paper which lets server owners script
+their server with plain-text `.her` files — no Java required, and no plugin
+per feature. It can also be useful if you *do* know Java: some tasks are
+quicker to script than to code, and Hermes makes a great prototyping tool.
 
 ```
 when player joins
@@ -25,25 +30,29 @@ command "/kit" with argument <name>
     tell player "Kit ${name} claimed!"
 ```
 
-## Important legal note
+## Requirements
 
-- **Not affiliated with Mojang or Microsoft.** Minecraft is a trademark of
-  Mojang Synergies AB / Microsoft, and this project is not endorsed by them.
-- **Not affiliated with SkriptLang.** Hermes is an original implementation of
-  Skript-style *ideas* (event-driven scripting of a server). It contains no
-  Skript code. Skript itself is MIT-licensed by Peter Güttinger et al.
-- This project is licensed under the **MIT License** (see [LICENSE](LICENSE)).
+Hermes requires **Paper** to work. You heard it right — **Spigot** does *not*
+work. Hermes also requires **Java 21** or newer.
 
-## Install
+## Download
 
-1. Put `Hermes.jar` (from `target/`) into your server's `plugins/` folder.
+You can find the downloads for each version with their release notes on the
+[releases page](https://github.com/ftbxx1/Hermes/releases). You may also
+build the latest source yourself — see [Compiling](#compiling) below.
+
+1. Put `Hermes.jar` into your server's `plugins/` folder.
 2. Start the server. Hermes creates `plugins/Hermes/hermes/` — put your
    `.her` scripts there.
 3. Run `/hermes reload` (or restart).
 
-Requires Paper 1.21+.
+## Documentation
 
-## What you can script
+The in-game docs are generated into `plugins/Hermes/help/variables.md` on
+first run. The same content (variables, conditions, values, loops, commands)
+is also in the [README](README.md) feature table below.
+
+### What you can script
 
 | Feature | Example |
 | --- | --- |
@@ -55,13 +64,10 @@ Requires Paper 1.21+.
 | Reusable actions | `action greet <name> the player` ... `greet "Steve" the player` |
 | Loops | `loop over list "quests" as task`, `loop over all players as p`, `loop over numbers from 1 to 10 as i`, `loop over player's inventory as item` |
 | Text interpolation | `tell player "You have ${player's coins} coins!"` |
-| Variables | player, world, scoreboard, lists, and loop variables — saved to `state.txt` on shutdown |
+| Variables | player, world, scoreboard, lists, loop variables — saved to `state.txt` on shutdown |
 | Effects | teleport, damage, heal, feed, give/remove items, potions, title/actionbar, sounds, particles, lightning, explosions, launch, gamemode, XP, scoreboards, teams, permissions |
 | World | weather, time, regions, marks, signs, doors, buttons, levers, chests, blocks, mobs |
 | Flow | `if / else`, `repeat 5 times`, `stop`, custom events (`fire event "boss_killed"`) |
-
-Full docs (variables, conditions, values) are generated into
-`plugins/Hermes/help/variables.md` on first run.
 
 ### Triggers the plugin bridges
 
@@ -85,39 +91,68 @@ Full docs (variables, conditions, values) are generated into
 | `when <mob> dies / spawns / attacks` | mob lifecycle |
 | `when it is nighttime` and other states | polled every 10 ticks |
 
-## Commands
+## Reporting Issues
 
-| Command | What it does |
-| --- | --- |
-| `/hermes reload` | Reload all scripts |
-| `/hermes scripts` | List loaded scripts |
-| `/hermes run <file>` | Load one script |
-| `/hermes events` | List registered triggers |
-| `/hermes vars` | Show variable counts |
+Please see our [contribution guidelines](.github/contributing.md) before
+reporting issues. Use the [issue templates](.github/ISSUE_TEMPLATE/) so we
+can reproduce problems quickly.
 
-All need `hermes.admin` (default: operators).
+## Compiling
 
-## How it's built
-
-One project, two layers:
-
-- The **language** — `dev.hermes.core`: lexer, parser, dictionary, interpreter,
-  engine. No Minecraft dependency; runs anywhere (tests use a headless
-  `MockWorld`, and `java -jar Hermes.jar` runs a demo console).
-- The **Paper bridge** — `dev.hermes.plugin`: `BukkitWorld` implements the
-  `WorldAPI`, `HermesListener` turns Bukkit events into triggers,
-  `HermesPlugin` loads scripts and registers script commands.
-
-## Building
+Hermes uses Maven for compilation:
 
 ```
 mvn package
 ```
 
-The plugin jar lands at `target/Hermes.jar`.
+The plugin jar lands at `target/Hermes.jar`. Run the test suite with:
+
+```
+mvn test
+```
+
+## Contributing
+
+Please review our [contribution guidelines](.github/contributing.md).
+
+## Maven Repository
+
+If you use Hermes as a (soft) dependency for your plugin, add JitPack and the
+dependency:
+
+```xml
+<repositories>
+    <repository>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
+    </repository>
+</repositories>
+
+<dependency>
+    <groupId>com.github.ftbxx1</groupId>
+    <artifactId>Hermes</artifactId>
+    <version>1.0.0</version>
+    <scope>provided</scope>
+</dependency>
+```
+
+## Relevant Links
+
+- [Releases](https://github.com/ftbxx1/Hermes/releases)
+- [Issues](https://github.com/ftbxx1/Hermes/issues)
+- [In-game docs: help/variables.md](src/main/resources/help/variables.md)
+
+## Developers
+
+You can find all contributors
+[here](https://github.com/ftbxx1/Hermes/graphs/contributors).
 
 ## License
 
-[MIT](LICENSE) © 2026 ftbxx1. You are free to use, modify, and redistribute —
-attribution required. The project is provided "as is", without warranty of any
-kind; the author is not liable for anything that happens using it.
+Licensed under the [MIT License](LICENSE) © 2026 ftbxx1. See [LICENSE](LICENSE)
+for the full text.
+
+**Not affiliated with Mojang or Microsoft.** Minecraft is a trademark of
+Mojang Synergies AB / Microsoft. **Not affiliated with SkriptLang** — Hermes
+is an original implementation of Skript-style ideas and contains no Skript
+code.
