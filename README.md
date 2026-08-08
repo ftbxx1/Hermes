@@ -36,7 +36,7 @@ command "/kit" with argument <name>
 
 ## Install
 
-1. Put `Hermes.jar` (from `plugin/target/`) into your server's `plugins/` folder.
+1. Put `Hermes.jar` (from `target/`) into your server's `plugins/` folder.
 2. Start the server. Hermes creates `plugins/Hermes/hermes/` — put your
    `.her` scripts there.
 3. Run `/hermes reload` (or restart).
@@ -63,6 +63,28 @@ Requires Paper 1.21+.
 Full docs (variables, conditions, values) are generated into
 `plugins/Hermes/help/variables.md` on first run.
 
+### Triggers the plugin bridges
+
+| Hermes trigger | Minecraft event |
+| --- | --- |
+| `when player joins / leaves / dies / respawns` | join, quit, death, respawn |
+| `when player first joins` | first join ever (tracked per player) |
+| `when player breaks <block>` / `places <block>` | block break / place |
+| `when player types "<text>"` / `chats` | chat message |
+| `when player uses <item>` | right-click with an item |
+| `when player interacts with <block>` | right-click on a block |
+| `when player picks up <item>` / `drops <item>` | item pickup / drop |
+| `when player eats <item>` | eating food / drinking |
+| `when player fishes` | catching a fish |
+| `when player levels up` | gaining an XP level |
+| `when player kills <mob>` / `kills any mob` | killing a mob |
+| `when player starts sprinting` / `stops sprinting` | sprint toggling |
+| `when player attacks` / `takes damage` | dealing / taking damage |
+| `when player jumps` / `sneaks` / `moves` | movement |
+| `when player enters region "<name>"` | crossing into a region |
+| `when <mob> dies / spawns / attacks` | mob lifecycle |
+| `when it is nighttime` and other states | polled every 10 ticks |
+
 ## Commands
 
 | Command | What it does |
@@ -77,11 +99,14 @@ All need `hermes.admin` (default: operators).
 
 ## How it's built
 
-- `hermes-core` — the language: lexer, parser, dictionary, engine. No
-  Minecraft dependency; runs anywhere (tests use a headless MockWorld).
-- `hermes-plugin` — the Paper bridge: `BukkitWorld` implements the `WorldAPI`,
-  `HermesListener` turns Bukkit events into triggers, `HermesPlugin` loads
-  scripts and registers script commands.
+One project, two layers:
+
+- The **language** — `dev.hermes.core`: lexer, parser, dictionary, interpreter,
+  engine. No Minecraft dependency; runs anywhere (tests use a headless
+  `MockWorld`, and `java -jar Hermes.jar` runs a demo console).
+- The **Paper bridge** — `dev.hermes.plugin`: `BukkitWorld` implements the
+  `WorldAPI`, `HermesListener` turns Bukkit events into triggers,
+  `HermesPlugin` loads scripts and registers script commands.
 
 ## Building
 
@@ -89,7 +114,7 @@ All need `hermes.admin` (default: operators).
 mvn package
 ```
 
-The plugin jar lands at `plugin/target/Hermes.jar`.
+The plugin jar lands at `target/Hermes.jar`.
 
 ## License
 
