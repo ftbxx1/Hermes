@@ -8,7 +8,7 @@ authors: [Hermes]
 commands:
   hermes:
     description: Manage Hermes scripts
-    usage: /hermes <reload|scripts|run|events|vars>
+    usage: /hermes <reload|scripts> [all|<script.her>]
     permission: hermes.admin
 
 permissions:
