@@ -579,6 +579,10 @@ public final class BukkitWorld implements WorldAPI {
                 new Vec3(Math.max(a.x(), b.x()), Math.max(a.y(), b.y()), Math.max(a.z(), b.z()))));
     }
 
+    @Override public void undefineRegion(String name) {
+        regions.remove(name);
+    }
+
     @Override public boolean inRegion(String name, Vec3 loc) {
         Region r = regions.get(name);
         if (r == null) return false;

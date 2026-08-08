@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -94,9 +93,13 @@ public final class HermesPlugin extends JavaPlugin implements TabCompleter {
     /** Copies the bundled help files into plugins/Hermes/help/ on first run. */
     private void copyHelpIfNeeded() {
         Path helpFolder = getDataFolder().toPath().resolve("help");
+        String[] files = {
+                "variables.md", "triggers.md", "commands.md", "gui.md", "loops.md",
+                "scoreboards.md", "regions.md", "effects.md", "timers.md", "world.md",
+        };
         try {
             Files.createDirectories(helpFolder);
-            for (String file : new String[] {"variables.md"}) {
+            for (String file : files) {
                 Path target = helpFolder.resolve(file);
                 if (Files.exists(target)) continue;
                 try (InputStream in = getResource("help/" + file)) {
@@ -248,6 +251,26 @@ public final class HermesPlugin extends JavaPlugin implements TabCompleter {
         }
         switch (args[0].toLowerCase()) {
             case "reload": {
+                if (args.length >= 2 && !args[1].equalsIgnoreCase("all")) {
+                    String name = args[1];
+                    Path target = scriptsFolder().resolve(name);
+                    if (!Files.isRegularFile(target)) {
+                        sender.sendMessage("§cNo script named '" + name + "' in " + scriptsFolder().getFileName() + "/");
+                        return true;
+                    }
+                    unregisterScriptCommands();
+                    engine.unload(name);
+                    if (engine.load(target)) {
+                        sender.sendMessage("§a[Hermes] §fReloaded " + name + ".");
+                    } else {
+                        for (VerseError err : engine.loadErrors()) {
+                            sender.sendMessage("§c" + err.message + " §7(line " + err.line + ")");
+                        }
+                        sender.sendMessage("§c[Hermes] §f" + name + " has problems and was NOT reloaded.");
+                    }
+                    registerScriptCommands();
+                    return true;
+                }
                 reloadAll();
                 sender.sendMessage("§a[Hermes] §fScripts reloaded.");
                 return true;
@@ -260,41 +283,6 @@ public final class HermesPlugin extends JavaPlugin implements TabCompleter {
                 if (engine.scripts().isEmpty()) sender.sendMessage("§7  (none)");
                 return true;
             }
-            case "run": {
-                if (args.length < 2) {
-                    sender.sendMessage("§cUsage: /hermes run <script.her>");
-                    return true;
-                }
-                String name = args[1];
-                Path target = scriptsFolder().resolve(name);
-                if (!Files.isRegularFile(target)) {
-                    sender.sendMessage("§cNo script named '" + name + "' in " + scriptsFolder().getFileName() + "/");
-                    return true;
-                }
-                List<VerseError> before = new ArrayList<>(engine.loadErrors());
-                if (engine.load(target)) {
-                    sender.sendMessage("§a[Hermes] §fLoaded " + name + ".");
-                } else {
-                    engine.loadErrors().stream().skip(before.size()).forEach(err ->
-                            sender.sendMessage("§c" + err.message + " §7(line " + err.line + ")"));
-                    sender.sendMessage("§c[Hermes] §f" + name + " has problems and was not loaded.");
-                }
-                return true;
-            }
-            case "events": {
-                sender.sendMessage("§a[Hermes] §fRegistered triggers:");
-                Map<String, Integer> counts = engine.eventCounts();
-                if (counts.isEmpty()) sender.sendMessage("§7  (no event triggers loaded)");
-                counts.forEach((event, count) ->
-                        sender.sendMessage("§7  - §fwhen " + event + " §7(" + count + ")"));
-                return true;
-            }
-            case "vars": {
-                sender.sendMessage("§a[Hermes] §fWorld variables: "
-                        + engine.vars.playerVars().size() + " player(s), "
-                        + engine.vars.worldVars().size() + " world var(s).");
-                return true;
-            }
             default:
                 help(sender);
                 return true;
@@ -304,10 +292,9 @@ public final class HermesPlugin extends JavaPlugin implements TabCompleter {
     private void help(CommandSender sender) {
         sender.sendMessage("§6[Hermes] §fcommands:");
         sender.sendMessage("§7  /hermes reload §f- reload all scripts");
+        sender.sendMessage("§7  /hermes reload all §f- reload all scripts");
+        sender.sendMessage("§7  /hermes reload <script.her> §f- reload just that script");
         sender.sendMessage("§7  /hermes scripts §f- list loaded scripts");
-        sender.sendMessage("§7  /hermes run <script> §f- load one script");
-        sender.sendMessage("§7  /hermes events §f- list registered triggers");
-        sender.sendMessage("§7  /hermes vars §f- show engine variable counts");
         if (sender instanceof Player) {
             sender.sendMessage("§7Scripts live in §fplugins/Hermes/hermes/");
         }
@@ -317,14 +304,17 @@ public final class HermesPlugin extends JavaPlugin implements TabCompleter {
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
         if (args.length == 1) {
             String prefix = args[0].toLowerCase();
-            return List.of("reload", "scripts", "run", "events", "vars").stream()
+            return List.of("reload", "scripts").stream()
                     .filter(s -> s.startsWith(prefix))
                     .collect(Collectors.toList());
         }
-        if (args.length == 2 && args[0].equalsIgnoreCase("run")) {
-            return findScripts(scriptsFolder()).stream()
-                    .map(p -> scriptsFolder().relativize(p).toString())
-                    .collect(Collectors.toList());
+        if (args.length == 2 && args[0].equalsIgnoreCase("reload")) {
+            List<String> out = new ArrayList<>();
+            out.add("all");
+            for (Path p : findScripts(scriptsFolder())) {
+                out.add(scriptsFolder().relativize(p).toString());
+            }
+            return out;
         }
         return List.of();
     }

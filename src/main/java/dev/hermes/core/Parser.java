@@ -664,6 +664,17 @@ public final class Parser {
         int line = cur().line;
         pos++;
 
+        if (cur().type == Type.STRING) {
+            ValueExpr v = value("some text to remove");
+            expect("from", "remove \"Defeat the dragon\" from list \"quests\"");
+            if (eat("list")) {
+                String list = string("the list name");
+                endStatement();
+                return new ListRemoveStmt(line, list, v);
+            }
+            throw err("I can only remove text from a list: remove \"x\" from list \"quests\"");
+        }
+
         if (cur().type == Type.NUMBER) {
             double n = number("a number");
             if (eat("from")) {
@@ -906,11 +917,23 @@ public final class Parser {
         int line = cur().line;
         pos++;
         Trigger trig = trigger();
-        List<Condition> extra = new ArrayList<>();
-        while (eat("and")) {
-            extra.add(condition());
+        if (at("and") || at("or")) {
+            Condition combined = trig.conditions.isEmpty() ? null : trig.conditions.remove(0);
+            while (at("and") || at("or")) {
+                boolean isAnd = at("and");
+                pos++;
+                Condition next = primaryCond();
+                if (combined == null) { combined = next; continue; }
+                if (isAnd) {
+                    if (combined instanceof AndCond a) a.parts.add(next);
+                    else combined = new AndCond(new ArrayList<>(List.of(combined, next)));
+                } else {
+                    if (combined instanceof OrCond o) o.parts.add(next);
+                    else combined = new OrCond(new ArrayList<>(List.of(combined, next)));
+                }
+            }
+            trig.conditions.add(combined);
         }
-        trig.conditions.addAll(extra);
         List<Stmt> body = block();
         return new WhenBlock(line, trig, body);
     }
@@ -1295,6 +1318,10 @@ public final class Parser {
             case "y": return new PlayerCoordExpr(line, "y");
             case "z": return new PlayerCoordExpr(line, "z");
             case "gamemode": return new GamemodeExpr(line);
+            case "health": return new HealthExpr(line);
+            case "hunger": return new HungerExpr(line);
+            case "xp": return new XpExpr(line);
+            case "level": return new LevelExpr(line);
             default: return new VarGetExpr(line, new VarTarget("player", name));
         }
     }
@@ -1424,6 +1451,7 @@ public final class Parser {
                             }
                             return new InBiomeCond(canonical);
                         }
+                        if (at("region")) pos++;
                         String gamemode = greedy(Dictionary::findGamemode, 2, null);
                         if (gamemode != null) return new InGamemodeCond(gamemode);
                         eatNoise();
@@ -1476,6 +1504,19 @@ public final class Parser {
                             "when player has 5 diamonds\n    give player a diamond sword",
                             null);
             }
+        }
+
+        if (at("world") && peek(1).type == Type.POSSESSIVE) {
+            pos += 2;
+            String name = word("a variable name");
+            if (eat("is") || eat("are")) { /* nothing */ }
+            String op = cmpOpOrNull();
+            if (op == null) {
+                ValueExpr right = value("a value to compare with");
+                return new CmpCond(new VarGetExpr(line, new VarTarget("world", name)), "==", right);
+            }
+            ValueExpr right = value("a value");
+            return new CmpCond(new VarGetExpr(line, new VarTarget("world", name)), op, right);
         }
 
         if (at("it")) {
@@ -1567,6 +1608,17 @@ public final class Parser {
         if (at("player")) {
             if (peek(1).type == Type.POSSESSIVE) {
                 pos += 2;
+                if (at("score")) {
+                    pos++;
+                    String obj = string("the scoreboard name");
+                    if (eat("is") || eat("are")) { /* nothing */ }
+                    String op = cmpOpOrNull();
+                    if (op == null) throw new VerseError(line,
+                            "I expected a comparison here, like: player's coins are at least 100.",
+                            "when player's coins are at least 100\n    give player a diamond sword", null);
+                    double v = number("a number");
+                    return stateTrigger(new ScoreCond(obj, op, v), true);
+                }
                 String name = word("a variable name");
                 if (eat("is") || eat("are")) { /* nothing */ }
                 String op = cmpOpOrNull();
@@ -1747,6 +1799,7 @@ public final class Parser {
                             if (canonical == null) throw new VerseError(line, "I don't know the biome '" + biome + "'.");
                             return stateTrigger(new InBiomeCond(canonical), true);
                         }
+                        if (at("region")) pos++;
                         String gamemode = greedy(Dictionary::findGamemode, 2, null);
                         if (gamemode != null) return stateTrigger(new InGamemodeCond(gamemode), true);
                         eatNoise();
@@ -1780,6 +1833,21 @@ public final class Parser {
                             "I don't know the event '" + w + "'. I know: joins, leaves, dies, jumps, sneaks, breaks, places, chats, takes damage, enters, reaches...",
                             "when player joins\n    tell player \"Hello!\"", null);
             }
+        }
+
+        if (at("world") && peek(1).type == Type.POSSESSIVE) {
+            pos += 2;
+            String name = word("a variable name");
+            if (eat("is") || eat("are")) { /* nothing */ }
+            String op = cmpOpOrNull();
+            if (op == null) {
+                ValueExpr right = value("a value to compare with");
+                return stateTrigger(new CmpCond(new VarGetExpr(line, new VarTarget("world", name)),
+                        "==", right), false);
+            }
+            ValueExpr right = value("a value");
+            return stateTrigger(new CmpCond(new VarGetExpr(line, new VarTarget("world", name)),
+                    op, right), false);
         }
 
         if (at("it")) {

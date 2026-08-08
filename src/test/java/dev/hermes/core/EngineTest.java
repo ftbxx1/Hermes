@@ -552,4 +552,116 @@ class EngineTest {
         h.engine.tick();
         assertEquals(1, h.p1.inventory.getOrDefault("diamond", 0));
     }
+
+    @Test
+    void unloadRemovesEverythingFromThatFile() {
+        Harness h = new Harness("""
+                region "Arena" from 0 0 0 to 10 10 10
+                mark home at 100 64 200
+                every 5 seconds
+                    add 1 to world's ticks
+                command "/alpha"
+                    tell player "alpha"
+                when player joins
+                    tell player "old"
+                """);
+        h.engine.unload("test.Hermes");
+
+        assertTrue(h.engine.scripts().isEmpty());
+        assertTrue(h.engine.commands().isEmpty());
+        assertFalse(h.world.inRegion("Arena", new WorldAPI.Vec3(5, 5, 5)));
+        assertFalse(h.engine.marks.containsKey("home"));
+        assertEquals(0, h.scheduler.everyTaskCount(), "timers from the unloaded file must be gone");
+        h.p1.health = 20;
+        h.engine.playerEvent("joins", h.p1);
+        assertFalse(h.world.messageContains("PlayerOne", "old"));
+    }
+
+    @Test
+    void reloadKeepsOtherScripts() {
+        Harness h = new Harness("""
+                when player joins
+                    tell player "one"
+                """);
+        assertTrue(h.engine.loadString("""
+                when player joins
+                    tell player "two"
+                """, "second.Hermes"));
+
+        h.engine.unload("test.Hermes");
+        h.engine.playerEvent("joins", h.p1);
+        assertTrue(h.world.messageContains("PlayerOne", "two"));
+        assertFalse(h.world.messageContains("PlayerOne", "one"));
+
+        assertEquals(1, h.engine.scripts().size());
+        assertEquals("second.Hermes", h.engine.scripts().get(0).fileName);
+    }
+
+    @Test
+    void worldVariableConditions() {
+        Harness h = new Harness("""
+                when world's flag is true
+                    announce "event started"
+                when player joins
+                    if world's flag is true
+                        give player 1 diamond
+                """);
+        h.engine.tick();
+        assertFalse(h.world.broadcastContains("event started"));
+        h.engine.vars.setWorld("flag", Value.truth(true));
+        h.engine.tick();
+        assertTrue(h.world.broadcastContains("event started"));
+        h.engine.playerEvent("joins", h.p1);
+        assertEquals(1, h.p1.inventory.getOrDefault("diamond", 0));
+    }
+
+    @Test
+    void isInRegionWithKeyword() {
+        Harness h = new Harness("""
+                region "SafeZone" from 0 60 0 to 20 64 20
+                when player is in region "SafeZone"
+                    announce "inside"
+                when player joins
+                    if player is in region "SafeZone"
+                        tell player "you are safe"
+                """);
+        h.engine.tick();
+        assertTrue(h.world.broadcastContains("inside"));
+        h.engine.playerEvent("joins", h.p1);
+        assertTrue(h.world.messageContains("PlayerOne", "you are safe"));
+    }
+
+    @Test
+    void scoreConditionInWhenHeader() {
+        Harness h = new Harness("""
+                when player's score "kills" is at least 10
+                    give player 1 diamond
+                """);
+        h.world.setScore(h.p1, "kills", 12);
+        h.engine.tick();
+        assertEquals(1, h.p1.inventory.getOrDefault("diamond", 0));
+    }
+
+    @Test
+    void orConditionInWhenHeader() {
+        Harness h = new Harness("""
+                when player's health is below 5 or player's hunger is below 5
+                    warn player "Take care!"
+                """);
+        h.engine.tick();
+        assertTrue(h.p1.warnings.isEmpty());
+        h.p1.hunger = 2;
+        h.engine.tick();
+        assertTrue(h.p1.warnings.contains("Take care!"));
+    }
+
+    @Test
+    void removesTextFromList() {
+        Harness h = new Harness("""
+                create list "quests"
+                add "Find the key" to list "quests"
+                remove "Find the key" from list "quests"
+                """);
+        assertEquals(0, h.engine.vars.list("quests").items.size());
+    }
 }

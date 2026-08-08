@@ -1,0 +1,11 @@
+# /fly - toggle flight for anyone (no permission required)
+# Note: Hermes has no "allow flying" effect yet, so this toggles
+# creative mode, which grants flight.
+
+command "/fly"
+    if player is in creative
+        set player's gamemode to survival
+        tell player "Flight disabled."
+    else
+        set player's gamemode to creative
+        tell player "Flight enabled!"

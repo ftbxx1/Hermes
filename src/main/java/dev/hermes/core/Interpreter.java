@@ -99,6 +99,17 @@ public final class Interpreter {
         return script.name != null ? script.name : "script";
     }
 
+    /** The .her file this interpreter came from (for unloads), or null. */
+    private String sourceFile = null;
+
+    public void setSourceFile(String name) {
+        this.sourceFile = name;
+    }
+
+    public String sourceFile() {
+        return sourceFile;
+    }
+
     // ------------------------------------------------------------------
     // blocks
     // ------------------------------------------------------------------

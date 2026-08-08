@@ -55,6 +55,11 @@ public final class TaleEngine {
     private final List<VerseError> loadErrors = new ArrayList<>();
     private final Map<String, RegisteredCommand> commands = new LinkedHashMap<>();
 
+    /** Per-script bookkeeping so a single file can be unloaded and reloaded. */
+    private final Map<String, List<String>> scriptMarks = new HashMap<>();
+    private final Map<String, List<String>> scriptRegions = new HashMap<>();
+    private final Map<String, List<Runnable>> scriptTimers = new HashMap<>();
+
     /** A command defined by a script, ready to be executed. */
     public static final class RegisteredCommand {
         public final CommandDef def;
@@ -110,6 +115,7 @@ public final class TaleEngine {
 
         try {
             Interpreter interp = new Interpreter(script, this);
+            interp.setSourceFile(fileName);
             AtomicInteger idx = new AtomicInteger();
             List<Stmt> startup = new ArrayList<>();
             for (Stmt s : script.body) {
@@ -146,17 +152,42 @@ public final class TaleEngine {
             }
         } else if (s instanceof EveryBlock ev) {
             long millis = Math.max(50, (long) (ev.seconds * 1000));
-            scheduler.runEvery(millis, () -> runScheduled(ev, interp, id));
+            Runnable task = () -> runScheduled(ev, interp, id);
+            scheduler.runEvery(millis, task);
+            scriptTimers.computeIfAbsent(interp.sourceFile(), k -> new ArrayList<>()).add(task);
         } else if (s instanceof RegionDef r) {
             double minX = Math.min(r.a.x(), r.b.x()), maxX = Math.max(r.a.x(), r.b.x());
             double minY = Math.min(r.a.y(), r.b.y()), maxY = Math.max(r.a.y(), r.b.y());
             double minZ = Math.min(r.a.z(), r.b.z()), maxZ = Math.max(r.a.z(), r.b.z());
             world.defineRegion(r.name, WorldAPI.Vec3.of(minX, minY, minZ), WorldAPI.Vec3.of(maxX, maxY, maxZ));
+            scriptRegions.computeIfAbsent(interp.sourceFile(), k -> new ArrayList<>()).add(r.name);
         } else if (s instanceof MarkDef m) {
             marks.put(m.name, m.loc);
+            scriptMarks.computeIfAbsent(interp.sourceFile(), k -> new ArrayList<>()).add(m.name);
         } else if (s instanceof CommandDef c) {
             commands.put(c.name.toLowerCase(), new RegisteredCommand(c, interp));
         }
+    }
+
+    /** Removes everything one script file contributed, so it can be reloaded. */
+    public void unload(String fileName) {
+        handlers.entrySet().removeIf(e -> {
+            e.getValue().removeIf(h -> fileName.equals(h.interp.sourceFile()));
+            return e.getValue().isEmpty();
+        });
+        stateTriggers.removeIf(e -> fileName.equals(e.interp.sourceFile()));
+        commands.entrySet().removeIf(e -> fileName.equals(e.getValue().interp.sourceFile()));
+
+        List<String> marks = scriptMarks.remove(fileName);
+        if (marks != null) for (String name : marks) this.marks.remove(name);
+        List<String> regions = scriptRegions.remove(fileName);
+        if (regions != null) for (String name : regions) world.undefineRegion(name);
+        List<Runnable> timers = scriptTimers.remove(fileName);
+        if (timers != null) for (Runnable task : timers) scheduler.cancelEvery(task);
+
+        loaded.removeIf(s -> s.fileName.equals(fileName));
+        stateEdges.keySet().removeIf(k -> k.startsWith(fileName + "#"));
+        loadErrors.clear();
     }
 
     /** Every command defined by the loaded scripts. */

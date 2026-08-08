@@ -298,6 +298,10 @@ public final class MockWorld implements WorldAPI {
     @Override public void defineRegion(String name, Vec3 a, Vec3 b) {
         regions.put(name, new Region(name, a, b));
     }
+    @Override public void undefineRegion(String name) {
+        regions.remove(name);
+    }
+
     @Override public boolean inRegion(String name, Vec3 loc) {
         Region r = regions.get(name);
         if (r == null) return false;
@@ -382,6 +386,10 @@ public final class MockWorld implements WorldAPI {
             everyTasks.add(new Task(millis, task));
         }
 
+        @Override public void cancelEvery(Runnable task) {
+            everyTasks.removeIf(t -> t.runnable == task);
+        }
+
         @Override public void runLater(long millis, Runnable task) {
             laterTasks.add(new Task(millis, task));
         }
@@ -410,6 +418,11 @@ public final class MockWorld implements WorldAPI {
                 t.runnable.run();
             }
             laterTasks.clear();
+        }
+
+        /** Number of repeating tasks still scheduled. */
+        public int everyTaskCount() {
+            return everyTasks.size();
         }
     }
 }

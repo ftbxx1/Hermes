@@ -20,14 +20,9 @@ Each player has their own copy. `PlayerOne`'s coins and `PlayerTwo`'s coins
 are completely separate.
 
 ```
-set player's coins to 0
-add 5 to player's coins
-add 100 to player's coins
-remove 2 from player's coins
-set player's coins to 7
-
 when player joins
     set player's coins to 0
+    add 100 to player's coins
 
 when player breaks diamond ore
     add 5 to player's coins
@@ -79,10 +74,11 @@ Real Minecraft scoreboard objectives. Visible with the scoreboard command,
 persisted by the scoreboard, and usable in Hermes conditions.
 
 ```
-set player's score "kills" to 0
-add 5 to player's score "kills"
+when player joins
+    set player's score "kills" to 0
+    add 5 to player's score "kills"
 
-when player kills a mob
+when player kills any mob
     add 1 to player's score "kills"
 
 when player's score "kills" is above 50
@@ -108,9 +104,10 @@ add 10 to list "points"
 ### Reading them
 
 ```
-tell player length of list "quests"
-loop over list "quests" as task
-    tell player task
+when player joins
+    tell player length of list "quests"
+    loop over list "quests" as task
+        tell player task
 ```
 
 Every item of the list appears in the loop, one at a time, as a temporary
@@ -151,11 +148,12 @@ Loops can run over more than lists:
 loop over all players as p
     give player 1 bread
 
-loop over numbers from 1 to 10 as i
-    tell player "Counting ${i}..."
+when player joins
+    loop over numbers from 1 to 10 as i
+        tell player "Counting ${i}..."
 
-loop over player's inventory as item
-    tell player "You have ${item}"
+    loop over player's inventory as item
+        tell player "You have ${item}"
 ```
 
 Inside `loop over all players`, `player` means the looped player — so
@@ -206,8 +204,9 @@ when player has 5 diamonds and player's level is above 20
 You can also use `not` and `or`:
 
 ```
-when not player has 10 diamonds
-    tell player "Keep mining!"
+when player joins
+    if not player has 10 diamonds
+        tell player "Keep mining!"
 
 when player's health is below 5 or player's hunger is below 5
     warn player "You need to take care of yourself!"
@@ -228,10 +227,11 @@ Besides variables, `player's ...` can read facts about the player:
 | `player's health` / `hunger` / `xp` / `level` | stats |
 
 ```
-tell player player's name
-set player's home x to player's x
-if player's gamemode is creative
-    give player a netherite sword
+when player joins
+    tell player player's name
+    set temporary lastx to player's x
+    if player's gamemode is creative
+        give player a netherite sword
 ```
 
 ## Handy values
@@ -245,19 +245,32 @@ if player's gamemode is creative
 
 ```
 set world's price to random number between 10 and 100
-if count of "emerald" in player's inventory is at least 5
-    announce "Rich player!"
+
+when player joins
+    if count of "emerald" in player's inventory is at least 5
+        announce "Rich player!"
 ```
 
 ## Player state conditions
 
 ```
-player is sneaking
-player is on the ground
-player is wet
-player is flying
-player is op
-player is in creative mode        # or survival / adventure / spectator
+if player is sneaking
+    tell player "You're sneaking!"
+
+if player is on the ground
+    tell player "On solid ground!"
+
+if player is wet
+    tell player "You're soaked!"
+
+if player is flying
+    give player 1 elytra
+
+if player is op
+    announce "An operator is here!"
+
+if player is in creative mode    # or survival / adventure / spectator
+    give player a diamond
 ```
 
 They work in `when` headers, `if` blocks and `and` / `or` chains:
@@ -275,15 +288,17 @@ when player is flying
 `show` prints a variable's value to the player.
 
 ```
-show player's coins
-show world's kills
-show length of list "quests"
+when player joins
+    show player's coins
+    show world's kills
+    show list "quests"
 ```
 
 The player sees:
 
 ```
-coins: 12
+when player joins
+    tell player "coins: 12"
 ```
 
 ---
@@ -293,25 +308,27 @@ coins: 12
 Any quoted text can mix plain text with a value using `${...}`:
 
 ```
-set player's coins to 5
-
-tell player "You have ${player's coins} coins!"
-announce "${player's name} joined the server"
-set world's greeting to "Welcome back, ${player's name}!"
+when player joins
+    set player's coins to 5
+    tell player "You have ${player's coins} coins!"
+    set world's greeting to "Welcome back, ${player's name}!"
+    announce "${player's name} joined the server"
 ```
 
 The player sees:
 
 ```
-You have 5 coins!
+when player joins
+    tell player "You have 5 coins!"
 ```
 
 Inside `${...}` can go any value — variables, special values like
 `player's health`, or whole phrases like `random number between 1 and 10`:
 
 ```
-tell player "A wild ${random number between 1 and 10} appeared!"
-title player "HP: ${player's health} — Run!"
+when player joins
+    tell player "A wild ${random number between 1 and 10} appeared!"
+    title player "HP: ${player's health} — Run!"
 ```
 
 Lists print as `[a, b, c]` when they land inside `${...}`.
@@ -329,15 +346,16 @@ starts, so progress survives restarts.
 ## The rules in one picture
 
 ```
-set  player's coins   to 5        # player variable
-add  5                to player's coins
-set  world's flag     to true     # world variable
-add  1                to world's kills
-set  player's score "kills" to 0  # scoreboard
-add  "a"              to list "quests"   # list
-loop over list "quests" as task          # temporary
-    tell player task
-show player's coins
+when player joins
+    set  player's coins   to 5        # player variable
+    add  5                to player's coins
+    set  world's flag     to true     # world variable
+    add  1                to world's kills
+    set  player's score "kills" to 0  # scoreboard
+    add  "a"              to list "quests"   # list
+    loop over list "quests" as task          # temporary
+        tell player task
+    show player's coins
 ```
 
 Every variable is one word (or a quoted name for lists and scores). If you

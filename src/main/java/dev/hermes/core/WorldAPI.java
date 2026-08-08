@@ -120,6 +120,8 @@ public interface WorldAPI {
 
     // ---------- regions ----------
     void defineRegion(String name, Vec3 a, Vec3 b);
+
+    void undefineRegion(String name);
     boolean inRegion(String name, Vec3 loc);
 
     // ---------- sound & particles ----------

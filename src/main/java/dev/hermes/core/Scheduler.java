@@ -9,4 +9,7 @@ public interface Scheduler {
     void runEvery(long millis, Runnable task);
 
     void runLater(long millis, Runnable task);
+
+    /** Stops a repeating task previously given to {@link #runEvery}. */
+    void cancelEvery(Runnable task);
 }
