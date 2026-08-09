@@ -211,6 +211,10 @@ public final class Parser {
                 if (blockDepth > 0) throw err("'mark' can only appear at the top of the script.");
                 return markDef();
             }
+            case "gui": {
+                if (blockDepth > 0) throw err("'gui' can only appear at the top of the script.");
+                return guiDef();
+            }
             case "create": return createStmt();
             case "if": return ifStmt();
             case "repeat": return repeatStmt();
@@ -240,7 +244,12 @@ public final class Parser {
             }
             case "delete": {
                 pos++;
-                if (!eat("list")) throw err("I can delete a list: 'delete list \"quests\"'.");
+                if (eat("world")) {
+                    String name = string("the world name");
+                    endStatement();
+                    return new DeleteWorldStmt(line, name);
+                }
+                if (!eat("list")) throw err("I can delete a list: 'delete list \"quests\"', or a world: 'delete world \"arena\"'.");
                 String name = string("the list name");
                 endStatement();
                 return new ListDeleteStmt(line, name);
@@ -456,7 +465,14 @@ public final class Parser {
             }
             case "open": {
                 pos++;
-                if (!eat("door")) throw err("I can open a door: 'open door near player'.");
+                if (eat("gui")) {
+                    String gui = string("the gui name");
+                    expect("to", "open gui \"Shop\" to player");
+                    TargetRef t = targetRef();
+                    endStatement();
+                    return new OpenGuiStmt(line, t, gui);
+                }
+                if (!eat("door")) throw err("I can open a door: 'open door near player', or a gui: 'open gui \"Shop\" to player'.");
                 expect("near");
                 expect("player", "open door near player");
                 endStatement();
@@ -592,20 +608,9 @@ public final class Parser {
             double n = number("a number");
             if (at("xp") || at("experience")) { pos++; endStatement(); return new GiveXpStmt(line, n); }
             if (at("level") || at("levels")) { pos++; endStatement(); return new GiveLevelsStmt(line, n); }
-            eatNoise();
-            String item = itemToEndOfLine();
-            if (item == null) {
-                String missing = pendingPhrase;
-                String closest = Dictionary.suggest(missing, Dictionary.itemNames());
-                throw new VerseError(line,
-                        "I don't know the item '" + missing + "'.",
-                        closest != null
-                                ? "Did you mean: '" + closest + "' ?"
-                                : "Did you mean: add " + (long) n + " to player's " + missing + " ?",
-                        sourceLine(line));
-            }
+            WorldAPI.ItemSpec spec = itemSpec((int) n);
             endStatement();
-            return new GiveItemStmt(line, t, item, (int) n);
+            return new GiveItemStmt(line, t, spec);
         }
 
         if (at("permission")) {
@@ -613,6 +618,13 @@ public final class Parser {
             String perm = string("the permission name");
             endStatement();
             return new PermissionStmt(line, true, t, perm);
+        }
+
+        if (at("book")) {
+            pos++;
+            String book = string("the book name");
+            endStatement();
+            return new GiveBookStmt(line, t, book);
         }
 
         eatNoise();
@@ -628,36 +640,66 @@ public final class Parser {
             return new EffectStmt(line, t, effect, seconds);
         }
 
-        String item = itemToEndOfLine();
-        if (item != null) {
-            endStatement();
-            return new GiveItemStmt(line, t, item, 1);
-        }
-
-        throw new VerseError(line,
-                "I don't know what to give. I know items, effects, xp, levels and permissions.",
-                "give player 5 diamonds\nor: give player speed for 10 seconds",
-                sourceLine(line));
+        WorldAPI.ItemSpec spec = itemSpec(1);
+        endStatement();
+        return new GiveItemStmt(line, t, spec);
     }
 
-    /** Joins every remaining word up to the end of the line. */
-    private String pendingPhrase = "";
-
-    private String phraseToEndOfLine() {
-        StringBuilder sb = new StringBuilder();
-        while (cur().type == Type.WORD) {
-            if (sb.length() > 0) sb.append(' ');
-            sb.append(cur().text);
-            pos++;
+    /** "5 diamond named \"X\" with lore \"...\" with enchant sharpness 5" after the count. */
+    private WorldAPI.ItemSpec itemSpec(int count) {
+        eatNoise();
+        int itemStart = pos;
+        String item = itemNameOrError();
+        String name = null;
+        List<String> lore = new ArrayList<>();
+        List<WorldAPI.EnchantSpec> enchants = new ArrayList<>();
+        while (true) {
+            if (at("named")) {
+                pos++;
+                name = string("the display name");
+            } else if (at("with")) {
+                pos++;
+                if (eat("lore")) {
+                    lore.add(string("a lore line"));
+                } else if (eat("enchant")) {
+                    String ench = enchantNameOrError();
+                    int lvl = 1;
+                    if (cur().type == Type.NUMBER) lvl = (int) number("an enchant level");
+                    enchants.add(new WorldAPI.EnchantSpec(ench, lvl));
+                } else {
+                    throw err("After 'with' I expect 'lore' or 'enchant'.");
+                }
+            } else {
+                break;
+            }
         }
-        return sb.toString();
+        if (!atEndOfLine()) {
+            StringBuilder full = new StringBuilder();
+            for (int i = itemStart; i < toks.size() && toks.get(i).type == Type.WORD; i++) {
+                if (full.length() > 0) full.append(' ');
+                full.append(toks.get(i).text);
+            }
+            String missing = full.toString();
+            String closest = Dictionary.suggest(missing, Dictionary.itemNames());
+            throw new VerseError(cur().line,
+                    "I don't know the item '" + missing + "'.",
+                    closest != null
+                            ? "Did you mean: '" + closest + "' ?"
+                            : "Did you mean: add " + count + " to player's " + missing + " ?",
+                    sourceLine(cur().line));
+        }
+        return new WorldAPI.ItemSpec(item, count, name, lore, enchants);
     }
 
-    /** Looks up the rest of the line as one item name; returns null if unknown. */
-    private String itemToEndOfLine() {
-        pendingPhrase = phraseToEndOfLine();
-        if (pendingPhrase.isEmpty()) return null;
-        return Dictionary.findItem(pendingPhrase);
+    private String enchantNameOrError() {
+        String ench = greedy(Dictionary::findEnchant, 3, null);
+        if (ench == null) {
+            String missing = cur().text;
+            String sug = Dictionary.suggest(missing, Dictionary.enchantNames());
+            throw new VerseError(cur().line, "I don't know the enchantment '" + missing + "'.",
+                    sug != null ? "Did you mean: '" + sug + "' ?" : null, sourceLine(cur().line));
+        }
+        return ench;
     }
 
     private Stmt removeStmt() {
@@ -718,16 +760,55 @@ public final class Parser {
         pos++;
 
         if (eat("weather")) {
+            if (at("in")) {
+                pos++;
+                expect("world", "set weather in world \"arena\" to rain");
+                String world = string("the world name");
+                expect("to", "set weather in world \"arena\" to rain");
+                String w = weatherNameOrError();
+                endStatement();
+                return new SetWorldWeatherStmt(line, world, w);
+            }
             expect("to", "set weather to rain");
             String w = weatherNameOrError();
             endStatement();
             return new SetWeatherStmt(line, w);
         }
         if (eat("time")) {
+            if (at("in")) {
+                pos++;
+                expect("world", "set time in world \"arena\" to night");
+                String world = string("the world name");
+                expect("to", "set time in world \"arena\" to night");
+                String d = daypartNameOrError();
+                endStatement();
+                return new SetWorldTimeStmt(line, world, d);
+            }
             expect("to", "set time to noon");
             String d = daypartNameOrError();
             endStatement();
             return new SetTimeStmt(line, d);
+        }
+        if (eat("config")) {
+            expect("value", "set config value \"prefix\" in file \"config.yml\" to \"[Hermes]\"");
+            String key = string("the config key");
+            expect("in", "set config value \"prefix\" in file \"config.yml\" to \"[Hermes]\"");
+            expect("file", "set config value \"prefix\" in file \"config.yml\" to \"[Hermes]\"");
+            String file = string("the config file name");
+            expect("to", "set config value \"prefix\" in file \"config.yml\" to \"[Hermes]\"");
+            ValueExpr v = value("a value");
+            endStatement();
+            return new ConfigSetStmt(line, file, key, v);
+        }
+        if (eat("slot")) {
+            int slot = (int) number("a slot number");
+            expect("of", "set slot 3 of gui \"Shop\" to 1 diamond");
+            expect("gui", "set slot 3 of gui \"Shop\" to 1 diamond");
+            String gui = string("the gui name");
+            expect("to", "set slot 3 of gui \"Shop\" to 1 diamond");
+            WorldAPI.ItemSpec spec = itemSpec(1);
+            endStatement();
+            return new SetGuiSlotStmt(line, gui, slot, spec);
         }
         if (eat("block")) {
             expect("at", "set block at 10 64 20 to diamond block");
@@ -785,7 +866,40 @@ public final class Parser {
             endStatement();
             return new ListCreate(line, name);
         }
-        throw err("I can create a team or a list: 'create team \"red\"'");
+        if (eat("world")) {
+            String name = string("the world name");
+            endStatement();
+            return new CreateWorldStmt(line, name);
+        }
+        if (eat("database")) {
+            String name = string("the database name");
+            endStatement();
+            return new CreateDatabaseStmt(line, name);
+        }
+        if (eat("book")) {
+            String name = string("the book name");
+            String title = name;
+            String author = "Hermes";
+            List<String> pages = new ArrayList<>();
+            while (true) {
+                if (eat("with")) {
+                    if (eat("title")) {
+                        title = string("the book title");
+                    } else if (eat("author")) {
+                        author = string("the author name");
+                    } else if (eat("page")) {
+                        pages.add(string("a page of text"));
+                    } else {
+                        throw err("After 'with' I expect 'title', 'author' or 'page'.");
+                    }
+                } else {
+                    break;
+                }
+            }
+            endStatement();
+            return new BookCreate(line, name, new WorldAPI.BookDef(title, author, pages));
+        }
+        throw err("I can create a team, a list, a world, a database or a book: 'create team \"red\"', 'create world \"arena\"', 'create database \"data\"', 'create book \"Guide\" with page \"...\"'");
     }
 
     private Stmt fireStmt() {        int line = cur().line;
@@ -817,6 +931,51 @@ public final class Parser {
         Vec3 v = coords();
         endStatement();
         return new MarkDef(line, name, v);
+    }
+
+    private Stmt guiDef() {
+        int line = cur().line;
+        pos++;
+        String name = nameOrString("a gui name");
+        expect("with", "gui \"Shop\" with 9 slots");
+        int size = (int) number("the number of slots");
+        eat("slots");
+        if (size < 1 || size > 54) throw err("A gui can have between 1 and 54 slots.");
+        List<SlotStmt> slots = new ArrayList<>();
+        if (cur().type != Type.NEWLINE) {
+            throw err("A gui's slots need to be listed below it.",
+                    "gui \"Shop\" with 9 slots\n    slot 3 has 1 diamond");
+        }
+        newline();
+        if (cur().type != Type.INDENT) {
+            throw err("I expected an indented list of slots here.",
+                    "gui \"Shop\" with 9 slots\n    slot 3 has 1 diamond");
+        }
+        pos++;
+        blockDepth++;
+        try {
+            while (cur().type != Type.DEDENT && cur().type != Type.EOF) {
+                if (cur().type == Type.NEWLINE) { newline(); continue; }
+                if (!at("slot")) throw err("Inside a gui I only accept lines like: slot 3 has 1 diamond.");
+                slots.add(slotStmt());
+            }
+        } finally {
+            blockDepth--;
+        }
+        if (cur().type == Type.DEDENT) pos++;
+        return new GuiDef(line, name, slots);
+    }
+
+    private SlotStmt slotStmt() {
+        int line = cur().line;
+        pos++;
+        int slot = (int) number("a slot number");
+        expect("has", "slot 3 has 1 diamond");
+        int count = 1;
+        if (cur().type == Type.NUMBER) count = (int) number("a number");
+        WorldAPI.ItemSpec spec = itemSpec(count);
+        endStatement();
+        return new SlotStmt(line, slot, spec);
     }
 
     private Stmt actionDef() {
@@ -1238,6 +1397,11 @@ public final class Parser {
                     String obj = string("the scoreboard name");
                     return new ScoreGetExpr(line, obj);
                 }
+                if (at("data")) {
+                    pos++;
+                    String key = string("a data key");
+                    return new PlayerDataGetExpr(line, key);
+                }
                 String name = word("a variable name");
                 return possessiveExpr(line, name);
             }
@@ -1247,6 +1411,22 @@ public final class Parser {
             if ("xp".equals(w) || "experience".equals(w)) { pos += 2; return new XpExpr(line); }
             if ("level".equals(w) || "levels".equals(w)) { pos += 2; return new LevelExpr(line); }
             throw err("I expected 'player's <name>' or 'player health' here.");
+        }
+        if (at("database")) {
+            pos++;
+            String db = string("the database name");
+            expect("at", "database \"data\" at \"coins\"");
+            String key = string("a database key");
+            return new DatabaseGetExpr(line, db, key);
+        }
+        if (at("config")) {
+            pos++;
+            expect("value", "config value \"prefix\" in file \"config.yml\"");
+            String key = string("the config key");
+            expect("in", "config value \"prefix\" in file \"config.yml\"");
+            expect("file", "config value \"prefix\" in file \"config.yml\"");
+            String file = string("the config file name");
+            return new ConfigGetExpr(line, file, key);
         }
         if (at("world") && peek(1).type == Type.POSSESSIVE) {
             VarTarget vt = varTarget(what);
@@ -1333,8 +1513,34 @@ public final class Parser {
                 String obj = string("the scoreboard name");
                 return new VarTarget("score", obj);
             }
+            if (at("data")) {
+                pos++;
+                String key = string("a data key");
+                return new VarTarget("playerdata", key);
+            }
             String name = word("a variable name");
             return new VarTarget("player", name);
+        }
+        if (at("player") && peek(1).type == Type.WORD && peek(1).text.equals("data")) {
+            pos += 2;
+            String key = string("a data key");
+            return new VarTarget("playerdata", key);
+        }
+        if (at("database")) {
+            pos++;
+            String db = string("the database name");
+            expect("at", "set database \"data\" at \"coins\" to 5");
+            String key = string("a database key");
+            return new VarTarget("database", db, key);
+        }
+        if (at("config")) {
+            pos++;
+            expect("value", "set config value \"prefix\" in file \"config.yml\" to \"[Hermes]\"");
+            String key = string("the config key");
+            expect("in", "set config value \"prefix\" in file \"config.yml\" to \"[Hermes]\"");
+            expect("file", "set config value \"prefix\" in file \"config.yml\" to \"[Hermes]\"");
+            String file = string("the config file name");
+            return new VarTarget("config", file, key);
         }
         if (at("world") && peek(1).type == Type.POSSESSIVE) {
             pos += 2;
@@ -1357,7 +1563,7 @@ public final class Parser {
             return new VarTarget("score", obj);
         }
         throw new VerseError(cur().line,
-                "I expected a variable here: 'player's coins', 'world's gold' or 'temporary x'.",
+                "I expected a variable here: 'player's coins', 'world's gold', 'database \"data\" at \"coins\"' or 'temporary x'.",
                 "set player's coins to 100", sourceLine(cur().line));
     }
 
@@ -1397,15 +1603,23 @@ public final class Parser {
                     double v = number("a number");
                     return new ScoreCond(obj, op == null ? "==" : op, v);
                 }
-                String name = word("a variable name");
+                ValueExpr left;
+                if (at("data")) {
+                    pos++;
+                    String key = string("a data key");
+                    left = new PlayerDataGetExpr(line, key);
+                } else {
+                    String name = word("a variable name");
+                    left = possessiveExpr(line, name);
+                }
                 if (eat("is") || eat("are")) { /* nothing */ }
                 String op = cmpOpOrNull();
                 if (op == null) {
                     ValueExpr right = value("a value to compare with");
-                    return new CmpCond(possessiveExpr(line, name), "==", right);
+                    return new CmpCond(left, "==", right);
                 }
                 ValueExpr right = value("a value");
-                return new CmpCond(possessiveExpr(line, name), op, right);
+                return new CmpCond(left, op, right);
             }
             pos++;
             String w = word("a condition");
@@ -1441,6 +1655,11 @@ public final class Parser {
                     }
                     if (eat("in")) {
                         eatNoise();
+                        if (at("world")) {
+                            pos++;
+                            String world = string("the world name");
+                            return new InWorldCond(world);
+                        }
                         if (at("biome")) {
                             pos++;
                             String biome = nameOrString("a biome name");
@@ -1659,6 +1878,19 @@ public final class Parser {
                     eat("up");
                     return eventTrigger("levels up", null, Trigger.Filter.NONE);
                 }
+                case "clicks": {
+                    eatNoise();
+                    int slot = -1;
+                    if (eat("slot")) {
+                        slot = (int) number("a slot number");
+                        eat("of");
+                    }
+                    expect("gui", "when player clicks slot 4 of gui \"Shop\"");
+                    String gui = string("the gui name");
+                    Trigger t = eventTrigger("gui click", gui, Trigger.Filter.GUI);
+                    t.guiSlot = slot;
+                    return t;
+                }
                 case "eats": {
                     if (at("any")) {
                         pos++;
@@ -1792,6 +2024,11 @@ public final class Parser {
                     }
                     if (eat("in")) {
                         eatNoise();
+                        if (at("world")) {
+                            pos++;
+                            String world = string("the world name");
+                            return stateTrigger(new InWorldCond(world), true);
+                        }
                         if (at("biome")) {
                             pos++;
                             String biome = nameOrString("a biome name");

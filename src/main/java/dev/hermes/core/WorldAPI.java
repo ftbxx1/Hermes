@@ -29,6 +29,19 @@ public interface WorldAPI {
         public Vec3 floor() { return new Vec3(Math.floor(x), Math.floor(y), Math.floor(z)); }
     }
 
+    /** An enchantment on a crafted item: name + level (e.g. "sharpness" 5). */
+    record EnchantSpec(String enchant, int level) {}
+
+    /** A fully described item: what it is, how many, and its custom name/lore/enchants. */
+    record ItemSpec(String item, int count, String name, java.util.List<String> lore, java.util.List<EnchantSpec> enchants) {
+        public static ItemSpec plain(String item, int count) {
+            return new ItemSpec(item, count, null, List.of(), List.of());
+        }
+    }
+
+    /** A page of a written book. */
+    record BookDef(String title, String author, java.util.List<String> pages) {}
+
     // ---------- locations ----------
     Vec3 playerLocation(PlayerRef p);
     void teleport(PlayerRef p, Vec3 loc);
@@ -65,10 +78,12 @@ public interface WorldAPI {
 
     // ---------- inventory ----------
     void giveItem(PlayerRef p, String item, int count);
+    void giveItemSpec(PlayerRef p, ItemSpec spec);
     boolean takeItem(PlayerRef p, String item, int count);
     int countItem(PlayerRef p, String item);
     boolean isHolding(PlayerRef p, String item);
     void clearInventory(PlayerRef p);
+    void giveBook(PlayerRef p, BookDef book);
 
     // ---------- messaging ----------
     void sendTitle(PlayerRef p, String title, String subtitle);
@@ -83,10 +98,16 @@ public interface WorldAPI {
     // ---------- world ----------
     void setWeather(String weather);
     void setTime(String daypart);
+    void setWorldWeather(String world, String weather);
+    void setWorldTime(String world, String daypart);
     boolean isNight();
     boolean isWeather(String weather);
     String dimensionOf(PlayerRef p);
     String biomeAt(Vec3 loc);
+    String playerWorld(PlayerRef p);
+    void createWorld(String name);
+    void deleteWorld(String name);
+    boolean worldExists(String name);
 
     // ---------- entities ----------
     MobRef spawnMob(String mob, Vec3 loc, String customName);
@@ -127,6 +148,16 @@ public interface WorldAPI {
     // ---------- sound & particles ----------
     void playSound(String sound, Vec3 loc);
     void spawnParticles(String particle, Vec3 loc);
+
+    // ---------- guis ----------
+    /** Opens a virtual inventory for the player. slots is size 1..54; null entries are empty. */
+    void openGui(PlayerRef p, String title, List<ItemSpec> slots);
+    /** Closes any Hermes gui the player has open. */
+    void closeGui(PlayerRef p);
+
+    // ---------- config files ----------
+    String configValue(String file, String key);
+    void setConfigValue(String file, String key, String value);
 
     // ---------- permissions (managed by Hermes) ----------
     boolean hasPermission(PlayerRef p, String perm);

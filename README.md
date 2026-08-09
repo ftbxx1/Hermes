@@ -131,7 +131,7 @@ dependency:
 <dependency>
     <groupId>com.github.ftbxx1</groupId>
     <artifactId>Hermes</artifactId>
-    <version>1.0.0</version>
+    <version>1.2.0</version>
     <scope>provided</scope>
 </dependency>
 ```

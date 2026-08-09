@@ -12,6 +12,7 @@ import org.bukkit.Particle;
 import org.bukkit.Registry;
 import org.bukkit.Sound;
 import org.bukkit.World;
+import org.bukkit.WorldCreator;
 import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
 import org.bukkit.block.Sign;
@@ -281,6 +282,57 @@ public final class BukkitWorld implements WorldAPI {
         return playerOf(p).getInventory().getItemInMainHand().getType() == m;
     }
 
+    @Override public void giveItemSpec(PlayerRef p, ItemSpec spec) {
+        Material m = materialOf(spec.item());
+        if (m == null) {
+            plugin.getLogger().warning("Hermes: unknown item '" + spec.item() + "'");
+            return;
+        }
+        ItemStack stack = new ItemStack(m, spec.count());
+        if (spec.name() != null) {
+            stack.editMeta(meta -> meta.displayName(Component.text(spec.name())));
+        }
+        if (!spec.lore().isEmpty()) {
+            stack.editMeta(meta -> meta.lore(spec.lore().stream().map(Component::text).toList()));
+        }
+        if (!spec.enchants().isEmpty()) {
+            stack.editMeta(meta -> {
+                for (EnchantSpec e : spec.enchants()) {
+                    org.bukkit.enchantments.Enchantment en = enchantmentOf(e.enchant());
+                    if (en != null) meta.addEnchant(en, Math.max(1, e.level()), true);
+                }
+            });
+        }
+        Map<Integer, ItemStack> leftover = playerOf(p).getInventory().addItem(stack);
+        if (!leftover.isEmpty()) {
+            World world = playerOf(p).getWorld();
+            for (ItemStack rest : leftover.values()) world.dropItemNaturally(playerOf(p).getLocation(), rest);
+        }
+    }
+
+    @Override public void giveBook(PlayerRef p, BookDef book) {
+        ItemStack stack = new ItemStack(Material.WRITTEN_BOOK);
+        stack.editMeta(meta -> {
+            if (meta instanceof org.bukkit.inventory.meta.BookMeta bm) {
+                bm.setTitle(book.title());
+                bm.setAuthor(book.author());
+                for (String page : book.pages()) bm.addPage(page);
+            }
+        });
+        Map<Integer, ItemStack> leftover = playerOf(p).getInventory().addItem(stack);
+        if (!leftover.isEmpty()) {
+            World world = playerOf(p).getWorld();
+            for (ItemStack rest : leftover.values()) world.dropItemNaturally(playerOf(p).getLocation(), rest);
+        }
+    }
+
+    private static org.bukkit.enchantments.Enchantment enchantmentOf(String friendly) {
+        String canonical = Dictionary.findEnchant(friendly);
+        if (canonical == null) canonical = friendly;
+        NamespacedKey key = NamespacedKey.minecraft(canonical.toLowerCase(Locale.ROOT));
+        return Registry.ENCHANTMENT.get(key);
+    }
+
     @Override public void clearInventory(PlayerRef p) {
         playerOf(p).getInventory().clear();
     }
@@ -383,6 +435,104 @@ public final class BukkitWorld implements WorldAPI {
         NamespacedKey key = defaultWorld().getBiome((int) loc.x(), (int) loc.y(), (int) loc.z()).getKey();
         String friendly = Dictionary.findBiome(key.getKey().replace('_', ' '));
         return friendly != null ? friendly : key.getKey();
+    }
+
+    @Override public void setWorldWeather(String worldName, String weather) {
+        World w = Bukkit.getWorld(worldName);
+        if (w == null) return;
+        if (weather.equals("rain") || weather.equals("storm")) {
+            w.setStorm(true);
+            w.setWeatherDuration(20 * 60 * 5);
+        } else {
+            w.setStorm(false);
+            w.setClearWeatherDuration(20 * 60 * 5);
+        }
+    }
+
+    @Override public void setWorldTime(String worldName, String daypart) {
+        World w = Bukkit.getWorld(worldName);
+        if (w == null) return;
+        long t;
+        switch (daypart) {
+            case "dawn": t = 0; break;
+            case "noon": t = 6000; break;
+            case "afternoon": t = 9000; break;
+            case "dusk": case "evening": t = 13000; break;
+            case "night": t = 14000; break;
+            case "midnight": t = 18000; break;
+            default: t = 1000; break;
+        }
+        w.setTime(t);
+    }
+
+    @Override public String playerWorld(PlayerRef p) {
+        return playerOf(p).getWorld().getName();
+    }
+
+    @Override public void createWorld(String name) {
+        if (Bukkit.getWorld(name) != null) return;
+        WorldCreator creator = new WorldCreator(name);
+        creator.createWorld();
+    }
+
+    @Override public void deleteWorld(String name) {
+        World w = Bukkit.getWorld(name);
+        if (w == null) return;
+        Bukkit.unloadWorld(w, true);
+    }
+
+    @Override public boolean worldExists(String name) {
+        return Bukkit.getWorld(name) != null;
+    }
+
+    @Override public String configValue(String file, String key) {
+        return plugin.getConfig().getString(key, "");
+    }
+
+    @Override public void setConfigValue(String file, String key, String value) {
+        plugin.getConfig().set(key, value);
+        plugin.saveConfig();
+    }
+
+    @Override public void openGui(PlayerRef p, String title, List<ItemSpec> slots) {
+        Inventory inv = Bukkit.createInventory(null, inventorySize(slots.size()), Component.text(title));
+        for (int i = 0; i < slots.size() && i < inv.getSize(); i++) {
+            ItemSpec spec = slots.get(i);
+            if (spec == null) continue;
+            inv.setItem(i, toItemStack(spec));
+        }
+        playerOf(p).openInventory(inv);
+    }
+
+    @Override public void closeGui(PlayerRef p) {
+        playerOf(p).closeInventory();
+    }
+
+    private static int inventorySize(int slots) {
+        int size = 9;
+        while (size < slots && size < 54) size += 9;
+        return size;
+    }
+
+    private static ItemStack toItemStack(ItemSpec spec) {
+        Material m = materialOf(spec.item());
+        if (m == null) m = Material.STONE;
+        ItemStack stack = new ItemStack(m, Math.max(1, spec.count()));
+        if (spec.name() != null) {
+            stack.editMeta(meta -> meta.displayName(Component.text(spec.name())));
+        }
+        if (!spec.lore().isEmpty()) {
+            stack.editMeta(meta -> meta.lore(spec.lore().stream().map(Component::text).toList()));
+        }
+        if (!spec.enchants().isEmpty()) {
+            stack.editMeta(meta -> {
+                for (EnchantSpec e : spec.enchants()) {
+                    org.bukkit.enchantments.Enchantment en = enchantmentOf(e.enchant());
+                    if (en != null) meta.addEnchant(en, Math.max(1, e.level()), true);
+                }
+            });
+        }
+        return stack;
     }
 
     // ------------------------------------------------------------------

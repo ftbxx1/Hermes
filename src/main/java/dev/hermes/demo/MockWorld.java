@@ -184,6 +184,14 @@ public final class MockWorld implements WorldAPI {
         player(p).inventory.merge(canonical, count, Integer::sum);
     }
 
+    @Override public void giveItemSpec(PlayerRef p, ItemSpec spec) {
+        giveItem(p, spec.item(), spec.count());
+    }
+
+    @Override public void giveBook(PlayerRef p, BookDef book) {
+        player(p).messages.add("[book] " + book.title() + " by " + book.author());
+    }
+
     @Override public boolean takeItem(PlayerRef p, String item, int count) {
         String canonical = Dictionary.findItem(item);
         if (canonical == null) canonical = item;
@@ -229,6 +237,35 @@ public final class MockWorld implements WorldAPI {
     @Override public boolean isWeather(String weather) {
         return weather.equals("rain") ? raining : weather.equals("storm") ? storming : !raining;
     }
+
+    private final Map<String, Boolean> worldWeather = new HashMap<>();
+    private final Map<String, Long> worldTime = new HashMap<>();
+    private final Map<String, Boolean> worlds = new HashMap<>();
+    private final Map<String, Map<String, String>> configFiles = new HashMap<>();
+
+    @Override public void setWorldWeather(String world, String weather) {
+        worldWeather.put(world, weather.equals("rain") || weather.equals("storm"));
+    }
+    @Override public void setWorldTime(String world, String daypart) {
+        worldTime.put(world, (long) time);
+    }
+    @Override public String playerWorld(PlayerRef p) { return player(p).dimension; }
+    @Override public void createWorld(String name) { worlds.put(name, true); }
+    @Override public void deleteWorld(String name) { worlds.remove(name); }
+    @Override public boolean worldExists(String name) { return worlds.containsKey(name); }
+
+    @Override public String configValue(String file, String key) {
+        Map<String, String> m = configFiles.get(file);
+        return m != null ? m.getOrDefault(key, "") : "";
+    }
+    @Override public void setConfigValue(String file, String key, String value) {
+        configFiles.computeIfAbsent(file, k -> new HashMap<>()).put(key, value);
+    }
+
+    @Override public void openGui(PlayerRef p, String title, List<ItemSpec> slots) {
+        player(p).messages.add("[gui] " + title);
+    }
+    @Override public void closeGui(PlayerRef p) { }
 
     @Override public String dimensionOf(PlayerRef p) { return player(p).dimension; }
     @Override public String biomeAt(Vec3 loc) {

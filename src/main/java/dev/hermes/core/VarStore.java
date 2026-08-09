@@ -16,6 +16,7 @@ public final class VarStore {
 
     private final Map<String, Value> worldVars = new HashMap<>();
     private final Map<String, Map<String, Value>> playerVars = new HashMap<>();
+    private final Map<String, Map<String, Value>> databases = new HashMap<>();
 
     // ---------- world ----------
     public Value getWorld(String name) {
@@ -62,6 +63,36 @@ public final class VarStore {
         worldVars.remove(name);
     }
 
+    // ---------- databases (name -> key -> value) ----------
+    public void createDatabase(String name) {
+        databases.putIfAbsent(name, new HashMap<>());
+    }
+
+    public Value getDatabase(String db, String key) {
+        Map<String, Value> m = databases.get(db);
+        if (m == null) return Value.none();
+        return m.getOrDefault(key, Value.none());
+    }
+
+    public void setDatabase(String db, String key, Value v) {
+        databases.computeIfAbsent(db, k -> new HashMap<>()).put(key, v);
+    }
+
+    public Map<String, Map<String, Value>> databases() {
+        return databases;
+    }
+
+    // ---------- persistent per-player data (name -> key -> value) ----------
+    public Value getPlayerData(String player, String key) {
+        Map<String, Value> m = playerVars.get(player);
+        if (m == null) return Value.none();
+        return m.getOrDefault("data_" + key, Value.none());
+    }
+
+    public void setPlayerData(String player, String key, Value v) {
+        playerVars.computeIfAbsent(player, k -> new HashMap<>()).put("data_" + key, v);
+    }
+
     // ---------- introspection ----------
     public Map<String, Map<String, Value>> playerVars() {
         return playerVars;
@@ -80,6 +111,12 @@ public final class VarStore {
         for (Map.Entry<String, Map<String, Value>> e : playerVars.entrySet()) {
             for (Map.Entry<String, Value> v : e.getValue().entrySet()) {
                 sb.append("P ").append(e.getKey()).append(' ').append(v.getKey())
+                        .append(" = ").append(serialize(v.getValue())).append('\n');
+            }
+        }
+        for (Map.Entry<String, Map<String, Value>> e : databases.entrySet()) {
+            for (Map.Entry<String, Value> v : e.getValue().entrySet()) {
+                sb.append("D ").append(e.getKey()).append(' ').append(v.getKey())
                         .append(" = ").append(serialize(v.getValue())).append('\n');
             }
         }
@@ -107,6 +144,13 @@ public final class VarStore {
                     int sp = head.indexOf(' ');
                     if (sp < 0) continue;
                     setPlayer(head.substring(0, sp), head.substring(sp + 1), deserialize(line.substring(eq + 3)));
+                } else if (line.startsWith("D ")) {
+                    int eq = line.indexOf(" = ");
+                    if (eq < 4) continue;
+                    String head = line.substring(2, eq);
+                    int sp = head.indexOf(' ');
+                    if (sp < 0) continue;
+                    setDatabase(head.substring(0, sp), head.substring(sp + 1), deserialize(line.substring(eq + 3)));
                 }
             }
         } catch (IOException ex) {

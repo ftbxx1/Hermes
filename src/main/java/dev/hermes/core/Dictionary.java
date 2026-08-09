@@ -25,6 +25,7 @@ public final class Dictionary {
     private static final Map<String, String> PARTICLES = new HashMap<>();
     private static final Map<String, String> BIOMES = new HashMap<>();
     private static final Map<String, String> GAMEMODES = new HashMap<>();
+    private static final Map<String, String> ENCHANTS = new HashMap<>();
 
     private Dictionary() {}
 
@@ -585,6 +586,7 @@ public final class Dictionary {
     public static String findParticle(String name) { return find(PARTICLES, name); }
     public static String findBiome(String name) { return find(BIOMES, name); }
     public static String findGamemode(String name) { return find(GAMEMODES, name); }
+    public static String findEnchant(String name) { return find(ENCHANTS, name); }
 
     public static boolean isItem(String name) { return findItem(name) != null; }
     public static boolean isMob(String name) { return findMob(name) != null; }
@@ -655,6 +657,25 @@ public final class Dictionary {
             {"end rod", "END_ROD"}, {"totem", "TOTEM"}, {"soul", "SOUL_FIRE_FLAME"},
         };
         for (String[] pair : par) PARTICLE_KEYS.put(pair[0], pair[1]);
+
+        String[][] enc = {
+            {"sharpness", "SHARPNESS"}, {"smite", "SMITE"}, {"bane of arthropods", "BANE_OF_ARTHROPODS"},
+            {"knockback", "KNOCKBACK"}, {"fire aspect", "FIRE_ASPECT"}, {"looting", "LOOTING"},
+            {"sweeping edge", "SWEEPING_EDGE"}, {"efficiency", "EFFICIENCY"},
+            {"silk touch", "SILK_TOUCH"}, {"unbreaking", "UNBREAKING"}, {"fortune", "FORTUNE"},
+            {"power", "POWER"}, {"punch", "PUNCH"}, {"flame", "FLAME"}, {"infinity", "INFINITY"},
+            {"luck of the sea", "LUCK_OF_THE_SEA"}, {"lure", "LURE"},
+            {"protection", "PROTECTION"}, {"fire protection", "FIRE_PROTECTION"},
+            {"blast protection", "BLAST_PROTECTION"}, {"projectile protection", "PROJECTILE_PROTECTION"},
+            {"feather falling", "FEATHER_FALLING"}, {"respiration", "RESPIRATION"},
+            {"aqua affinity", "AQUA_AFFINITY"}, {"thorns", "THORNS"},
+            {"depth strider", "DEPTH_STRIDER"}, {"frost walker", "FROST_WALKER"},
+            {"mending", "MENDING"}, {"soul speed", "SOUL_SPEED"},
+            {"swift sneak", "SWIFT_SNEAK"}, {"curse of binding", "CURSE_OF_BINDING"},
+            {"curse of vanishing", "CURSE_OF_VANISHING"}, {"channeling", "CHANNELING"},
+            {"riptide", "RIPTIDE"}, {"impaling", "IMPALING"}, {"loyalty", "LOYALTY"},
+        };
+        for (String[] pair : enc) ENCHANTS.put(pair[0], pair[1]);
 
         String[][] bio = {
             {"plains", "PLAINS"}, {"forest", "FOREST"}, {"dark forest", "DARK_FOREST"},
@@ -750,6 +771,7 @@ public final class Dictionary {
     public static String[] particleNames() { return PARTICLES.keySet().toArray(new String[0]); }
     public static String[] biomeNames() { return BIOMES.keySet().toArray(new String[0]); }
     public static String[] gamemodeNames() { return GAMEMODES.keySet().toArray(new String[0]); }
+    public static String[] enchantNames() { return ENCHANTS.keySet().toArray(new String[0]); }
 
     /** All canonical item names (the friendly spellings). */
     public static List<String> canonicalItems() {

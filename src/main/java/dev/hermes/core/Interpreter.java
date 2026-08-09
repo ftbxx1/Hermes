@@ -254,7 +254,33 @@ public final class Interpreter {
             else world.heal(needPlayer(s, ctx), h.amount);
         } else if (s instanceof GiveItemStmt g) {
             PlayerRef p = needPlayer(s, ctx);
-            world.giveItem(p, g.item, g.count);
+            world.giveItemSpec(p, g.spec);
+        } else if (s instanceof GiveBookStmt gb) {
+            WorldAPI.BookDef book = engine.book(gb.book);
+            if (book == null) {
+                throw new VerseError(s.line,
+                        "There is no book called '" + gb.book + "'.",
+                        "Create it first:\n\ncreate book \"" + gb.book + "\" with page \"...\"");
+            }
+            world.giveBook(needPlayer(s, ctx), book);
+        } else if (s instanceof OpenGuiStmt og) {
+            engine.openGui(og.gui, needPlayer(s, ctx));
+        } else if (s instanceof SetGuiSlotStmt gs) {
+            engine.setGuiSlot(gs.gui, gs.slot, gs.spec);
+        } else if (s instanceof BookCreate bc) {
+            engine.registerBook(bc.name, bc.book, scriptName());
+        } else if (s instanceof CreateWorldStmt cw) {
+            world.createWorld(cw.world);
+        } else if (s instanceof DeleteWorldStmt dw) {
+            world.deleteWorld(dw.world);
+        } else if (s instanceof SetWorldWeatherStmt sww) {
+            world.setWorldWeather(sww.world, sww.weather);
+        } else if (s instanceof SetWorldTimeStmt swt) {
+            world.setWorldTime(swt.world, swt.daypart);
+        } else if (s instanceof CreateDatabaseStmt cd) {
+            engine.vars.createDatabase(cd.db);
+        } else if (s instanceof ConfigSetStmt cs) {
+            world.setConfigValue(cs.file, cs.key, eval(cs.value, ctx).display());
         } else if (s instanceof TakeItemStmt t) {
             PlayerRef p = needPlayer(s, ctx);
             if (!world.takeItem(p, t.item, t.count)) {
@@ -423,6 +449,17 @@ public final class Interpreter {
                 world.setScore(p, t.name, v.isNumber() ? (int) v.num : 0);
                 break;
             }
+            case "database":
+                engine.vars.setDatabase(t.name, t.key, v);
+                break;
+            case "playerdata": {
+                PlayerRef p = needPlayerVar(ctx);
+                engine.vars.setPlayerData(p.name(), t.name, v);
+                break;
+            }
+            case "config":
+                world.setConfigValue(t.name, t.key, v.display());
+                break;
             default:
                 break;
         }
@@ -452,6 +489,19 @@ public final class Interpreter {
             case "score": {
                 PlayerRef p = needPlayerVar(ctx);
                 world.addScore(p, t.name, (int) delta);
+                break;
+            }
+            case "database": {
+                Value cur = engine.vars.getDatabase(t.name, t.key);
+                requireNumber(cur, t, ctx);
+                engine.vars.setDatabase(t.name, t.key, Value.number((cur.isNumber() ? cur.num : 0) + delta));
+                break;
+            }
+            case "playerdata": {
+                PlayerRef p = needPlayerVar(ctx);
+                Value cur = engine.vars.getPlayerData(p.name(), t.name);
+                requireNumber(cur, t, ctx);
+                engine.vars.setPlayerData(p.name(), t.name, Value.number((cur.isNumber() ? cur.num : 0) + delta));
                 break;
             }
             default:
@@ -488,6 +538,14 @@ public final class Interpreter {
                 if (ctx.player == null) return Value.number(0);
                 return Value.number(world.score(ctx.player, t.name));
             }
+            case "database":
+                return engine.vars.getDatabase(t.name, t.key);
+            case "playerdata": {
+                if (ctx.player == null) return Value.none();
+                return engine.vars.getPlayerData(ctx.player.name(), t.name);
+            }
+            case "config":
+                return Value.text(world.configValue(t.name, t.key));
             default:
                 return Value.none();
         }
@@ -518,6 +576,16 @@ public final class Interpreter {
         }
         if (e instanceof LengthExpr len) {
             return Value.number(engine.vars.list(len.list).items.size());
+        }
+        if (e instanceof DatabaseGetExpr dg) {
+            return engine.vars.getDatabase(dg.db, dg.key);
+        }
+        if (e instanceof ConfigGetExpr cg) {
+            return Value.text(world.configValue(cg.file, cg.key));
+        }
+        if (e instanceof PlayerDataGetExpr pd) {
+            if (ctx.player == null) return Value.none();
+            return engine.vars.getPlayerData(ctx.player.name(), pd.key);
         }
         if (e instanceof PlayerNameExpr) {
             return Value.text(needPlayerForExpr(e, ctx).name());
@@ -592,6 +660,9 @@ public final class Interpreter {
         }
         if (c instanceof InRegionCond r) {
             return ctx.player != null && world.inRegion(r.region, world.playerLocation(ctx.player));
+        }
+        if (c instanceof InWorldCond wc) {
+            return ctx.player != null && world.playerWorld(ctx.player).equals(wc.world);
         }
         if (c instanceof InBiomeCond b) {
             return ctx.player != null && world.biomeAt(world.playerLocation(ctx.player)).equals(b.biome);

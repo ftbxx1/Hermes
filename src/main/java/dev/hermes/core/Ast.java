@@ -35,6 +35,18 @@ public final class Ast {
         public MarkDef(int line, String name, WorldAPI.Vec3 loc) { super(line); this.name = name; this.loc = loc; }
     }
 
+    /** "gui \"Shop\" ..." followed by a block of slot lines. */
+    public static final class GuiDef extends Stmt {
+        public final String name; public final List<SlotStmt> slots;
+        public GuiDef(int line, String name, List<SlotStmt> slots) { super(line); this.name = name; this.slots = slots; }
+    }
+
+    /** One line inside a gui definition: "slot 3 has 1 diamond named \"Star\"". */
+    public static final class SlotStmt extends Stmt {
+        public final int slot; public final WorldAPI.ItemSpec spec;
+        public SlotStmt(int line, int slot, WorldAPI.ItemSpec spec) { super(line); this.slot = slot; this.spec = spec; }
+    }
+
     public static final class TeamCreate extends Stmt {
         public final String name;
         public TeamCreate(int line, String name) { super(line); this.name = name; }
@@ -174,8 +186,8 @@ public final class Ast {
     }
 
     public static final class GiveItemStmt extends Stmt {
-        public final TargetRef target; public final String item; public final int count;
-        public GiveItemStmt(int line, TargetRef target, String item, int count) { super(line); this.target = target; this.item = item; this.count = count; }
+        public final TargetRef target; public final WorldAPI.ItemSpec spec;
+        public GiveItemStmt(int line, TargetRef target, WorldAPI.ItemSpec spec) { super(line); this.target = target; this.spec = spec; }
     }
 
     public static final class TakeItemStmt extends Stmt {
@@ -370,6 +382,64 @@ public final class Ast {
     }
 
     // ------------------------------------------------------------------
+    // Guis, books, databases, config files, worlds & player data
+    // ------------------------------------------------------------------
+
+    public static final class OpenGuiStmt extends Stmt {
+        public final TargetRef target; public final String gui;
+        public OpenGuiStmt(int line, TargetRef target, String gui) { super(line); this.target = target; this.gui = gui; }
+    }
+
+    public static final class SetGuiSlotStmt extends Stmt {
+        public final String gui; public final int slot; public final WorldAPI.ItemSpec spec;
+        public SetGuiSlotStmt(int line, String gui, int slot, WorldAPI.ItemSpec spec) {
+            super(line); this.gui = gui; this.slot = slot; this.spec = spec;
+        }
+    }
+
+    public static final class BookCreate extends Stmt {
+        public final String name; public final WorldAPI.BookDef book;
+        public BookCreate(int line, String name, WorldAPI.BookDef book) { super(line); this.name = name; this.book = book; }
+    }
+
+    public static final class GiveBookStmt extends Stmt {
+        public final TargetRef target; public final String book;
+        public GiveBookStmt(int line, TargetRef target, String book) { super(line); this.target = target; this.book = book; }
+    }
+
+    public static final class CreateWorldStmt extends Stmt {
+        public final String world;
+        public CreateWorldStmt(int line, String world) { super(line); this.world = world; }
+    }
+
+    public static final class DeleteWorldStmt extends Stmt {
+        public final String world;
+        public DeleteWorldStmt(int line, String world) { super(line); this.world = world; }
+    }
+
+    public static final class SetWorldWeatherStmt extends Stmt {
+        public final String world; public final String weather;
+        public SetWorldWeatherStmt(int line, String world, String weather) { super(line); this.world = world; this.weather = weather; }
+    }
+
+    public static final class SetWorldTimeStmt extends Stmt {
+        public final String world; public final String daypart;
+        public SetWorldTimeStmt(int line, String world, String daypart) { super(line); this.world = world; this.daypart = daypart; }
+    }
+
+    public static final class CreateDatabaseStmt extends Stmt {
+        public final String db;
+        public CreateDatabaseStmt(int line, String db) { super(line); this.db = db; }
+    }
+
+    public static final class ConfigSetStmt extends Stmt {
+        public final String file; public final String key; public final ValueExpr value;
+        public ConfigSetStmt(int line, String file, String key, ValueExpr value) {
+            super(line); this.file = file; this.key = key; this.value = value;
+        }
+    }
+
+    // ------------------------------------------------------------------
     // Value expressions
     // ------------------------------------------------------------------
 
@@ -400,14 +470,20 @@ public final class Ast {
     }
 
     public static final class VarTarget {
-        public final String kind; // player | world | temp | list
+        public final String kind; // player | world | temp | list | score | database | playerdata
         public final String name;
-        public VarTarget(String kind, String name) { this.kind = kind; this.name = name; }
+        /** Extra key for compound targets: database name or key, playerdata key. */
+        public final String key;
+        public VarTarget(String kind, String name) { this(kind, name, null); }
+        public VarTarget(String kind, String name, String key) { this.kind = kind; this.name = name; this.key = key; }
         public String describe() {
             switch (kind) {
                 case "player": return "player's " + name;
                 case "world": return "world's " + name;
                 case "temp": return "temporary " + name;
+                case "score": return "score \"" + name + "\"";
+                case "database": return "database \"" + name + "\" at \"" + key + "\"";
+                case "playerdata": return "player data \"" + name + "\"";
                 default: return "list \"" + name + "\"";
             }
         }
@@ -475,6 +551,21 @@ public final class Ast {
         public LengthExpr(int line, String list) { super(line); this.list = list; }
     }
 
+    public static final class DatabaseGetExpr extends ValueExpr {
+        public final String db; public final String key;
+        public DatabaseGetExpr(int line, String db, String key) { super(line); this.db = db; this.key = key; }
+    }
+
+    public static final class ConfigGetExpr extends ValueExpr {
+        public final String file; public final String key;
+        public ConfigGetExpr(int line, String file, String key) { super(line); this.file = file; this.key = key; }
+    }
+
+    public static final class PlayerDataGetExpr extends ValueExpr {
+        public final String key;
+        public PlayerDataGetExpr(int line, String key) { super(line); this.key = key; }
+    }
+
     // ------------------------------------------------------------------
     // Conditions
     // ------------------------------------------------------------------
@@ -504,6 +595,11 @@ public final class Ast {
     public static final class InRegionCond extends Condition {
         public final String region;
         public InRegionCond(String region) { this.region = region; }
+    }
+
+    public static final class InWorldCond extends Condition {
+        public final String world;
+        public InWorldCond(String world) { this.world = world; }
     }
 
     public static final class InBiomeCond extends Condition {
@@ -587,7 +683,7 @@ public final class Ast {
 
     public static final class Trigger {
         public enum Kind { EVENT, STATE }
-        public enum Filter { NONE, ITEM, BLOCK, MOB, REGION, TEXT, MOB_NAME }
+        public enum Filter { NONE, ITEM, BLOCK, MOB, REGION, TEXT, MOB_NAME, GUI }
 
         public final Kind kind;
         /** For EVENT triggers: "joins", "breaks", "mob dies", "custom", ... */
@@ -599,6 +695,8 @@ public final class Ast {
         public final boolean playerSubject;
         /** "when player first joins": fires only the first time a player joins. */
         public boolean first;
+        /** For GUI click triggers: the slot, or -1 for any slot. */
+        public int guiSlot = -1;
 
         public Trigger(Kind kind, String event, String filter, Filter filterType,
                        List<Condition> conditions, boolean playerSubject) {

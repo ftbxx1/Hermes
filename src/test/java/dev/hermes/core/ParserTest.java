@@ -176,4 +176,106 @@ class ParserTest {
         assertEquals("join", join.op);
         assertInstanceOf(ChestStmt.class, script.body.get(4));
         assertInstanceOf(ChestHasCond.class, ((IfStmt) script.body.get(5)).cond);    }
+
+    @Test
+    void parsesGuiDefinitionsAndOpen() {
+        Script script = parse("""
+                gui "Shop" with 9 slots
+                    slot 3 has 1 diamond named "Star Sword"
+                    slot 5 has 1 emerald with lore "Shiny" with lore "Valuable" with enchant sharpness 5
+
+                when player joins
+                    open gui "Shop" to player
+
+                when player clicks slot 3 of gui "Shop"
+                    give player 1 emerald
+                """);
+        GuiDef g = (GuiDef) script.body.get(0);
+        assertEquals("Shop", g.name);
+        assertEquals(2, g.slots.size());
+        assertEquals(3, g.slots.get(0).slot);
+        assertEquals("Star Sword", g.slots.get(0).spec.name());
+        assertEquals(1, g.slots.get(1).spec.enchants().size());
+        assertEquals("SHARPNESS", g.slots.get(1).spec.enchants().get(0).enchant());
+        assertInstanceOf(OpenGuiStmt.class, ((WhenBlock) script.body.get(1)).body.get(0));
+        WhenBlock click = (WhenBlock) script.body.get(2);
+        assertEquals("gui click", click.trigger.event);
+        assertEquals(Trigger.Filter.GUI, click.trigger.filterType);
+        assertEquals("Shop", click.trigger.filter);
+        assertEquals(3, click.trigger.guiSlot);
+    }
+
+    @Test
+    void parsesBooksWorldsDatabasesConfigAndPlayerData() {
+        Script script = parse("""
+                create book "Guide" with title "The Guide" with author "Hermes" with page "Hello" with page "World"
+                create world "arena"
+                delete world "old"
+                create database "data"
+                set database "data" at "coins" to 5
+                add 2 to database "data" at "coins"
+                set config value "prefix" in file "config.yml" to "[Hermes]"
+                set player data "tokens" to 100
+                when player joins
+                    give player book "Guide"
+                    set weather in world "arena" to rain
+                    set time in world "arena" to night
+                when player is in world "arena"
+                    tell player "Welcome to the arena!"
+                """);
+        BookCreate bc = (BookCreate) script.body.get(0);
+        assertEquals("Guide", bc.name);
+        assertEquals("The Guide", bc.book.title());
+        assertEquals(2, bc.book.pages().size());
+        assertInstanceOf(CreateWorldStmt.class, script.body.get(1));
+        assertInstanceOf(DeleteWorldStmt.class, script.body.get(2));
+        assertInstanceOf(CreateDatabaseStmt.class, script.body.get(3));
+        SetStmt db = (SetStmt) script.body.get(4);
+        assertEquals("database", db.target.kind);
+        assertEquals("data", db.target.name);
+        assertEquals("coins", db.target.key);
+        assertInstanceOf(ConfigSetStmt.class, script.body.get(6));
+        SetStmt pd = (SetStmt) script.body.get(7);
+        assertEquals("playerdata", pd.target.kind);
+        assertEquals("tokens", pd.target.name);
+        WhenBlock give = (WhenBlock) script.body.get(8);
+        assertInstanceOf(GiveBookStmt.class, give.body.get(0));
+        assertInstanceOf(SetWorldWeatherStmt.class, give.body.get(1));
+        assertInstanceOf(SetWorldTimeStmt.class, give.body.get(2));
+        assertInstanceOf(InWorldCond.class, ((WhenBlock) script.body.get(9)).trigger.conditions.get(0));
+    }
+
+    @Test
+    void parsesDatabaseAndPlayerDataValues() {
+        Script script = parse("""
+                if database "data" at "coins" is above 10
+                    set player data "tokens" to database "data" at "coins"
+                if player's data "tokens" is equal to 100
+                    tell player "Rich!"
+                """);
+        IfStmt iff = (IfStmt) script.body.get(0);
+        CmpCond cmp = (CmpCond) iff.cond;
+        assertInstanceOf(DatabaseGetExpr.class, cmp.left);
+        SetStmt set = (SetStmt) iff.thenBody.get(0);
+        assertInstanceOf(DatabaseGetExpr.class, set.value);
+        IfStmt iff2 = (IfStmt) script.body.get(1);
+        assertInstanceOf(PlayerDataGetExpr.class, ((CmpCond) iff2.cond).left);
+    }
+
+    @Test
+    void parsesItemSpecModifiers() {
+        Script script = parse("""
+                give player 1 diamond named "Star" with lore "Shiny" with enchant sharpness 5
+                give player a golden apple named "Health" with enchant unbreaking 3
+                """);
+        GiveItemStmt g1 = (GiveItemStmt) script.body.get(0);
+        assertEquals("diamond", g1.spec.item());
+        assertEquals(1, g1.spec.count());
+        assertEquals("Star", g1.spec.name());
+        assertEquals(1, g1.spec.lore().size());
+        assertEquals(1, g1.spec.enchants().size());
+        GiveItemStmt g2 = (GiveItemStmt) script.body.get(1);
+        assertEquals("golden apple", g2.spec.item());
+        assertEquals("Health", g2.spec.name());
+    }
 }

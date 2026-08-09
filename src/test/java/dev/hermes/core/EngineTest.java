@@ -664,4 +664,110 @@ class EngineTest {
                 """);
         assertEquals(0, h.engine.vars.list("quests").items.size());
     }
+
+    @Test
+    void opensGuiAndHandlesSlotClick() {
+        Harness h = new Harness("""
+                gui "Shop" with 9 slots
+                    slot 0 has 1 diamond named "Star"
+                    slot 2 has 1 emerald
+
+                when player joins
+                    open gui "Shop" to player
+
+                when player clicks slot 2 of gui "Shop"
+                    give player 5 emeralds
+
+                when player clicks gui "Shop"
+                    give player 1 iron ingot
+                """);
+        h.engine.playerEvent("joins", h.p1);
+        assertTrue(h.world.messageContains("PlayerOne", "[gui] Shop"));
+
+        h.engine.playerEventGui("gui click", h.p1, "Shop", 2);
+        assertEquals(5, h.p1.inventory.getOrDefault("emerald", 0));
+
+        h.engine.playerEventGui("gui click", h.p1, "Shop", 5);
+        assertEquals(2, h.p1.inventory.getOrDefault("iron ingot", 0));
+    }
+
+    @Test
+    void guiSlotClickOnlyFiresItsOwnSlot() {
+        Harness h = new Harness("""
+                gui "Menu" with 9 slots
+                    slot 0 has 1 diamond
+
+                when player clicks slot 0 of gui "Menu"
+                    give player 1 emerald
+                """);
+        h.engine.playerEventGui("gui click", h.p1, "Menu", 3);
+        assertEquals(0, h.p1.inventory.getOrDefault("emerald", 0));
+        h.engine.playerEventGui("gui click", h.p1, "Menu", 0);
+        assertEquals(1, h.p1.inventory.getOrDefault("emerald", 0));
+    }
+
+    @Test
+    void booksAreCreatedAndGiven() {
+        Harness h = new Harness("""
+                create book "Guide" with title "The Guide" with author "Hermes" with page "Page one"
+                when player joins
+                    give player book "Guide"
+                """);
+        h.engine.playerEvent("joins", h.p1);
+        assertTrue(h.world.messageContains("PlayerOne", "[book] The Guide by Hermes"));
+    }
+
+    @Test
+    void databasesAndPlayerDataPersist() {
+        Harness h = new Harness("""
+                create database "data"
+                when player joins
+                    set database "data" at "coins" to 5
+                    add 2 to database "data" at "coins"
+                    set player data "tokens" to 100
+                    if database "data" at "coins" is above 5
+                        set player's coins to database "data" at "coins"
+                """);
+        h.engine.playerEvent("joins", h.p1);
+        assertEquals(7, h.engine.vars.getDatabase("data", "coins").num);
+        assertEquals(100, h.engine.vars.getPlayerData("PlayerOne", "tokens").num);
+        assertEquals(7, h.engine.vars.getPlayer("PlayerOne", "coins").num);
+    }
+
+    @Test
+    void configValuesAreReadAndWritten() {
+        Harness h = new Harness("""
+                when player joins
+                    set config value "prefix" in file "config.yml" to "[Hermes]"
+                    if config value "prefix" in file "config.yml" is equal to "[Hermes]"
+                        tell player "prefix ok"
+                """);
+        h.engine.playerEvent("joins", h.p1);
+        assertTrue(h.world.messageContains("PlayerOne", "prefix ok"));
+    }
+
+    @Test
+    void playerInWorldCondition() {
+        Harness h = new Harness("""
+                when player is in world "arena"
+                    tell player "in the arena"
+                """);
+        h.p1.dimension = "arena";
+        h.engine.tick();
+        assertTrue(h.world.messageContains("PlayerOne", "in the arena"));
+    }
+
+    @Test
+    void worldCreateAndSetWeatherAndTime() {
+        Harness h = new Harness("""
+                when player joins
+                    create world "arena"
+                    delete world "old"
+                    set weather in world "arena" to rain
+                    set time in world "arena" to night
+                """);
+        h.engine.playerEvent("joins", h.p1);
+        assertTrue(h.world.worldExists("arena"));
+        assertFalse(h.world.worldExists("old"));
+    }
 }

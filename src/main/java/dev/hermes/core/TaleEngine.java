@@ -31,6 +31,17 @@ public final class TaleEngine {
     /** Named places: "home" -> coordinates. */
     public final Map<String, WorldAPI.Vec3> marks = new HashMap<>();
 
+    /** Books defined by scripts: "Guide" -> the written book. */
+    public final Map<String, WorldAPI.BookDef> books = new HashMap<>();
+
+    /** A gui defined by a script: name -> its slots (slot index -> item). */
+    public static final class Gui {
+        public final java.util.Map<Integer, WorldAPI.ItemSpec> slots = new HashMap<>();
+        public WorldAPI.ItemSpec get(int slot) { return slots.get(slot); }
+        public void set(int slot, WorldAPI.ItemSpec spec) { slots.put(slot, spec); }
+    }
+    public final Map<String, Gui> guis = new HashMap<>();
+
     private static final class Handler {
         final Trigger trig;
         final List<Stmt> body;
@@ -58,6 +69,8 @@ public final class TaleEngine {
     /** Per-script bookkeeping so a single file can be unloaded and reloaded. */
     private final Map<String, List<String>> scriptMarks = new HashMap<>();
     private final Map<String, List<String>> scriptRegions = new HashMap<>();
+    private final Map<String, List<String>> scriptBooks = new HashMap<>();
+    private final Map<String, List<String>> scriptGuis = new HashMap<>();
     private final Map<String, List<Runnable>> scriptTimers = new HashMap<>();
 
     /** A command defined by a script, ready to be executed. */
@@ -121,7 +134,7 @@ public final class TaleEngine {
             for (Stmt s : script.body) {
                 if (s instanceof WhenBlock || s instanceof EveryBlock
                         || s instanceof ActionDef || s instanceof RegionDef || s instanceof MarkDef
-                        || s instanceof CommandDef) {
+                        || s instanceof GuiDef || s instanceof CommandDef) {
                     register(s, interp, fileName + "#" + idx.getAndIncrement());
                 } else {
                     startup.add(s);
@@ -164,6 +177,14 @@ public final class TaleEngine {
         } else if (s instanceof MarkDef m) {
             marks.put(m.name, m.loc);
             scriptMarks.computeIfAbsent(interp.sourceFile(), k -> new ArrayList<>()).add(m.name);
+        } else if (s instanceof GuiDef g) {
+            Gui gui = new Gui();
+            for (SlotStmt st : g.slots) {
+                if (st.slot < 0 || st.slot >= 54) continue;
+                gui.set(st.slot, st.spec);
+            }
+            guis.put(g.name, gui);
+            scriptGuis.computeIfAbsent(interp.sourceFile(), k -> new ArrayList<>()).add(g.name);
         } else if (s instanceof CommandDef c) {
             commands.put(c.name.toLowerCase(), new RegisteredCommand(c, interp));
         }
@@ -182,6 +203,10 @@ public final class TaleEngine {
         if (marks != null) for (String name : marks) this.marks.remove(name);
         List<String> regions = scriptRegions.remove(fileName);
         if (regions != null) for (String name : regions) world.undefineRegion(name);
+        List<String> books = scriptBooks.remove(fileName);
+        if (books != null) for (String name : books) this.books.remove(name);
+        List<String> guis = scriptGuis.remove(fileName);
+        if (guis != null) for (String name : guis) this.guis.remove(name);
         List<Runnable> timers = scriptTimers.remove(fileName);
         if (timers != null) for (Runnable task : timers) scheduler.cancelEvery(task);
 
@@ -257,6 +282,59 @@ public final class TaleEngine {
 
     public void mobEventByName(String event, MobRef m, String customName) {
         dispatch(event, Trigger.Filter.MOB_NAME, customName, null, m);
+    }
+
+    /** A player clicked a gui slot: "gui click" events with a GUI filter. */
+    public void playerEventGui(String event, PlayerRef p, String gui, int slot) {
+        List<Handler> hs = handlers.get(event);
+        if (hs == null) return;
+        for (Handler h : hs) {
+            Trigger t = h.trig;
+            if (t.filterType != Trigger.Filter.GUI) continue;
+            if (t.filter != null && !t.filter.equals(gui)) continue;
+            if (t.guiSlot >= 0 && t.guiSlot != slot) continue;
+            if (!allConditions(t, h.interp, new Interpreter.RunContext(h.interp.scriptName(), p, null))) continue;
+            try {
+                h.interp.runBlock(h.body, new Interpreter.RunContext(h.interp.scriptName(), p, null));
+            } catch (VerseError e) {
+                reportError(h.interp, e, p);
+            } catch (RuntimeException e) {
+                world.log("Hermes error: " + e);
+            }
+        }
+    }
+
+    public void registerBook(String name, WorldAPI.BookDef book, String sourceFile) {
+        books.put(name, book);
+        scriptBooks.computeIfAbsent(sourceFile, k -> new ArrayList<>()).add(name);
+    }
+
+    public WorldAPI.BookDef book(String name) {
+        return books.get(name);
+    }
+
+    /** Opens a script-defined gui for a player, filling each slot. */
+    public void openGui(String guiName, PlayerRef p) {
+        Gui gui = guis.get(guiName);
+        if (gui == null) {
+            throw new VerseError(0,
+                    "There is no gui called '" + guiName + "'.",
+                    "Define it first:\n\ngui \"" + guiName + "\" with 9 slots\n    slot 0 has 1 diamond");
+        }
+        List<WorldAPI.ItemSpec> slots = new ArrayList<>();
+        for (int i = 0; i < 54; i++) {
+            WorldAPI.ItemSpec spec = gui.get(i);
+            slots.add(spec != null ? spec : null);
+        }
+        world.openGui(p, guiName, slots);
+    }
+
+    public void setGuiSlot(String guiName, int slot, WorldAPI.ItemSpec spec) {
+        Gui gui = guis.get(guiName);
+        if (gui == null) throw new VerseError(0,
+                "There is no gui called '" + guiName + "'.",
+                "Define it first:\n\ngui \"" + guiName + "\" with 9 slots\n    slot 0 has 1 diamond");
+        gui.set(slot, spec);
     }
 
     /** A custom event created by scripts themselves. */

@@ -32,6 +32,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.event.player.PlayerToggleSprintEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
@@ -267,6 +268,16 @@ public final class HermesListener implements Listener {
     }
 
     // ------------------------------------------------------------------
+
+    /** Clicks inside a Hermes gui become "gui click" events with the gui name and slot. */
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void onGuiClick(InventoryClickEvent e) {
+        if (!(e.getWhoClicked() instanceof Player p)) return;
+        if (e.getInventory().getHolder() != null) return; // only our plain Hermes inventories
+        String title = PlainTextComponentSerializer.plainText().serialize(e.getView().title());
+        if (title.isEmpty()) return;
+        plugin.engine().playerEventGui("gui click", of(p), title, e.getRawSlot());
+    }
 
     private static String friendlyItemKey(Material m) {
         String key = m.getKey().getKey();
