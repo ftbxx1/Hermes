@@ -1094,4 +1094,103 @@ class EngineTest {
         assertEquals(5, h.p1.level);
         assertEquals(5, p2.level);
     }
+
+    @Test
+    void dropItemsAtLocation() {
+        Harness h = new Harness("""
+                when player joins
+                    drop 5 diamonds at player
+                    drop a diamond at 100 64 200
+                """);
+        h.engine.playerEvent("joins", h.p1);
+        assertTrue(h.world.log.contains("dropped diamond x5@8,8"), "log: " + h.world.log);
+        assertTrue(h.world.log.contains("dropped diamond x1@100,200"), "log: " + h.world.log);
+    }
+
+    @Test
+    void pushPlayerByDirection() {
+        Harness h = new Harness("""
+                when player joins
+                    push player up by 3
+                    throw player backwards by 2
+                """);
+        h.engine.playerEvent("joins", h.p1);
+        assertTrue(h.world.log.contains("pushed PlayerOne up by 3.0"), "log: " + h.world.log);
+        assertTrue(h.world.log.contains("pushed PlayerOne backwards by 2.0"), "log: " + h.world.log);
+    }
+
+    @Test
+    void makePlayerRunCommand() {
+        Harness h = new Harness("""
+                when player joins
+                    make player run command "/spawn"
+                """);
+        h.engine.playerEvent("joins", h.p1);
+        assertTrue(h.p1.commands.contains("/spawn"), "commands: " + h.p1.commands);
+    }
+
+    @Test
+    void setPlayerRespawnPoint() {
+        Harness h = new Harness("""
+                when player joins
+                    set player's respawn point to 100 64 200
+                """);
+        h.engine.playerEvent("joins", h.p1);
+        assertEquals(100.0, h.p1.respawn.x(), 0.001);
+        assertEquals(200.0, h.p1.respawn.z(), 0.001);
+    }
+
+    @Test
+    void setPlayerEquipment() {
+        Harness h = new Harness("""
+                when player joins
+                    set player's helmet to iron helmet
+                    set player's boots to diamond boots
+                """);
+        h.engine.playerEvent("joins", h.p1);
+        assertEquals("iron helmet", h.p1.equipment.get("helmet"));
+        assertEquals("diamond boots", h.p1.equipment.get("boots"));
+    }
+
+    @Test
+    void launchFireworkAtPlayer() {
+        Harness h = new Harness("""
+                when player joins
+                    launch firework at player
+                """);
+        h.engine.playerEvent("joins", h.p1);
+        assertTrue(h.world.log.contains("firework@8,8"), "log: " + h.world.log);
+    }
+
+    @Test
+    void makePlayerSwingHand() {
+        Harness h = new Harness("""
+                when player joins
+                    make player swing their hand
+                """);
+        h.engine.playerEvent("joins", h.p1);
+        assertTrue(h.world.log.contains("swung PlayerOne hand"), "log: " + h.world.log);
+    }
+
+    @Test
+    void makePlayerLookAt() {
+        Harness h = new Harness("""
+                when player joins
+                    make player look at 100 64 200
+                """);
+        h.engine.playerEvent("joins", h.p1);
+        assertTrue(h.world.log.contains("looked PlayerOne at 100,200"), "log: " + h.world.log);
+    }
+
+    @Test
+    void setPlayerSpeed() {
+        Harness h = new Harness("""
+                when player joins
+                    set player's speed to 0.5
+                    set player's fly speed to 0.3
+                """);
+        h.engine.playerEvent("joins", h.p1);
+        assertEquals(0.5, h.p1.walkSpeed, 0.001);
+        assertEquals(0.3, h.p1.flySpeed, 0.001);
+    }
 }

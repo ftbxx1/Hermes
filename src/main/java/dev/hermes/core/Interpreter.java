@@ -46,7 +46,7 @@ public final class Interpreter {
         "press", "pull", "power", "unpower", "put", "take", "make", "win", "fire", "clear",
         "create", "stop", "repeat", "loop", "if", "kick", "launch", "title", "actionbar",
         "lightning", "explode", "delete", "particles", "while", "wait",
-        "freeze", "unfreeze", "randomly",
+        "freeze", "unfreeze", "randomly", "push", "throw", "drop",
     };
 
     Interpreter(Script script, TaleEngine engine) {
@@ -268,6 +268,32 @@ public final class Interpreter {
             if (l.target == TargetRef.MOB) throw new VerseError(s.line,
                     "I can only launch players.", "launch player by 5");
             world.launch(needPlayer(s, ctx), l.amount);
+        } else if (s instanceof PushStmt pu) {
+            if (pu.target == TargetRef.MOB) throw new VerseError(s.line,
+                    "I can only push players.", "push player up by 3");
+            world.push(needPlayer(s, ctx), pu.direction, pu.strength);
+        } else if (s instanceof DropStmt dr) {
+            world.dropItems(resolveLoc(dr.where, s, ctx), dr.spec);
+        } else if (s instanceof RunCommandStmt rc) {
+            if (rc.target == TargetRef.MOB) throw new VerseError(s.line,
+                    "I can only make players run commands.", "make player run command \"/spawn\"");
+            world.runCommand(needPlayer(s, ctx), rc.command);
+        } else if (s instanceof SetRespawnStmt sr) {
+            world.setRespawnPoint(needPlayer(s, ctx), resolveLoc(sr.where, s, ctx));
+        } else if (s instanceof SetEquipmentStmt eq) {
+            world.setEquipment(needPlayer(s, ctx), eq.slot, eq.spec);
+        } else if (s instanceof FireworkStmt fw) {
+            world.launchFirework(resolveLoc(fw.where, s, ctx));
+        } else if (s instanceof SwingStmt sw) {
+            if (sw.target == TargetRef.MOB) throw new VerseError(s.line,
+                    "I can only make players swing their hand.", "make player swing their hand");
+            world.swingHand(needPlayer(s, ctx));
+        } else if (s instanceof LookStmt lk) {
+            if (lk.target == TargetRef.MOB) throw new VerseError(s.line,
+                    "I can only make players look around.", "make player look at 10 64 20");
+            world.lookAt(needPlayer(s, ctx), resolveLoc(lk.where, s, ctx));
+        } else if (s instanceof SetSpeedStmt spd) {
+            world.setSpeed(needPlayer(s, ctx), spd.kind, spd.speed);
         } else if (s instanceof TitleStmt title) {
             PlayerRef p = needPlayer(s, ctx);
             world.sendTitle(p, eval(title.title, ctx).display(),

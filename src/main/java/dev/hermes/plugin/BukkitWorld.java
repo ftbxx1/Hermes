@@ -5,6 +5,8 @@ import dev.hermes.core.WorldAPI;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Bukkit;
+import org.bukkit.Color;
+import org.bukkit.FireworkEffect;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -20,11 +22,13 @@ import org.bukkit.block.data.Openable;
 import org.bukkit.block.data.Powerable;
 import org.bukkit.block.data.type.Switch;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Firework;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.GameMode;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scoreboard.Objective;
@@ -336,10 +340,21 @@ public final class BukkitWorld implements WorldAPI {
     }
 
     @Override public void giveItemSpec(PlayerRef p, ItemSpec spec) {
+        ItemStack stack = stackFromSpec(spec);
+        if (stack == null) return;
+        Map<Integer, ItemStack> leftover = playerOf(p).getInventory().addItem(stack);
+        if (!leftover.isEmpty()) {
+            World world = playerOf(p).getWorld();
+            for (ItemStack rest : leftover.values()) world.dropItemNaturally(playerOf(p).getLocation(), rest);
+        }
+    }
+
+    /** Builds the ItemStack for an ItemSpec, or null if the item is unknown. */
+    private ItemStack stackFromSpec(ItemSpec spec) {
         Material m = materialOf(spec.item());
         if (m == null) {
             plugin.getLogger().warning("Hermes: unknown item '" + spec.item() + "'");
-            return;
+            return null;
         }
         ItemStack stack = new ItemStack(m, spec.count());
         if (spec.name() != null) {
@@ -356,11 +371,7 @@ public final class BukkitWorld implements WorldAPI {
                 }
             });
         }
-        Map<Integer, ItemStack> leftover = playerOf(p).getInventory().addItem(stack);
-        if (!leftover.isEmpty()) {
-            World world = playerOf(p).getWorld();
-            for (ItemStack rest : leftover.values()) world.dropItemNaturally(playerOf(p).getLocation(), rest);
-        }
+        return stack;
     }
 
     @Override public void giveBook(PlayerRef p, BookDef book) {
@@ -424,6 +435,92 @@ public final class BukkitWorld implements WorldAPI {
     @Override public void launch(PlayerRef p, double amount) {
         playerOf(p).setVelocity(playerOf(p).getVelocity().add(
                 new org.bukkit.util.Vector(0, amount, 0)));
+    }
+
+    @Override public void push(PlayerRef p, String direction, double strength) {
+        Player player = playerOf(p);
+        org.bukkit.util.Vector v;
+        switch (direction) {
+            case "up": v = new org.bukkit.util.Vector(0, strength, 0); break;
+            case "down": v = new org.bukkit.util.Vector(0, -strength, 0); break;
+            case "forwards": v = forward(player).multiply(strength); break;
+            case "backwards": v = forward(player).multiply(-strength); break;
+            case "left": v = leftOf(player).multiply(strength); break;
+            case "right": v = leftOf(player).multiply(-strength); break;
+            default: v = new org.bukkit.util.Vector(0, strength, 0);
+        }
+        player.setVelocity(player.getVelocity().add(v));
+    }
+
+    private static org.bukkit.util.Vector forward(Player player) {
+        double rad = Math.toRadians(player.getLocation().getYaw());
+        return new org.bukkit.util.Vector(-Math.sin(rad), 0, Math.cos(rad));
+    }
+
+    private static org.bukkit.util.Vector leftOf(Player player) {
+        double rad = Math.toRadians(player.getLocation().getYaw());
+        return new org.bukkit.util.Vector(-Math.cos(rad), 0, -Math.sin(rad));
+    }
+
+    @Override public void dropItems(Vec3 loc, ItemSpec spec) {
+        ItemStack stack = stackFromSpec(spec);
+        if (stack == null) return;
+        World w = defaultWorld();
+        w.dropItemNaturally(toBukkit(w, loc), stack);
+    }
+
+    @Override public void launchFirework(Vec3 loc) {
+        World w = defaultWorld();
+        Firework fw = w.spawn(toBukkit(w, loc), Firework.class);
+        FireworkMeta meta = fw.getFireworkMeta();
+        meta.setPower(1);
+        meta.addEffect(FireworkEffect.builder()
+                .with(FireworkEffect.Type.BURST)
+                .withColor(Color.RED, Color.ORANGE)
+                .withFade(Color.YELLOW)
+                .build());
+        fw.setFireworkMeta(meta);
+        fw.detonate();
+    }
+
+    @Override public void runCommand(PlayerRef p, String command) {
+        String cmd = command.startsWith("/") ? command.substring(1) : command;
+        playerOf(p).performCommand(cmd);
+    }
+
+    @Override public void setRespawnPoint(PlayerRef p, Vec3 loc) {
+        Player player = playerOf(p);
+        player.setRespawnLocation(toBukkit(player.getWorld(), loc));
+    }
+
+    @Override public void swingHand(PlayerRef p) {
+        playerOf(p).swingMainHand();
+    }
+
+    @Override public void lookAt(PlayerRef p, Vec3 loc) {
+        Player player = playerOf(p);
+        Location facing = player.getLocation().clone();
+        facing.setDirection(toBukkit(player.getWorld(), loc).toVector().subtract(facing.toVector()));
+        player.teleport(facing);
+    }
+
+    @Override public void setSpeed(PlayerRef p, String kind, double speed) {
+        Player player = playerOf(p);
+        if (kind.equals("fly")) player.setFlySpeed((float) speed);
+        else player.setWalkSpeed((float) speed);
+    }
+
+    @Override public void setEquipment(PlayerRef p, String slot, ItemSpec spec) {
+        ItemStack stack = stackFromSpec(spec);
+        if (stack == null) return;
+        Player player = playerOf(p);
+        switch (slot) {
+            case "helmet": player.getInventory().setHelmet(stack); break;
+            case "chestplate": player.getInventory().setChestplate(stack); break;
+            case "leggings": player.getInventory().setLeggings(stack); break;
+            case "boots": player.getInventory().setBoots(stack); break;
+            default: break;
+        }
     }
 
     // ------------------------------------------------------------------

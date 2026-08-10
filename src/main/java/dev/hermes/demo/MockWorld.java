@@ -44,6 +44,11 @@ public final class MockWorld implements WorldAPI {
         public String biome = "plains";
         public String bossbar;
         public double bossbarProgress = 100;
+        public Vec3 respawn;
+        public double walkSpeed = 0.2;
+        public double flySpeed = 0.1;
+        public final Map<String, String> equipment = new HashMap<>();
+        public final List<String> commands = new ArrayList<>();
 
         public MockPlayer(String name) { this.name = name; }
 
@@ -203,6 +208,32 @@ public final class MockWorld implements WorldAPI {
         log.add("explosion@" + (long) loc.x() + "," + (long) loc.z() + " power " + power);
     }
     @Override public void launch(PlayerRef p, double amount) { log.add("launched " + p.name() + " by " + amount); }
+    @Override public void push(PlayerRef p, String direction, double strength) {
+        log.add("pushed " + p.name() + " " + direction + " by " + strength);
+    }
+    @Override public void dropItems(Vec3 loc, ItemSpec spec) {
+        String canonical = Dictionary.findItem(spec.item());
+        if (canonical == null) canonical = spec.item();
+        log.add("dropped " + canonical + " x" + spec.count() + "@" + (long) loc.x() + "," + (long) loc.z());
+    }
+    @Override public void launchFirework(Vec3 loc) {
+        log.add("firework@" + (long) loc.x() + "," + (long) loc.z());
+    }
+    @Override public void runCommand(PlayerRef p, String command) { player(p).commands.add(command); }
+    @Override public void setRespawnPoint(PlayerRef p, Vec3 loc) { player(p).respawn = loc; }
+    @Override public void swingHand(PlayerRef p) { log.add("swung " + p.name() + " hand"); }
+    @Override public void lookAt(PlayerRef p, Vec3 loc) {
+        log.add("looked " + p.name() + " at " + (long) loc.x() + "," + (long) loc.z());
+    }
+    @Override public void setSpeed(PlayerRef p, String kind, double speed) {
+        if (kind.equals("fly")) player(p).flySpeed = speed;
+        else player(p).walkSpeed = speed;
+    }
+    @Override public void setEquipment(PlayerRef p, String slot, ItemSpec spec) {
+        String canonical = Dictionary.findItem(spec.item());
+        if (canonical == null) canonical = spec.item();
+        player(p).equipment.put(slot, canonical);
+    }
 
     @Override public void giveItem(PlayerRef p, String item, int count) {
         String canonical = Dictionary.findItem(item);

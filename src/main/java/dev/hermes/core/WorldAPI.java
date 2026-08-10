@@ -88,6 +88,16 @@ public interface WorldAPI {
     boolean isOp(PlayerRef p);
     void setFrozen(PlayerRef p, boolean frozen);
     boolean isFrozen(PlayerRef p);
+    /** Makes the player perform a command as if they typed it. */
+    void runCommand(PlayerRef p, String command);
+    /** Where the player respawns after death. */
+    void setRespawnPoint(PlayerRef p, Vec3 loc);
+    /** Plays the hand-swing animation for the player. */
+    void swingHand(PlayerRef p);
+    /** Turns the player to face a location. */
+    void lookAt(PlayerRef p, Vec3 loc);
+    /** Sets walk or fly speed ("walk"|"fly"); speed is 0..1. */
+    void setSpeed(PlayerRef p, String kind, double speed);
 
     // ---------- inventory ----------
     void giveItem(PlayerRef p, String item, int count);
@@ -97,6 +107,8 @@ public interface WorldAPI {
     boolean isHolding(PlayerRef p, String item);
     void clearInventory(PlayerRef p);
     void giveBook(PlayerRef p, BookDef book);
+    /** Puts an item into a player's equipment slot ("helmet", "chestplate", "leggings", "boots"). */
+    void setEquipment(PlayerRef p, String slot, ItemSpec spec);
 
     // ---------- messaging ----------
     void sendTitle(PlayerRef p, String title, String subtitle);
@@ -107,6 +119,12 @@ public interface WorldAPI {
     void strikeLightning(Vec3 loc);
     void explode(Vec3 loc, double power);
     void launch(PlayerRef p, double amount);
+    /** Kicks a player with a directional velocity ("up", "down", "forwards", "backwards", "left", "right"). */
+    void push(PlayerRef p, String direction, double strength);
+    /** Drops an item stack into the world at a location. */
+    void dropItems(Vec3 loc, ItemSpec spec);
+    /** A colourful firework bursts at a location. */
+    void launchFirework(Vec3 loc);
 
     // ---------- world ----------
     void setWeather(String weather);

@@ -45,6 +45,27 @@ when player joins
     give player 5 levels
 ```
 
+## Movement and actions
+
+```
+when player joins
+    push player up by 3          # or down / forwards / backwards / left / right
+    throw player backwards by 2  # same as push
+    make player swing their hand
+    make player look at 10 64 200
+
+when player joins
+    make player run command "/spawn"
+    set player's speed to 0.5          # walk speed, 0..1
+    set player's fly speed to 0.3      # fly speed, 0..1
+    set player's respawn point to 100 64 200
+
+when player joins
+    set player's helmet to iron helmet       # also chestplate, leggings, boots
+    drop 5 diamonds at player                # items appear in the world
+    launch firework at player                # a colourful firework bursts
+```
+
 ## A useful example
 
 ```

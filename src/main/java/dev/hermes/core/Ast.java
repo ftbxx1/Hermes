@@ -251,6 +251,62 @@ public final class Ast {
         public LaunchStmt(int line, TargetRef target, double amount) { super(line); this.target = target; this.amount = amount; }
     }
 
+    /** "push player up by 3" / "throw player backwards by 3": a velocity kick. */
+    public static final class PushStmt extends Stmt {
+        public final TargetRef target; public final String direction; public final double strength;
+        public PushStmt(int line, TargetRef target, String direction, double strength) {
+            super(line); this.target = target; this.direction = direction; this.strength = strength;
+        }
+    }
+
+    /** "drop 5 diamonds at player": items appear in the world as a stack. */
+    public static final class DropStmt extends Stmt {
+        public final WorldAPI.ItemSpec spec; public final LocRef where;
+        public DropStmt(int line, WorldAPI.ItemSpec spec, LocRef where) { super(line); this.spec = spec; this.where = where; }
+    }
+
+    /** "make player run command \"/spawn\"": the player runs it as themselves. */
+    public static final class RunCommandStmt extends Stmt {
+        public final TargetRef target; public final String command;
+        public RunCommandStmt(int line, TargetRef target, String command) { super(line); this.target = target; this.command = command; }
+    }
+
+    /** "set player's respawn point to 10 64 20". */
+    public static final class SetRespawnStmt extends Stmt {
+        public final LocRef where;
+        public SetRespawnStmt(int line, LocRef where) { super(line); this.where = where; }
+    }
+
+    /** "set player's helmet to iron helmet": equipment slots. */
+    public static final class SetEquipmentStmt extends Stmt {
+        public final String slot; public final WorldAPI.ItemSpec spec;
+        public SetEquipmentStmt(int line, String slot, WorldAPI.ItemSpec spec) { super(line); this.slot = slot; this.spec = spec; }
+    }
+
+    /** "launch firework at player": a colourful firework bursts there. */
+    public static final class FireworkStmt extends Stmt {
+        public final LocRef where;
+        public FireworkStmt(int line, LocRef where) { super(line); this.where = where; }
+    }
+
+    /** "make player swing their hand": plays the hand-swing animation. */
+    public static final class SwingStmt extends Stmt {
+        public final TargetRef target;
+        public SwingStmt(int line, TargetRef target) { super(line); this.target = target; }
+    }
+
+    /** "make player look at 10 64 20": turns the player's head that way. */
+    public static final class LookStmt extends Stmt {
+        public final TargetRef target; public final LocRef where;
+        public LookStmt(int line, TargetRef target, LocRef where) { super(line); this.target = target; this.where = where; }
+    }
+
+    /** "set player's speed to 0.5" (walk) or "set player's fly speed to 0.3". */
+    public static final class SetSpeedStmt extends Stmt {
+        public final String kind; public final double speed;
+        public SetSpeedStmt(int line, String kind, double speed) { super(line); this.kind = kind; this.speed = speed; }
+    }
+
     public static final class TitleStmt extends Stmt {
         public final TargetRef target; public final ValueExpr title; public final ValueExpr subtitle;
         public TitleStmt(int line, TargetRef target, ValueExpr title, ValueExpr subtitle) {

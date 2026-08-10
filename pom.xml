@@ -6,7 +6,7 @@
 
   <groupId>dev.hermes</groupId>
   <artifactId>hermes</artifactId>
-  <version>1.3.0</version>
+  <version>1.7.0</version>
   <packaging>jar</packaging>
 
   <name>Hermes</name>
@@ -40,6 +40,22 @@
   </dependencies>
 
   <build>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+        <includes>
+          <include>plugin.yml</include>
+        </includes>
+      </resource>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>false</filtering>
+        <excludes>
+          <exclude>plugin.yml</exclude>
+        </excludes>
+      </resource>
+    </resources>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>

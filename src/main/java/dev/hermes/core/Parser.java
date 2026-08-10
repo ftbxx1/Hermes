@@ -25,7 +25,7 @@ public final class Parser {
         "press", "pull", "power", "unpower", "put", "take", "make", "win", "fire", "clear",
         "create", "stop", "repeat", "loop", "if", "when", "every", "action", "region", "mark",
         "kick", "launch", "title", "actionbar", "lightning", "explode", "delete", "particles",
-        "while", "wait", "freeze", "unfreeze", "randomly",
+        "while", "wait", "freeze", "unfreeze", "randomly", "push", "throw", "drop",
     };
 
     private final List<Token> toks;
@@ -274,6 +274,9 @@ public final class Parser {
             case "remove": return removeStmt();
             case "set": return setStmt();
             case "add": return addStmt();
+            case "push":
+            case "throw": return pushStmt();
+            case "drop": return dropStmt();
             case "tell": {
                 pos++;
                 TargetRef t = targetRef();
@@ -353,6 +356,13 @@ public final class Parser {
             }
             case "launch": {
                 pos++;
+                if (at("firework")) {
+                    pos++;
+                    expect("at", "launch firework at player");
+                    LocRef where = where();
+                    endStatement();
+                    return new FireworkStmt(line, where);
+                }
                 TargetRef t = targetRef();
                 expect("by", "launch player by 5");
                 double n = number("a number");
@@ -584,6 +594,24 @@ public final class Parser {
             case "make": {
                 pos++;
                 TargetRef t = targetRef();
+                if (eat("run")) {
+                    expect("command", "make player run command \"/spawn\"");
+                    String command = string("the command");
+                    endStatement();
+                    return new RunCommandStmt(line, t, command);
+                }
+                if (eat("swing")) {
+                    eatNoise();
+                    eat("their"); eat("hand"); eat("arm");
+                    endStatement();
+                    return new SwingStmt(line, t);
+                }
+                if (eat("look")) {
+                    expect("at", "make player look at 10 64 20");
+                    LocRef where = where();
+                    endStatement();
+                    return new LookStmt(line, t, where);
+                }
                 String adj = effectNameOrError("an effect like 'stronger'");
                 endStatement();
                 return new MakeEffectStmt(line, t, adj);
@@ -693,8 +721,43 @@ public final class Parser {
         return new GiveItemStmt(line, t, spec);
     }
 
+    private Stmt pushStmt() {
+        int line = cur().line;
+        pos++;
+        TargetRef t = targetRef();
+        String direction;
+        if (at("up") || at("down") || at("forwards") || at("backwards") || at("left") || at("right")) {
+            direction = cur().text;
+            pos++;
+        } else {
+            throw err("I expected 'up', 'down', 'forwards', 'backwards', 'left' or 'right' here.",
+                    "push player up by 3");
+        }
+        expect("by", "push player up by 3");
+        double strength = number("a number");
+        endStatement();
+        return new PushStmt(line, t, direction, strength);
+    }
+
+    private Stmt dropStmt() {
+        int line = cur().line;
+        pos++;
+        int count = 1;
+        if (cur().type == Type.NUMBER) count = (int) number("a number");
+        WorldAPI.ItemSpec spec = itemSpec(count, new String[]{"at"});
+        expect("at", "drop 5 diamonds at player");
+        LocRef where = where();
+        endStatement();
+        return new DropStmt(line, spec, where);
+    }
+
     /** "5 diamond named \"X\" with lore \"...\" with enchant sharpness 5" after the count. */
     private WorldAPI.ItemSpec itemSpec(int count) {
+        return itemSpec(count, (String[]) null);
+    }
+
+    /** Same, but stops the item spec when it meets one of the given words (e.g. "at"). */
+    private WorldAPI.ItemSpec itemSpec(int count, String[] stopAt) {
         eatNoise();
         int itemStart = pos;
         String item = itemNameOrError();
@@ -721,7 +784,9 @@ public final class Parser {
                 break;
             }
         }
-        if (!atEndOfLine()) {
+        boolean stops = stopAt != null && cur().type == Type.WORD
+                && java.util.Arrays.asList(stopAt).contains(cur().text);
+        if (!atEndOfLine() && !stops) {
             StringBuilder full = new StringBuilder();
             for (int i = itemStart; i < toks.size() && toks.get(i).type == Type.WORD; i++) {
                 if (full.length() > 0) full.append(' ');
@@ -882,6 +947,39 @@ public final class Parser {
                 }
                 endStatement();
                 return new SetBossbarStmt(line, title, progress);
+            }
+            if (prop.equals("respawn")) {
+                pos += 3;
+                expect("point", "set player's respawn point to 10 64 20");
+                expect("to", "set player's respawn point to 10 64 20");
+                LocRef where = where();
+                endStatement();
+                return new SetRespawnStmt(line, where);
+            }
+            if (prop.equals("speed")) {
+                pos += 3;
+                expect("to", "set player's speed to 0.5");
+                double speed = number("a number");
+                if (speed < 0 || speed > 1) throw err("Speed must be between 0 and 1.");
+                endStatement();
+                return new SetSpeedStmt(line, "walk", speed);
+            }
+            if (prop.equals("fly")) {
+                pos += 3;
+                expect("speed", "set player's fly speed to 0.3");
+                expect("to", "set player's fly speed to 0.3");
+                double speed = number("a number");
+                if (speed < 0 || speed > 1) throw err("Speed must be between 0 and 1.");
+                endStatement();
+                return new SetSpeedStmt(line, "fly", speed);
+            }
+            if (prop.equals("helmet") || prop.equals("chestplate") || prop.equals("leggings")
+                    || prop.equals("boots")) {
+                pos += 3;
+                expect("to", "set player's helmet to iron helmet");
+                WorldAPI.ItemSpec spec = itemSpec(1);
+                endStatement();
+                return new SetEquipmentStmt(line, prop, spec);
             }
             if (prop.equals("health") || prop.equals("hunger") || prop.equals("food")
                     || prop.equals("xp") || prop.equals("experience") || prop.equals("level")) {
