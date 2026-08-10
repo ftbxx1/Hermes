@@ -1,0 +1,305 @@
+# Lithuanian translation pack for Hermes.
+# Format: <canonical english>=<native form> (one per line, # = comment).
+# Single native words are translated while reading a script; longer native
+# phrases ("deimantinis kardas") are matched by the parser's greedy lookups.
+# You may extend or override anything here by dropping a custom lt.lang into
+# plugins/Hermes/lang/.
+
+# --- flow & structure ---
+when=kai
+every=kiekvienas
+action=veiksmas
+command=komanda
+region=regionas
+mark=žyma
+gui=meniu
+create=sukurti
+if=jei
+repeat=kartoti
+loop=ciklas
+stop=sustabdyti
+else=kitaip
+fire=paleisti
+win=laimeiti
+clear=išvalyti
+delete=ištrinti
+while=kol
+wait=laukti
+and=ir
+or=arba
+as=kaip
+all=visi
+numbers=skaiciai
+from=nuo
+to=iki
+over=virsui
+up=aukštyn
+down=žemyn
+
+# --- actions ---
+give=duok
+remove=pašalinti
+set=nustatyti
+add=pridėti
+tell=sakyk
+announce=paskelbk
+warn=įspėti
+welcome=sveikink
+show=rodyk
+kill=nuzudyk
+damage=žalok
+heal=gydyk
+feed=maitink
+kick=išmesk
+launch=sviesk
+title=pavadinimas
+actionbar=juosta
+lightning=žaibas
+explode=sprogk
+teleport=teleportuok
+spawn=iškviesk
+play=grok
+write=rašyk
+open=atidaryk
+close=uždaryk
+press=paspausk
+pull=trauk
+power=įjunk
+unpower=išjunk
+put=įdėk
+take=paimk
+make=daryk
+
+# --- noise / articles ---
+the=tas
+a=vienas
+an=vienas
+any=betkoks
+
+# --- prepositions ---
+with=su
+by=prie
+at=ties
+near=šalia
+named=vadinamas
+because=nes
+in=viduje
+on=ant
+of=is
+
+# --- values ---
+true=tiesa
+false=netiesa
+nothing=nieko
+none=niekas
+length=ilgis
+random=atsitiktinis
+number=skaicius
+count=kiekis
+between=tarp
+contains=turi
+plus=pliusas
+minus=minusas
+times=kartus
+divided=padalinta
+second=sekunde
+seconds=sekundes
+minute=minute
+minutes=minutes
+hour=valanda
+hours=valandos
+tick=tick
+ticks=tick
+
+# --- variable targets ---
+player=žaidėjas
+world=pasaulis
+temporary=laikinas
+list=sąrašas
+score=taškai
+database=duomenų bazė
+config=nustatymai
+value=reikšmė
+file=failas
+data=duomenys
+
+# --- conditions & comparisons ---
+has=turi
+is=yra
+are=yra
+not=ne
+holding=laiko
+sneaking=slankioja
+flying=skrenda
+wet=šlapias
+op=op
+ground=žemė
+biome=biomas
+permission=leidimas
+more=daugiau
+less=mažiau
+equal=lygus
+than=nei
+least=mažiausiai
+most=daugiausiai
+above=aukščiau
+below=žemiau
+under=po
+health=sveikata
+hunger=alkis
+xp=xp
+level=lygis
+gamemode=režimas
+
+# --- player events ---
+joins=prisijungia
+joins=ateina
+leaves=palieka
+leaves=išeina
+dies=mirsta
+respawns=atsigauna
+jumps=šoka
+sneaks=tykoja
+sneaks=slankioja
+moves=juda
+moves=keliauja
+attacks=puola
+chats=šneka
+fishes=žvejoja
+levels=kyla
+clicks=paspaudžia
+eats=valgo
+kills=nuzudo
+starts=pradeda
+stops=sustoja
+sprinting=bėga
+takes=gauna
+damage=žala
+breaks=laužia
+places=deda
+picks=renka
+drops=meta
+uses=naudoja
+interacts=sąveikauja
+enters=patenka
+reaches=pasiekia
+types=rašo
+touches=paliečia
+walks=vaikšto
+first=pirmas
+inventory=inventorius
+mob=padaras
+custom=pritaikytas
+event=įvykis
+fires=įvyksta
+night=naktis
+dawn=aušra
+falls=krinta
+game=žaidimas
+server=serveris
+slot=anga
+
+# --- world state ---
+weather=orai
+rain=lietus
+sunny=saulėta
+storm=audra
+stormy=audringa
+noon=vidudienis
+dusk=sutemos
+midnight=vidurnaktis
+morning=rytas
+evening=vakaras
+day=diena
+daytime=diena
+nighttime=naktis
+
+# --- gamemodes ---
+survival=išgyvenimas
+creative=kūryba
+adventure=nuotykis
+spectator=stebėtojas
+
+# --- dimensions ---
+the end=pabaiga
+overworld=pagrindinis pasaulis
+
+# --- single-word items & blocks ---
+diamond=deimantas
+emerald=smaragdas
+iron=geležis
+gold=auksas
+coal=anglis
+bread=duona
+apple=obuolys
+torch=žibintas
+water=vanduo
+lava=lava
+stone=akmuo
+dirt=purvas
+sand=smėlis
+glass=stiklas
+chest=skrynia
+door=durys
+sword=kardas
+bow=lankas
+arrow=strėlė
+shield=skydas
+stick=lazda
+bed=lova
+boat=valtis
+bucket=kibiras
+compass=kompasas
+
+# --- multi-word items & blocks (phrases) ---
+diamond sword=deimantinis kardas
+iron sword=geležinis kardas
+wooden sword=medinis kardas
+golden sword=auksinis kardas
+netherite sword=netherito kardas
+diamond block=deimantų blokas
+gold block=aukso blokas
+iron block=geležies blokas
+iron ingot=geležies luitas
+gold ingot=aukso luitas
+diamond ore=deimantų rūda
+iron ore=geležies rūda
+gold ore=aukso rūda
+coal ore=anglies rūda
+redstone dust=redstone dulkės
+enchanted golden apple=užburtas auksinis obuolys
+golden apple=auksinis obuolys
+
+# --- single-word mobs ---
+zombie=zombis
+skeleton=skeletas
+creeper=kryperis
+spider=voras
+pig=kiaulė
+cow=karvė
+chicken=višta
+sheep=avis
+wolf=vilkas
+enderman=endermanas
+villager=gyventojas
+horse=arklys
+cat=katė
+bee=bitė
+
+# --- multi-word mobs ---
+iron golem=geležinis golemas
+zombie pigman=kiaulys zombis
+
+# --- effects ---
+speed=greitis
+strength=jėga
+jump boost=šuolio stiprinimas
+regeneration=regeneracija
+invisibility=nematomumas
+poison=nuodai
+weakness=silpnumas
+slowness=lėtumas
+night vision=naktinis matymas
+fire resistance=atsparumas ugniai
+water breathing=kvėpavimas po vandeniu
+haste=skubėjimas

@@ -1,0 +1,305 @@
+# German translation pack for Hermes.
+# Format: <canonical english>=<native form> (one per line, # = comment).
+# Single native words are translated while reading a script; longer native
+# phrases ("diamantschwert") are matched by the parser's greedy lookups.
+# You may extend or override anything here by dropping a custom de.lang into
+# plugins/Hermes/lang/.
+
+# --- flow & structure ---
+when=wenn
+every=alle
+action=aktion
+command=kommando
+region=region
+mark=markierung
+gui=menue
+create=erstellen
+if=falls
+repeat=wiederhole
+loop=schleife
+stop=stopp
+else=sonst
+fire=ausloesen
+win=gewinnen
+clear=leeren
+delete=loeschen
+while=solange
+wait=warte
+and=und
+or=oder
+as=als
+all=alle
+numbers=zahlen
+from=von
+to=zu
+over=ueber
+up=hoch
+down=runter
+
+# --- actions ---
+give=gebe
+remove=entferne
+set=setze
+add=addiere
+tell=sage
+announce=verkuende
+warn=warne
+welcome=begruesse
+show=zeige
+kill=toete
+damage=schaedige
+heal=heile
+feed=fuettere
+kick=werfe
+launch=schleudere
+title=titel
+actionbar=leiste
+lightning=blitz
+explode=explodiere
+teleport=teleportiere
+spawn=spawne
+play=spiele
+write=schreibe
+open=oeffne
+close=schliesse
+press=druecke
+pull=ziehe
+power=aktiviere
+unpower=deaktiviere
+put=stecke
+take=nimm
+make=mache
+
+# --- noise / articles ---
+the=der
+a=ein
+an=ein
+any=irgendein
+
+# --- prepositions ---
+with=mit
+by=um
+at=bei
+near=in der naehe
+near=nahe
+named=genannt
+because=weil
+in=in
+on=auf
+of=von
+
+# --- values ---
+true=wahr
+false=falsch
+nothing=nichts
+none=keiner
+length=laenge
+random=zufall
+number=zahl
+count=anzahl
+between=zwischen
+contains=enthaelt
+plus=plus
+minus=minus
+times=mal
+divided=geteilt
+second=sekunde
+seconds=sekunden
+minute=minute
+minutes=minuten
+hour=stunde
+hours=stunden
+tick=tick
+ticks=ticks
+
+# --- variable targets ---
+player=spieler
+world=welt
+temporary=temporaer
+list=liste
+score=punkte
+database=datenbank
+config=konfiguration
+value=wert
+file=datei
+data=daten
+
+# --- conditions & comparisons ---
+has=hat
+is=ist
+are=sind
+not=nicht
+holding=haelt
+sneaking=schleicht
+flying=fliegt
+wet=nass
+op=op
+ground=boden
+biome=biom
+permission=erlaubnis
+more=mehr
+less=weniger
+equal=gleich
+than=als
+least=mindestens
+most=hoechstens
+above=ueber
+below=unter
+under=unter
+health=leben
+hunger=hunger
+xp=xp
+level=level
+gamemode=modus
+
+# --- player events ---
+joins=tritt bei
+joins=beitritt
+leaves=verlaesst
+dies=stirbt
+respawns=respawned
+jumps=springt
+sneaks=schleicht
+moves=bewegt
+attacks=greift an
+attacks=greift
+chats=redet
+fishes=angelt
+levels=steigt
+clicks=klickt
+eats=isst
+kills=toetet
+starts=beginnt
+stops=hoert auf
+stops=stoppt
+sprinting=rennen
+takes=nimmt
+damage=schaden
+breaks=bricht
+places=platziert
+picks=sammelt
+drops=wirft
+uses=benutzt
+interacts=interagiert
+enters=betritt
+reaches=erreicht
+types=tippt
+touches=beruehrt
+walks=laueft
+walks=laeuft
+first=erste
+inventory=inventar
+mob=kreatur
+custom=benutzerdefiniert
+event=ereignis
+fires=feuert
+night=nacht
+dawn=daemmerung
+falls=faellt
+game=spiel
+server=server
+slot=platz
+
+# --- world state ---
+weather=wetter
+rain=regen
+sunny=sonnig
+storm=sturm
+stormy=sturm
+noon=mittag
+dusk=abend
+midnight=mitternacht
+morning=morgen
+evening=abend
+day=tag
+daytime=tag
+nighttime=nacht
+
+# --- gamemodes ---
+survival=ueberleben
+creative=kreativ
+adventure=abenteuer
+spectator=zuschauer
+
+# --- dimensions ---
+the end=das ende
+overworld=oberwelt
+
+# --- single-word items & blocks ---
+diamond=diamant
+emerald=smaragd
+iron=eisen
+gold=gold
+coal=kohle
+bread=brot
+apple=apfel
+torch=fackel
+water=wasser
+lava=lava
+stone=stein
+dirt=erde
+sand=sand
+glass=glas
+chest=truhe
+door=tuer
+sword=schwert
+bow=bogen
+arrow=pfeil
+shield=schild
+stick=stock
+bed=bett
+boat=boot
+bucket=eimer
+compass=kompass
+
+# --- multi-word items & blocks (phrases) ---
+diamond sword=diamantschwert
+iron sword=eisenschwert
+wooden sword=holzschwert
+golden sword=goldschwert
+netherite sword=netheritschwert
+diamond block=diamantblock
+gold block=goldblock
+iron block=eisenblock
+iron ingot=eisenbarren
+gold ingot=goldbarren
+diamond ore=diamanterz
+iron ore=eisenerz
+gold ore=golderz
+coal ore=kohleerz
+enchanted golden apple=verzauberter goldener apfel
+golden apple=goldener apfel
+
+# --- single-word mobs ---
+zombie=zombie
+skeleton=skelett
+creeper=creeper
+spider=spinne
+pig=schwein
+cow=kuh
+chicken=huhn
+sheep=schaf
+wolf=wolf
+enderman=enderman
+villager=bewohner
+horse=pferd
+cat=katze
+bee=biene
+
+# --- multi-word mobs ---
+iron golem=eisengolem
+zombie pigman=zombie schwein
+
+# --- effects ---
+speed=schnelligkeit
+strength=staerke
+jump boost=sprungkraft
+regeneration=regeneration
+invisibility=unsichtbarkeit
+poison=gift
+weakness=schwaeche
+slowness=langsamkeit
+night vision=nachtsicht
+fire resistance=feuerresistenz
+water breathing=wasseratmung
+haste=eilfertigkeit

@@ -1,0 +1,313 @@
+# Bosnian translation pack for Hermes.
+# Format: <canonical english>=<native form> (one per line, # = comment).
+# Single native words are translated while reading a script; longer native
+# phrases ("dijamantni mač") are matched by the parser's greedy lookups.
+# You may extend or override anything here by dropping a custom bs.lang into
+# plugins/Hermes/lang/.
+
+# --- flow & structure ---
+when=kada
+every=svaki
+action=akcija
+command=komanda
+region=regija
+mark=oznaka
+gui=meni
+create=stvori
+if=ako
+repeat=ponovi
+loop=petlja
+stop=zaustavi
+else=inače
+fire=opali
+win=pobijedi
+clear=očisti
+delete=obriši
+while=dok
+wait=čekaj
+and=i
+or=ili
+as=kao
+all=svi
+numbers=brojevi
+from=od
+to=do
+over=preko
+up=gore
+down=dolje
+
+# --- actions ---
+give=daj
+remove=ukloni
+set=postavi
+add=dodaj
+tell=reci
+announce=objavi
+warn=upozori
+welcome=pozdravi
+show=pokaži
+kill=ubij
+damage=ošteti
+heal=izliječi
+feed=nahrani
+kick=izbaci
+launch=lansiraj
+title=naslov
+actionbar=traka
+lightning=munja
+explode=eksplodiraj
+teleport=teleportiraj
+spawn=pojavi
+play=sviraj
+write=napiši
+open=otvori
+close=zatvori
+press=pritisni
+pull=vuci
+power=aktiviraj
+unpower=deaktiviraj
+put=stavi
+take=uzmi
+make=napravi
+freeze=zamrzni
+unfreeze=odmrznite
+
+# --- noise / articles ---
+the=te
+a=jedan
+an=jedan
+any=bilo koji
+item=predmet
+
+# --- prepositions ---
+with=sa
+by=od
+at=na
+near=blizu
+near=nedaleko
+named=nazvan
+because=jer
+in=u
+on=na
+of=od
+randomly=nasumično
+within=unutar
+
+# --- values ---
+true=istina
+false=laž
+nothing=ništa
+none=nijedan
+length=duljina
+random=slučajan
+number=broj
+count=broj
+between=između
+contains=sadrži
+plus=plus
+minus=minus
+times=puta
+divided=podijeljeno
+second=sekunda
+seconds=sekunde
+minute=minuta
+minutes=minute
+hour=sat
+hours=sati
+tick=tik
+ticks=tikovi
+size=veličina
+
+# --- variable targets ---
+player=igrač
+world=svijet
+temporary=privremen
+list=lista
+score=rezultat
+database=baza podataka
+config=konfiguracija
+value=vrijednost
+file=datoteka
+data=podaci
+players=igrači
+
+# --- conditions & comparisons ---
+has=ima
+is=je
+are=su
+not=ne
+holding=drži
+sneaking=šunja se
+flying=leti
+wet=mokar
+op=op
+ground=tlo
+biome=biom
+permission=dopuštenje
+more=više
+less=manje
+equal=jednako
+than=nego
+least=najmanje
+most=najviše
+above=iznad
+below=ispod
+under=ispod
+health=zdravlje
+hunger=glad
+xp=xp
+level=razina
+gamemode=način igre
+chance=šansa
+
+# --- player events ---
+joins=pridruži se
+joins=ulazi
+leaves=napusti
+dies=umire
+respawns=ponovo se pojavi
+jumps=skače
+sneaks=šunja se
+moves=kreće se
+attacks=napada
+attacks=udara
+chats=priča
+fishes=peca
+levels=napreduje
+clicks=klikne
+eats=jede
+kills=ubija
+starts=počinje
+stops=prestaje
+stops=staje
+sprinting=trči
+takes=uzima
+damage=šteta
+breaks=razbija
+places=postavlja
+picks=skuplja
+drops=baca
+uses=koristi
+interacts=komunicira
+enters=ulazi
+reaches=doseže
+types=tipka
+touches=dodiruje
+walks=hoda
+walks=šeta
+first=prvi
+inventory=inventar
+mob=čudovište
+custom=prilagođen
+event=događaj
+fires=pali
+night=noć
+dawn=zora
+falls=pada
+game=igra
+server=poslužitelj
+slot=utor
+
+# --- world state ---
+weather=vrijeme
+rain=kiša
+sunny=sunčano
+storm=oluja
+stormy=olujno
+noon=podne
+dusk=sumrak
+midnight=ponoć
+morning=jutro
+evening=večer
+day=dan
+daytime=danju
+nighttime=noću
+
+# --- gamemodes ---
+survival=preživljavanje
+creative=kreativno
+adventure=avantura
+spectator=gledatelj
+
+# --- dimensions ---
+the end=kraj
+overworld=gornji svijet
+
+# --- single-word items & blocks ---
+diamond=dijamant
+emerald=smaragd
+iron=željezo
+gold=zlato
+coal=ugljen
+bread=hljeb
+apple=jabuka
+torch=baklja
+water=voda
+lava=lava
+stone=kamen
+dirt=zemlja
+sand=pijesak
+glass=staklo
+chest=škrinja
+door=vrata
+sword=mač
+bow=luk
+arrow=strijela
+shield=štit
+stick=štap
+bed=krevet
+boat=čamac
+bucket=kanta
+compass=kompas
+
+# --- multi-word items & blocks (phrases) ---
+diamond sword=dijamantni mač
+iron sword=željezni mač
+wooden sword=drveni mač
+golden sword=zlatni mač
+netherite sword=netheritski mač
+diamond block=dijamantni blok
+gold block=zlatni blok
+iron block=željezni blok
+iron ingot=željezna poluga
+gold ingot=zlatna poluga
+diamond ore=dijamantna ruda
+iron ore=željezna ruda
+gold ore=zlatna ruda
+coal ore=ugljena ruda
+enchanted golden apple=začarana zlatna jabuka
+golden apple=zlatna jabuka
+
+# --- single-word mobs ---
+zombie=zombi
+skeleton=kostur
+creeper=creeper
+spider=pauk
+pig=svinja
+cow=krava
+chicken=kokoš
+sheep=ovca
+wolf=vuk
+enderman=enderman
+villager=seljak
+horse=konj
+cat=mačka
+bee=pčela
+
+# --- multi-word mobs ---
+iron golem=željezni golem
+zombie pigman=zombi svinja
+
+# --- effects ---
+speed=brzina
+strength=snaga
+jump boost=skok uvis
+regeneration=regeneracija
+invisibility=nevidljivost
+poison=otrov
+weakness=slabost
+slowness=sporost
+night vision=noćni vid
+fire resistance=otpornost na vatru
+water breathing=disanje pod vodom
+haste=žurba

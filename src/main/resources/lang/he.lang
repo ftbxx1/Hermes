@@ -1,0 +1,305 @@
+# Hebrew translation pack for Hermes.
+# Format: <canonical english>=<native form> (one per line, # = comment).
+# Single native words are translated while reading a script; longer native
+# phrases ("חרב יהלום") are matched by the parser's greedy lookups.
+# You may extend or override anything here by dropping a custom he.lang into
+# plugins/Hermes/lang/.
+
+# --- flow & structure ---
+when=כאשר
+every=כל
+action=פעולה
+command=פקודה
+region=אזור
+mark=סימון
+gui=תפריט
+create=צור
+if=אם
+repeat=חזור
+loop=לולאה
+stop=עצור
+else=אחרת
+fire=ירה
+win=נצח
+clear=נקה
+delete=מחק
+while=בעוד
+wait=המתן
+and=ו
+or=או
+as=כמו
+all=הכל
+numbers=מספרים
+from=מ
+to=אל
+over=מעל
+up=למעלה
+down=למטה
+
+# --- actions ---
+give=תן
+remove=הסר
+set=הגדר
+add=הוסף
+tell=אמור
+announce=הכרז
+warn=הזהר
+welcome=קבל
+show=הראה
+kill=הרוג
+damage=פגע
+heal=רפא
+feed=האכל
+kick=גרש
+launch=שיגר
+title=כותרת
+actionbar=פס
+lightning=ברק
+explode=פוצץ
+teleport=שדר
+spawn=הזמן
+play=נגן
+write=כתוב
+open=פתח
+close=סגור
+press=לחץ
+pull=משוך
+power=הפעל
+unpower=כבה
+put=שים
+take=קח
+make=עשה
+
+# --- noise / articles ---
+the=ה
+a=אחד
+an=אחת
+any=כלשהו
+
+# --- prepositions ---
+with=עם
+by=על ידי
+at=ב
+near=ליד
+named=בשם
+because=כי
+in=ב
+on=על
+of=של
+
+# --- values ---
+true=נכון
+false=שקר
+nothing=כלום
+none=אף
+length=אורך
+random=אקראי
+number=מספר
+count=כמות
+between=בין
+contains=מכיל
+plus=ועוד
+minus=מינוס
+times=פעמים
+divided=חלקי
+second=שנייה
+seconds=שניות
+minute=דקה
+minutes=דקות
+hour=שעה
+hours=שעות
+tick=טיק
+ticks=טיקים
+
+# --- variable targets ---
+player=שחקן
+world=עולם
+temporary=זמני
+list=רשימה
+score=ניקוד
+database=בסיס
+config=הגדרות
+value=ערך
+file=קובץ
+data=נתונים
+
+# --- conditions & comparisons ---
+has=יש
+is=הוא
+are=הם
+not=לא
+holding=אוחז
+sneaking=מתכופף
+flying=עף
+wet=רטוב
+op=אופ
+ground=קרקע
+biome=ביומה
+permission=הרשאה
+more=יותר
+less=פחות
+equal=שווה
+than=מ
+least=מינימום
+most=מקסימום
+above=מעל
+below=מתחת
+under=תחת
+health=חיים
+hunger=רעב
+xp=נסיון
+level=רמה
+gamemode=מצב
+
+# --- player events ---
+joins=מצטרף
+joins=נכנס
+leaves=עוזב
+leaves=נפרד
+dies=מת
+respawns=חוזר
+jumps=קופץ
+sneaks=מתכופף
+sneaks=גוחן
+moves=נע
+moves=זז
+attacks=תוקף
+chats=מדבר
+fishes=דוג
+levels=עולה
+clicks=לוחץ
+eats=אוכל
+kills=הורג
+starts=מתחיל
+stops=עוצר
+sprinting=רץ
+takes=לוקח
+damage=נזק
+breaks=שובר
+places=מניח
+picks=מרים
+drops=מפיל
+uses=משתמש
+interacts=מתקשר
+enters=נכנס
+reaches=מגיע
+types=מקליד
+touches=נוגע
+walks=הולך
+first=ראשון
+inventory=מלאי
+mob=יצור
+custom=מותאם
+event=אירוע
+fires=מתרחש
+night=לילה
+dawn=שחר
+falls=נופל
+game=משחק
+server=שרת
+slot=משבצת
+
+# --- world state ---
+weather=מזג אוויר
+rain=גשם
+sunny=שטוף שמש
+storm=סערה
+stormy=סוער
+noon=צהריים
+dusk=דמדומים
+midnight=חצות
+morning=בוקר
+evening=ערב
+day=יום
+daytime=אור יום
+nighttime=לילה
+
+# --- gamemodes ---
+survival=הישרדות
+creative=יצירתי
+adventure=הרפתקה
+spectator=צופה
+
+# --- dimensions ---
+the end=הסוף
+overworld=עולם ראשי
+
+# --- single-word items & blocks ---
+diamond=יהלום
+emerald=ברקת
+iron=ברזל
+gold=זהב
+coal=פחם
+bread=לחם
+apple=תפוח
+torch=לפיד
+water=מים
+lava=לבה
+stone=אבן
+dirt=עפר
+sand=חול
+glass=זכוכית
+chest=תיבה
+door=דלת
+sword=חרב
+bow=קשת
+arrow=חץ
+shield=מגן
+stick=מקל
+bed=מיטה
+boat=סירה
+bucket=דלי
+compass=מצפן
+
+# --- multi-word items & blocks (phrases) ---
+diamond sword=חרב יהלום
+iron sword=חרב ברזל
+wooden sword=חרב עץ
+golden sword=חרב זהב
+netherite sword=חרב נטרייט
+diamond block=בלוק יהלום
+gold block=בלוק זהב
+iron block=בלוק ברזל
+iron ingot=מטיל ברזל
+gold ingot=מטיל זהב
+diamond ore=עפרת יהלום
+iron ore=עפרת ברזל
+gold ore=עפרת זהב
+coal ore=עפרת פחם
+redstone dust=אבקת רדסטון
+enchanted golden apple=תפוח זהב קסום
+golden apple=תפוח זהב
+
+# --- single-word mobs ---
+zombie=זומבי
+skeleton=שלד
+creeper=קריפר
+spider=עכביש
+pig=חזיר
+cow=פרה
+chicken=תרנגולת
+sheep=כבשה
+wolf=זאב
+enderman=אנדרמן
+villager=כפרי
+horse=סוס
+cat=חתול
+bee=דבורה
+
+# --- multi-word mobs ---
+iron golem=גולם ברזל
+zombie pigman=חזיר זומבי
+
+# --- effects ---
+speed=מהירות
+strength=חוזק
+jump boost=קפיצה
+regeneration=התחדשות
+invisibility=אי נראות
+poison=רעל
+weakness=חולשה
+slowness=האטה
+night vision=ראיית לילה
+fire resistance=חסינות לאש
+water breathing=נשימה מתחת למים
+haste=זירוז

@@ -1,0 +1,305 @@
+# Filipino translation pack for Hermes.
+# Format: <canonical english>=<native form> (one per line, # = comment).
+# Single native words are translated while reading a script; longer native
+# phrases ("espada ng brilyante") are matched by the parser's greedy lookups.
+# You may extend or override anything here by dropping a custom fil.lang into
+# plugins/Hermes/lang/.
+
+# --- flow & structure ---
+when=kapa
+every=bawat
+action=aksyon
+command=utos
+region=rehiyon
+mark=marka
+gui=menu
+create=likhain
+if=kung
+repeat=ulitin
+loop=paikot
+stop=tigil
+else=kung hindi
+fire=paputukin
+win=manalo
+clear=linisin
+delete=burahin
+while=habang
+wait=maghintay
+and=at
+or=o
+as=bilang
+all=lahat
+numbers=mga numero
+from=mula
+to=hanggang
+over=sa itaas
+up=pataas
+down=pababa
+
+# --- actions ---
+give=ibigay
+remove=alisin
+set=itakda
+add=idagdag
+tell=sabihin
+announce=ipahayag
+warn=bigyan ng babala
+welcome=batiin
+show=ipakita
+kill=patayin
+damage=sirain
+heal=pagalingin
+feed=pakainin
+kick=sipain
+launch=ilunsad
+title=pamagat
+actionbar=bar ng aksyon
+lightning=kidlat
+explode=sumabog
+teleport=teleport
+spawn=ilabas
+play=patugtugin
+write=isulat
+open=buksan
+close=isara
+press=pindutin
+pull=hilahin
+power=paganahin
+unpower=i-off
+put=ilagay
+take=kunin
+make=gawin
+
+# --- noise / articles ---
+the=ang
+a=isang
+an=isang
+any=kahit ano
+
+# --- prepositions ---
+with=kasama
+by=ng
+at=sa
+near=malapit
+named=pinangalanan
+because=dahil
+in=sa
+on=nasa
+of=ng
+
+# --- values ---
+true=totoo
+false=mali
+nothing=wala
+none=wala
+length=haba
+random=random
+number=numero
+count=bilang
+between=sa pagitan
+contains=naglalaman
+plus=dagdag
+minus=bawas
+times=beses
+divided=hinati
+second=segundo
+seconds=segundo
+minute=minuto
+minutes=minuto
+hour=oras
+hours=oras
+tick=tick
+ticks=tick
+
+# --- variable targets ---
+player=manlalaro
+world=mundo
+temporary=pansamantala
+list=listahan
+score=iskor
+database=database
+config=configuration
+value=halaga
+file=file
+data=data
+
+# --- conditions & comparisons ---
+has=may
+is=ay
+are=ay
+not=hindi
+holding=hawak
+sneaking=nakayuko
+flying=lumilipad
+wet=basa
+op=op
+ground=lupa
+biome=biome
+permission=pahintulot
+more=higit
+less=kulang
+equal=katumbas
+than=kaysa
+least=pinakakaunti
+most=pinakamarami
+above=sa itaas
+below=sa ibaba
+under=sa ilalim
+health=kalusugan
+hunger=gutom
+xp=xp
+level=level
+gamemode=mode ng laro
+
+# --- player events ---
+joins=sasali
+joins=pumasok
+leaves=umaalis
+leaves=aalis
+dies=namamatay
+respawns=nag-respawn
+jumps=tumatalon
+sneaks=nakayuko
+sneaks=yumuyuko
+moves=gumagalaw
+moves=kumikilos
+attacks=umaatake
+chats=nagsasalita
+fishes=nangingisda
+levels=nag-level up
+clicks=nag-click
+eats=kumakain
+kills=pumapatay
+starts=nagsisimula
+stops=humihinto
+sprinting=tumatakbo
+takes=natanggap
+damage=sira
+breaks=sinisira
+places=naglalagay
+picks=pumipitas
+drops=binabagsak
+uses=gumagamit
+interacts=nakikipag-ugnayan
+enters=pumapasok
+reaches=nakararating
+types=nagti-type
+touches=nakakahawak
+walks=naglalakad
+first=una
+inventory=imbentaryo
+mob=mob
+custom=custom
+event=pangyayari
+fires=nangyayari
+night=gabi
+dawn=madaling araw
+falls=nahuhulog
+game=laro
+server=server
+slot=slot
+
+# --- world state ---
+weather=panahon
+rain=ulan
+sunny=maaraw
+storm=bagyo
+stormy=mabagyo
+noon=tanghali
+dusk=dapit-hapon
+midnight=hatinggabi
+morning=umaga
+evening=hapon
+day=araw
+daytime=araw
+nighttime=gabi
+
+# --- gamemodes ---
+survival=survival
+creative=creative
+adventure=pakikipagsapalaran
+spectator=spectator
+
+# --- dimensions ---
+the end=ang katapusan
+overworld=overworld
+
+# --- single-word items & blocks ---
+diamond=brilyante
+emerald=esmeralda
+iron=bakal
+gold=ginto
+coal=uling
+bread=tinapay
+apple=mansanas
+torch=sulo
+water=tubig
+lava=lava
+stone=bato
+dirt=dumi
+sand=buhangin
+glass=salamin
+chest=kahon
+door=pinto
+sword=espada
+bow=busog
+arrow=palaso
+shield=kalasag
+stick=patpat
+bed=kama
+boat=bangka
+bucket=timba
+compass=compass
+
+# --- multi-word items & blocks (phrases) ---
+diamond sword=espada ng brilyante
+iron sword=espada ng bakal
+wooden sword=espada na kahoy
+golden sword=espada ng ginto
+netherite sword=espada ng netherite
+diamond block=bloke ng brilyante
+gold block=bloke ng ginto
+iron block=bloke ng bakal
+iron ingot=ingot na bakal
+gold ingot=ingot na ginto
+diamond ore=mineral ng brilyante
+iron ore=mineral ng bakal
+gold ore=mineral ng ginto
+coal ore=mineral ng uling
+redstone dust=alikabok ng redstone
+enchanted golden apple=mansanas na ginto na may engkanto
+golden apple=mansanas na ginto
+
+# --- single-word mobs ---
+zombie=zombie
+skeleton=kalansay
+creeper=creeper
+spider=gagamba
+pig=baboy
+cow=baka
+chicken=manok
+sheep=tupa
+wolf=lobo
+enderman=enderman
+villager=mamamayan
+horse=kabayo
+cat=pusa
+bee=bubuyog
+
+# --- multi-word mobs ---
+iron golem=golem na bakal
+zombie pigman=baboy na zombie
+
+# --- effects ---
+speed=bilis
+strength=lakas
+jump boost=talon boost
+regeneration=regeneration
+invisibility=invisibility
+poison=lason
+weakness=kahinaan
+slowness=bagal
+night vision=paningin sa gabi
+fire resistance=panlaban sa apoy
+water breathing=paghinga sa ilalim ng tubig
+haste=pagmamadali

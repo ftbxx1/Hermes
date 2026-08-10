@@ -1,0 +1,305 @@
+# Icelandic translation pack for Hermes.
+# Format: <canonical english>=<native form> (one per line, # = comment).
+# Single native words are translated while reading a script; longer native
+# phrases ("diamantsverð") are matched by the parser's greedy lookups.
+# You may extend or override anything here by dropping a custom is.lang into
+# plugins/Hermes/lang/.
+
+# --- flow & structure ---
+when=þegar
+every=hver
+action=aðgerð
+command=skipun
+region=svæði
+mark=merki
+gui=valmynd
+create=búa til
+if=ef
+repeat=endurtaka
+loop=lykkja
+stop=hætta
+else=annars
+fire=skjóta
+win=vinna
+clear=hreinsa
+delete=eyða
+while=meðan
+wait=bíða
+and=og
+or=eða
+as=sem
+all=allt
+numbers=tölur
+from=frá
+to=til
+over=yfir
+up=upp
+down=niður
+
+# --- actions ---
+give=gefðu
+remove=fjarlægðu
+set=settu
+add=bættu við
+tell=segðu
+announce=tilkynntu
+warn=varaðu
+welcome=fagna
+show=sýndu
+kill=dreptu
+damage=skemmd
+heal=lækna
+feed=fóðra
+kick=reka
+launch=skjóta upp
+title=titill
+actionbar=aðgerðastika
+lightning=elding
+explode=sprengja
+teleport=flytja
+spawn=kalla fram
+play=spila
+write=skrifa
+open=opna
+close=loka
+press=ýta
+pull=toga
+power=kveikja
+unpower=slökkva
+put=setja
+take=taka
+make=búa til
+
+# --- noise / articles ---
+the=hið
+a=einn
+an=eitt
+any=einhver
+
+# --- prepositions ---
+with=með
+by=af
+at=á
+near=nálægt
+named=nefndur
+because=vegna
+in=í
+on=á
+of=af
+
+# --- values ---
+true=satt
+false=ósatt
+nothing=ekkert
+none=enginn
+length=lengd
+random=handahóf
+number=tala
+count=fjöldi
+between=á milli
+contains=inniheldur
+plus=plús
+minus=mínus
+times=sinnum
+divided=deilt
+second=sekúnda
+seconds=sekúndur
+minute=mínúta
+minutes=mínútur
+hour=klukkustund
+hours=klukkustundir
+tick=tick
+ticks=tick
+
+# --- variable targets ---
+player=leikmaður
+world=heimur
+temporary=tímabundið
+list=listi
+score=stig
+database=gagnagrunnur
+config=stilling
+value=gildi
+file=skrá
+data=gögn
+
+# --- conditions & comparisons ---
+has=hefur
+is=er
+are=eru
+not=ekki
+holding=heldur
+sneaking=laumast
+flying=flýgur
+wet=votur
+op=op
+ground=jörð
+biome=vistkerfi
+permission=leyfi
+more=meira
+less=minna
+equal=jafnt
+than=en
+least=minnst
+most=mest
+above=fyrir ofan
+below=fyrir neðan
+under=undir
+health=heilsa
+hunger=hungur
+xp=xp
+level=stig
+gamemode=leikhamur
+
+# --- player events ---
+joins=gengur í
+joins=kemur inn
+leaves=fer
+leaves=yfirgefur
+dies=deyr
+respawns=endurfæðist
+jumps=stekkur
+sneaks=laumast
+sneaks=skreppur
+moves=hreyfist
+moves=færist
+attacks=raðst á
+chats=spjallar
+fishes=veiðir
+levels=hækkar
+clicks=smellir
+eats=borðar
+kills=drepur
+starts=byrjar
+stops=hættir
+sprinting=hleypur
+takes=tekur
+damage=skemmd
+breaks=brýtur
+places=setur
+picks=tínir
+drops=sleppir
+uses=notar
+interacts=á í samskiptum
+enters=gengur inn
+reaches=nær
+types=slær inn
+touches=snertir
+walks=gengur
+first=fyrst
+inventory=birgðageymsla
+mob=skepna
+custom=sérsniðið
+event=atburður
+fires=verður
+night=nótt
+dawn=dögun
+falls=fellur
+game=leikur
+server=þjónn
+slot=stæði
+
+# --- world state ---
+weather=veður
+rain=rigning
+sunny=sólríkt
+storm=stormur
+stormy=stormasamt
+noon=hádegi
+dusk=kvöld
+midnight=miðnætti
+morning=morgunn
+evening=kvöld
+day=dagur
+daytime=dagur
+nighttime=nótt
+
+# --- gamemodes ---
+survival=lifunarhamur
+creative=skapandi
+adventure=ævintýri
+spectator=áhorfandi
+
+# --- dimensions ---
+the end=endirinn
+overworld=yfirheimur
+
+# --- single-word items & blocks ---
+diamond=diamant
+emerald=smaragð
+iron=járn
+gold=gull
+coal=kol
+bread=brauð
+apple=epli
+torch=kyndill
+water=vatn
+lava=hraun
+stone=steinn
+dirt=mold
+sand=sandur
+glass=gler
+chest=kista
+door=hurð
+sword=sverð
+bow=bogi
+arrow=ör
+shield=skjöldur
+stick=stafur
+bed=rúm
+boat=bátur
+bucket=fata
+compass=áttaviti
+
+# --- multi-word items & blocks (phrases) ---
+diamond sword=diamantsverð
+iron sword=járnsverð
+wooden sword=trésverð
+golden sword=gullinsverð
+netherite sword=netheritsverð
+diamond block=diamantblokk
+gold block=gullblokk
+iron block=járnblokk
+iron ingot=járnstöng
+gold ingot=gullstöng
+diamond ore=diamantgrýti
+iron ore=járngrýti
+gold ore=gullgrýti
+coal ore=kolgrýti
+redstone dust=rauðsteinsryk
+enchanted golden apple=galdrað gullepli
+golden apple=gullepli
+
+# --- single-word mobs ---
+zombie=uppvakningur
+skeleton=beinagrind
+creeper=creeper
+spider=kónguló
+pig=svín
+cow=kýr
+chicken=hæna
+sheep=kind
+wolf=úlfur
+enderman=enderman
+villager=þorpsbúi
+horse=hestur
+cat=köttur
+bee=býfluga
+
+# --- multi-word mobs ---
+iron golem=járngólmur
+zombie pigman=uppvakningasvín
+
+# --- effects ---
+speed=hraði
+strength=styrkur
+jump boost=stökkstyrking
+regeneration=endurnýjun
+invisibility=ósýnileiki
+poison=eitur
+weakness=veikleiki
+slowness=hægð
+night vision=nætursjón
+fire resistance=eldþol
+water breathing=vatnsöndun
+haste=bráð

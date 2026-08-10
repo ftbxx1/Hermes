@@ -1,0 +1,306 @@
+# Catalan translation pack for Hermes.
+# Format: <canonical english>=<native form> (one per line, # = comment).
+# Single native words are translated while reading a script; longer native
+# phrases ("espasa de diamant") are matched by the parser's greedy lookups.
+# You may extend or override anything here by dropping a custom ca.lang into
+# plugins/Hermes/lang/.
+
+# --- flow & structure ---
+when=quan
+every=cada
+action=acció
+command=comandament
+region=regió
+mark=marca
+gui=menú
+create=crear
+if=si
+repeat=repetir
+loop=recórrer
+stop=aturar
+else=sinó
+fire=disparar
+win=guanyar
+clear=netejar
+delete=esborrar
+while=mentre
+wait=esperar
+and=i
+or=o
+as=com
+all=tots
+numbers=números
+from=des de
+to=a
+over=sobre
+up=amunt
+down=avall
+
+# --- actions ---
+give=donar
+remove=treure
+set=establir
+add=afegir
+tell=dir
+announce=anunciar
+warn=avisar
+welcome=rebre
+show=mostrar
+kill=matar
+damage=danyar
+heal=curar
+feed=alimentar
+kick=expulsar
+launch=llançar
+title=títol
+actionbar=barra
+lightning=llamp
+explode=explotar
+teleport=teletransportar
+spawn=generar
+spawn=aparèixer
+play=reproduir
+write=escriure
+open=obrir
+close=tancar
+press=prémer
+pull=estirar
+power=activar
+unpower=desactivar
+put=posar
+take=treure
+make=fer
+
+# --- noise / articles ---
+the=el
+a=un
+an=un
+any=qualsevol
+
+# --- prepositions ---
+with=amb
+by=per
+at=a
+near=prop
+named=anomenat
+because=perquè
+in=en
+on=sobre
+of=de
+
+# --- values ---
+true=cert
+false=fals
+nothing=res
+none=cap
+length=longitud
+random=aleatori
+number=número
+count=quantitat
+between=entre
+contains=conté
+plus=més
+minus=menys
+times=vegades
+divided=dividit
+second=segon
+seconds=segons
+minute=minut
+minutes=minuts
+hour=hora
+hours=hores
+tick=tick
+ticks=ticks
+
+# --- variable targets ---
+player=jugador
+world=món
+temporary=temporal
+list=llista
+score=punts
+database=base de dades
+config=configuració
+value=valor
+file=fitxer
+data=dades
+
+# --- conditions & comparisons ---
+has=té
+is=és
+are=són
+not=no
+holding=subjectant
+sneaking=ajupit
+flying=volant
+wet=mullat
+op=op
+ground=terra
+biome=bioma
+permission=permís
+more=més
+less=menys
+equal=igual
+than=que
+least=mínim
+most=màxim
+above=dalt
+below=baix
+under=sota
+health=vida
+hunger=fam
+xp=xp
+level=nivell
+gamemode=manera de joc
+
+# --- player events ---
+joins=s'uneix
+joins=entra
+leaves=se'n va
+leaves=surt
+dies=mor
+respawns=reapareix
+jumps=salta
+sneaks=s'ajup
+sneaks=ajup
+moves=es mou
+moves=mou
+attacks=ataca
+chats=parla
+fishes=pesca
+levels=puja
+clicks=clica
+eats=menja
+kills=mata
+starts=comença
+stops=para
+sprinting=corrent
+takes=rep
+damage=dany
+breaks=trenca
+places=col·loca
+picks=recull
+drops=deixa anar
+uses=usa
+interacts=interactua
+enters=entra
+reaches=arriba
+types=escriu
+touches=toca
+walks=camina
+first=primera
+inventory=inventari
+mob=criatura
+custom=personalitzat
+event=esdeveniment
+fires=succeeix
+night=nit
+dawn=alba
+falls=cau
+game=joc
+server=servidor
+slot=ranura
+
+# --- world state ---
+weather=temps
+rain=pluja
+sunny=assolellat
+storm=tempesta
+stormy=tempestuós
+noon=migdia
+dusk=capvespre
+midnight=mitjanit
+morning=matí
+evening=vespre
+day=dia
+daytime=dia
+nighttime=nit
+
+# --- gamemodes ---
+survival=supervivència
+creative=creatiu
+adventure=aventura
+spectator=espectador
+
+# --- dimensions ---
+the end=la fi
+overworld=superfície
+
+# --- single-word items & blocks ---
+diamond=diamant
+emerald=maragda
+iron=ferro
+gold=or
+coal=carbó
+bread=pa
+apple=poma
+torch=torxa
+water=aigua
+lava=lava
+stone=pedra
+dirt=terra
+sand=sorra
+glass=vidre
+chest=cofre
+door=porta
+sword=espasa
+bow=arc
+arrow=fletxa
+shield=escut
+stick=palo
+bed=llit
+boat=barca
+bucket=galleda
+compass=brúixola
+
+# --- multi-word items & blocks (phrases) ---
+diamond sword=espasa de diamant
+iron sword=espasa de ferro
+wooden sword=espasa de fusta
+golden sword=espasa d'or
+netherite sword=espasa de netherita
+diamond block=bloc de diamant
+gold block=bloc d'or
+iron block=bloc de ferro
+iron ingot=lingot de ferro
+gold ingot=lingot d'or
+diamond ore=mineral de diamant
+iron ore=mineral de ferro
+gold ore=mineral d'or
+coal ore=mineral de carbó
+redstone dust=pols de redstone
+enchanted golden apple=poma daurada encantada
+golden apple=poma daurada
+
+# --- single-word mobs ---
+zombie=zombi
+skeleton=esquelet
+creeper=creeper
+spider=aranya
+pig=porc
+cow=vaca
+chicken=gallina
+sheep=ovella
+wolf=llop
+enderman=enderman
+villager=vilatà
+horse=cavall
+cat=gat
+bee=abella
+
+# --- multi-word mobs ---
+iron golem=golem de ferro
+zombie pigman=porc zombi
+
+# --- effects ---
+speed=velocitat
+strength=força
+jump boost=salts
+regeneration=regeneració
+invisibility=invisibilitat
+poison=verí
+weakness=debilitat
+slowness=lentitud
+night vision=visió nocturna
+fire resistance=resistència al foc
+water breathing=respirar sota l'aigua
+haste=pressa

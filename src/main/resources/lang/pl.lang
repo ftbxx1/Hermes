@@ -1,0 +1,304 @@
+# Polish translation pack for Hermes.
+# Format: <canonical english>=<native form> (one per line, # = comment).
+# Single native words are translated while reading a script; longer native
+# phrases ("diamentowy miecz") are matched by the parser's greedy lookups.
+
+# --- flow & structure ---
+when=kiedy
+every=co
+action=akcja
+command=komenda
+region=region
+mark=znacznik
+gui=menu
+create=stwórz
+if=jeśli
+if=jeżeli
+repeat=powtórz
+loop=pętla
+stop=zatrzymaj
+else=inaczej
+fire=odpal
+win=wygraj
+clear=wyczyść
+delete=usuń
+while=podczas
+wait=czekaj
+and=i
+or=lub
+as=jako
+all=wszystkie
+numbers=liczby
+from=od
+to=do
+over=nad
+up=w górę
+down=w dół
+
+# --- actions ---
+give=daj
+remove=usuń
+set=ustaw
+add=dodaj
+tell=powiedz
+announce=ogłoś
+warn=ostrzeż
+welcome=powitaj
+show=pokaż
+kill=zabij
+damage=zranij
+heal=ulecz
+feed=nakarm
+kick=wyrzuć
+launch=wystrzel
+title=tytuł
+actionbar=pasek
+lightning=piorun
+explode=wybuch
+teleport=teleportuj
+spawn=odrodź
+play=graj
+write=napisz
+open=otwórz
+close=zamknij
+press=naciśnij
+pull=pociągnij
+power=zasil
+unpower=odłącz
+put=włóż
+take=weź
+make=zrób
+
+# --- noise / articles ---
+the=ten
+a=jakiś
+an=jakiś
+any=dowolny
+
+# --- prepositions ---
+with=z
+by=przez
+at=na
+near=blisko
+named=nazwany
+because=ponieważ
+in=w
+on=na
+of=z
+
+# --- values ---
+true=prawda
+false=fałsz
+nothing=nic
+none=żaden
+length=długość
+random=losowy
+number=liczba
+count=ilość
+between=między
+contains=zawiera
+plus=plus
+minus=minus
+times=razy
+divided=podzielone
+second=sekunda
+seconds=sekundy
+minute=minuta
+minutes=minuty
+hour=godzina
+hours=godziny
+tick=tick
+ticks=ticki
+
+# --- variable targets ---
+player=gracz
+world=świat
+temporary=tymczasowy
+list=lista
+score=punkty
+database=baza
+config=konfiguracja
+value=wartość
+file=plik
+data=dane
+
+# --- conditions & comparisons ---
+has=ma
+is=jest
+are=są
+not=nie
+holding=trzyma
+sneaking=skrada się
+flying=leci
+wet=mokry
+op=op
+ground=ziemia
+biome=biom
+permission=uprawnienie
+more=więcej
+less=mniej
+equal=rowne
+than=niż
+least=najmniej
+most=najbardziej
+above=powyżej
+below=poniżej
+under=pod
+health=zdrowie
+hunger=głód
+xp=xp
+level=poziom
+gamemode=tryb
+
+# --- player events ---
+joins=dołącza
+joins=wchodzi
+leaves=wychodzi
+leaves=opuszcza
+dies=umiera
+respawns=odradza się
+jumps=skacze
+sneaks=skrada się
+sneaks=czai się
+moves=rusza się
+moves=porusza się
+attacks=atakuje
+chats=pisze
+fishes=łowi
+levels=awansuje
+clicks=klika
+eats=je
+kills=zabija
+starts=zaczyna
+stops=przestaje
+sprinting=sprintuje
+takes=otrzymuje
+damage=obrażenia
+breaks=niszczy
+places=stawia
+picks=zbiera
+drops=upuszcza
+uses=używa
+interacts=interaguje
+enters=wchodzi
+reaches=dociera
+types=pisze
+touches=dotyka
+walks=chodzi
+first=pierwszy
+inventory=ekwipunek
+mob=stworzenie
+custom=niestandardowy
+event=wydarzenie
+fires=uruchamia się
+night=noc
+dawn=świt
+falls=spada
+game=gra
+server=serwer
+slot=slot
+
+# --- world state ---
+weather=pogoda
+rain=deszcz
+sunny=słonecznie
+storm=burza
+stormy=burzowo
+noon=południe
+dusk=zmierzch
+midnight=północ
+morning=poranek
+evening=wieczór
+day=dzień
+daytime=dzień
+nighttime=noc
+
+# --- gamemodes ---
+survival=przetrwanie
+creative=kreatywny
+adventure=przygoda
+spectator=obserwator
+
+# --- dimensions ---
+the end=koniec
+overworld=świat
+
+# --- single-word items & blocks ---
+diamond=diament
+emerald=szmaragd
+iron=żelazo
+gold=złoto
+coal=węgiel
+bread=chleb
+apple=jabłko
+torch=pochodnia
+water=woda
+lava=lawa
+stone=kamień
+dirt=ziemia
+sand=piasek
+glass=szkło
+chest=skrzynia
+door=drzwi
+sword=miecz
+bow=łuk
+arrow=strzała
+shield=tarcza
+stick=patyk
+bed=łóżko
+boat=łódka
+bucket=wiadro
+compass=kompas
+
+# --- multi-word items & blocks (phrases) ---
+diamond sword=diamentowy miecz
+iron sword=żelazny miecz
+wooden sword=drewniany miecz
+golden sword=złoty miecz
+netherite sword=netherytowy miecz
+diamond block=blok diamentu
+gold block=blok złota
+iron block=blok żelaza
+iron ingot=sztabka żelaza
+gold ingot=sztabka złota
+diamond ore=ruda diamentu
+iron ore=ruda żelaza
+gold ore=ruda złota
+coal ore=ruda węgla
+redstone dust=pył redstone
+enchanted golden apple=zaczarowane złote jabłko
+golden apple=złote jabłko
+
+# --- single-word mobs ---
+zombie=zombie
+skeleton=szkielet
+creeper=creeper
+spider=pająk
+pig=świnia
+cow=krowa
+chicken=kurczak
+sheep=owca
+wolf=wilk
+enderman=enderman
+villager=osadnik
+horse=koń
+cat=kot
+bee=pszczoła
+
+# --- multi-word mobs ---
+iron golem=żelazny golem
+zombie pigman=zombie pigman
+
+# --- effects ---
+speed=szybkość
+strength=siła
+jump boost=wzmocnienie skoku
+regeneration=regeneracja
+invisibility=niewidzialność
+poison=trucizna
+weakness=osłabienie
+slowness=spowolnienie
+night vision=widzenie w ciemności
+fire resistance=odporność na ogień
+water breathing=oddychanie pod wodą
+haste=pośpiech

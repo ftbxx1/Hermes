@@ -1,0 +1,305 @@
+# Slovenian translation pack for Hermes.
+# Format: <canonical english>=<native form> (one per line, # = comment).
+# Single native words are translated while reading a script; longer native
+# phrases ("diamantni meč") are matched by the parser's greedy lookups.
+# You may extend or override anything here by dropping a custom sl.lang into
+# plugins/Hermes/lang/.
+
+# --- flow & structure ---
+when=ko
+every=vsak
+action=akcija
+command=ukaz
+region=regija
+mark=oznaka
+gui=meni
+create=ustvari
+if=če
+repeat=ponovi
+loop=zanka
+stop=ustavi
+else=sicer
+fire=streljaj
+win=zmagaj
+clear=počisti
+delete=izbriši
+while=dokler
+wait=počakaj
+and=in
+or=ali
+as=kakor
+all=vsi
+numbers=števila
+from=od
+to=do
+over=čez
+up=gor
+down=dol
+
+# --- actions ---
+give=daj
+remove=odstrani
+set=nastavi
+add=dodaj
+tell=povej
+announce=objavi
+warn=opozori
+welcome=pozdravi
+show=pokaži
+kill=ubij
+damage=poškoduj
+heal=ozdravi
+feed=nahrani
+kick=izženi
+launch=izstreli
+title=naslov
+actionbar=vrstica
+lightning=strela
+explode=eksplodiraj
+teleport=teleportiraj
+spawn=prikliči
+play=predvajaj
+write=napiši
+open=odpri
+close=zapri
+press=pritisni
+pull=potegni
+power=aktiviraj
+unpower=deaktiviraj
+put=položi
+take=vzemi
+make=naredi
+
+# --- noise / articles ---
+the=ta
+a=eden
+an=eden
+any=katerikoli
+
+# --- prepositions ---
+with=z
+by=od
+at=pri
+near=blizu
+named=imenovan
+because=ker
+in=v
+on=na
+of=iz
+
+# --- values ---
+true=res
+false=napačno
+nothing=nič
+none=nihče
+length=dolžina
+random=naključen
+number=število
+count=štetje
+between=med
+contains=vsebuje
+plus=plus
+minus=minus
+times=krat
+divided=deljeno
+second=sekunda
+seconds=sekunde
+minute=minuta
+minutes=minute
+hour=ura
+hours=ure
+tick=tik
+ticks=tiki
+
+# --- variable targets ---
+player=igralec
+world=svet
+temporary=začasen
+list=seznam
+score=točke
+database=baza
+config=konfiguracija
+value=vrednost
+file=datoteka
+data=podatki
+
+# --- conditions & comparisons ---
+has=ima
+is=je
+are=so
+not=ne
+holding=drži
+sneaking=se plazi
+flying=leti
+wet=moker
+op=op
+ground=tla
+biome=biom
+permission=dovoljenje
+more=več
+less=manj
+equal=enako
+than=kot
+least=najmanj
+most=največ
+above=nad
+below=pod
+under=spodaj
+health=zdravje
+hunger=lakota
+xp=izkušnje
+level=raven
+gamemode=način
+
+# --- player events ---
+joins=se pridruži
+joins=vstopi
+leaves=odide
+leaves=zapusti
+dies=umre
+respawns=se oživi
+jumps=skoči
+sneaks=se plazi
+sneaks=plazi
+moves=se premika
+moves=premika
+attacks=napada
+chats=govori
+fishes=ribari
+levels=se dvigne
+clicks=klikne
+eats=jé
+kills=ubije
+starts=začne
+stops=ustavi
+sprinting=teče
+takes=prejme
+damage=škoda
+breaks=razbije
+places=postavi
+picks=pobere
+drops=izpusti
+uses=uporabi
+interacts=interagira
+enters=vstopi
+reaches=doseže
+types=tipka
+touches=dotakne
+walks=hodi
+first=prvi
+inventory=inventar
+mob=bitje
+custom=poseben
+event=dogodek
+fires=zgodi
+night=noč
+dawn=zora
+falls=pade
+game=igra
+server=strežnik
+slot=reža
+
+# --- world state ---
+weather=vreme
+rain=dež
+sunny=sončno
+storm=nevihta
+stormy=nevihtno
+noon=poldan
+dusk=mrak
+midnight=polnoč
+morning=jutro
+evening=večer
+day=dan
+daytime=podnevi
+nighttime=ponoči
+
+# --- gamemodes ---
+survival=preživetje
+creative=ustvarjalni
+adventure=pustolovščina
+spectator=opazovalec
+
+# --- dimensions ---
+the end=konec
+overworld=zgornji svet
+
+# --- single-word items & blocks ---
+diamond=diamant
+emerald=smaragd
+iron=železo
+gold=zlato
+coal=premog
+bread=kruh
+apple=jabolko
+torch=bakla
+water=voda
+lava=lava
+stone=kamen
+dirt=zemlja
+sand=pesek
+glass=steklo
+chest=skrinja
+door=vrata
+sword=meč
+bow=lok
+arrow=puščica
+shield=ščit
+stick=palica
+bed=postelja
+boat=čoln
+bucket=vedro
+compass=kompas
+
+# --- multi-word items & blocks (phrases) ---
+diamond sword=diamantni meč
+iron sword=železni meč
+wooden sword=leseni meč
+golden sword=zlati meč
+netherite sword=netheritski meč
+diamond block=blok diamanta
+gold block=blok zlata
+iron block=blok železa
+iron ingot=železni ingot
+gold ingot=zlati ingot
+diamond ore=diamantna ruda
+iron ore=železna ruda
+gold ore=zlata ruda
+coal ore=premogova ruda
+redstone dust=rdeči kameni prah
+enchanted golden apple=začarana zlata jabolka
+golden apple=zlata jabolka
+
+# --- single-word mobs ---
+zombie=zombi
+skeleton=okostnjak
+creeper=creeper
+spider=pajek
+pig=prašič
+cow=krava
+chicken=piščanec
+sheep=ovca
+wolf=volk
+enderman=enderman
+villager=vaščan
+horse=konj
+cat=mačka
+bee=čebela
+
+# --- multi-word mobs ---
+iron golem=železni golem
+zombie pigman=zombi prašič
+
+# --- effects ---
+speed=hitrost
+strength=moč
+jump boost=ojačani skok
+regeneration=regeneracija
+invisibility=nevidnost
+poison=strup
+weakness=šibkost
+slowness=počasnost
+night vision=nočni vid
+fire resistance=odpornost na ogenj
+water breathing=dihanje pod vodo
+haste=pospešek

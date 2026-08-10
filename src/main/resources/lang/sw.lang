@@ -1,0 +1,311 @@
+# Swahili translation pack for Hermes.
+# Format: <canonical english>=<native form> (one per line, # = comment).
+# Single native words are translated while reading a script; longer native
+# phrases ("upanga") are matched by the parser's greedy lookups.
+
+# --- flow & structure ---
+when=lini
+every=kila
+action=kitendo
+command=amri
+region=mkoa
+mark=alama
+gui=menu
+create=unda
+if=ikiwa
+repeat=rudia
+loop=kitanzi
+stop=acha
+else=vinginevyo
+fire=fyatua
+win=shinda
+clear=safisha
+delete=futa
+while=wakati
+wait=ngoja
+and=na
+or=au
+as=kama
+all=yote
+numbers=nambari
+from=kutoka
+to=hadi
+over=juu ya
+up=juu
+down=chini
+
+# --- actions ---
+give=pa
+remove=ondoa
+set=weka
+add=ongeza
+tell=ambia
+announce=tangaza
+warn=onya
+welcome=karibu
+show=onyesha
+kill=ua
+damage=haribu
+heal=ponya
+feed=lisha
+kick=fukuza
+launch=zindua
+title=kichwa
+actionbar=bar ya vitendo
+lightning=umeme
+explode=lipua
+teleport=safirisha
+spawn=zalisha
+play=cheza
+write=andika
+open=fungua
+close=funge
+press=bonyeza
+pull=vuta
+power=washa
+unpower=zima
+put=tia
+take=chukua
+make=fanya
+freeze=gandisha
+unfreeze=yeyusha
+
+# --- noise / articles ---
+the=hii
+a=moja
+an=moja
+any=yoyote
+item=kipengee
+
+# --- prepositions ---
+with=pamoja na
+by=kwa
+at=katika
+near=karibu
+near=karibu na
+named=inaitwa
+because=kwa sababu
+in=ndani
+on=juu
+of=ya
+randomly=bila mpangilio
+within=ndani ya
+
+# --- values ---
+true=kweli
+false=uongo
+nothing=hakuna kitu
+none=hakuna
+length=urefu
+random=nasibu
+number=nambari
+count=hesabu
+between=kati ya
+contains=ina
+plus=plus
+minus=kutoa
+times=mara
+divided=gawanya
+second=sekunde
+seconds=sekunde
+minute=dakika
+minutes=dakika
+hour=saa
+hours=saa
+tick=tik
+ticks=tik
+size=ukubwa
+
+# --- variable targets ---
+player=mchezaji
+world=dunia
+temporary=ya muda
+list=orodha
+score=pointi
+database=hifadhidata
+config=usanidi
+value=thamani
+file=faili
+data=data
+players=wachezaji
+
+# --- conditions & comparisons ---
+has=ana
+is=ni
+are=wako
+not=si
+holding=anashikilia
+sneaking=ananyemelea
+flying=anaruka
+wet=mbichi
+op=op
+ground=ardhi
+biome=biomu
+permission=ruhusa
+more=zaidi
+less=chache
+equal=sawa
+than=kuliko
+least=angalau
+most=mengi
+above=zaidi ya
+below=chini ya
+under=chini
+health=afya
+hunger=njaa
+xp=xp
+level=kiwango
+gamemode=modi
+chance=nafasi
+
+# --- player events ---
+joins=anajiunga
+joins=hujiunga
+leaves=anaondoka
+dies=anakufa
+respawns=anazaliwa upya
+jumps=anaruka
+sneaks=anyemelea
+moves=anasonga
+attacks=anashambulia
+attacks=hushambulia
+chats=anaongea
+fishes=anavua
+levels=anapanda kiwango
+clicks=anabofya
+eats=anakula
+kills=anaua
+starts=anaanza
+stops=anasimama
+stops=husimama
+sprinting=anakimbia
+takes=anachukua
+damage=madhara
+breaks=anavunja
+places=anaweka
+picks=anaokota
+drops=anadondosha
+uses=anatumia
+interacts=anaingiliana
+enters=anaingia
+reaches=anafikia
+types=anachapa
+touches=anagusa
+walks=anatembea
+walks=hatembea
+first=ya kwanza
+inventory=orodha ya vitu
+mob=kiumbe
+custom=maalum
+event=tukio
+fires=anafyatua
+night=usiku
+dawn=alfajiri
+falls=anaanguka
+game=mchezo
+server=seva
+slot=sehemu
+
+# --- world state ---
+weather=hali ya hewa
+rain=mvua
+sunny=jua
+storm=dhoruba
+stormy=ya dhoruba
+noon=adhuhuri
+dusk=machweo
+midnight=usiku wa manane
+morning=asubuhi
+evening=jioni
+day=siku
+daytime=mchana
+nighttime=wakati wa usiku
+
+# --- gamemodes ---
+survival=kuishi
+creative=ubunifu
+adventure=matukio
+spectator=mtazamaji
+
+# --- dimensions ---
+the end=mwisho
+overworld=dunia ya juu
+
+# --- single-word items & blocks ---
+diamond=almasi
+emerald=zumari
+iron=chuma
+gold=dhahabu
+coal=makaa
+bread=mkate
+apple=tufaha
+torch=mwenge
+water=maji
+lava=lava
+stone=jiwe
+dirt=udongo
+sand=mchanga
+glass=kioo
+chest=sanduku
+door=mlango
+sword=upanga
+bow=upinde
+arrow=mshale
+shield=ngao
+stick=fimbo
+bed=kitanda
+boat=mashua
+bucket=ndoo
+compass=kompas
+
+# --- multi-word items & blocks (phrases) ---
+diamond sword=upanga wa almasi
+iron sword=upanga wa chuma
+wooden sword=upanga wa mbao
+golden sword=upanga wa dhahabu
+netherite sword=upanga wa netherite
+diamond block=bloki ya almasi
+gold block=bloki ya dhahabu
+iron block=bloki ya chuma
+iron ingot=chinga ya chuma
+gold ingot=chinga ya dhahabu
+diamond ore=madini ya almasi
+iron ore=madini ya chuma
+gold ore=madini ya dhahabu
+coal ore=madini ya makaa
+enchanted golden apple=tufaha la dhahabu la kichawi
+golden apple=tufaha la dhahabu
+
+# --- single-word mobs ---
+zombie=zombie
+skeleton=mifupa
+creeper=creeper
+spider=buibui
+pig=nguruwe
+cow=ng'ombe
+chicken=kuku
+sheep=kondoo
+wolf=mbwa mwitu
+enderman=enderman
+villager=mkazi
+horse=farasi
+cat=paka
+bee=nyuki
+
+# --- multi-word mobs ---
+iron golem=golem ya chuma
+zombie pigman=zombie nguruwe
+
+# --- effects ---
+speed=kasi
+strength=nguvu
+jump boost=nyongeza ya kuruka
+regeneration=kurejesha
+invisibility=kujificha
+poison=sumu
+weakness=udhaifu
+slowness=upole
+night vision=maono ya usiku
+fire resistance=ustahimili moto
+water breathing=upumuaji wa maji
+haste=haraka

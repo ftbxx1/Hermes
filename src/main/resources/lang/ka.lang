@@ -1,0 +1,313 @@
+# Georgian translation pack for Hermes.
+# Format: <canonical english>=<native form> (one per line, # = comment).
+# Single native words are translated while reading a script; longer native
+# phrases are matched by the parser's greedy lookups.
+# You may extend or override anything here by dropping a custom ka.lang into
+# plugins/Hermes/lang/.
+
+# --- flow & structure ---
+when=როდესაც
+every=ყოველი
+action=მოქმედება
+command=ბრძანება
+region=რეგიონი
+mark=ნიშანი
+gui=მენიუ
+create=შექმნა
+if=თუ
+repeat=გამეორება
+loop=ციკლი
+stop=გაჩერება
+else=სხვაგვარად
+fire=სროლა
+win=მოგება
+clear=გასუფთავება
+delete=წაშლა
+while=სანამ
+wait=დალოდება
+and=და
+or=ან
+as=როგორც
+all=ყველა
+numbers=რიცხვები
+from=დან
+to=მდე
+over=ზემოთ
+up=მაღლა
+down=ქვევით
+
+# --- actions ---
+give=მიცემა
+remove=მოცილება
+set=დაყენება
+add=დამატება
+tell=თქმა
+announce=განცხადება
+warn=გაფრთხილება
+welcome=მისალმება
+show=ჩვენება
+kill=მოკვლა
+damage=დაზიანება
+heal=განკურნება
+feed=გამოკვება
+kick=გაგდება
+launch=სროლა
+title=სათაური
+actionbar=ზოლი
+lightning=ელვა
+explode=აფეთქება
+teleport=ტელეპორტი
+spawn=გაჩენა
+play=თამაში
+write=წერა
+open=გახსნა
+close=დახურვა
+press=დაჭერა
+pull=მიზიდვა
+power=ჩართვა
+unpower=გამორთვა
+put=ჩადება
+take=აღება
+make=გაკეთება
+freeze=გაყინვა
+unfreeze=გალღობა
+
+# --- noise / articles ---
+the=ეს
+a=ერთი
+an=ერთი
+any=ნებისმიერი
+item=ნივთი
+
+# --- prepositions ---
+with=თან
+by=გვერდით
+at=ზე
+near=ახლოს
+near=მახლობლად
+named=სახელად
+because=რადგან
+in=ში
+on=ზე
+of=ის
+randomly=შემთხვევით
+within=ფარგლებში
+
+# --- values ---
+true=მართალი
+false=მცდარი
+nothing=არაფერი
+none=არავინ
+length=სიგრძე
+random=შემთხვევითი
+number=რიცხვი
+count=რაოდენობა
+between=შორის
+contains=შეიცავს
+plus=პლუს
+minus=მინუს
+times=ჯერ
+divided=გაყოფილი
+second=წამი
+seconds=წამი
+minute=წუთი
+minutes=წუთი
+hour=საათი
+hours=საათი
+tick=ტიკი
+ticks=ტიკები
+size=ზომა
+
+# --- variable targets ---
+player=მოთამაშე
+world=სამყარო
+temporary=დროებითი
+list=სია
+score=ქულა
+database=მონაცემთა ბაზა
+config=კონფიგურაცია
+value=მნიშვნელობა
+file=ფაილი
+data=მონაცემები
+players=მოთამაშეები
+
+# --- conditions & comparisons ---
+has=აქვს
+is=არის
+are=არიან
+not=არა
+holding=უჭირავს
+sneaking=მცოცავი
+flying=მფრინავი
+wet=სველი
+op=ოპ
+ground=მიწა
+biome=ბიომი
+permission=ნებართვა
+more=მეტი
+less=ნაკლები
+equal=ტოლი
+than=ვიდრე
+least=სულ ცოტა
+most=ყველაზე მეტი
+above=ზემოთ
+below=ქვემოთ
+under=ქვეშ
+health=ჯანმრთელობა
+hunger=შიმშილი
+xp=გამოცდილება
+level=დონე
+gamemode=რეჟიმი
+chance=შანსი
+
+# --- player events ---
+joins=უერთდება
+joins=შემოდის
+leaves=ტოვებს
+dies=კვდება
+respawns=აღორძინდება
+jumps=ხტება
+sneaks=იპარება
+moves=მოძრაობს
+attacks=უტევს
+attacks=ურტყამს
+chats=ლაპარაკობს
+fishes=თევზაობს
+levels=დონე ამაღლებს
+clicks=აწკაპუნებს
+eats=ჭამს
+kills=კლავს
+starts=იწყებს
+stops=წყვეტს
+stops=ჩერდება
+sprinting=სირბილი
+takes=იღებს
+damage=ზიანი
+breaks=ამტვრევს
+places=ათავსებს
+picks=აგროვებს
+drops=აგდებს
+uses=იყენებს
+interacts=ურთიერთქმედებს
+enters=შემოდის
+reaches=აღწევს
+types=აკრეფს
+touches=ეხება
+walks=დადის
+walks=ისეირნებს
+first=პირველი
+inventory=ინვენტარი
+mob=მობი
+custom=შექმნილი
+event=მოვლენა
+fires=ისვრის
+night=ღამე
+dawn=გარიჟრაჟი
+falls=ვარდება
+game=თამაში
+server=სერვერი
+slot=უჯრა
+
+# --- world state ---
+weather=ამინდი
+rain=წვიმა
+sunny=მზიანი
+storm=ქარიშხალი
+stormy=ქარიშხლიანი
+noon=შუადღე
+dusk=ბინდი
+midnight=შუაღამე
+morning=დილა
+evening=საღამო
+day=დღე
+daytime=დღის დრო
+nighttime=ღამის დრო
+
+# --- gamemodes ---
+survival=გადარჩენა
+creative=კრეატივი
+adventure=თავგადასავალი
+spectator=მაყურებელი
+
+# --- dimensions ---
+the end=დასასრული
+overworld=ზედა სამყარო
+
+# --- single-word items & blocks ---
+diamond=ბრილიანტი
+emerald=ზურმუხტი
+iron=რკინა
+gold=ოქრო
+coal=ნახშირი
+bread=პური
+apple=ვაშლი
+torch=ჩირაღდანი
+water=წყალი
+lava=ლავა
+stone=ქვა
+dirt=მიწა
+sand=ქვიშა
+glass=მინა
+chest=სკივრი
+door=კარი
+sword=ხმალი
+bow=მშვილდი
+arrow=ისარი
+shield=ფარი
+stick=ჯოხი
+bed=საწოლი
+boat=ნავი
+bucket=ვედრო
+compass=კომპასი
+
+# --- multi-word items & blocks (phrases) ---
+diamond sword=ბრილიანტის ხმალი
+iron sword=რკინის ხმალი
+wooden sword=ხის ხმალი
+golden sword=ოქროს ხმალი
+netherite sword=ნეთერის ხმალი
+diamond block=ბრილიანტის ბლოკი
+gold block=ოქროს ბლოკი
+iron block=რკინის ბლოკი
+iron ingot=რკინის ზოდი
+gold ingot=ოქროს ზოდი
+diamond ore=ბრილიანტის მადანი
+iron ore=რკინის მადანი
+gold ore=ოქროს მადანი
+coal ore=ნახშირის მადანი
+enchanted golden apple=მოჯადოებული ოქროს ვაშლი
+golden apple=ოქროს ვაშლი
+
+# --- single-word mobs ---
+zombie=ზომბი
+skeleton=ჩონჩხი
+creeper=კრიპერი
+spider=ობობა
+pig=ღორი
+cow=ძროხა
+chicken=ქათამი
+sheep=ცხვარი
+wolf=მგელი
+enderman=ენდერმენი
+villager=სოფლელი
+horse=ცხენი
+cat=კატა
+bee=ფუტკარი
+
+# --- multi-word mobs ---
+iron golem=რკინის გოლემი
+zombie pigman=ზომბი ღორი
+
+# --- effects ---
+speed=სიჩქარე
+strength=ძალა
+jump boost=ხტომის ძალა
+regeneration=რეგენერაცია
+invisibility=უხილავობა
+poison=შხამი
+weakness=სისუსტე
+slowness=ნელა
+night vision=ღამის ხედვა
+fire resistance=ცეცხლგამძლეობა
+water breathing=წყლის სუნთქვა
+haste=აჩქარება

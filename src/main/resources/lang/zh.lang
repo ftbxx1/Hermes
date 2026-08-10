@@ -1,0 +1,303 @@
+# Chinese Simplified translation pack for Hermes.
+# Format: <canonical english>=<native form> (one per line, # = comment).
+# Single native words are translated while reading a script; longer native
+# phrases ("钻石剑") are matched by the parser's greedy lookups.
+
+# --- flow & structure ---
+when=当
+every=每
+action=动作
+command=命令
+region=区域
+mark=标记
+gui=菜单
+create=创建
+if=如果
+repeat=重复
+loop=循环
+stop=停止
+else=否则
+fire=触发
+win=获胜
+clear=清除
+delete=删除
+while=期间
+wait=等待
+and=和
+or=或
+as=作为
+all=所有
+numbers=数字
+from=从
+to=到
+over=超过
+up=向上
+down=向下
+
+# --- actions ---
+give=给予
+remove=移除
+set=设置
+add=添加
+tell=告知
+announce=宣布
+warn=警告
+welcome=欢迎
+show=显示
+kill=杀死
+damage=造成伤害
+heal=治疗
+feed=喂食
+kick=踢出
+launch=发射
+title=标题
+actionbar=动作栏
+lightning=闪电
+explode=爆炸
+teleport=传送
+spawn=生成
+play=播放
+write=写入
+open=打开
+close=关闭
+press=按下
+pull=拉动
+power=通电
+unpower=断电
+put=放入
+take=取出
+make=制作
+
+# --- noise / articles ---
+the=那个
+a=一个
+an=一个
+any=任意
+
+# --- prepositions ---
+with=与
+by=通过
+at=在
+near=附近
+named=名为
+because=因为
+in=里面
+on=上
+of=的
+
+# --- values ---
+true=真
+false=假
+nothing=什么都没有
+none=无
+length=长度
+random=随机
+number=数字
+count=数量
+between=之间
+contains=包含
+plus=加
+minus=减
+times=倍
+divided=除
+second=秒
+seconds=秒
+minute=分
+minutes=分
+hour=小时
+hours=小时
+tick=刻
+ticks=刻
+
+# --- variable targets ---
+player=玩家
+world=世界
+temporary=临时
+list=列表
+score=分数
+database=数据库
+config=配置
+value=值
+file=文件
+data=数据
+
+# --- conditions & comparisons ---
+has=拥有
+is=是
+are=是
+not=不是
+holding=持有着
+sneaking=潜行中
+flying=飞行中
+wet=湿的
+op=管理员
+ground=地面
+biome=生物群系
+permission=权限
+more=更多
+less=更少
+equal=等于
+than=比
+least=最小
+most=最大
+above=上方
+below=下方
+under=下面
+health=生命值
+hunger=饥饿
+xp=经验值
+level=等级
+gamemode=游戏模式
+
+# --- player events ---
+joins=加入
+joins=加入
+leaves=离开
+leaves=离去
+dies=死亡
+respawns=重生
+jumps=跳跃
+sneaks=潜行
+sneaks=下蹲
+moves=移动
+moves=走动
+attacks=攻击
+chats=说话
+fishes=钓鱼
+levels=升级
+clicks=点击
+eats=进食
+kills=击杀
+starts=开始
+stops=停下
+sprinting=疾跑中
+takes=接受
+damage=伤害
+breaks=破坏
+places=放置
+picks=拾取
+drops=掉落
+uses=使用
+interacts=交互
+enters=进入
+reaches=到达
+types=输入
+touches=触摸
+walks=行走
+first=第一
+inventory=物品栏
+mob=生物
+custom=自定义
+event=事件
+fires=触发
+night=夜晚
+dawn=黎明
+falls=坠落
+game=游戏
+server=服务器
+slot=槽位
+
+# --- world state ---
+weather=天气
+rain=下雨
+sunny=晴朗
+storm=暴风雨
+stormy=暴风雨
+noon=正午
+dusk=黄昏
+midnight=午夜
+morning=早晨
+evening=傍晚
+day=白天
+daytime=白天
+nighttime=夜晚
+
+# --- gamemodes ---
+survival=生存
+creative=创造
+adventure=冒险
+spectator=旁观
+
+# --- dimensions ---
+the end=末地
+overworld=主世界
+
+# --- single-word items & blocks ---
+diamond=钻石
+emerald=绿宝石
+iron=铁
+gold=金
+coal=煤炭
+bread=面包
+apple=苹果
+torch=火把
+water=水
+lava=岩浆
+stone=石头
+dirt=泥土
+sand=沙子
+glass=玻璃
+chest=箱子
+door=门
+sword=剑
+bow=弓
+arrow=箭
+shield=盾牌
+stick=木棍
+bed=床
+boat=船
+bucket=桶
+compass=指南针
+
+# --- multi-word items & blocks (phrases) ---
+diamond sword=钻石剑
+iron sword=铁剑
+wooden sword=木剑
+golden sword=金剑
+netherite sword=下界合金剑
+diamond block=钻石块
+gold block=金块
+iron block=铁块
+iron ingot=铁锭
+gold ingot=金锭
+diamond ore=钻石矿石
+iron ore=铁矿石
+gold ore=金矿石
+coal ore=煤矿石
+redstone dust=红石粉
+enchanted golden apple=附魔金苹果
+golden apple=金苹果
+
+# --- single-word mobs ---
+zombie=僵尸
+skeleton=骷髅
+creeper=苦力怕
+spider=蜘蛛
+pig=猪
+cow=牛
+chicken=鸡
+sheep=羊
+wolf=狼
+enderman=末影人
+villager=村民
+horse=马
+cat=猫
+bee=蜜蜂
+
+# --- multi-word mobs ---
+iron golem=铁傀儡
+zombie pigman=僵尸猪人
+
+# --- effects ---
+speed=速度
+strength=力量
+jump boost=跳跃提升
+regeneration=再生
+invisibility=隐身
+poison=中毒
+weakness=虚弱
+slowness=缓慢
+night vision=夜视
+fire resistance=防火
+water breathing=水下呼吸
+haste=急迫

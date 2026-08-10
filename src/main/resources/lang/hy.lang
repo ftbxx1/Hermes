@@ -1,0 +1,313 @@
+# Armenian translation pack for Hermes.
+# Format: <canonical english>=<native form> (one per line, # = comment).
+# Single native words are translated while reading a script; longer native
+# phrases are matched by the parser's greedy lookups.
+# You may extend or override anything here by dropping a custom hy.lang into
+# plugins/Hermes/lang/.
+
+# --- flow & structure ---
+when=երբ
+every=ամեն
+action=գործողություն
+command=հրաման
+region=տարածք
+mark=նշան
+gui=մենյու
+create=ստեղծել
+if=եթե
+repeat=կրկնել
+loop=օղակ
+stop=կանգ
+else=այլապես
+fire=կրակել
+win=հաղթել
+clear=մաքրել
+delete=ջնջել
+while=մինչ
+wait=սպասել
+and=և
+or=կամ
+as=որպես
+all=բոլորը
+numbers=թվեր
+from=ից
+to=մինչև
+over=վերևում
+up=վեր
+down=ներքև
+
+# --- actions ---
+give=տալ
+remove=հեռացնել
+set=սահմանել
+add=ավելացնել
+tell=ասել
+announce=հայտարարել
+warn=զգուշացնել
+welcome=ողջունել
+show=ցույց տալ
+kill=սպանել
+damage=վնասել
+heal=բուժել
+feed=կերակրել
+kick=վռնդել
+launch=նետել
+title=վերնագիր
+actionbar=շերտ
+lightning=կայծակ
+explode=պայթել
+teleport=տելեպորտել
+spawn=հայտնվել
+play=խաղալ
+write=գրել
+open=բացել
+close=փակել
+press=սեղմել
+pull=քաշել
+power=ակտիվացնել
+unpower=դադարեցնել
+put=դնել
+take=վերցնել
+make=անել
+freeze=սառեցնել
+unfreeze=հալեցնել
+
+# --- noise / articles ---
+the=այդ
+a=մի
+an=մի
+any=ցանկացած
+item=առարկա
+
+# --- prepositions ---
+with=հետ
+by=մոտ
+at=մոտ
+near=մոտիկ
+near=մոտ
+named=անունով
+because=քանի որ
+in=մեջ
+on=վրա
+of=ի
+randomly=պատահականորեն
+within=ներսում
+
+# --- values ---
+true=ճիշտ
+false=սխալ
+nothing=ոչինչ
+none=ոչ ոք
+length=երկարություն
+random=պատահական
+number=թիվ
+count=քանակ
+between=միջև
+contains=պարունակում է
+plus=գումարած
+minus=մինուս
+times=անգամ
+divided=բաժանված
+second=վայրկյան
+seconds=վայրկյան
+minute=րոպե
+minutes=րոպե
+hour=ժամ
+hours=ժամ
+tick=տիկ
+ticks=տիկեր
+size=չափ
+
+# --- variable targets ---
+player=խաղացող
+world=աշխարհ
+temporary=ժամանակավոր
+list=ցուցակ
+score=միավոր
+database=տվյալների բազա
+config=կոնֆիգուրացիա
+value=արժեք
+file=ֆայլ
+data=տվյալներ
+players=խաղացողներ
+
+# --- conditions & comparisons ---
+has=ունի
+is=է
+are=են
+not=ոչ
+holding=բռնում է
+sneaking=գաղտագողի
+flying=թռչում է
+wet=թաց
+op=օպ
+ground=գետին
+biome=բիոմ
+permission=թույլտվություն
+more=ավելի շատ
+less=ավելի քիչ
+equal=հավասար
+than=քան
+least=նվազագույն
+most=ամենաշատ
+above=վերևում
+below=ներքևում
+under=տակ
+health=առողջություն
+hunger=սով
+xp=փորձ
+level=մակարդակ
+gamemode=ռեժիմ
+chance=հնարավորություն
+
+# --- player events ---
+joins=միանում է
+joins=մտնում է
+leaves=հեռանում է
+dies=մահանում է
+respawns=վերածնվում է
+jumps=ցատկում է
+sneaks=գաղտագողի շարժվում
+moves=շարժվում է
+attacks=հարձակվում է
+attacks=խփում է
+chats=զրուցում է
+fishes=ձուկ է որսում
+levels=մակարդակ բարձրանում
+clicks=սեղմում է
+eats=ուտում է
+kills=սպանում է
+starts=սկսում է
+stops=դադարում է
+stops=կանգ է առնում
+sprinting=վազք
+takes=վերցնում է
+damage=վնաս
+breaks=կոտրում է
+places=տեղադրում է
+picks=հավաքում է
+drops=գցում է
+uses=օգտագործում է
+interacts=շփվում է
+enters=մտնում է
+reaches=հասնում է
+types=մուտքագրում է
+touches=դիպչում է
+walks=քայլում է
+walks=շրջում է
+first=առաջին
+inventory=ինվենտար
+mob=մոբ
+custom=հատուկ
+event=իրադարձություն
+fires=կրակում է
+night=գիշեր
+dawn=լուսաբաց
+falls=ընկնում է
+game=խաղ
+server=սերվեր
+slot=բնիկ
+
+# --- world state ---
+weather=եղանակ
+rain=անձրև
+sunny=արևոտ
+storm=փոթորիկ
+stormy=փոթորկոտ
+noon=կեսօր
+dusk=մթնշաղ
+midnight=կեսգիշեր
+morning=առավոտ
+evening=երեկո
+day=օր
+daytime=ցերեկ
+nighttime=գիշեր
+
+# --- gamemodes ---
+survival=գոյատևում
+creative=ստեղծագործական
+adventure=արկածային
+spectator=հանդիսատես
+
+# --- dimensions ---
+the end=վերջը
+overworld=վերին աշխարհ
+
+# --- single-word items & blocks ---
+diamond=ադամանդ
+emerald=զմրուխտ
+iron=երկաթ
+gold=ոսկի
+coal=ածուխ
+bread=հաց
+apple=խնձոր
+torch=ջահ
+water=ջուր
+lava=լավա
+stone=քար
+dirt=հող
+sand=ավազ
+glass=ապակի
+chest=սնդուկ
+door=դուռ
+sword=սուր
+bow=աղեղ
+arrow=նետ
+shield=վահան
+stick=փայտ
+bed=մահճակալ
+boat=նավակ
+bucket=դույլ
+compass=կողմնացույց
+
+# --- multi-word items & blocks (phrases) ---
+diamond sword=ադամանդե սուր
+iron sword=երկաթե սուր
+wooden sword=փայտե սուր
+golden sword=ոսկե սուր
+netherite sword=նետերիտե սուր
+diamond block=ադամանդե բլոկ
+gold block=ոսկե բլոկ
+iron block=երկաթե բլոկ
+iron ingot=երկաթի ձուլակտոր
+gold ingot=ոսկու ձուլակտոր
+diamond ore=ադամանդի հանքաքար
+iron ore=երկաթի հանքաքար
+gold ore=ոսկու հանքաքար
+coal ore=ածխի հանքաքար
+enchanted golden apple=կախարդված ոսկե խնձոր
+golden apple=ոսկե խնձոր
+
+# --- single-word mobs ---
+zombie=զոմբի
+skeleton=կմախք
+creeper=կրիպեր
+spider=սարդ
+pig=խոզ
+cow=կով
+chicken=հավ
+sheep=ոչխար
+wolf=գայլ
+enderman=էնդերմեն
+villager=գյուղացի
+horse=ձի
+cat=կատու
+bee=մեղու
+
+# --- multi-word mobs ---
+iron golem=երկաթե գոլեմ
+zombie pigman=զոմբի խոզ
+
+# --- effects ---
+speed=արագություն
+strength=ուժ
+jump boost=ցատկի ուժ
+regeneration=վերականգնում
+invisibility=անտեսանելիություն
+poison=թույն
+weakness=թուլություն
+slowness=դանդաղություն
+night vision=գիշերային տեսողություն
+fire resistance=հրակայունություն
+water breathing=ջրային շնչառություն
+haste=արագացում

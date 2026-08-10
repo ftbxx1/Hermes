@@ -1,0 +1,305 @@
+# Arabic translation pack for Hermes.
+# Format: <canonical english>=<native form> (one per line, # = comment).
+# Single native words are translated while reading a script; longer native
+# phrases ("سيف الماس") are matched by the parser's greedy lookups.
+# You may extend or override anything here by dropping a custom ar.lang into
+# plugins/Hermes/lang/.
+
+# --- flow & structure ---
+when=عندما
+every=كل
+action=فعل
+command=أمر
+region=منطقة
+mark=علامة
+gui=قائمة
+create=أنشئ
+if=إذا
+repeat=كرر
+loop=حلقة
+stop=أوقف
+else=وإلا
+fire=أطلق
+win=اربح
+clear=امسح
+delete=احذف
+while=بينما
+wait=انتظر
+and=و
+or=أو
+as=كما
+all=كل
+numbers=أرقام
+from=من
+to=إلى
+over=فوق
+up=أعلى
+down=أسفل
+
+# --- actions ---
+give=اعط
+remove=ازل
+set=ضع
+add=اضف
+tell=اخبر
+announce=اعلن
+warn=حذر
+welcome=رحب
+show=اظهر
+kill=اقتل
+damage=اضر
+heal=اشف
+feed=اطعم
+kick=اطرد
+launch=قذف
+title=عنوان
+actionbar=شريط
+lightning=صاعقة
+explode=انفجر
+teleport=انقل
+spawn=استدع
+play=شغل
+write=اكتب
+open=افتح
+close=اغلق
+press=اضغط
+pull=اسحب
+power=فعل
+unpower=اوقف
+put=ضع
+take=خذ
+make=اصنع
+
+# --- noise / articles ---
+the=ال
+a=واحد
+an=واحدة
+any=أي
+
+# --- prepositions ---
+with=مع
+by=بواسطة
+at=عند
+near=قرب
+named=مسمى
+because=لأن
+in=في
+on=على
+of=من
+
+# --- values ---
+true=صحيح
+false=خاطئ
+nothing=لا شيء
+none=لا يوجد
+length=طول
+random=عشوائي
+number=رقم
+count=عدد
+between=بين
+contains=يحتوي
+plus=زائد
+minus=ناقص
+times=مرات
+divided=مقسوم
+second=ثانية
+seconds=ثوان
+minute=دقيقة
+minutes=دقائق
+hour=ساعة
+hours=ساعات
+tick=تيك
+ticks=تيكات
+
+# --- variable targets ---
+player=لاعب
+world=عالم
+temporary=مؤقت
+list=لائحة
+score=نقاط
+database=قاعدة
+config=إعدادات
+value=قيمة
+file=ملف
+data=بيانات
+
+# --- conditions & comparisons ---
+has=يملك
+is=هو
+are=هم
+not=لا
+holding=يحمل
+sneaking=منحني
+flying=يطير
+wet=مبلل
+op=أوب
+ground=أرض
+biome=بيوم
+permission=صلاحية
+more=أكثر
+less=أقل
+equal=يساوي
+than=من
+least=الأقل
+most=الأكثر
+above=فوق
+below=أسفل
+under=تحت
+health=صحة
+hunger=جوع
+xp=خبرة
+level=مستوى
+gamemode=وضع
+
+# --- player events ---
+joins=ينضم
+joins=يدخل
+leaves=يغادر
+leaves=يرحل
+dies=يموت
+respawns=يعود
+jumps=يقفز
+sneaks=ينحني
+sneaks=يقرفص
+moves=يتحرك
+moves=ينتقل
+attacks=يهاجم
+chats=يتحدث
+fishes=يصطاد
+levels=يرتقي
+clicks=ينقر
+eats=يأكل
+kills=يقتل
+starts=يبدأ
+stops=يتوقف
+sprinting=يعدو
+takes=يأخذ
+damage=ضرر
+breaks=يكسر
+places=يضع
+picks=يلتقط
+drops=يسقط
+uses=يستخدم
+interacts=يتفاعل
+enters=يدخل
+reaches=يصل
+types=يكتب
+touches=يلمس
+walks=يمشي
+first=أول
+inventory=مخزون
+mob=وحش
+custom=مخصص
+event=حدث
+fires=يحدث
+night=ليل
+dawn=فجر
+falls=يسقط
+game=لعبة
+server=خادم
+slot=خانة
+
+# --- world state ---
+weather=طقس
+rain=مطر
+sunny=مشمس
+storm=عاصفة
+stormy=عاصف
+noon=ظهر
+dusk=غروب
+midnight=منتصف الليل
+morning=صباح
+evening=مساء
+day=يوم
+daytime=نهار
+nighttime=ليل
+
+# --- gamemodes ---
+survival=بقاء
+creative=إبداعي
+adventure=مغامرة
+spectator=مشاهد
+
+# --- dimensions ---
+the end=النهاية
+overworld=العالم العلوي
+
+# --- single-word items & blocks ---
+diamond=ألماس
+emerald=زمرد
+iron=حديد
+gold=ذهب
+coal=فحم
+bread=خبز
+apple=تفاحة
+torch=مشعل
+water=ماء
+lava=حمم
+stone=حجر
+dirt=تراب
+sand=رمل
+glass=زجاج
+chest=صندوق
+door=باب
+sword=سيف
+bow=قوس
+arrow=سهم
+shield=درع
+stick=عصا
+bed=سرير
+boat=قارب
+bucket=دلو
+compass=بوصلة
+
+# --- multi-word items & blocks (phrases) ---
+diamond sword=سيف ألماس
+iron sword=سيف حديد
+wooden sword=سيف خشب
+golden sword=سيف ذهب
+netherite sword=سيف نذرابيت
+diamond block=كتلة ألماس
+gold block=كتلة ذهب
+iron block=كتلة حديد
+iron ingot=سبيكة حديد
+gold ingot=سبيكة ذهب
+diamond ore=خام ألماس
+iron ore=خام حديد
+gold ore=خام ذهب
+coal ore=خام فحم
+redstone dust=غبار ريدستون
+enchanted golden apple=تفاحة ذهبية مسحورة
+golden apple=تفاحة ذهبية
+
+# --- single-word mobs ---
+zombie=زومبي
+skeleton=هيكل
+creeper=كريبر
+spider=عنكبوت
+pig=خنزير
+cow=بقرة
+chicken=دجاجة
+sheep=خروف
+wolf=ذئب
+enderman=إندرمان
+villager=قروي
+horse=حصان
+cat=قطة
+bee=نحلة
+
+# --- multi-word mobs ---
+iron golem=غول حديد
+zombie pigman=خنزير زومبي
+
+# --- effects ---
+speed=سرعة
+strength=قوة
+jump boost=قفز
+regeneration=تجدد
+invisibility=إخفاء
+poison=سم
+weakness=ضعف
+slowness=بطء
+night vision=رؤية ليلية
+fire resistance=مقاومة النار
+water breathing=تنفس تحت الماء
+haste=تسريع

@@ -252,6 +252,11 @@ public final class TaleEngine {
         dispatch(event, Trigger.Filter.NONE, null, p, null);
     }
 
+    /** A server-wide event with no player: "server starts", "server stops". */
+    public void serverEvent(String event) {
+        dispatch(event, Trigger.Filter.NONE, null, null, null);
+    }
+
     public void playerEventItem(String event, PlayerRef p, String item) {
         dispatch(event, Trigger.Filter.ITEM, item, p, null);
     }
@@ -428,8 +433,8 @@ public final class TaleEngine {
         world.log("Hermes error in " + interp.scriptName() + ": " + e.message
                 + (e.line > 0 ? " (line " + e.line + ")" : ""));
         if (p != null) {
-            world.sendMessage(p, "Â§cÂ§lHermes error: Â§7" + e.message
-                    + (e.suggestion != null ? " Â§cTry: Â§7" + e.suggestion.replace('\n', ' ') : ""));
+            world.sendMessage(p, "§c§lHermes error: §7" + e.message
+                    + (e.suggestion != null ? " §cTry: §7" + e.suggestion.replace('\n', ' ') : ""));
         }
     }
 

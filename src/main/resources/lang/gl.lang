@@ -1,0 +1,306 @@
+# Galician translation pack for Hermes.
+# Format: <canonical english>=<native form> (one per line, # = comment).
+# Single native words are translated while reading a script; longer native
+# phrases ("espada de diamante") are matched by the parser's greedy lookups.
+# You may extend or override anything here by dropping a custom gl.lang into
+# plugins/Hermes/lang/.
+
+# --- flow & structure ---
+when=cando
+every=cada
+action=acción
+command=comando
+region=rexón
+mark=marca
+gui=menú
+create=crear
+if=se
+repeat=repetir
+loop=percorrer
+stop=deter
+else=senón
+fire=disparar
+win=gañar
+clear=limpar
+delete=borrar
+while=mentres
+wait=esperar
+and=e
+or=ou
+as=como
+all=todos
+numbers=números
+from=desde
+to=para
+over=sobre
+up=arriba
+down=abaixo
+
+# --- actions ---
+give=dar
+remove=quitar
+set=poñer
+add=engadir
+tell=dicir
+announce=anunciar
+warn=avisar
+welcome=recibir
+show=amosar
+kill=matar
+damage=danar
+heal=curar
+feed=alimentar
+kick=expulsar
+launch=lanzar
+title=título
+actionbar=barra
+lightning=raio
+explode=explotar
+teleport=teletransportar
+spawn=xerar
+spawn=aparecer
+play=reproducir
+write=escribir
+open=abrir
+close=pechar
+press=premer
+pull=tirar
+power=activar
+unpower=desactivar
+put=meter
+take=sacar
+make=facer
+
+# --- noise / articles ---
+the=o
+a=un
+an=un
+any=calquera
+
+# --- prepositions ---
+with=con
+by=por
+at=en
+near=preto
+named=chamado
+because=porque
+in=en
+on=sobre
+of=de
+
+# --- values ---
+true=verdadeiro
+false=falso
+nothing=nada
+none=ningún
+length=tamaño
+random=aleatorio
+number=número
+count=cantidade
+between=entre
+contains=contén
+plus=máis
+minus=menos
+times=veces
+divided=dividido
+second=segundo
+seconds=segundos
+minute=minuto
+minutes=minutos
+hour=hora
+hours=horas
+tick=tick
+ticks=ticks
+
+# --- variable targets ---
+player=xogador
+world=mundo
+temporary=temporal
+list=lista
+score=puntos
+database=base de datos
+config=configuración
+value=valor
+file=ficheiro
+data=datos
+
+# --- conditions & comparisons ---
+has=ten
+is=é
+are=son
+not=non
+holding=sostendo
+sneaking=agachado
+flying=voando
+wet=mollado
+op=op
+ground=chan
+biome=bioma
+permission=permiso
+more=máis
+less=menos
+equal=igual
+than=ca
+least=mínimo
+most=máximo
+above=arriba
+below=debaixo
+under=baixo
+health=vida
+hunger=fame
+xp=xp
+level=nivel
+gamemode=modo de xogo
+
+# --- player events ---
+joins=úntese
+joins=entra
+leaves=vaise
+leaves=sae
+dies=more
+respawns=renace
+jumps=salta
+sneaks=agáchase
+sneaks=agacha
+moves=móvese
+moves=move
+attacks=ataca
+chats=fala
+fishes=pesca
+levels=sube
+clicks=clica
+eats=come
+kills=mata
+starts=comeza
+stops=para
+sprinting=correndo
+takes=recibe
+damage=dano
+breaks=rompe
+places=coloca
+picks=recolla
+drops=solta
+uses=usa
+interacts=interactúa
+enters=entra
+reaches=chega
+types=escribe
+touches=toca
+walks=camina
+first=primeira
+inventory=inventario
+mob=criatura
+custom=personalizado
+event=evento
+fires=ocorre
+night=noite
+dawn=amencer
+falls=cae
+game=xogo
+server=servidor
+slot=ranura
+
+# --- world state ---
+weather=clima
+rain=choiva
+sunny=soleado
+storm=treboada
+stormy=tormentoso
+noon=mediodía
+dusk=solpor
+midnight=medianoite
+morning=mañá
+evening=tarde
+day=día
+daytime=día
+nighttime=noite
+
+# --- gamemodes ---
+survival=supervivencia
+creative=creativo
+adventure=aventura
+spectator=espectador
+
+# --- dimensions ---
+the end=a fin
+overworld=superficie
+
+# --- single-word items & blocks ---
+diamond=diamante
+emerald=esmeralda
+iron=ferro
+gold=ouro
+coal=carbón
+bread=pan
+apple=mazá
+torch=antorcha
+water=auga
+lava=lava
+stone=pedra
+dirt=terra
+sand=area
+glass=vidro
+chest=cofre
+door=porta
+sword=espada
+bow=arco
+arrow=frecha
+shield=escudo
+stick=pau
+bed=cama
+boat=barco
+bucket=balde
+compass=compás
+
+# --- multi-word items & blocks (phrases) ---
+diamond sword=espada de diamante
+iron sword=espada de ferro
+wooden sword=espada de madeira
+golden sword=espada de ouro
+netherite sword=espada de netherita
+diamond block=bloque de diamante
+gold block=bloque de ouro
+iron block=bloque de ferro
+iron ingot=lingote de ferro
+gold ingot=lingote de ouro
+diamond ore=mineral de diamante
+iron ore=mineral de ferro
+gold ore=mineral de ouro
+coal ore=mineral de carbón
+redstone dust=po de redstone
+enchanted golden apple=mazá dourada encantada
+golden apple=mazá dourada
+
+# --- single-word mobs ---
+zombie=zombi
+skeleton=esqueleto
+creeper=creeper
+spider=araña
+pig=porco
+cow=vaca
+chicken=galiña
+sheep=ovella
+wolf=lobo
+enderman=enderman
+villager=aldeán
+horse=cabalo
+cat=gato
+bee=abella
+
+# --- multi-word mobs ---
+iron golem=golem de ferro
+zombie pigman=porco zombi
+
+# --- effects ---
+speed=velocidade
+strength=forza
+jump boost=salto
+regeneration=rexeneración
+invisibility=invisibilidade
+poison=veleno
+weakness=debilidade
+slowness=lentitude
+night vision=visión nocturna
+fire resistance=resistencia ao lume
+water breathing=respirar baixo a auga
+haste=prisa

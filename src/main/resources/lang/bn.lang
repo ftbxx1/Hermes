@@ -1,0 +1,305 @@
+# Bengali translation pack for Hermes.
+# Format: <canonical english>=<native form> (one per line, # = comment).
+# Single native words are translated while reading a script; longer native
+# phrases ("হীরার তলোয়ার") are matched by the parser's greedy lookups.
+# You may extend or override anything here by dropping a custom bn.lang into
+# plugins/Hermes/lang/.
+
+# --- flow & structure ---
+when=যখন
+every=প্রত্যেক
+action=কর্ম
+command=আদেশ
+region=অঞ্চল
+mark=চিহ্ন
+gui=মেনু
+create=তৈরি করো
+if=যদি
+repeat=পুনরাবৃত্তি করো
+loop=লুপ
+stop=থামাও
+else=অন্যথায়
+fire=গুলি করো
+win=জয় করো
+clear=পরিষ্কার করো
+delete=মুছে ফেলো
+while=যতক্ষণ
+wait=অপেক্ষা করো
+and=এবং
+or=বা
+as=হিসাবে
+all=সব
+numbers=সংখ্যা
+from=থেকে
+to=পর্যন্ত
+over=উপরে
+up=উপরে
+down=নিচে
+
+# --- actions ---
+give=দাও
+remove=সরাও
+set=সেট করো
+add=যোগ করো
+tell=বলো
+announce=ঘোষণা করো
+warn=সতর্ক করো
+welcome=স্বাগতম জানাও
+show=দেখাও
+kill=মারো
+damage=ক্ষতি করো
+heal=সুস্থ করো
+feed=খাওয়াও
+kick=বের করে দাও
+launch=ছুড়ে দাও
+title=শিরোনাম
+actionbar=অ্যাকশন বার
+lightning=বজ্রপাত
+explode=বিস্ফোরণ করো
+teleport=টেলিপোর্ট করো
+spawn=জন্ম দাও
+play=বাজাও
+write=লেখো
+open=খোলো
+close=বন্ধ করো
+press=চাপো
+pull=টানো
+power=চালু করো
+unpower=বন্ধ করো
+put=রাখো
+take=নাও
+make=বানাও
+
+# --- noise / articles ---
+the=এটি
+a=একটি
+an=একটি
+any=যে কোনো
+
+# --- prepositions ---
+with=সাথে
+by=দ্বারা
+at=এ
+near=কাছে
+named=নামের
+because=কারণ
+in=ভিতরে
+on=উপরে
+of=এর
+
+# --- values ---
+true=সত্য
+false=মিথ্যা
+nothing=কিছুই না
+none=কিছু না
+length=দৈর্ঘ্য
+random=এলোমেলো
+number=সংখ্যা
+count=গণনা
+between=মাঝে
+contains=ধারণ করে
+plus=যোগ
+minus=বিয়োগ
+times=গুণ
+divided=ভাগ
+second=সেকেন্ড
+seconds=সেকেন্ড
+minute=মিনিট
+minutes=মিনিট
+hour=ঘণ্টা
+hours=ঘণ্টা
+tick=টিক
+ticks=টিক
+
+# --- variable targets ---
+player=খেলোয়াড়
+world=পৃথিবী
+temporary=অস্থায়ী
+list=তালিকা
+score=স্কোর
+database=ডেটাবেস
+config=কনফিগ
+value=মান
+file=ফাইল
+data=ডেটা
+
+# --- conditions & comparisons ---
+has=আছে
+is=হয়
+are=হয়
+not=না
+holding=ধরেছে
+sneaking=লুকিয়ে
+flying=উড়ছে
+wet=ভেজা
+op=অপ
+ground=মাটি
+biome=বায়োম
+permission=অনুমতি
+more=বেশি
+less=কম
+equal=সমান
+than=থেকে
+least=কমপক্ষে
+most=সর্বাধিক
+above=উপরে
+below=নিচে
+under=নিচে
+health=স্বাস্থ্য
+hunger=ক্ষুধা
+xp=অভিজ্ঞতা
+level=স্তর
+gamemode=গেম মোড
+
+# --- player events ---
+joins=যোগ দেয়
+joins=প্রবেশ করে
+leaves=চলে যায়
+leaves=বের হয়
+dies=মারা যায়
+respawns=আবার জন্মায়
+jumps=লাফ দেয়
+sneaks=লুকিয়ে থাকে
+sneaks=চুপিচুপি যায়
+moves=নড়ে
+moves=চলে
+attacks=আক্রমণ করে
+chats=কথা বলে
+fishes=মাছ ধরে
+levels=লেভেল ওঠে
+clicks=ক্লিক করে
+eats=খায়
+kills=মারে
+starts=শুরু করে
+stops=থামে
+sprinting=দৌড়ায়
+takes=নেয়
+damage=ক্ষতি
+breaks=ভাঙে
+places=রাখে
+picks=তোলে
+drops=ফেলে
+uses=ব্যবহার করে
+interacts=যোগাযোগ করে
+enters=ঢোকে
+reaches=পৌঁছায়
+types=টাইপ করে
+touches=ছোঁয়
+walks=হাঁটে
+first=প্রথম
+inventory=ইনভেন্টরি
+mob=দানব
+custom=কাস্টম
+event=ঘটনা
+fires=ঘটে
+night=রাত
+dawn=ভোর
+falls=পড়ে
+game=খেলা
+server=সার্ভার
+slot=স্লট
+
+# --- world state ---
+weather=আবহাওয়া
+rain=বৃষ্টি
+sunny=রোদ
+storm=ঝড়
+stormy=ঝড়ো
+noon=দুপুর
+dusk=সন্ধ্যা
+midnight=মধ্যরাত
+morning=সকাল
+evening=সন্ধ্যা
+day=দিন
+daytime=দিন
+nighttime=রাত
+
+# --- gamemodes ---
+survival=সারভাইভাল
+creative=ক্রিয়েটিভ
+adventure=অ্যাডভেঞ্চার
+spectator=পর্যবেক্ষক
+
+# --- dimensions ---
+the end=শেষ
+overworld=ওভারওয়ার্ল্ড
+
+# --- single-word items & blocks ---
+diamond=হীরা
+emerald=পান্না
+iron=লোহা
+gold=সোনা
+coal=কয়লা
+bread=রুটি
+apple=আপেল
+torch=টর্চ
+water=পানি
+lava=লাভা
+stone=পাথর
+dirt=মাটি
+sand=বালি
+glass=কাচ
+chest=বাক্স
+door=দরজা
+sword=তলোয়ার
+bow=ধনুক
+arrow=তীর
+shield=ঢাল
+stick=লাঠি
+bed=বিছানা
+boat=নৌকা
+bucket=বালতি
+compass=কম্পাস
+
+# --- multi-word items & blocks (phrases) ---
+diamond sword=হীরার তলোয়ার
+iron sword=লোহার তলোয়ার
+wooden sword=কাঠের তলোয়ার
+golden sword=সোনার তলোয়ার
+netherite sword=নেদারাইট তলোয়ার
+diamond block=হীরার ব্লক
+gold block=সোনার ব্লক
+iron block=লোহার ব্লক
+iron ingot=লোহার পিণ্ড
+gold ingot=সোনার পিণ্ড
+diamond ore=হীরার আকরিক
+iron ore=লোহার আকরিক
+gold ore=সোনার আকরিক
+coal ore=কয়লার আকরিক
+redstone dust=রেডস্টোন ধুলো
+enchanted golden apple=মন্ত্রমুগ্ধ সোনালি আপেল
+golden apple=সোনালি আপেল
+
+# --- single-word mobs ---
+zombie=জম্বি
+skeleton=কঙ্কাল
+creeper=ক্রিপার
+spider=মাকড়সা
+pig=শূকর
+cow=গরু
+chicken=মুরগি
+sheep=ভেড়া
+wolf=নেকড়ে
+enderman=এন্ডারম্যান
+villager=গ্রামবাসী
+horse=ঘোড়া
+cat=বিড়াল
+bee=মৌমাছি
+
+# --- multi-word mobs ---
+iron golem=লোহার গোলেম
+zombie pigman=জম্বি শূকর মানুষ
+
+# --- effects ---
+speed=গতি
+strength=শক্তি
+jump boost=লাফ বৃদ্ধি
+regeneration=পুনর্জন্ম
+invisibility=অদৃশ্যতা
+poison=বিষ
+weakness=দুর্বলতা
+slowness=ধীরতা
+night vision=রাতের দৃষ্টি
+fire resistance=আগুন প্রতিরোধ
+water breathing=পানিতে শ্বাস
+haste=তাড়াতাড়ি

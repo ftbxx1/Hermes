@@ -31,6 +31,7 @@ public final class MockWorld implements WorldAPI {
         public boolean wet = false;
         public boolean flying = false;
         public boolean op = false;
+        public boolean frozen = false;
         public String kicked;
         public final Map<String, Integer> inventory = new HashMap<>();
         public final List<String> messages = new ArrayList<>();
@@ -41,6 +42,8 @@ public final class MockWorld implements WorldAPI {
         public String team;
         public final List<String> effects = new ArrayList<>();
         public String biome = "plains";
+        public String bossbar;
+        public double bossbarProgress = 100;
 
         public MockPlayer(String name) { this.name = name; }
 
@@ -154,6 +157,27 @@ public final class MockWorld implements WorldAPI {
     @Override public int level(PlayerRef p) { return player(p).level; }
     @Override public void giveLevels(PlayerRef p, int amount) { player(p).level += amount; }
 
+    @Override public void setHealth(PlayerRef p, double amount) {
+        player(p).health = Math.max(0, Math.min(20, amount));
+    }
+    @Override public void setHunger(PlayerRef p, int amount) {
+        player(p).hunger = Math.max(0, Math.min(20, amount));
+    }
+    @Override public void setXp(PlayerRef p, int amount) { player(p).xp = Math.max(0, amount); }
+    @Override public void setLevel(PlayerRef p, int amount) { player(p).level = Math.max(0, amount); }
+
+    @Override public void setBossbar(PlayerRef p, String title, double progress) {
+        player(p).bossbar = title;
+        player(p).bossbarProgress = Math.max(0, Math.min(100, progress));
+    }
+    @Override public void clearBossbar(PlayerRef p) {
+        player(p).bossbar = null;
+        player(p).bossbarProgress = 100;
+    }
+    @Override public String heldItem(PlayerRef p) {
+        return player(p).holding == null ? "nothing" : player(p).holding;
+    }
+
     @Override public void setGamemode(PlayerRef p, String mode) { player(p).gamemode = mode; }
     @Override public String gamemode(PlayerRef p) { return player(p).gamemode; }
     @Override public boolean isSneaking(PlayerRef p) { return player(p).sneaking; }
@@ -161,6 +185,8 @@ public final class MockWorld implements WorldAPI {
     @Override public boolean isWet(PlayerRef p) { return player(p).wet; }
     @Override public boolean isFlying(PlayerRef p) { return player(p).flying; }
     @Override public boolean isOp(PlayerRef p) { return player(p).op; }
+    @Override public void setFrozen(PlayerRef p, boolean frozen) { player(p).frozen = frozen; }
+    @Override public boolean isFrozen(PlayerRef p) { return player(p).frozen; }
 
     @Override public void clearInventory(PlayerRef p) { player(p).inventory.clear(); }
 
@@ -348,7 +374,10 @@ public final class MockWorld implements WorldAPI {
     }
 
     @Override public void playSound(String sound, Vec3 loc) { sounds.add(sound + "@" + (long) loc.x() + "," + (long) loc.z()); }
-    @Override public void spawnParticles(String particle, Vec3 loc) { particles.add(particle + "@" + (long) loc.x() + "," + (long) loc.z()); }
+    @Override public void spawnParticles(String particle, Vec3 loc) { spawnParticles(particle, loc, 30, 1.0); }
+    @Override public void spawnParticles(String particle, Vec3 loc, int count, double size) {
+        particles.add(particle + "@" + (long) loc.x() + "," + (long) loc.z() + " x" + count + " size " + size);
+    }
 
     @Override public boolean hasPermission(PlayerRef p, String perm) {
         List<String> perms = permissions.get(p.name());

@@ -1,0 +1,305 @@
+# Hindi translation pack for Hermes.
+# Format: <canonical english>=<native form> (one per line, # = comment).
+# Single native words are translated while reading a script; longer native
+# phrases ("हीरे की तलवार") are matched by the parser's greedy lookups.
+# You may extend or override anything here by dropping a custom hi.lang into
+# plugins/Hermes/lang/.
+
+# --- flow & structure ---
+when=जब
+every=हर
+action=क्रिया
+command=आदेश
+region=क्षेत्र
+mark=निशान
+gui=मेनू
+create=बनाओ
+if=अगर
+repeat=दोहराओ
+loop=लूप
+stop=रोको
+else=वरना
+fire=दागो
+win=जीतो
+clear=साफ़ करो
+delete=मिटाओ
+while=जब तक
+wait=रुको
+and=और
+or=या
+as=के रूप में
+all=सभी
+numbers=संख्याएँ
+from=से
+to=तक
+over=ऊपर
+up=ऊपर
+down=नीचे
+
+# --- actions ---
+give=दो
+remove=हटाओ
+set=रखो
+add=जोड़ो
+tell=बताओ
+announce=घोषणा करो
+warn=चेतावनी दो
+welcome=स्वागत करो
+show=दिखाओ
+kill=मारो
+damage=नुकसान पहुँचाओ
+heal=ठीक करो
+feed=खिलाओ
+kick=निकालो
+launch=छोड़ो
+title=शीर्षक
+actionbar=क्रिया पट्टी
+lightning=बिजली
+explode=विस्फोट करो
+teleport=दूरभ्रमण करो
+spawn=प्रकट करो
+play=चलाओ
+write=लिखो
+open=खोलो
+close=बंद करो
+press=दबाओ
+pull=खींचो
+power=चालू करो
+unpower=बंद करो
+put=रखो
+take=लो
+make=बनाओ
+
+# --- noise / articles ---
+the=यह
+a=एक
+an=एक
+any=कोई
+
+# --- prepositions ---
+with=के साथ
+by=द्वारा
+at=पर
+near=पास
+named=नाम का
+because=क्योंकि
+in=में
+on=पर
+of=का
+
+# --- values ---
+true=सही
+false=गलत
+nothing=कुछ नहीं
+none=कोई नहीं
+length=लंबाई
+random=यादृच्छिक
+number=संख्या
+count=गिनती
+between=के बीच
+contains=शामिल है
+plus=जोड़
+minus=घटाव
+times=गुणा
+divided=भाग
+second=सेकंड
+seconds=सेकंड
+minute=मिनट
+minutes=मिनट
+hour=घंटा
+hours=घंटे
+tick=टिक
+ticks=टिक
+
+# --- variable targets ---
+player=खिलाड़ी
+world=दुनिया
+temporary=अस्थायी
+list=सूची
+score=अंक
+database=डेटाबेस
+config=कॉन्फ़िग
+value=मूल्य
+file=फ़ाइल
+data=डेटा
+
+# --- conditions & comparisons ---
+has=है
+is=है
+are=हैं
+not=नहीं
+holding=पकड़े हुए
+sneaking=झुककर
+flying=उड़ता
+wet=गीला
+op=ऑप
+ground=ज़मीन
+biome=बायोम
+permission=अनुमति
+more=अधिक
+less=कम
+equal=बराबर
+than=से
+least=न्यूनतम
+most=अधिकतम
+above=ऊपर
+below=नीचे
+under=नीचे
+health=स्वास्थ्य
+hunger=भूख
+xp=अनुभव
+level=स्तर
+gamemode=गेम मोड
+
+# --- player events ---
+joins=शामिल होता है
+joins=आता है
+leaves=छोड़ता है
+leaves=निकलता है
+dies=मरता है
+respawns=फिर से जन्म लेता है
+jumps=कूदता है
+sneaks=झुकता है
+sneaks=दबकर चलता है
+moves=हिलता है
+moves=चलता है
+attacks=हमला करता है
+chats=बात करता है
+fishes=मछली पकड़ता है
+levels=स्तर बढ़ाता है
+clicks=क्लिक करता है
+eats=खाता है
+kills=मारता है
+starts=शुरू करता है
+stops=रोकता है
+sprinting=दौड़ता है
+takes=लेता है
+damage=नुकसान
+breaks=तोड़ता है
+places=रखता है
+picks=उठाता है
+drops=गिराता है
+uses=इस्तेमाल करता है
+interacts=बातचीत करता है
+enters=अंदर आता है
+reaches=पहुँचता है
+types=टाइप करता है
+touches=छूता है
+walks=चलता है
+first=पहला
+inventory=सूची
+mob=भीड़
+custom=अनुकूलित
+event=घटना
+fires=होता है
+night=रात
+dawn=भोर
+falls=गिरता है
+game=खेल
+server=सर्वर
+slot=स्लॉट
+
+# --- world state ---
+weather=मौसम
+rain=बारिश
+sunny=धूप
+storm=तूफ़ान
+stormy=तूफ़ानी
+noon=दोपहर
+dusk=शाम
+midnight=आधी रात
+morning=सुबह
+evening=शाम
+day=दिन
+daytime=दिन
+nighttime=रात
+
+# --- gamemodes ---
+survival=जीवित
+creative=रचनात्मक
+adventure=रोमांच
+spectator=दर्शक
+
+# --- dimensions ---
+the end=अंत
+overworld=ऊपरी दुनिया
+
+# --- single-word items & blocks ---
+diamond=हीरा
+emerald=पन्ना
+iron=लोहा
+gold=सोना
+coal=कोयला
+bread=रोटी
+apple=सेब
+torch=मशाल
+water=पानी
+lava=लावा
+stone=पत्थर
+dirt=मिट्टी
+sand=रेत
+glass=काँच
+chest=संदूक
+door=दरवाज़ा
+sword=तलवार
+bow=धनुष
+arrow=तीर
+shield=ढाल
+stick=छड़ी
+bed=बिस्तर
+boat=नाव
+bucket=बाल्टी
+compass=कम्पास
+
+# --- multi-word items & blocks (phrases) ---
+diamond sword=हीरे की तलवार
+iron sword=लोहे की तलवार
+wooden sword=लकड़ी की तलवार
+golden sword=सोने की तलवार
+netherite sword=नेथराइट तलवार
+diamond block=हीरे का ब्लॉक
+gold block=सोने का ब्लॉक
+iron block=लोहे का ब्लॉक
+iron ingot=लोहे की ईंट
+gold ingot=सोने की ईंट
+diamond ore=हीरे का अयस्क
+iron ore=लोहे का अयस्क
+gold ore=सोने का अयस्क
+coal ore=कोयले का अयस्क
+redstone dust=रेडस्टोन धूल
+enchanted golden apple=जादुई सुनहरा सेब
+golden apple=सुनहरा सेब
+
+# --- single-word mobs ---
+zombie=ज़ोंबी
+skeleton=कंकाल
+creeper=क्रीपर
+spider=मकड़ी
+pig=सूअर
+cow=गाय
+chicken=मुर्गी
+sheep=भेड़
+wolf=भेड़िया
+enderman=एंडरमैन
+villager=ग्रामीण
+horse=घोड़ा
+cat=बिल्ली
+bee=मधुमक्खी
+
+# --- multi-word mobs ---
+iron golem=लोहे का गोलेम
+zombie pigman=ज़ोंबी सूअर आदमी
+
+# --- effects ---
+speed=गति
+strength=शक्ति
+jump boost=कूद वृद्धि
+regeneration=पुनर्जनन
+invisibility=अदृश्यता
+poison=ज़हर
+weakness=कमज़ोरी
+slowness=धीमापन
+night vision=रात्रि दृष्टि
+fire resistance=आग प्रतिरोध
+water breathing=पानी में साँस
+haste=तेज़ी

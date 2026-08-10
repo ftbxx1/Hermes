@@ -22,7 +22,11 @@ public final class Lexer {
 
     public static final class Token {
         public final Type type;
-        public final String text;
+        /** The text of the token. For words this is the canonical English form
+         *  when a translation pack is active (see {@link Lang}). */
+        public String text;
+        /** What the user actually typed (before any translation). */
+        public String raw;
         public final double num;
         public final int line;
         public final int col;
@@ -30,6 +34,7 @@ public final class Lexer {
         Token(Type type, String text, double num, int line, int col) {
             this.type = type;
             this.text = text;
+            this.raw = text;
             this.num = num;
             this.line = line;
             this.col = col;
@@ -71,7 +76,7 @@ public final class Lexer {
             while (indent < raw.length() && raw.charAt(indent) == ' ') indent++;
             if (indent < raw.length() && raw.charAt(indent) == '\t') {
                 throw new VerseError(ln,
-                        "I found a tab where indentation should be. Tabs confuse me â€” use spaces instead.",
+                        "I found a tab where indentation should be. Tabs confuse me — use spaces instead.",
                         null, raw);
             }
             String body = raw.substring(indent);
@@ -102,7 +107,19 @@ public final class Lexer {
             out.add(new Token(Type.DEDENT, "", 0, lines.length, 1));
         }
         out.add(new Token(Type.EOF, "", 0, lines.length, 1));
+        translateWords(out);
         return out;
+    }
+
+    /** Replaces native words with their English forms when a language pack is active. */
+    private static void translateWords(List<Token> out) {
+        for (Token t : out) {
+            if (t.type != Type.WORD) continue;
+            String english = Lang.translateWord(t.raw);
+            if (english != null && !english.equals(t.text)) {
+                t.text = english;
+            }
+        }
     }
 
     private static void tokenizeLine(List<Token> out, String line, int ln) {
@@ -180,6 +197,7 @@ public final class Lexer {
                 while (i < line.length()) {
                     char d = line.charAt(i);
                     if (Character.isLetterOrDigit(d) || d == '_' || d == '-') { sb.append(d); i++; }
+                    else if (isCombiningMark(d)) { sb.append(d); i++; }
                     else break;
                 }
                 if (i < line.length() && line.charAt(i) == '\'') {
@@ -203,5 +221,14 @@ public final class Lexer {
 
             throw new VerseError(ln, "I don't understand this character: '" + c + "'");
         }
+    }
+
+    /** Combining marks (vowel signs, matras, nukta...) are part of a word in
+     *  scripts like Devanagari, Bengali, Tamil, Arabic and Thai. */
+    private static boolean isCombiningMark(char c) {
+        int type = Character.getType(c);
+        return type == Character.NON_SPACING_MARK
+                || type == Character.COMBINING_SPACING_MARK
+                || type == Character.ENCLOSING_MARK;
     }
 }

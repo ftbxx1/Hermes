@@ -41,6 +41,32 @@ when player joins
         give player 1 golden apple
 ```
 
+## Loop while a condition holds
+
+```
+when player joins
+    while player's health is above 5
+        damage player by 1
+        wait 2 seconds
+```
+
+The body keeps running as long as the condition is true. Be careful: if the
+condition never becomes false the loop never stops, so make sure the body
+changes something the condition checks.
+
+## Wait before continuing
+
+```
+when player joins
+    tell player "Countdown..."
+    wait 3 seconds
+    tell player "Go!"
+```
+
+`wait` pauses the rest of the block. Use seconds (or `ticks` for 1/20th of a
+second). `wait` is only allowed directly inside a `when`/`every`/`action`/
+`command` block, not nested inside another loop.
+
 ## Loop variables
 
 The variable is temporary: it only exists inside the loop, and you use it

@@ -13,8 +13,8 @@ supported.
 ## Reporting a Vulnerability
 
 Please **do not** create a public issue for security vulnerabilities.
-Instead, email [hermes-security@ftbxx1.dev](mailto:hermes-security@ftbxx1.dev)
-or open a private vulnerability report via
+Instead, join our Discord server and message a maintainer privately:
+<https://discord.gg/5DCs5JGBmX>, or open a private vulnerability report via
 [GitHub's security advisory feature](https://github.com/ftbxx1/Hermes/security/advisories/new).
 
 You should receive a response within a few days. Please include:

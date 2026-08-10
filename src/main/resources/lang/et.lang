@@ -1,0 +1,305 @@
+# Estonian translation pack for Hermes.
+# Format: <canonical english>=<native form> (one per line, # = comment).
+# Single native words are translated while reading a script; longer native
+# phrases ("puust mõõk") are matched by the parser's greedy lookups.
+# You may extend or override anything here by dropping a custom et.lang into
+# plugins/Hermes/lang/.
+
+# --- flow & structure ---
+when=kui
+every=iga
+action=tegevus
+command=käsk
+region=piirkond
+mark=märk
+gui=menüü
+create=loo
+if=kui
+repeat=korda
+loop=tsükkel
+stop=peata
+else=muidu
+fire=lase
+win=võida
+clear=tühjenda
+delete=kustuta
+while=kuni
+wait=oota
+and=ja
+or=või
+as=nagu
+all=kõik
+numbers=numbrid
+from=alates
+to=kuni
+over=üle
+up=üles
+down=alla
+
+# --- actions ---
+give=anna
+remove=eemalda
+set=sea
+add=lisa
+tell=ütle
+announce=teata
+warn=hoiata
+welcome=tervita
+show=näita
+kill=tapa
+damage=kahjusta
+heal=tervenda
+feed=toida
+kick=viska
+launch=paiska
+title=pealkiri
+actionbar=tegevusriba
+lightning=välk
+explode=plahvata
+teleport=teleporti
+spawn=tekita
+play=mängi
+write=kirjuta
+open=ava
+close=sulge
+press=vajuta
+pull=tõmba
+power=aktiveeri
+unpower=deaktiveeri
+put=pane
+take=võta
+make=tee
+
+# --- noise / articles ---
+the=see
+a=üks
+an=üks
+any=ükskõik
+
+# --- prepositions ---
+with=koos
+by=poolt
+at=juures
+near=lähedal
+named=nimega
+because=sest
+in=sees
+on=peal
+of=oma
+
+# --- values ---
+true=tõene
+false=väär
+nothing=eimiski
+none=ühtegi
+length=pikkus
+random=juhuslik
+number=number
+count=arv
+between=vahel
+contains=sisaldab
+plus=pluss
+minus=miinus
+times=korda
+divided=jagatud
+second=sekund
+seconds=sekundit
+minute=minut
+minutes=minutit
+hour=tund
+hours=tundi
+tick=tick
+ticks=tick
+
+# --- variable targets ---
+player=mängija
+world=maailm
+temporary=ajutine
+list=loend
+score=punktid
+database=andmebaas
+config=seadistus
+value=väärtus
+file=fail
+data=andmed
+
+# --- conditions & comparisons ---
+has=on
+is=on
+are=on
+not=ei
+holding=hoiab
+sneaking=hiilib
+flying=lendab
+wet=märg
+op=op
+ground=maa
+biome=bioom
+permission=õigus
+more=rohkem
+less=vähem
+equal=võrdne
+than=kui
+least=vähemalt
+most=enim
+above=kohal
+below=all
+under=all
+health=tervis
+hunger=nälg
+xp=xp
+level=tase
+gamemode=mängurežiim
+
+# --- player events ---
+joins=liitub
+joins=tuleb
+leaves=lahkub
+leaves=käib
+dies=sureb
+respawns=taassünnib
+jumps=hüppab
+sneaks=hiilib
+sneaks=kükitab
+moves=liigub
+moves=teisaldub
+attacks=ründab
+chats=suhtleb
+fishes=kalastab
+levels=tõuseb
+clicks=klikkib
+eats=sööb
+kills=tapab
+starts=alustab
+stops=lõpetab
+sprinting=jookseb
+takes=võtab
+damage=kahju
+breaks=lõhub
+places=paigutab
+picks=korjab
+drops=pillab
+uses=kasutab
+interacts=puutub
+enters=siseneb
+reaches=jõuab
+types=kirjutab
+touches=puudutab
+walks=kõnnib
+first=esimene
+inventory=inventar
+mob=olend
+custom=kohandatud
+event=sündmus
+fires=süttib
+night=öö
+dawn=koidik
+falls=kukub
+game=mäng
+server=server
+slot=pesa
+
+# --- world state ---
+weather=ilm
+rain=vihm
+sunny=päikeseline
+storm=torm
+stormy=tormine
+noon=keskpäev
+dusk=hämarik
+midnight=kesköö
+morning=hommik
+evening=õhtu
+day=päev
+daytime=päev
+nighttime=öö
+
+# --- gamemodes ---
+survival=ellujäämine
+creative=loominguline
+adventure=seiklus
+spectator=vaatleja
+
+# --- dimensions ---
+the end=lõpp
+overworld=pealmaailm
+
+# --- single-word items & blocks ---
+diamond=teemant
+emerald=smaragd
+iron=raud
+gold=kuld
+coal=süsi
+bread=leib
+apple=õun
+torch=tõrvik
+water=vesi
+lava=laava
+stone=kivi
+dirt=muld
+sand=liiv
+glass=klaas
+chest=laegas
+door=uks
+sword=mõõk
+bow=amb
+arrow=nool
+shield=kilp
+stick=kepp
+bed=voodi
+boat=paat
+bucket=ämber
+compass=kompass
+
+# --- multi-word items & blocks (phrases) ---
+diamond sword=teemantmõõk
+iron sword=raudmõõk
+wooden sword=puust mõõk
+golden sword=kuldne mõõk
+netherite sword=netheriitmõõk
+diamond block=teemantplokk
+gold block=kuldplokk
+iron block=raudplokk
+iron ingot=raudkang
+gold ingot=kuldkang
+diamond ore=teemantmaak
+iron ore=raudmaak
+gold ore=kuldmaak
+coal ore=söemaak
+redstone dust=redstone tolm
+enchanted golden apple=loitsitud kuldne õun
+golden apple=kuldne õun
+
+# --- single-word mobs ---
+zombie=zombi
+skeleton=skelett
+creeper=creeper
+spider=ämblik
+pig=siga
+cow=lehm
+chicken=kana
+sheep=lammas
+wolf=hunt
+enderman=enderman
+villager=külaelanik
+horse=hobune
+cat=kass
+bee=mesilane
+
+# --- multi-word mobs ---
+iron golem=raudgolem
+zombie pigman=zombi seasiga
+
+# --- effects ---
+speed=kiirus
+strength=jõud
+jump boost=hüppevõimendus
+regeneration=taastumine
+invisibility=nähtamatus
+poison=mürk
+weakness=nõrkus
+slowness=aeglus
+night vision=öövaade
+fire resistance=tuletakistus
+water breathing=veehingamine
+haste=kiirendus

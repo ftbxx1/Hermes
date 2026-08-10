@@ -17,7 +17,7 @@ import java.util.List;
  * </pre>
  *
  * The demo plays a little story against the MockWorld: a player joins,
- * mines diamond ore, touches water, night falls, and time passes â€” so
+ * mines diamond ore, touches water, night falls, and time passes — so
  * every trigger in a typical script gets a chance to respond.
  */
 public final class Console {
@@ -26,7 +26,7 @@ public final class Console {
 
     public static void main(String[] args) {
         if (args.length < 1) {
-            System.out.println("Hermes console â€” run Hermes scripts without Minecraft.");
+            System.out.println("Hermes console — run Hermes scripts without Minecraft.");
             System.out.println();
             System.out.println("Usage:");
             System.out.println("    java -jar Hermes-core.jar <script.Hermes>");
@@ -63,7 +63,7 @@ public final class Console {
         }
 
         if (!demo) {
-            System.out.println("Loaded " + file + " â€” no errors. Registered triggers:");
+            System.out.println("Loaded " + file + " — no errors. Registered triggers:");
             engine.eventCounts().forEach((event, count) ->
                     System.out.println("    when " + event + "  (" + count + " handler" + (count == 1 ? "" : "s") + ")"));
             System.out.println("State triggers: " + engine.scripts().stream()

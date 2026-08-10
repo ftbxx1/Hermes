@@ -1,0 +1,305 @@
+# Vietnamese translation pack for Hermes.
+# Format: <canonical english>=<native form> (one per line, # = comment).
+# Single native words are translated while reading a script; longer native
+# phrases ("kiếm kim cương") are matched by the parser's greedy lookups.
+# You may extend or override anything here by dropping a custom vi.lang into
+# plugins/Hermes/lang/.
+
+# --- flow & structure ---
+when=khi
+every=mỗi
+action=hành động
+command=lệnh
+region=vùng
+mark=đánh dấu
+gui=menu
+create=tạo
+if=nếu
+repeat=lặp lại
+loop=vòng lặp
+stop=dừng
+else=nếu không
+fire=bắn
+win=thắng
+clear=xóa
+delete=xóa bỏ
+while=trong khi
+wait=chờ
+and=và
+or=hoặc
+as=là
+all=tất cả
+numbers=số
+from=từ
+to=đến
+over=trên
+up=lên
+down=xuống
+
+# --- actions ---
+give=cho
+remove=gỡ
+set=đặt
+add=thêm
+tell=nói
+announce=thông báo
+warn=cảnh báo
+welcome=chào mừng
+show=hiển thị
+kill=giết
+damage=gây sát thương
+heal=chữa trị
+feed=cho ăn
+kick=đá
+launch=phóng
+title=tiêu đề
+actionbar=thanh hành động
+lightning=sét
+explode=nổ
+teleport=dịch chuyển
+spawn=sinh ra
+play=phát
+write=viết
+open=mở
+close=đóng
+press=nhấn
+pull=kéo
+power=cấp điện
+unpower=ngắt điện
+put=bỏ
+take=lấy
+make=làm
+
+# --- noise / articles ---
+the=cái
+a=một
+an=một
+any=bất kỳ
+
+# --- prepositions ---
+with=với
+by=bởi
+at=tại
+near=gần
+named=tên là
+because=bởi vì
+in=trong
+on=trên
+of=của
+
+# --- values ---
+true=đúng
+false=sai
+nothing=không gì
+none=không có
+length=độ dài
+random=ngẫu nhiên
+number=số
+count=số lượng
+between=giữa
+contains=chứa
+plus=cộng
+minus=trừ
+times=nhân
+divided=chia
+second=giây
+seconds=giây
+minute=phút
+minutes=phút
+hour=giờ
+hours=giờ
+tick=tick
+ticks=tick
+
+# --- variable targets ---
+player=người chơi
+world=thế giới
+temporary=tạm thời
+list=danh sách
+score=điểm
+database=cơ sở dữ liệu
+config=cấu hình
+value=giá trị
+file=tệp
+data=dữ liệu
+
+# --- conditions & comparisons ---
+has=có
+is=là
+are=là
+not=không
+holding=cầm
+sneaking=ngồi xổm
+flying=đang bay
+wet=ướt
+op=op
+ground=mặt đất
+biome=quần xã
+permission=quyền
+more=nhiều hơn
+less=ít hơn
+equal=bằng
+than=hơn
+least=ít nhất
+most=nhiều nhất
+above=phía trên
+below=phía dưới
+under=dưới
+health=máu
+hunger=đói
+xp=xp
+level=cấp độ
+gamemode=chế độ
+
+# --- player events ---
+joins=tham gia
+joins=vào
+leaves=rời khỏi
+leaves=rời
+dies=chết
+respawns=hồi sinh
+jumps=nhảy
+sneaks=ngồi xổm
+sneaks=khom người
+moves=di chuyển
+moves=di động
+attacks=tấn công
+chats=nói chuyện
+fishes=câu cá
+levels=lên cấp
+clicks=nhấp chuột
+eats=ăn
+kills=giết
+starts=bắt đầu
+stops=dừng
+sprinting=chạy nước rút
+takes=nhận
+damage=sát thương
+breaks=phá vỡ
+places=đặt
+picks=nhặt
+drops=rơi
+uses=sử dụng
+interacts=tương tác
+enters=vào
+reaches=đạt tới
+types=gõ
+touches=chạm
+walks=đi bộ
+first=đầu tiên
+inventory=túi đồ
+mob=quái vật
+custom=tùy chỉnh
+event=sự kiện
+fires=xảy ra
+night=ban đêm
+dawn=bình minh
+falls=rơi
+game=trò chơi
+server=máy chủ
+slot=ô
+
+# --- world state ---
+weather=thời tiết
+rain=mưa
+sunny=nắng
+storm=bão
+stormy=bão
+noon=giữa trưa
+dusk=hoàng hôn
+midnight=nửa đêm
+morning=buổi sáng
+evening=buổi tối
+day=ban ngày
+daytime=ban ngày
+nighttime=ban đêm
+
+# --- gamemodes ---
+survival=sinh tồn
+creative=sáng tạo
+adventure=phiêu lưu
+spectator=khán giả
+
+# --- dimensions ---
+the end=tận cùng
+overworld=thế giới thường
+
+# --- single-word items & blocks ---
+diamond=kim cương
+emerald=ngọc lục bảo
+iron=sắt
+gold=vàng
+coal=than
+bread=bánh mì
+apple=táo
+torch=đuốc
+water=nước
+lava=dung nham
+stone=đá
+dirt=đất
+sand=cát
+glass=kính
+chest=rương
+door=cửa
+sword=kiếm
+bow=cung
+arrow=mũi tên
+shield=khiên
+stick=gậy
+bed=giường
+boat=thuyền
+bucket=xô
+compass=la bàn
+
+# --- multi-word items & blocks (phrases) ---
+diamond sword=kiếm kim cương
+iron sword=kiếm sắt
+wooden sword=kiếm gỗ
+golden sword=kiếm vàng
+netherite sword=kiếm netherite
+diamond block=khối kim cương
+gold block=khối vàng
+iron block=khối sắt
+iron ingot=thỏi sắt
+gold ingot=thỏi vàng
+diamond ore=quặng kim cương
+iron ore=quặng sắt
+gold ore=quặng vàng
+coal ore=quặng than
+redstone dust=bụi đá đỏ
+enchanted golden apple=táo vàng phù phép
+golden apple=táo vàng
+
+# --- single-word mobs ---
+zombie=xác sống
+skeleton=bộ xương
+creeper=creeper
+spider=nhện
+pig=lợn
+cow=bò
+chicken=gà
+sheep=cừu
+wolf=sói
+enderman=enderman
+villager=dân làng
+horse=ngựa
+cat=mèo
+bee=ong
+
+# --- multi-word mobs ---
+iron golem=golem sắt
+zombie pigman=lợn xác sống
+
+# --- effects ---
+speed=tốc độ
+strength=sức mạnh
+jump boost=nhảy cao
+regeneration=hồi phục
+invisibility=tàng hình
+poison=độc
+weakness=yếu đuối
+slowness=chậm chạp
+night vision=nhìn ban đêm
+fire resistance=kháng lửa
+water breathing=thở dưới nước
+haste=nhanh nhẹn

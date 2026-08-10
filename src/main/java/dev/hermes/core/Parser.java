@@ -25,6 +25,7 @@ public final class Parser {
         "press", "pull", "power", "unpower", "put", "take", "make", "win", "fire", "clear",
         "create", "stop", "repeat", "loop", "if", "when", "every", "action", "region", "mark",
         "kick", "launch", "title", "actionbar", "lightning", "explode", "delete", "particles",
+        "while", "wait", "freeze", "unfreeze", "randomly",
     };
 
     private final List<Token> toks;
@@ -217,6 +218,8 @@ public final class Parser {
             }
             case "create": return createStmt();
             case "if": return ifStmt();
+            case "while": return whileStmt();
+            case "wait": return waitStmt();
             case "repeat": return repeatStmt();
             case "loop": return loopStmt();
             case "stop": pos++; endStatement(); return new StopStmt(line);
@@ -232,6 +235,11 @@ public final class Parser {
             case "clear": {
                 pos++;
                 if (at("player") && peek(1).type == Type.POSSESSIVE) {
+                    if (peek(2).type == Type.WORD && peek(2).text.equals("bossbar")) {
+                        pos += 3;
+                        endStatement();
+                        return new ClearBossbarStmt(line);
+                    }
                     pos += 2;
                     expect("inventory", "clear player's inventory");
                     endStatement();
@@ -394,6 +402,13 @@ public final class Parser {
             case "teleport": {
                 pos++;
                 TargetRef t = targetRef();
+                if (eat("randomly")) {
+                    expect("within", "teleport player randomly within 100");
+                    double radius = number("a number");
+                    if (radius <= 0) throw err("A random teleport needs a positive distance.");
+                    endStatement();
+                    return new TeleportRandomStmt(line, t, radius);
+                }
                 expect("to", "teleport player to 100 64 200");
                 LocRef where = where();
                 endStatement();
@@ -420,8 +435,21 @@ public final class Parser {
                         }
                     }
                     LocRef pWhere = spawnWhere();
+                    int count = 30;
+                    double size = 1.0;
+                    while (eat("with")) {
+                        if (eat("count")) {
+                            count = (int) number("a number");
+                            if (count < 1) throw err("You need at least one particle.");
+                        } else if (eat("size")) {
+                            size = number("a number");
+                            if (size <= 0) throw err("A particle size must be more than zero.");
+                        } else {
+                            throw err("After 'with' I expect 'count' or 'size': spawn particles \"heart\" at player with count 50 size 2");
+                        }
+                    }
                     endStatement();
-                    return new ParticleStmt(line, particle, pWhere);
+                    return new ParticleStmt(line, particle, pWhere, count, size);
                 }
                 int count = 1;
                 if (cur().type == Type.NUMBER) {
@@ -560,6 +588,18 @@ public final class Parser {
                 endStatement();
                 return new MakeEffectStmt(line, t, adj);
             }
+            case "freeze": {
+                pos++;
+                TargetRef t = targetRef();
+                endStatement();
+                return new FreezeStmt(line, t, true);
+            }
+            case "unfreeze": {
+                pos++;
+                TargetRef t = targetRef();
+                endStatement();
+                return new FreezeStmt(line, t, false);
+            }
             default:
                 // maybe a user-defined action call
                 return actionCall(line);
@@ -602,12 +642,20 @@ public final class Parser {
     private Stmt giveStmt() {
         int line = cur().line;
         pos++;
-        TargetRef t = targetRef();
+        TargetRef t;
+        if (eat("all")) {
+            if (!eat("players") && !eat("player")) {
+                throw err("give all players 1 diamond");
+            }
+            t = TargetRef.ALL_PLAYERS;
+        } else {
+            t = targetRef();
+        }
 
         if (cur().type == Type.NUMBER) {
             double n = number("a number");
-            if (at("xp") || at("experience")) { pos++; endStatement(); return new GiveXpStmt(line, n); }
-            if (at("level") || at("levels")) { pos++; endStatement(); return new GiveLevelsStmt(line, n); }
+            if ((at("xp") || at("experience"))) { pos++; endStatement(); return new GiveXpStmt(line, t, n); }
+            if ((at("level") || at("levels"))) { pos++; endStatement(); return new GiveLevelsStmt(line, t, n); }
             WorldAPI.ItemSpec spec = itemSpec((int) n);
             endStatement();
             return new GiveItemStmt(line, t, spec);
@@ -819,6 +867,31 @@ public final class Parser {
             if (b == null) throw err("I don't know the block '" + cur().text + "'.");
             endStatement();
             return new SetBlockStmt(line, v, b);
+        }
+        if (at("player") && peek(1).type == Type.POSSESSIVE && peek(2).type == Type.WORD) {
+            String prop = peek(2).text;
+            if (prop.equals("bossbar")) {
+                pos += 3;
+                expect("to", "set player's bossbar to \"Quest\" with progress 50");
+                ValueExpr title = value("the bossbar title");
+                ValueExpr progress = null;
+                if (eat("with")) {
+                    eatNoise();
+                    expect("progress", "set player's bossbar to \"Quest\" with progress 50");
+                    progress = value("the bossbar progress");
+                }
+                endStatement();
+                return new SetBossbarStmt(line, title, progress);
+            }
+            if (prop.equals("health") || prop.equals("hunger") || prop.equals("food")
+                    || prop.equals("xp") || prop.equals("experience") || prop.equals("level")) {
+                pos += 3;
+                expect("to", "set player's health to 10");
+                ValueExpr v = value("a number");
+                endStatement();
+                String stat = prop.equals("food") ? "hunger" : prop.equals("experience") ? "xp" : prop;
+                return new SetPlayerStatStmt(line, stat, v);
+            }
         }
         if (at("player") && peek(1).type == Type.POSSESSIVE && peek(2).type == Type.WORD
                 && peek(2).text.equals("gamemode")) {
@@ -1040,6 +1113,27 @@ public final class Parser {
         return new RepeatStmt(line, times, body);
     }
 
+    private Stmt whileStmt() {
+        int line = cur().line;
+        pos++;
+        Condition cond = condition();
+        List<Stmt> body = block();
+        return new WhileStmt(line, cond, body);
+    }
+
+    private Stmt waitStmt() {
+        int line = cur().line;
+        pos++;
+        if (blockDepth != 1) {
+            throw err("'wait' can only be used directly inside a 'when', 'every', 'action' or 'command' block.",
+                    "when player joins\n    wait 2 seconds\n    tell player \"Welcome!\"");
+        }
+        double n = number("a number");
+        double seconds = durationSeconds(n);
+        endStatement();
+        return new WaitStmt(line, seconds);
+    }
+
     private Stmt loopStmt() {
         int line = cur().line;
         pos++;
@@ -1048,7 +1142,9 @@ public final class Parser {
         String listName = null;
         double from = 0, to = 0;
         if (eat("all")) {
-            expect("players", "loop over all players as p");
+            if (!eat("players") && !eat("player")) {
+                throw err("loop over all players as p");
+            }
             kind = "players";
         } else if (at("numbers")) {
             pos++;
@@ -1183,7 +1279,7 @@ public final class Parser {
             return new LocRef("coords", coords(), null);
         }
         if (atEndOfLine()) {
-            // "spawn zombies" â€” near the world spawn
+            // "spawn zombies" — near the world spawn
             return new LocRef("spawn", null, null);
         }
         throw err("I expected 'near player', 'at X Y Z' or the end of the line here.",
@@ -1224,23 +1320,56 @@ public final class Parser {
 
     private interface Lookup { String find(String name); }
 
-    /** Tries the longest word sequence that the dictionary knows. */
+    /** Tries the longest word sequence that the dictionary knows.
+     *  Native-language phrases are translated first ("espada de diamante"
+     *  becomes "diamond sword"). */
     private String greedy(Lookup lookup, int maxWords, String errorPrefix) {
         for (int len = maxWords; len >= 1; len--) {
             if (pos + len > toks.size()) continue;
-            StringBuilder sb = new StringBuilder();
+            StringBuilder cur = new StringBuilder();
+            StringBuilder raw = new StringBuilder();
             boolean ok = true;
             for (int k = 0; k < len; k++) {
                 Token t = peek(k);
                 if (t.type != Type.WORD) { ok = false; break; }
-                if (k > 0) sb.append(' ');
-                sb.append(t.text);
+                if (k > 0) { cur.append(' '); raw.append(' '); }
+                cur.append(t.text);
+                raw.append(t.raw);
             }
             if (!ok) continue;
-            String canonical = lookup.find(sb.toString());
+            // 1. the native phrase as typed (for translation packs)
+            String viaLang = Lang.translatePhrase(raw.toString());
+            String canonical = viaLang != null ? lookup.find(viaLang) : null;
+            // 2. the (already translated) English words
+            if (canonical == null) canonical = lookup.find(cur.toString());
             if (canonical != null) {
                 pos += len;
                 return canonical;
+            }
+        }
+        return null;
+    }
+
+    /** Consumes up to maxWords whose native phrase translates to a single
+     *  English word (e.g. "se une" -> "joins"). Used where one keyword is
+     *  expected. */
+    private String greedyWords(int maxWords, String what) {
+        for (int len = maxWords; len >= 1; len--) {
+            if (pos + len > toks.size()) continue;
+            boolean ok = true;
+            for (int k = 0; k < len; k++) {
+                if (peek(k).type != Type.WORD) { ok = false; break; }
+            }
+            if (!ok) continue;
+            StringBuilder raw = new StringBuilder();
+            for (int k = 0; k < len; k++) {
+                if (k > 0) raw.append(' ');
+                raw.append(peek(k).raw);
+            }
+            String english = Lang.translatePhrase(raw.toString());
+            if (english != null && !english.contains(" ")) {
+                pos += len;
+                return english;
             }
         }
         return null;
@@ -1378,7 +1507,31 @@ public final class Parser {
         }
     }
 
+    /** A value, with optional math: "5", "5 plus 3", "2 times 4 minus 1", ... */
     private ValueExpr value(String what) {
+        ValueExpr left = primaryValue(what);
+        while (true) {
+            if (at("plus")) {
+                pos++;
+                left = new BinaryExpr(left.line, "+", left, primaryValue("a number"));
+            } else if (at("minus")) {
+                pos++;
+                left = new BinaryExpr(left.line, "-", left, primaryValue("a number"));
+            } else if (at("times")) {
+                pos++;
+                left = new BinaryExpr(left.line, "*", left, primaryValue("a number"));
+            } else if (at("divided")) {
+                pos++;
+                expect("by", "set player's coins to 10 divided by 2");
+                left = new BinaryExpr(left.line, "/", left, primaryValue("a number"));
+            } else {
+                break;
+            }
+        }
+        return left;
+    }
+
+    private ValueExpr primaryValue(String what) {
         Token t = cur();
         int line = t.line;
         switch (t.type) {
@@ -1401,6 +1554,10 @@ public final class Parser {
                     pos++;
                     String key = string("a data key");
                     return new PlayerDataGetExpr(line, key);
+                }
+                if (eat("held")) {
+                    expect("item", "player's held item");
+                    return new HeldItemExpr(line);
                 }
                 String name = word("a variable name");
                 return possessiveExpr(line, name);
@@ -1445,6 +1602,13 @@ public final class Parser {
         }
         if (at("random")) {
             pos++;
+            if (at("item")) {
+                pos++;
+                expect("from", "random item from list \"quests\"");
+                if (at("list")) pos++;
+                String listName = string("the list name");
+                return new RandomListExpr(line, listName);
+            }
             expect("number", "random number between 1 and 10");
             expect("between", "random number between 1 and 10");
             double a = number("a number");
@@ -1453,7 +1617,7 @@ public final class Parser {
             return new RandomExpr(line, a, b);
         }
         if (at("number") && peek(1).type == Type.WORD && peek(1).text.equals("of")
-                && peek(2).type == Type.WORD && peek(2).text.equals("players")) {
+                && peek(2).type == Type.WORD && (peek(2).text.equals("players") || peek(2).text.equals("player"))) {
             pos += 3;
             return new OnlineCountExpr(line);
         }
@@ -1648,6 +1812,7 @@ public final class Parser {
                     if (eat("flying")) return new PlayerStateCond("flying");
                     if (eat("wet")) return new PlayerStateCond("wet");
                     if (eat("op")) return new PlayerStateCond("op");
+                    if (eat("frozen")) return new PlayerStateCond("frozen");
                     if (eat("on")) {
                         eatNoise();
                         expect("ground", "player is on the ground");
@@ -1686,7 +1851,7 @@ public final class Parser {
                         return new IsHoldingCond(item);
                     }
                     throw new VerseError(line,
-                            "After 'player is' I know: 'holding <item>', 'sneaking', 'on the ground', 'in the nether', 'in <region>', 'in biome <biome>', 'in creative mode'.",
+                            "After 'player is' I know: 'holding <item>', 'sneaking', 'flying', 'wet', 'frozen', 'op', 'on the ground', 'in the nether', 'in <region>', 'in biome <biome>', 'in creative mode'.",
                             "player is holding a torch", null);
                 }
                 case "health": {
@@ -1769,6 +1934,20 @@ public final class Parser {
             return new ChestHasCond(v, item, (int) n);
         }
 
+        if (at("chance")) {
+            pos++;
+            if (eat("of")) {
+                double a = number("a number");
+                expect("in", "chance of 1 in 4");
+                double b = number("a number");
+                if (b <= 0) throw err("The second number in 'chance of X in Y' must be more than zero.");
+                return new ChanceCond(Math.min(100, a / b * 100));
+            }
+            double percent = number("a number");
+            if (percent < 0 || percent > 100) throw err("A chance must be between 0 and 100.");
+            return new ChanceCond(percent);
+        }
+
         ValueExpr left = value("a value");
         String op = cmpOpOrNull();
         if (op == null) {
@@ -1824,6 +2003,14 @@ public final class Parser {
     private Trigger trigger() {
         int line = cur().line;
 
+        if (at("server")) {
+            pos++;
+            if (eat("starts")) return eventTrigger("server starts", null, Trigger.Filter.NONE);
+            if (eat("stops")) return eventTrigger("server stops", null, Trigger.Filter.NONE);
+            throw new VerseError(line, "I expected 'server starts' or 'server stops'.",
+                    "when server starts\n    announce \"The server is up!\"", null);
+        }
+
         if (at("player")) {
             if (peek(1).type == Type.POSSESSIVE) {
                 pos += 2;
@@ -1851,7 +2038,8 @@ public final class Parser {
             pos++;
             boolean firstJoin = false;
             if (eat("first")) firstJoin = true;
-            String w = word("an event");
+            String w = greedyWords(2, "an event");
+            if (w == null) w = word("an event");
             switch (w) {
                 case "joins": {
                     eatNoise(); eat("world"); eat("server"); eat("game");
@@ -2017,6 +2205,7 @@ public final class Parser {
                     if (eat("flying")) return stateTrigger(new PlayerStateCond("flying"), true);
                     if (eat("wet")) return stateTrigger(new PlayerStateCond("wet"), true);
                     if (eat("op")) return stateTrigger(new PlayerStateCond("op"), true);
+                    if (eat("frozen")) return stateTrigger(new PlayerStateCond("frozen"), true);
                     if (eat("on")) {
                         eatNoise();
                         expect("ground", "when player is on the ground");
@@ -2047,7 +2236,7 @@ public final class Parser {
                         return stateTrigger(new InRegionCond(region), true);
                     }
                     throw new VerseError(line,
-                            "After 'player is' I know: 'holding <item>', 'sneaking', 'on the ground', 'in the nether', 'in <region>', 'in creative mode'.",
+                            "After 'player is' I know: 'holding <item>', 'sneaking', 'flying', 'wet', 'frozen', 'op', 'on the ground', 'in the nether', 'in <region>', 'in creative mode'.",
                             "when player is holding a torch\n    give player night vision", null);
                 }
                 case "health": {

@@ -6,6 +6,15 @@
 # loaded too, so you can organize your scripts by map or minigame.
 scripts-folder: hermes
 
+# What language your scripts are written in. Hermes keywords and vocabulary
+# (items, mobs, effects ...) are translated so you can script in your own
+# language. Built-in packs (45+): en (English), es, pt, fr, it, de, nl, ca,
+# gl, pl, cs, sk, ru, uk, bg, hr, sr, sl, sv, da, no, fi, et, lt, lv, hu,
+# ro, el, tr, is, ar, he, fa, ur, zh, ja, ko, hi, bn, ta, te, id, ms, th,
+# vi, fil. Drop a custom <language>.lang file into plugins/Hermes/lang/ to
+# add or fix translations for any language.
+language: en
+
 # How often state triggers ("when player touches water", "when it is
 # nighttime" ...) are checked, in ticks. 10 ticks = half a second.
 state-tick-interval: 10

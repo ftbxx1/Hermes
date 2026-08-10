@@ -1,0 +1,305 @@
+# Hungarian translation pack for Hermes.
+# Format: <canonical english>=<native form> (one per line, # = comment).
+# Single native words are translated while reading a script; longer native
+# phrases ("elvarázsolt aranyalma") are matched by the parser's greedy lookups.
+# You may extend or override anything here by dropping a custom hu.lang into
+# plugins/Hermes/lang/.
+
+# --- flow & structure ---
+when=amikor
+every=minden
+action=művelet
+command=parancs
+region=terület
+mark=jelzés
+gui=menü
+create=létrehoz
+if=ha
+repeat=ismétel
+loop=ciklus
+stop=leállít
+else=különben
+fire=elsüt
+win=nyer
+clear=kitakarít
+delete=töröl
+while=amíg
+wait=vár
+and=és
+or=vagy
+as=mint
+all=összes
+numbers=számok
+from=től
+to=ig
+over=felett
+up=fel
+down=le
+
+# --- actions ---
+give=adj
+remove=eltávolít
+set=állíts
+add=adj hozzá
+tell=mondd
+announce=hirdess
+warn=figyelmeztess
+welcome=üdvözölj
+show=mutass
+kill=ölj
+damage=sebezz
+heal=gyógyíts
+feed=etess
+kick=rúgd ki
+launch=kilő
+title=cím
+actionbar=sáv
+lightning=villám
+explode=robbants
+teleport=teleportálj
+spawn=idézz
+play=lejátszik
+write=írj
+open=nyisd
+close=csukd
+press=nyomd
+pull=húzd
+power=kapcsolj be
+unpower=kapcsolj ki
+put=tedd
+take=vedd
+make=csinálj
+
+# --- noise / articles ---
+the=a
+a=egy
+an=egy
+any=bármely
+
+# --- prepositions ---
+with=vel
+by=által
+at=nál
+near=közel
+named=nevű
+because=mert
+in=bent
+on=rajta
+of=nak
+
+# --- values ---
+true=igaz
+false=hamis
+nothing=semmi
+none=egyik
+length=hossz
+random=véletlen
+number=szám
+count=darab
+between=között
+contains=tartalmaz
+plus=plusz
+minus=mínusz
+times=szor
+divided=osztva
+second=másodperc
+seconds=másodpercek
+minute=perc
+minutes=percek
+hour=óra
+hours=órák
+tick=tick
+ticks=tick
+
+# --- variable targets ---
+player=játékos
+world=világ
+temporary=ideiglenes
+list=lista
+score=pontszám
+database=adatbázis
+config=beállítás
+value=érték
+file=fájl
+data=adatok
+
+# --- conditions & comparisons ---
+has=van
+is=van
+are=van
+not=nem
+holding=tart
+sneaking=lopakodik
+flying=repül
+wet=nedves
+op=op
+ground=föld
+biome=biom
+permission=jogosultság
+more=több
+less=kevesebb
+equal=egyenlő
+than=mint
+least=legkevesebb
+most=legtöbb
+above=feljebb
+below=alatt
+under=alatt
+health=élet
+hunger=éhség
+xp=xp
+level=szint
+gamemode=játékmód
+
+# --- player events ---
+joins=csatlakozik
+joins=belép
+leaves=távozik
+leaves=elhagy
+dies=meghal
+respawns=újraszületik
+jumps=ugrik
+sneaks=lopakodik
+sneaks=leguggol
+moves=mozog
+moves=halad
+attacks=támad
+chats=beszél
+fishes=horgászik
+levels=szintet lép
+clicks=kattingat
+eats=eszik
+kills=öl
+starts=elkezd
+stops=megáll
+sprinting=fut
+takes=kap
+damage=sérülés
+breaks=eltörik
+places=helyez
+picks=felvesz
+drops=eldob
+uses=használ
+interacts=érintkezik
+enters=belép
+reaches=elér
+types=gépel
+touches=hozzáér
+walks=sétál
+first=első
+inventory=raktár
+mob=lény
+custom=egyéni
+event=esemény
+fires=történik
+night=éjszaka
+dawn=hajnal
+falls=esik
+game=játék
+server=szerver
+slot=hely
+
+# --- world state ---
+weather=időjárás
+rain=eső
+sunny=napos
+storm=vihar
+stormy=viharos
+noon=dél
+dusk=alkony
+midnight=éjfél
+morning=reggel
+evening=este
+day=nap
+daytime=nappal
+nighttime=éjszaka
+
+# --- gamemodes ---
+survival=túlélés
+creative=kreatív
+adventure=kaland
+spectator=néző
+
+# --- dimensions ---
+the end=vég
+overworld=felszín
+
+# --- single-word items & blocks ---
+diamond=gyémánt
+emerald=smaragd
+iron=vas
+gold=arany
+coal=szén
+bread=kenyér
+apple=alma
+torch=fáklya
+water=víz
+lava=láva
+stone=kő
+dirt=sár
+sand=homok
+glass=üveg
+chest=láda
+door=ajtó
+sword=kard
+bow=íj
+arrow=nyíl
+shield=pajzs
+stick=bot
+bed=ágy
+boat=csónak
+bucket=vödör
+compass=iránytű
+
+# --- multi-word items & blocks (phrases) ---
+diamond sword=gyémántkard
+iron sword=vaskard
+wooden sword=fakard
+golden sword=aranykard
+netherite sword=netheritkard
+diamond block=gyémántblokk
+gold block=aranyblokk
+iron block=vasblokk
+iron ingot=vasrúd
+gold ingot=aranyrúd
+diamond ore=gyémántérc
+iron ore=vasérc
+gold ore=aranyérc
+coal ore=szénérc
+redstone dust=redstone por
+enchanted golden apple=elvarázsolt aranyalma
+golden apple=aranyalma
+
+# --- single-word mobs ---
+zombie=zombi
+skeleton=csontváz
+creeper=creeper
+spider=pók
+pig=disznó
+cow=tehén
+chicken=csirke
+sheep=juh
+wolf=farkas
+enderman=enderman
+villager=falusi
+horse=ló
+cat=macska
+bee=méh
+
+# --- multi-word mobs ---
+iron golem=vasgolem
+zombie pigman=zombi disznó
+
+# --- effects ---
+speed=gyorsaság
+strength=erősség
+jump boost=ugráserősítő
+regeneration=regeneráció
+invisibility=láthatatlanság
+poison=méreg
+weakness=gyengeség
+slowness=lassúság
+night vision=éjjellátás
+fire resistance=tűzállóság
+water breathing=vízlélegzés
+haste=sietés

@@ -1,0 +1,311 @@
+# Basque translation pack for Hermes.
+# Format: <canonical english>=<native form> (one per line, # = comment).
+# Single native words are translated while reading a script; longer native
+# phrases ("ezpata") are matched by the parser's greedy lookups.
+
+# --- flow & structure ---
+when=noiz
+every=oro
+action=ekintza
+command=komandoa
+region=eskualdea
+mark=marka
+gui=menua
+create=sortu
+if=bada
+repeat=errepikatu
+loop=buklea
+stop=gelditu
+else=bestela
+fire=tiratu
+win=irabazi
+clear=garbitu
+delete=ezabatu
+while=bitartean
+wait=itxaron
+and=eta
+or=edo
+as=bezala
+all=guztiak
+numbers=zenbakiak
+from=batetik
+to=hona
+over=gainean
+up=gora
+down=behera
+
+# --- actions ---
+give=eman
+remove=kendu
+set=ezarri
+add=gehitu
+tell=esan
+announce=jakinarazi
+warn=ohartarazi
+welcome=ongi etorri
+show=erakutsi
+kill=hil
+damage=kalte
+heal=sendatu
+feed=elikatu
+kick=kanporatu
+launch=jaurti
+title=izenburua
+actionbar=ekintza-barra
+lightning=tximista
+explode=lehertu
+teleport=teleportatu
+spawn=agerrarazi
+play=erreproduzitu
+write=idatzi
+open=ireki
+close=itxi
+press=sakatu
+pull=erakarri
+power=aktibatu
+unpower=desaktibatu
+put=jarri
+take=hartu
+make=egin
+freeze=izoztu
+unfreeze=desizoztu
+
+# --- noise / articles ---
+the=hau
+a=bat
+an=bat
+any=edozein
+item=elementua
+
+# --- prepositions ---
+with=ekin
+by=bidez
+at=non
+near=gertu
+near=hurbil
+named=izendatua
+because=delako
+in=barruan
+on=gain
+of=ren
+randomly=ausaz
+within=barrutik
+
+# --- values ---
+true=egia
+false=gezurra
+nothing=ezer ez
+none=ezer ere ez
+length=luzera
+random=ausazkoa
+number=zenbakia
+count=kopurua
+between=artean
+contains=dauka
+plus=plus
+minus=ken
+times=bider
+divided=zatitua
+second=segundu
+seconds=segunduak
+minute=minutu
+minutes=minutuak
+hour=ordu
+hours=orduak
+tick=tik
+ticks=tikak
+size=tamaina
+
+# --- variable targets ---
+player=jokalari
+world=mundu
+temporary=behin-behineko
+list=zerrenda
+score=puntuak
+database=datu-basea
+config=konfigurazioa
+value=balioa
+file=fitxategia
+data=datuak
+players=jokalariak
+
+# --- conditions & comparisons ---
+has=du
+is=da
+are=dira
+not=ez
+holding=eusten
+sneaking=makurtzen
+flying=hegan
+wet=hezea
+op=op
+ground=lurra
+biome=bioma
+permission=baimena
+more=gehiago
+less=gutxiago
+equal=berdina
+than=baino
+least=gutxienez
+most=gehienez
+above=gainetik
+below=azpitik
+under=azpian
+health=osasuna
+hunger=gosea
+xp=xp
+level=maila
+gamemode=joko-modua
+chance=aukera
+
+# --- player events ---
+joins=sartzen da
+joins=elkartzen da
+leaves=irteten da
+dies=hiltzen da
+respawns=berriz jaiotzen da
+jumps=salto egiten du
+sneaks=makurtzen da
+moves=mugitzen da
+attacks=erasotzen du
+attacks=jotzen du
+chats=txateatzen du
+fishes=arrantzan egiten du
+levels=mailaz igotzen da
+clicks=klikatzen du
+eats=jaten du
+kills=hiltzen du
+starts=hasten da
+stops=gelditzen da
+stops=uzten dio
+sprinting=sprintean
+takes=hartzen du
+damage=kaltea
+breaks=apurtzen du
+places=jartzen du
+picks=jasotzen du
+drops=botatzen du
+uses=erabiltzen du
+interacts=elkarrekintzan aritzen da
+enters=sartzen da
+reaches=iristen da
+types=idazten du
+touches=ukitzen du
+walks=oinez dabil
+walks=ibiltzen da
+first=lehena
+inventory=inbentarioa
+mob=izakia
+custom=pertsonalizatua
+event=gertaera
+fires=tiro egiten du
+night=gau
+dawn=egunsentia
+falls=erortzen da
+game=jokoa
+server=zerbitzaria
+slot=zuloa
+
+# --- world state ---
+weather=eguraldia
+rain=euria
+sunny=eguzkitsua
+storm=ekaitza
+stormy=ekaitztsua
+noon=eguerdia
+dusk=ilunabarra
+midnight=gauerdia
+morning=goiza
+evening=arratsaldea
+day=eguna
+daytime=egunez
+nighttime=gauez
+
+# --- gamemodes ---
+survival=biziraupena
+creative=sorkuntza
+adventure=abentura
+spectator=ikuslea
+
+# --- dimensions ---
+the end=amaiera
+overworld=mundu nagusia
+
+# --- single-word items & blocks ---
+diamond=diamantea
+emerald=esmeralda
+iron=burdina
+gold=urrea
+coal=ikatza
+bread=ogia
+apple=sagarra
+torch=linterna
+water=ura
+lava=laba
+stone=harria
+dirt=lurra
+sand=harea
+glass=beira
+chest=kutxa
+door=atea
+sword=ezpata
+bow=arkua
+arrow=gezia
+shield=ezkutua
+stick=makila
+bed=ohea
+boat=itsasontzia
+bucket=kuboa
+compass=iparrorratza
+
+# --- multi-word items & blocks (phrases) ---
+diamond sword=diamante ezpata
+iron sword=burdin ezpata
+wooden sword=egur ezpata
+golden sword=urre ezpata
+netherite sword=netherita ezpata
+diamond block=diamante blokea
+gold block=urre blokea
+iron block=burdin blokea
+iron ingot=burdin lingotea
+gold ingot=urre lingotea
+diamond ore=diamante minerala
+iron ore=burdin minerala
+gold ore=urre minerala
+coal ore=ikatz minerala
+enchanted golden apple=sorgindutako urrezko sagarra
+golden apple=urrezko sagarra
+
+# --- single-word mobs ---
+zombie=zonbia
+skeleton=eskeletoa
+creeper=creeper
+spider=armiarma
+pig=txerria
+cow=behia
+chicken=oiloa
+sheep=ardia
+wolf=otsoa
+enderman=enderman
+villager=herritarra
+horse=zaldia
+cat=katua
+bee=erlea
+
+# --- multi-word mobs ---
+iron golem=burdin golema
+zombie pigman=zonbi txerria
+
+# --- effects ---
+speed=abiadura
+strength=indarra
+jump boost=jauzi hobekuntza
+regeneration=berregenerazioa
+invisibility=ikusezintasuna
+poison=pozoia
+weakness=ahultasuna
+slowness=moteltasuna
+night vision=gau ikusmena
+fire resistance=su erresistentzia
+water breathing=ur arnasketa
+haste=arintasuna

@@ -1,0 +1,311 @@
+# Welsh translation pack for Hermes.
+# Format: <canonical english>=<native form> (one per line, # = comment).
+# Single native words are translated while reading a script; longer native
+# phrases ("cleddyf") are matched by the parser's greedy lookups.
+
+# --- flow & structure ---
+when=pan
+every=bob
+action=gweithred
+command=gorchymyn
+region=rhanbarth
+mark=marc
+gui=dewislen
+create=creu
+if=os
+repeat=ailadrodd
+loop=dolen
+stop=stopio
+else=arall
+fire=tanio
+win=ennill
+clear=clirio
+delete=dileu
+while=tra
+wait=aros
+and=a
+or=neu
+as=fel
+all=cyfan
+numbers=rhifau
+from=o
+to=i
+over=dros
+up=fyny
+down=i lawr
+
+# --- actions ---
+give=rhoi
+remove=tynnu
+set=gosod
+add=ychwanegu
+tell=dweud
+announce=cyhoeddi
+warn=rhybuddio
+welcome=croesawu
+show=dangos
+kill=lladd
+damage=difrodi
+heal=iachau
+feed=bwydo
+kick=cicio
+launch=lansio
+title=teitl
+actionbar=bar gweithredu
+lightning=mellten
+explode=ffrwydro
+teleport=telegludo
+spawn=sbawmio
+play=chwarae
+write=ysgrifennu
+open=agor
+close=cau
+press=pwyso
+pull=llusgo
+power=pweru
+unpower=dadbweru
+put=dodi
+take=cymryd
+make=gwneud
+freeze=rhewi
+unfreeze=dadrewi
+
+# --- noise / articles ---
+the=yr
+a=un
+an=un
+any=unrhyw
+item=eitem
+
+# --- prepositions ---
+with=gyda
+by=erbyn
+at=wrth
+near=gerllaw
+near=agos
+named=enwyd
+because=oherwydd
+in=yn
+on=ar
+of=o
+randomly=ar hap
+within=o fewn
+
+# --- values ---
+true=gwir
+false=ffug
+nothing=dim byd
+none=dim
+length=hyd
+random=hap
+number=rhif
+count=cyfrif
+between=rhwng
+contains=cynnwys
+plus=plws
+minus=minws
+times=gwaith
+divided=wedi'i rannu
+second=eiliad
+seconds=eiliadau
+minute=munud
+minutes=munudau
+hour=awr
+hours=oriau
+tick=tic
+ticks=ticiau
+size=maint
+
+# --- variable targets ---
+player=chwaraewr
+world=byd
+temporary=dros dro
+list=rhestr
+score=sgôr
+database=cronfa ddata
+config=cyfluniad
+value=gwerth
+file=ffeil
+data=data
+players=chwaraewyr
+
+# --- conditions & comparisons ---
+has=meddu
+is=yw
+are=yn
+not=ddim
+holding=yn dal
+sneaking=yn llechu
+flying=yn hedfan
+wet=gwlyb
+op=op
+ground=daear
+biome=biome
+permission=caniatâd
+more=mwy
+less=llai
+equal=cyfartal
+than=nag
+least=lleiaf
+most=mwyaf
+above=uwch
+below=islaw
+under=o dan
+health=iechyd
+hunger=newyn
+xp=xp
+level=lefel
+gamemode=modd gêm
+chance=cyfle
+
+# --- player events ---
+joins=ymuno
+joins=yn ymuno
+leaves=ymadael
+dies=marw
+respawns=adfywio
+jumps=neidio
+sneaks=llechu
+moves=symud
+attacks=ymosod
+attacks=taro
+chats=sgwrsio
+fishes=pysgota
+levels=codi lefel
+clicks=clicio
+eats=bwyta
+kills=lladd
+starts=dechrau
+stops=stopio
+stops=peidio
+sprinting=sbrintio
+takes=cymryd
+damage=difrod
+breaks=torri
+places=gosod
+picks=casglu
+drops=gollwng
+uses=defnyddio
+interacts=rhyngweithio
+enters=myned i mewn
+reaches=cyrraedd
+types=teipio
+touches=cyffwrdd
+walks=cerdded
+walks=yn cerdded
+first=cyntaf
+inventory=inwentari
+mob=bwystfil
+custom=personol
+event=digwyddiad
+fires=tanio
+night=nos
+dawn=gwawr
+falls=disgyn
+game=gêm
+server=gweinydd
+slot=slot
+
+# --- world state ---
+weather=tywydd
+rain=glaw
+sunny=heulog
+storm=storm
+stormy=stormus
+noon=canol dydd
+dusk=cyfnos
+midnight=canol nos
+morning=bore
+evening=hwyr
+day=dydd
+daytime=diwrnod
+nighttime=yn y nos
+
+# --- gamemodes ---
+survival=goroesi
+creative=creadigol
+adventure=antur
+spectator=gwylwyr
+
+# --- dimensions ---
+the end=diwedd
+overworld=y byd
+
+# --- single-word items & blocks ---
+diamond=diemwnt
+emerald=emrallt
+iron=haearn
+gold=aur
+coal=glo
+bread=bara
+apple=afal
+torch=tortsh
+water=dŵr
+lava=lafa
+stone=carreg
+dirt=pridd
+sand=tywod
+glass=gwydr
+chest=cist
+door=drws
+sword=cleddyf
+bow=bwa
+arrow=saeth
+shield=tarian
+stick=ffon
+bed=gwely
+boat=cwch
+bucket=bwced
+compass=cwmpawd
+
+# --- multi-word items & blocks (phrases) ---
+diamond sword=cleddyf diemwnt
+iron sword=cleddyf haearn
+wooden sword=cleddyf pren
+golden sword=cleddyf aur
+netherite sword=cleddyf netherite
+diamond block=bloc diemwnt
+gold block=bloc aur
+iron block=bloc haearn
+iron ingot=ingot haearn
+gold ingot=ingot aur
+diamond ore=mwyn diemwnt
+iron ore=mwyn haearn
+gold ore=mwyn aur
+coal ore=mwyn glo
+enchanted golden apple=afal aur wedi'i swyno
+golden apple=afal aur
+
+# --- single-word mobs ---
+zombie=sombi
+skeleton=sgerbwd
+creeper=creeper
+spider=pry cop
+pig=mochyn
+cow=buwch
+chicken=cyw iâr
+sheep=dafad
+wolf=blaidd
+enderman=enderman
+villager=pentrefwr
+horse=ceffyl
+cat=cath
+bee=gwenynen
+
+# --- multi-word mobs ---
+iron golem=golem haearn
+zombie pigman=sombi mochyn
+
+# --- effects ---
+speed=cyflymder
+strength=cryfder
+jump boost=hwb naid
+regeneration=adfywiad
+invisibility=anweledigrwydd
+poison=gwenwyn
+weakness=gwendid
+slowness=arafwch
+night vision=golwg nos
+fire resistance=gwrthsafiad tân
+water breathing=anadlu dŵr
+haste=brys

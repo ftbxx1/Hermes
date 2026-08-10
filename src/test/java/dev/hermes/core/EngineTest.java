@@ -770,4 +770,328 @@ class EngineTest {
         assertTrue(h.world.worldExists("arena"));
         assertFalse(h.world.worldExists("old"));
     }
+
+    // ------------------------------------------------------------------
+    // while, wait, arithmetic, stat setters, bossbar, server events, i18n
+    // ------------------------------------------------------------------
+
+    @Test
+    void whileLoopRunsUntilConditionFails() {
+        Harness h = new Harness("""
+                when player joins
+                    while player health is above 5
+                        damage player by 1
+                """);
+        h.engine.playerEvent("joins", h.p1);
+        assertEquals(5, h.p1.health);
+    }
+
+    @Test
+    void waitDelaysTheRestOfTheBlock() {
+        Harness h = new Harness("""
+                when player joins
+                    tell player "now"
+                    wait 2 seconds
+                    tell player "later"
+                """);
+        h.engine.playerEvent("joins", h.p1);
+        assertTrue(h.world.messageContains("PlayerOne", "now"));
+        assertFalse(h.world.messageContains("PlayerOne", "later"));
+        h.scheduler.flush();
+        assertTrue(h.world.messageContains("PlayerOne", "later"));
+    }
+
+    @Test
+    void waitInsideLoopIsRejected() {
+        MockWorld world = new MockWorld();
+        TaleEngine engine = new TaleEngine(world, new MockScheduler());
+        boolean ok = engine.loadString("""
+                when player joins
+                    while player health is above 1
+                        wait 1 second
+                """, "t.Hermes");
+        assertFalse(ok);
+        assertFalse(engine.loadErrors().isEmpty());
+    }
+
+    @Test
+    void arithmeticInValues() {
+        Harness h = new Harness("""
+                when player joins
+                    set player's coins to 3 plus 4 times 2
+                    set player's level to 10 divided by 2 minus 1
+                    set player's score "wins" to player's coins minus 10
+                """);
+        h.engine.playerEvent("joins", h.p1);
+        assertEquals(14, h.engine.vars.getPlayer("PlayerOne", "coins").num);
+        assertEquals(4, h.p1.level);
+        assertEquals(4, h.p1.scores.getOrDefault("wins", 0));
+    }
+
+    @Test
+    void statSetters() {
+        Harness h = new Harness("""
+                when player joins
+                    set player's health to 7
+                    set player's hunger to 3
+                    set player's xp to 50
+                    set player's level to 9
+                    set player's food to 12
+                """);
+        h.engine.playerEvent("joins", h.p1);
+        assertEquals(7, h.p1.health);
+        assertEquals(12, h.p1.hunger);
+        assertEquals(50, h.p1.xp);
+        assertEquals(9, h.p1.level);
+    }
+
+    @Test
+    void bossbarSetAndCleared() {
+        Harness h = new Harness("""
+                when player joins
+                    set player's bossbar to "Quest" with progress 50
+                    set player's bossbar to "Quest 2"
+                    clear player's bossbar
+                """);
+        h.p1.bossbar = "old";
+        h.engine.playerEvent("joins", h.p1);
+        assertNull(h.p1.bossbar);
+    }
+
+    @Test
+    void bossbarKeepsProgress() {
+        Harness h = new Harness("""
+                when player joins
+                    set player's bossbar to "Quest" with progress 25
+                """);
+        h.engine.playerEvent("joins", h.p1);
+        assertEquals("Quest", h.p1.bossbar);
+        assertEquals(25, h.p1.bossbarProgress, 0.001);
+    }
+
+    @Test
+    void serverStartAndStopEvents() {
+        Harness h = new Harness("""
+                when server starts
+                    set world's phase to "up"
+                when server stops
+                    set world's phase to "down"
+                """);
+        h.engine.serverEvent("server starts");
+        assertEquals("up", h.engine.vars.getWorld("phase").text);
+        h.engine.serverEvent("server stops");
+        assertEquals("down", h.engine.vars.getWorld("phase").text);
+    }
+
+    @Test
+    void readsHeldItem() {
+        Harness h = new Harness("""
+                when player joins
+                    tell player "You hold: ${player's held item}"
+                """);
+        h.p1.holding = "diamond sword";
+        h.engine.playerEvent("joins", h.p1);
+        assertTrue(h.world.messageContains("PlayerOne", "You hold: diamond sword"));
+    }
+
+    @Test
+    void spanishScriptingWorks() {
+        Lang.setLanguage("es");
+        try {
+            Harness h = new Harness("""
+                    cuando jugador se une
+                        dar jugador 1 diamante
+
+                    cuando jugador tiene 5 diamante
+                        dar jugador 1 espada de diamante
+                    """);
+            h.engine.playerEvent("joins", h.p1);
+            assertEquals(1, h.p1.inventory.getOrDefault("diamond", 0));
+            h.world.giveItem(h.p1, "diamond", 4);
+            h.engine.tick();
+            assertEquals(1, h.p1.inventory.getOrDefault("diamond sword", 0));
+        } finally {
+            Lang.setLanguage("en");
+        }
+    }
+
+    @Test
+    void frenchScriptingWorks() {
+        Lang.setLanguage("fr");
+        try {
+            Harness h = new Harness("""
+                    quand joueur rejoint
+                        donner joueur 1 pain
+                    """);
+            h.engine.playerEvent("joins", h.p1);
+            assertEquals(1, h.p1.inventory.getOrDefault("bread", 0));
+        } finally {
+            Lang.setLanguage("en");
+        }
+    }
+
+    @Test
+    void germanScriptingWorks() {
+        Lang.setLanguage("de");
+        try {
+            Harness h = new Harness("""
+                    wenn spieler beitritt
+                        gebe spieler 1 brot
+                    """);
+            h.engine.playerEvent("joins", h.p1);
+            assertEquals(1, h.p1.inventory.getOrDefault("bread", 0));
+        } finally {
+            Lang.setLanguage("en");
+        }
+    }
+
+    @Test
+    void spanishKeywordsStayEnglishForUnknownWords() {
+        Lang.setLanguage("es");
+        try {
+            Harness h = new Harness("""
+                    cuando jugador se une
+                        poner jugador's monedas a 5
+                    """);
+            h.engine.playerEvent("joins", h.p1);
+            assertEquals(5, h.engine.vars.getPlayer("PlayerOne", "monedas").num);
+        } finally {
+            Lang.setLanguage("en");
+        }
+    }
+
+    @Test
+    void chanceOfOneHundredAlwaysFires() {
+        Harness h = new Harness("""
+                when player joins
+                    if chance 100
+                        give player 1 diamond
+                    if chance of 1 in 1
+                        give player 1 emerald
+                """);
+        h.engine.playerEvent("joins", h.p1);
+        assertEquals(1, h.p1.inventory.getOrDefault("diamond", 0));
+        assertEquals(1, h.p1.inventory.getOrDefault("emerald", 0));
+    }
+
+    @Test
+    void chanceOfZeroNeverFires() {
+        Harness h = new Harness("""
+                when player joins
+                    if chance 0
+                        give player 1 diamond
+                """);
+        h.engine.playerEvent("joins", h.p1);
+        assertEquals(0, h.p1.inventory.getOrDefault("diamond", 0));
+    }
+
+    @Test
+    void chanceWorksAsAndCondition() {
+        Harness h = new Harness("""
+                when player joins
+                    if chance 100 and player is sneaking
+                        give player 1 diamond
+                """);
+        h.p1.sneaking = true;
+        h.engine.playerEvent("joins", h.p1);
+        assertEquals(1, h.p1.inventory.getOrDefault("diamond", 0));
+    }
+
+    @Test
+    void randomItemFromList() {
+        Harness h = new Harness("""
+                create list "rewards"
+                add "sword" to list "rewards"
+                add "shield" to list "rewards"
+                add "helmet" to list "rewards"
+                when player joins
+                    set player's prize to random item from list "rewards"
+                """);
+        h.engine.playerEvent("joins", h.p1);
+        String prize = h.engine.vars.getPlayer("PlayerOne", "prize").text;
+        assertTrue(prize.equals("sword") || prize.equals("shield") || prize.equals("helmet"),
+                "prize should be one of the list items, was: " + prize);
+    }
+
+    @Test
+    void randomTeleportStaysWithinRadius() {
+        Harness h = new Harness("""
+                when player joins
+                    teleport player randomly within 50
+                """);
+        h.engine.playerEvent("joins", h.p1);
+        double dx = h.p1.location.x() - 8;
+        double dz = h.p1.location.z() - 8;
+        assertTrue(Math.hypot(dx, dz) <= 50.001, "moved too far from home: " + dx + "," + dz);
+    }
+
+    @Test
+    void freezeAndUnfreezePlayer() {
+        Harness h = new Harness("""
+                when player joins
+                    freeze player
+                when player breaks diamond ore
+                    unfreeze player
+                """);
+        h.engine.playerEvent("joins", h.p1);
+        assertTrue(h.world.isFrozen(h.p1));
+        h.engine.playerEventBlock("breaks", h.p1, "diamond ore");
+        assertFalse(h.world.isFrozen(h.p1));
+    }
+
+    @Test
+    void giveAllPlayersGivesEveryOnlinePlayer() {
+        Harness h = new Harness("""
+                when server starts
+                    give all players 1 diamond
+                    give all players a diamond sword
+                """);
+        MockWorld.MockPlayer p2 = h.world.addPlayer("PlayerTwo");
+        h.engine.serverEvent("server starts");
+        assertEquals(1, h.p1.inventory.getOrDefault("diamond", 0));
+        assertEquals(1, p2.inventory.getOrDefault("diamond", 0));
+        assertEquals(1, h.p1.inventory.getOrDefault("diamond sword", 0));
+        assertEquals(1, p2.inventory.getOrDefault("diamond sword", 0));
+    }
+
+    @Test
+    void particleCountAndSizeAreApplied() {
+        Harness h = new Harness("""
+                when player joins
+                    spawn particles "heart" near player with count 50 with size 2
+                """);
+        h.engine.playerEvent("joins", h.p1);
+        assertTrue(h.world.particles.contains("heart@8,8 x50 size 2.0"),
+                "particles logged: " + h.world.particles);
+    }
+
+    @Test
+    void frozenConditionWorks() {
+        Harness h = new Harness("""
+                when player joins
+                    if player is frozen
+                        warn player "already stuck"
+                    freeze player
+                    if player is frozen
+                        warn player "now stuck"
+                """);
+        h.engine.playerEvent("joins", h.p1);
+        assertFalse(h.p1.warnings.stream().anyMatch(w -> w.contains("already stuck")));
+        assertTrue(h.p1.warnings.stream().anyMatch(w -> w.contains("now stuck")));
+    }
+
+    @Test
+    void giveAllPlayersGivesXpAndLevels() {
+        Harness h = new Harness("""
+                when server starts
+                    give all players 10 xp
+                    give all players 5 levels
+                """);
+        MockWorld.MockPlayer p2 = h.world.addPlayer("PlayerTwo");
+        h.engine.serverEvent("server starts");
+        assertEquals(10, h.p1.xp);
+        assertEquals(10, p2.xp);
+        assertEquals(5, h.p1.level);
+        assertEquals(5, p2.level);
+    }
 }

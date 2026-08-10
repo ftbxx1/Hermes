@@ -1,0 +1,306 @@
+# Finnish translation pack for Hermes.
+# Format: <canonical english>=<native form> (one per line, # = comment).
+# Single native words are translated while reading a script; longer native
+# phrases ("timanttimiekka") are matched by the parser's greedy lookups.
+# You may extend or override anything here by dropping a custom fi.lang into
+# plugins/Hermes/lang/.
+
+# --- flow & structure ---
+when=kun
+every=aina
+action=toiminto
+command=komento
+region=alue
+mark=merkki
+gui=valikko
+create=luo
+if=jos
+repeat=toista
+loop=iteroi
+stop=pysäytä
+else=muuten
+fire=laukaise
+win=voita
+clear=tyhjennä
+delete=poista
+while=kunnes
+wait=odota
+and=ja
+or=tai
+as=kuin
+all=kaikki
+numbers=numero
+from=alkaen
+to=asti
+over=yli
+up=ylös
+down=alas
+
+# --- actions ---
+give=anna
+remove=poista
+set=aseta
+add=lisää
+tell=kerro
+announce=ilmoita
+warn=varoita
+welcome=tervehdi
+show=näytä
+kill=tapa
+damage=vahingoita
+heal=paranna
+feed=ruoki
+kick=potkaise
+launch=ammu
+title=otsikko
+actionbar=toimintapalkki
+lightning=salamanisku
+explode=räjäytä
+teleport=teleporttaa
+spawn=spawnaa
+play=soita
+write=kirjoita
+open=avaa
+close=sulje
+press=paina
+pull=vedä
+power=kytke
+unpower=katkaise
+put=laita
+take=ota
+make=tee
+
+# --- noise / articles ---
+the=se
+a=eräs
+an=eräs
+any=mikä
+
+# --- prepositions ---
+with=kanssa
+by=joka
+at=alla
+near=lähellä
+named=nimetty
+because=koska
+in=sisällä
+on=päällä
+of=osa
+
+# --- values ---
+true=tosi
+false=epätosi
+nothing=tyhjä
+none=mikään
+length=pituus
+random=satunnainen
+number=luku
+count=määrä
+between=välillä
+contains=sisältää
+plus=plus
+minus=miinus
+times=kertaa
+divided=jaa
+second=sekunti
+seconds=sekuntia
+minute=minuutti
+minutes=minuuttia
+hour=tunti
+hours=tuntia
+tick=tick
+ticks=tickit
+
+# --- variable targets ---
+player=pelaaja
+world=maailma
+temporary=tilapäinen
+list=lista
+score=pisteet
+database=tietokanta
+config=asetukset
+value=arvo
+file=tiedosto
+data=data
+
+# --- conditions & comparisons ---
+has=on
+is=on
+are=ovat
+not=ei
+holding=pitää
+sneaking=hiipii
+flying=lentää
+wet=märkä
+op=op
+ground=maa
+biome=biomi
+permission=lupa
+more=enemmän
+less=vähemmän
+equal=yhtä
+than=kuin
+least=vähintään
+most=enintään
+above=yläpuolella
+below=alapuolella
+under=alla
+health=terveys
+hunger=nälkä
+xp=xp
+level=taso
+gamemode=tila
+
+# --- player events ---
+joins=liittyy
+joins=liity
+leaves=poistuu
+leaves=lähtee
+dies=kuolee
+respawns=respawnaa
+jumps=hyppää
+sneaks=hiipii
+sneaks=livahtaa
+moves=liikkuu
+moves=siirtyy
+attacks=hyökkää
+chats=puhuu
+fishes=kalaa
+levels=nousee
+clicks=klikkaa
+eats=syö
+kills=tappaa
+starts=aloittaa
+stops=pysähtyy
+sprinting=juoksee
+takes=ottaa
+damage=vahinko
+breaks=rikkoo
+places=asettaa
+picks=kerää
+drops=pudottaa
+uses=käyttää
+interacts=vuorovaikuttaa
+enters=saapuu
+enters=tulee
+reaches=saavuttaa
+types=kirjoittaa
+touches=koskettaa
+walks=kävelee
+first=ensimmäinen
+inventory=inventaario
+mob=olento
+custom=muokattu
+event=tapahtuma
+fires=laukeaa
+night=yö
+dawn=aamunkoitto
+falls=putoaa
+game=peli
+server=palvelin
+slot=paikka
+
+# --- world state ---
+weather=sää
+rain=sade
+sunny=aurinkoista
+storm=myrsky
+stormy=myrskyinen
+noon=keskipäivä
+dusk=hämärä
+midnight=keskiyö
+morning=aamu
+evening=ilta
+day=päivä
+daytime=päiväaika
+nighttime=yöaika
+
+# --- gamemodes ---
+survival=selviytyminen
+creative=luova
+adventure=seikkailu
+spectator=katsoja
+
+# --- dimensions ---
+the end=loppu
+overworld=ulkomaailma
+
+# --- single-word items & blocks ---
+diamond=timantti
+emerald=smaragdi
+iron=rauta
+gold=kulta
+coal=hiili
+bread=leipä
+apple=omena
+torch=soihtu
+water=vesi
+lava=laava
+stone=kivi
+dirt=multa
+sand=hiekka
+glass=lasi
+chest=arkku
+door=ovi
+sword=miekka
+bow=jousi
+arrow=nuoli
+shield=kilpi
+stick=keppi
+bed=sänky
+boat=vene
+bucket=ämpäri
+compass=kompassi
+
+# --- multi-word items & blocks (phrases) ---
+diamond sword=timanttimiekka
+iron sword=rautamiekka
+wooden sword=puinen miekka
+golden sword=kultainen miekka
+netherite sword=netheriittimiekka
+diamond block=timanttiharkko
+gold block=kultakuutio
+iron block=rautakuutio
+iron ingot=rautaharkko
+gold ingot=kultaharkko
+diamond ore=timanttimalmi
+iron ore=rautamalmi
+gold ore=kultamalmi
+coal ore=hiilimalmi
+redstone dust=redstonepöly
+enchanted golden apple=loihdittu kultainen omena
+golden apple=kultainen omena
+
+# --- single-word mobs ---
+zombie=zombie
+skeleton=luuranko
+creeper=creeper
+spider=hämähäkki
+pig=sika
+cow=lehmä
+chicken=kana
+sheep=lammas
+wolf=susi
+enderman=enderman
+villager=kyläläinen
+horse=hevonen
+cat=kissa
+bee=mehiläinen
+
+# --- multi-word mobs ---
+iron golem=rautagolem
+zombie pigman=zombie sika
+
+# --- effects ---
+speed=nopeus
+strength=voima
+jump boost=hyppytehoste
+regeneration=regeneraatio
+invisibility=näkymättömyys
+poison=myrkky
+weakness=heikkous
+slowness=hidas
+night vision=pimeänäkö
+fire resistance=tulenkestävyys
+water breathing=vedenhengitys
+haste=kiire

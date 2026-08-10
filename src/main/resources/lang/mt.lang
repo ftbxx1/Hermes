@@ -1,0 +1,313 @@
+# Maltese translation pack for Hermes.
+# Format: <canonical english>=<native form> (one per line, # = comment).
+# Single native words are translated while reading a script; longer native
+# phrases ("sejf tal-ħadid") are matched by the parser's greedy lookups.
+# You may extend or override anything here by dropping a custom mt.lang into
+# plugins/Hermes/lang/.
+
+# --- flow & structure ---
+when=meta
+every=kull
+action=azzjoni
+command=kmand
+region=reġjun
+mark=marka
+gui=menù
+create=ħoloq
+if=jekk
+repeat=irrepeti
+loop=ċirku
+stop=waqqaf
+else=inkella
+fire=ispara
+win=irbaħ
+clear=naddaf
+delete=ħassar
+while=waqt li
+wait=stenna
+and=u
+or=jew
+as=bħala
+all=kollha
+numbers=numri
+from=minn
+to=lejn
+over=fuq
+up=il fuq
+down=il isfel
+
+# --- actions ---
+give=agħti
+remove=neħħi
+set=poġġi
+add=żid
+tell=għid
+announce=ħabbar
+warn=wissa
+welcome=ilqa'
+show=uri
+kill=aqtla
+damage=agħmel ħsara
+heal=fejjaq
+feed=itma'
+kick=keċċi
+launch=niedi
+title=titlu
+actionbar=barra tal-azzjoni
+lightning=sajjetta
+explode=splodi
+teleport=teleporta
+spawn=spawn
+play=doqq
+write=ikteb
+open=iftaħ
+close=agħlaq
+press=agħfas
+pull=igbed
+power=attiva
+unpower=itfi
+put=qiegħed
+take=ħu
+make=agħmel
+freeze=iffriża
+unfreeze=iddewweb
+
+# --- noise / articles ---
+the=il
+a=wieħed
+an=wieħed
+any=xi
+item=oġġett
+
+# --- prepositions ---
+with=ma'
+by=b'
+at=f'fejn
+near=viċin
+near=ħdejn
+named=msemmi
+because=għax
+in=f'
+on=fuq
+of=ta'
+randomly=każwalment
+within=f'ġewwa
+
+# --- values ---
+true=veru
+false=falz
+nothing=xejn
+none=ħadd
+length=tul
+random=każwali
+number=numru
+count=għadd
+between=bejn
+contains=fih
+plus=plus
+minus=minus
+times=darbiet
+divided=maqsum
+second=sekonda
+seconds=sekondi
+minute=minuta
+minutes=minuti
+hour=siegħa
+hours=sigħat
+tick=tik
+ticks=tikks
+size=daqs
+
+# --- variable targets ---
+player=plejer
+world=dinja
+temporary=temporanju
+list=lista
+score=punteġġ
+database=bażi ta' data
+config=konfigurazzjoni
+value=valur
+file=fajl
+data=data
+players=plejers
+
+# --- conditions & comparisons ---
+has=għandu
+is=huwa
+are=huma
+not=mhux
+holding=miżmum
+sneaking=jiżżerżaq
+flying=jtir
+wet=imxarrab
+op=op
+ground=art
+biome=bioma
+permission=permess
+more=aktar
+less=inqas
+equal=ugwali
+than=minn
+least=inqas
+most=aktar
+above=fuq
+below=taħt
+under=taħt
+health=sħħa
+hunger=ġuħ
+xp=xp
+level=livell
+gamemode=modalità tal-logħba
+chance=opportunità
+
+# --- player events ---
+joins=jingħaqad
+joins=jidħol
+leaves=jitlaq
+dies=jmut
+respawns=jerġa' jqum
+jumps=jaqbeż
+sneaks=jiżżerżaq
+moves=jiċċaqlaq
+attacks=jattakka
+attacks=jolqot
+chats=jitkellem
+fishes=istad
+levels=jogħla
+clicks=jikklikkja
+eats=jiekol
+kills=joqtol
+starts=jibda
+stops=jieqaf
+stops=iwaqqaf
+sprinting=jisprintja
+takes=jieħu
+damage=ħsara
+breaks=jikser
+places=ipoġġi
+picks=jiġbor
+drops=jitfa'
+uses=juża
+interacts=jinteraġixxi
+enters=jidħol
+reaches=jilħaq
+types=jikteb
+touches=imiss
+walks=jimxi
+walks=jimxi bil-mod
+first=ewwel
+inventory=inventarju
+mob=mob
+custom=personalizzat
+event=avveniment
+fires=jispara
+night=lejl
+dawn=sebħ
+falls=jaqa'
+game=logħba
+server=server
+slot=slot
+
+# --- world state ---
+weather=temp
+rain=xita
+sunny=xemxi
+storm=tempesta
+stormy=maltemp
+noon=nozinhar
+dusk=għabex
+midnight=nofs il-lejl
+morning=filgħodu
+evening=filgħaxija
+day=jum
+daytime=bi nhar
+nighttime=bil-lejl
+
+# --- gamemodes ---
+survival=sopravivenza
+creative=kreattiv
+adventure=avventura
+spectator=spettatur
+
+# --- dimensions ---
+the end=it-tmiem
+overworld=id-dinja ta' fuq
+
+# --- single-word items & blocks ---
+diamond=djamant
+emerald=żmerald
+iron=ħadid
+gold=deheb
+coal=faħam
+bread=ħobż
+apple=tuffieħa
+torch=torċa
+water=ilma
+lava=lavja
+stone=ġebla
+dirt=ħamrija
+sand=ramel
+glass=ħġieġ
+chest=senduq
+door=bieb
+sword=sejf
+bow=qasba
+arrow=vleġġa
+shield=tarka
+stick=stikka
+bed=sodda
+boat=dgħajsa
+bucket=barmil
+compass=kumpass
+
+# --- multi-word items & blocks (phrases) ---
+diamond sword=sejf tad-djamant
+iron sword=sejf tal-ħadid
+wooden sword=sejf tal-injam
+golden sword=sejf tad-deheb
+netherite sword=sejf tan-netherite
+diamond block=blokka tad-djamant
+gold block=blokka tad-deheb
+iron block=blokka tal-ħadid
+iron ingot=virga tal-ħadid
+gold ingot=virga tad-deheb
+diamond ore=mineral tad-djamant
+iron ore=mineral tal-ħadid
+gold ore=mineral tad-deheb
+coal ore=mineral tal-faħam
+enchanted golden apple=tuffieħa tad-deheb maħbura
+golden apple=tuffieħa tad-deheb
+
+# --- single-word mobs ---
+zombie=żombi
+skeleton=skalettru
+creeper=creeper
+spider=brimba
+pig=ħanżir
+cow=baqra
+chicken=tigieġa
+sheep=ħaruf
+wolf=lieb
+enderman=enderman
+villager=raħħal
+horse=żiemel
+cat=qattus
+bee=naħla
+
+# --- multi-word mobs ---
+iron golem=golem tal-ħadid
+zombie pigman=żombi ħanżir
+
+# --- effects ---
+speed=veloċità
+strength=siegħa
+jump boost=qabża għolja
+regeneration=riġenerazzjoni
+invisibility=inviżibbiltà
+poison=velenu
+weakness=dgħufija
+slowness=moderazzjoni
+night vision=vista ta' billejl
+fire resistance=reżistenza għan-nar
+water breathing=nisġa ta' l-ilma
+haste=ħeffa

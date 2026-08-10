@@ -86,6 +86,18 @@ public final class Ast {
         public RepeatStmt(int line, double times, List<Stmt> body) { super(line); this.times = times; this.body = body; }
     }
 
+    public static final class WhileStmt extends Stmt {
+        public final Condition cond; public final List<Stmt> body;
+        public WhileStmt(int line, Condition cond, List<Stmt> body) { super(line); this.cond = cond; this.body = body; }
+    }
+
+    /** Pauses a handler for a while: "wait 2 seconds". Only allowed directly
+     *  inside a when/every/action/command block. */
+    public static final class WaitStmt extends Stmt {
+        public final double seconds;
+        public WaitStmt(int line, double seconds) { super(line); this.seconds = seconds; }
+    }
+
     public static final class LoopStmt extends Stmt {
         /** "list", "players", "numbers" or "inventory". */
         public final String kind;
@@ -168,7 +180,7 @@ public final class Ast {
     // World actions
     // ------------------------------------------------------------------
 
-    public enum TargetRef { PLAYER, MOB }
+    public enum TargetRef { PLAYER, MOB, ALL_PLAYERS }
 
     public static final class KillStmt extends Stmt {
         public final TargetRef target;
@@ -196,13 +208,13 @@ public final class Ast {
     }
 
     public static final class GiveXpStmt extends Stmt {
-        public final double amount;
-        public GiveXpStmt(int line, double amount) { super(line); this.amount = amount; }
+        public final TargetRef target; public final double amount;
+        public GiveXpStmt(int line, TargetRef target, double amount) { super(line); this.target = target; this.amount = amount; }
     }
 
     public static final class GiveLevelsStmt extends Stmt {
-        public final double amount;
-        public GiveLevelsStmt(int line, double amount) { super(line); this.amount = amount; }
+        public final TargetRef target; public final double amount;
+        public GiveLevelsStmt(int line, TargetRef target, double amount) { super(line); this.target = target; this.amount = amount; }
     }
 
     public static final class EffectStmt extends Stmt {
@@ -268,7 +280,13 @@ public final class Ast {
 
     public static final class ParticleStmt extends Stmt {
         public final String particle; public final LocRef where;
-        public ParticleStmt(int line, String particle, LocRef where) { super(line); this.particle = particle; this.where = where; }
+        public final int count; public final double size;
+        public ParticleStmt(int line, String particle, LocRef where) {
+            this(line, particle, where, 30, 1.0);
+        }
+        public ParticleStmt(int line, String particle, LocRef where, int count, double size) {
+            super(line); this.particle = particle; this.where = where; this.count = count; this.size = size;
+        }
     }
 
     public static final class PermissionStmt extends Stmt {
@@ -306,6 +324,18 @@ public final class Ast {
     public static final class TeleportStmt extends Stmt {
         public final TargetRef target; public final LocRef where;
         public TeleportStmt(int line, TargetRef target, LocRef where) { super(line); this.target = target; this.where = where; }
+    }
+
+    /** "teleport player randomly within 100": scatters to a random spot nearby. */
+    public static final class TeleportRandomStmt extends Stmt {
+        public final TargetRef target; public final double radius;
+        public TeleportRandomStmt(int line, TargetRef target, double radius) { super(line); this.target = target; this.radius = radius; }
+    }
+
+    /** "freeze player" / "unfreeze player". */
+    public static final class FreezeStmt extends Stmt {
+        public final TargetRef target; public final boolean frozen;
+        public FreezeStmt(int line, TargetRef target, boolean frozen) { super(line); this.target = target; this.frozen = frozen; }
     }
 
     public static final class SpawnMobStmt extends Stmt {
@@ -439,6 +469,26 @@ public final class Ast {
         }
     }
 
+    /** "set player's health to 10", "set player's hunger to 5" ... */
+    public static final class SetPlayerStatStmt extends Stmt {
+        /** health | hunger | xp | level */
+        public final String stat; public final ValueExpr value;
+        public SetPlayerStatStmt(int line, String stat, ValueExpr value) { super(line); this.stat = stat; this.value = value; }
+    }
+
+    /** "set player's bossbar to \"Quest\" with progress 50". */
+    public static final class SetBossbarStmt extends Stmt {
+        public final ValueExpr title; public final ValueExpr progress;
+        public SetBossbarStmt(int line, ValueExpr title, ValueExpr progress) {
+            super(line); this.title = title; this.progress = progress;
+        }
+    }
+
+    /** "clear player's bossbar". */
+    public static final class ClearBossbarStmt extends Stmt {
+        public ClearBossbarStmt(int line) { super(line); }
+    }
+
     // ------------------------------------------------------------------
     // Value expressions
     // ------------------------------------------------------------------
@@ -451,6 +501,14 @@ public final class Ast {
     public static final class NumExpr extends ValueExpr {
         public final double v;
         public NumExpr(int line, double v) { super(line); this.v = v; }
+    }
+
+    /** "a plus b": a binary math expression. op is "+", "-", "*" or "/". */
+    public static final class BinaryExpr extends ValueExpr {
+        public final String op; public final ValueExpr left; public final ValueExpr right;
+        public BinaryExpr(int line, String op, ValueExpr left, ValueExpr right) {
+            super(line); this.op = op; this.left = left; this.right = right;
+        }
     }
 
     public static final class TextExpr extends ValueExpr {
@@ -527,9 +585,20 @@ public final class Ast {
         public GamemodeExpr(int line) { super(line); }
     }
 
+    /** "player's held item": the name of the item in the player's hand. */
+    public static final class HeldItemExpr extends ValueExpr {
+        public HeldItemExpr(int line) { super(line); }
+    }
+
     public static final class RandomExpr extends ValueExpr {
         public final double a; public final double b;
         public RandomExpr(int line, double a, double b) { super(line); this.a = a; this.b = b; }
+    }
+
+    /** "random item from list \"quests\"": a random element of a list. */
+    public static final class RandomListExpr extends ValueExpr {
+        public final String list;
+        public RandomListExpr(int line, String list) { super(line); this.list = list; }
     }
 
     public static final class OnlineCountExpr extends ValueExpr {
@@ -660,6 +729,12 @@ public final class Ast {
     public static final class TruthCond extends Condition {
         public final boolean v;
         public TruthCond(boolean v) { this.v = v; }
+    }
+
+    /** "chance 50" (percent) or "chance of 1 in 4" (a/b). */
+    public static final class ChanceCond extends Condition {
+        public final double percent; // 0..100
+        public ChanceCond(double percent) { this.percent = percent; }
     }
 
     public static final class NotCond extends Condition {

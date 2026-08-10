@@ -1,0 +1,305 @@
+# Tamil translation pack for Hermes.
+# Format: <canonical english>=<native form> (one per line, # = comment).
+# Single native words are translated while reading a script; longer native
+# phrases ("வைர வாள்") are matched by the parser's greedy lookups.
+# You may extend or override anything here by dropping a custom ta.lang into
+# plugins/Hermes/lang/.
+
+# --- flow & structure ---
+when=போது
+every=ஒவ்வொரு
+action=செயல்
+command=கட்டளை
+region=பகுதி
+mark=குறி
+gui=மெனு
+create=உருவாக்கு
+if=என்றால்
+repeat=மீண்டும் செய்
+loop=சுழற்சி
+stop=நிறுத்து
+else=இல்லையென்றால்
+fire=சுடு
+win=வெல்
+clear=அழி
+delete=நீக்கு
+while=வரை
+wait=காத்திரு
+and=மற்றும்
+or=அல்லது
+as=ஆக
+all=அனைத்து
+numbers=எண்கள்
+from=இருந்து
+to=வரை
+over=மேல்
+up=மேலே
+down=கீழே
+
+# --- actions ---
+give=கொடு
+remove=அகற்று
+set=அமை
+add=சேர்
+tell=சொல்
+announce=அறிவி
+warn=எச்சரிக்கை செய்
+welcome=வரவேற்க
+show=காட்டு
+kill=கொல்
+damage=சேதம் செய்
+heal=குணப்படுத்து
+feed=உணவளி
+kick=வெளியேற்று
+launch=எறி
+title=தலைப்பு
+actionbar=செயல் பட்டை
+lightning=மின்னல்
+explode=வெடி
+teleport=தொலைபெயர்
+spawn=தோற்றுவி
+play=இயக்கு
+write=எழுது
+open=திற
+close=மூடு
+press=அழுத்து
+pull=இழு
+power=இயக்கு
+unpower=நிறுத்து
+put=வை
+take=எடு
+make=உருவாக்கு
+
+# --- noise / articles ---
+the=இந்த
+a=ஒரு
+an=ஒரு
+any=எந்த
+
+# --- prepositions ---
+with=உடன்
+by=மூலம்
+at=இல்
+near=அருகில்
+named=என்ற பெயர்
+because=ஏனெனில்
+in=இல்
+on=மீது
+of=இன்
+
+# --- values ---
+true=உண்மை
+false=பொய்
+nothing=எதுவும் இல்லை
+none=எதுவுமில்லை
+length=நீளம்
+random=சீரற்ற
+number=எண்
+count=எண்ணிக்கை
+between=இடையில்
+contains=கொண்டுள்ளது
+plus=கூட்டல்
+minus=கழித்தல்
+times=முறை
+divided=வகுத்தல்
+second=வினாடி
+seconds=வினாடிகள்
+minute=நிமிடம்
+minutes=நிமிடங்கள்
+hour=மணி
+hours=மணி
+tick=டிக்
+ticks=டிக்
+
+# --- variable targets ---
+player=வீரர்
+world=உலகம்
+temporary=தற்காலிக
+list=பட்டியல்
+score=புள்ளி
+database=தரவுத்தளம்
+config=கட்டமைப்பு
+value=மதிப்பு
+file=கோப்பு
+data=தரவு
+
+# --- conditions & comparisons ---
+has=உள்ளது
+is=ஆகும்
+are=உள்ளன
+not=இல்லை
+holding=பிடித்து
+sneaking=பதுங்கி
+flying=பறக்கிறது
+wet=ஈரமான
+op=ஓப்
+ground=தரை
+biome=பகுதி
+permission=அனுமதி
+more=அதிகம்
+less=குறைவு
+equal=சமம்
+than=விட
+least=குறைந்த
+most=அதிக
+above=மேலே
+below=கீழே
+under=கீழ்
+health=உடல்நலம்
+hunger=பசி
+xp=அனுபவம்
+level=நிலை
+gamemode=விளையாட்டு முறை
+
+# --- player events ---
+joins=சேர்கிறான்
+joins=வருகிறான்
+leaves=வெளியேறுகிறான்
+leaves=போகிறான்
+dies=இறக்கிறான்
+respawns=மீண்டும் பிறக்கிறான்
+jumps=தாவுகிறான்
+sneaks=பதுங்குகிறான்
+sneaks=மெதுவாக நகர்கிறான்
+moves=நகர்கிறான்
+moves=அசைகிறான்
+attacks=தாக்குகிறான்
+chats=பேசுகிறான்
+fishes=மீன் பிடிக்கிறான்
+levels=நிலை உயர்கிறான்
+clicks=கிளிக் செய்கிறான்
+eats=சாப்பிடுகிறான்
+kills=கொல்கிறான்
+starts=தொடங்குகிறான்
+stops=நிறுத்துகிறான்
+sprinting=விரைந்து ஓடுகிறான்
+takes=எடுக்கிறான்
+damage=சேதம்
+breaks=உடைக்கிறான்
+places=வைக்கிறான்
+picks=எடுக்கிறான்
+drops=வீசுகிறான்
+uses=பயன்படுத்துகிறான்
+interacts=தொடர்பு கொள்கிறான்
+enters=நுழைகிறான்
+reaches=அடைகிறான்
+types=தட்டச்சு செய்கிறான்
+touches=தொடுகிறான்
+walks=நடக்கிறான்
+first=முதலில்
+inventory=பொருட்கள்
+mob=அரக்கன்
+custom=தனிப்பயன்
+event=நிகழ்வு
+fires=நடக்கிறது
+night=இரவு
+dawn=விடியல்
+falls=விழுகிறான்
+game=விளையாட்டு
+server=சேவையகம்
+slot=இடம்
+
+# --- world state ---
+weather=வானிலை
+rain=மழை
+sunny=வெயில்
+storm=புயல்
+stormy=புயலான
+noon=மதியம்
+dusk=அந்தி
+midnight=நள்ளிரவு
+morning=காலை
+evening=மாலை
+day=பகல்
+daytime=பகல்
+nighttime=இரவு
+
+# --- gamemodes ---
+survival=உயிர்வாழ்வு
+creative=படைப்பு
+adventure=சாகச
+spectator=பார்வையாளர்
+
+# --- dimensions ---
+the end=முடிவு
+overworld=மேல் உலகம்
+
+# --- single-word items & blocks ---
+diamond=வைரம்
+emerald=மரகதம்
+iron=இரும்பு
+gold=தங்கம்
+coal=நிலக்கரி
+bread=ரொட்டி
+apple=ஆப்பிள்
+torch=தீப்பந்தம்
+water=நீர்
+lava=எரிமலைக்குழம்பு
+stone=கல்
+dirt=மண்
+sand=மணல்
+glass=கண்ணாடி
+chest=பெட்டி
+door=கதவு
+sword=வாள்
+bow=வில்
+arrow=அம்பு
+shield=கேடயம்
+stick=குச்சி
+bed=படுக்கை
+boat=படகு
+bucket=வாளி
+compass=திசைகாட்டி
+
+# --- multi-word items & blocks (phrases) ---
+diamond sword=வைர வாள்
+iron sword=இரும்பு வாள்
+wooden sword=மர வாள்
+golden sword=தங்க வாள்
+netherite sword=நெதரைட் வாள்
+diamond block=வைர கட்டை
+gold block=தங்க கட்டை
+iron block=இரும்பு கட்டை
+iron ingot=இரும்பு கட்டி
+gold ingot=தங்க கட்டி
+diamond ore=வைர தாது
+iron ore=இரும்பு தாது
+gold ore=தங்க தாது
+coal ore=நிலக்கரி தாது
+redstone dust=ரெட்ஸ்டோன் தூள்
+enchanted golden apple=மந்திரித்த தங்க ஆப்பிள்
+golden apple=தங்க ஆப்பிள்
+
+# --- single-word mobs ---
+zombie=சோம்பி
+skeleton=எலும்புக்கூடு
+creeper=க்ரீப்பர்
+spider=சிலந்தி
+pig=பன்றி
+cow=மாடு
+chicken=கோழி
+sheep=செம்மறி
+wolf=ஓநாய்
+enderman=எண்டர்மேன்
+villager=கிராமவாசி
+horse=குதிரை
+cat=பூனை
+bee=தேனீ
+
+# --- multi-word mobs ---
+iron golem=இரும்பு கோலெம்
+zombie pigman=சோம்பி பன்றி மனிதன்
+
+# --- effects ---
+speed=வேகம்
+strength=வலிமை
+jump boost=தாவல் உயர்வு
+regeneration=மீளுருவாக்கம்
+invisibility=கண்ணாமூச்சி
+poison=விஷம்
+weakness=பலவீனம்
+slowness=மெதுவான
+night vision=இரவு பார்வை
+fire resistance=தீ எதிர்ப்பு
+water breathing=நீரில் மூச்சு
+haste=விரைவு

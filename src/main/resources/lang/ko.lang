@@ -1,0 +1,303 @@
+# Korean translation pack for Hermes.
+# Format: <canonical english>=<native form> (one per line, # = comment).
+# Single native words are translated while reading a script; longer native
+# phrases ("다이아몬드 검") are matched by the parser's greedy lookups.
+
+# --- flow & structure ---
+when=때
+every=마다
+action=동작
+command=명령어
+region=지역
+mark=표시
+gui=메뉴
+create=만들다
+if=만약
+repeat=반복하다
+loop=반복
+stop=멈추다
+else=그렇지 않으면
+fire=발동하다
+win=이기다
+clear=지우다
+delete=삭제하다
+while=동안
+wait=기다리다
+and=그리고
+or=또는
+as=로서
+all=모든
+numbers=숫자
+from=부터
+to=까지
+over=넘어
+up=위로
+down=아래로
+
+# --- actions ---
+give=주다
+remove=제거하다
+set=설정하다
+add=추가하다
+tell=말하다
+announce=공지하다
+warn=경고하다
+welcome=환영하다
+show=보여주다
+kill=죽이다
+damage=피해
+heal=치유하다
+feed=먹이다
+kick=퇴장시키다
+launch=발사하다
+title=제목
+actionbar=액션바
+lightning=번개
+explode=폭발하다
+teleport=이동시키다
+spawn=소환하다
+play=재생하다
+write=쓰다
+open=열다
+close=닫다
+press=누르다
+pull=당기다
+power=전원
+unpower=전원 차단
+put=넣다
+take=가지다
+make=만들다
+
+# --- noise / articles ---
+the=그
+a=한
+an=한
+any=아무
+
+# --- prepositions ---
+with=와 함께
+by=으로
+at=에서
+near=가까이
+named=이름이
+because=왜냐하면
+in=안에
+on=위에
+of=의
+
+# --- values ---
+true=참
+false=거짓
+nothing=아무것도
+none=없음
+length=길이
+random=무작위
+number=숫자
+count=개수
+between=사이
+contains=포함하다
+plus=더하기
+minus=빼기
+times=배
+divided=나누기
+second=초
+seconds=초
+minute=분
+minutes=분
+hour=시간
+hours=시간
+tick=틱
+ticks=틱
+
+# --- variable targets ---
+player=플레이어
+world=세계
+temporary=임시
+list=목록
+score=점수
+database=데이터베이스
+config=설정
+value=값
+file=파일
+data=데이터
+
+# --- conditions & comparisons ---
+has=가지고 있다
+is=이다
+are=이다
+not=아니다
+holding=들고 있는
+sneaking=숨어 있는
+flying=날고 있는
+wet=젖은
+op=관리자
+ground=땅
+biome=생물군계
+permission=권한
+more=더
+less=덜
+equal=같음
+than=보다
+least=최소
+most=최대
+above=위
+below=아래
+under=밑
+health=체력
+hunger=허기
+xp=경험치
+level=레벨
+gamemode=게임 모드
+
+# --- player events ---
+joins=접속한다
+joins=접속한다
+leaves=떠난다
+leaves=나간다
+dies=죽는다
+respawns=부활한다
+jumps=뛴다
+sneaks=숨는다
+sneaks=웅크린다
+moves=움직인다
+moves=이동한다
+attacks=공격한다
+chats=말한다
+fishes=낚는다
+levels=레벨업한다
+clicks=클릭한다
+eats=먹는다
+kills=죽인다
+starts=시작한다
+stops=멈춘다
+sprinting=달리고 있는
+takes=받는다
+damage=피해
+breaks=부순다
+places=설치한다
+picks=줍는다
+drops=떨어뜨린다
+uses=사용한다
+interacts=상호작용한다
+enters=들어간다
+reaches=도착한다
+types=입력한다
+touches=만진다
+walks=걷는다
+first=첫 번째
+inventory=인벤토리
+mob=몹
+custom=사용자 지정
+event=이벤트
+fires=발생한다
+night=밤
+dawn=새벽
+falls=떨어진다
+game=게임
+server=서버
+slot=슬롯
+
+# --- world state ---
+weather=날씨
+rain=비
+sunny=맑음
+storm=폭풍
+stormy=폭풍
+noon=정오
+dusk=황혼
+midnight=자정
+morning=아침
+evening=저녁
+day=낮
+daytime=낮
+nighttime=밤
+
+# --- gamemodes ---
+survival=서바이벌
+creative=크리에이티브
+adventure=모험
+spectator=관전
+
+# --- dimensions ---
+the end=엔드
+overworld=오버월드
+
+# --- single-word items & blocks ---
+diamond=다이아몬드
+emerald=에메랄드
+iron=철
+gold=금
+coal=석탄
+bread=빵
+apple=사과
+torch=횃불
+water=물
+lava=용암
+stone=돌
+dirt=흙
+sand=모래
+glass=유리
+chest=상자
+door=문
+sword=검
+bow=활
+arrow=화살
+shield=방패
+stick=막대기
+bed=침대
+boat=배
+bucket=양동이
+compass=나침반
+
+# --- multi-word items & blocks (phrases) ---
+diamond sword=다이아몬드 검
+iron sword=철 검
+wooden sword=나무 검
+golden sword=금 검
+netherite sword=네더라이트 검
+diamond block=다이아몬드 블록
+gold block=금 블록
+iron block=철 블록
+iron ingot=철 주괴
+gold ingot=금 주괴
+diamond ore=다이아몬드 광석
+iron ore=철 광석
+gold ore=금 광석
+coal ore=석탄 광석
+redstone dust=레드스톤 가루
+enchanted golden apple=마법이 부여된 황금 사과
+golden apple=황금 사과
+
+# --- single-word mobs ---
+zombie=좀비
+skeleton=스켈레톤
+creeper=크리퍼
+spider=거미
+pig=돼지
+cow=소
+chicken=닭
+sheep=양
+wolf=늑대
+enderman=엔더맨
+villager=주민
+horse=말
+cat=고양이
+bee=벌
+
+# --- multi-word mobs ---
+iron golem=철 골렘
+zombie pigman=좀비 피그맨
+
+# --- effects ---
+speed=속도
+strength=힘
+jump boost=점프 강화
+regeneration=재생
+invisibility=투명화
+poison=독
+weakness=약화
+slowness=감속
+night vision=야간 투시
+fire resistance=화염 저항
+water breathing=물 호흡
+haste=성급함

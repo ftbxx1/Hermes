@@ -1,0 +1,303 @@
+# Ukrainian translation pack for Hermes.
+# Format: <canonical english>=<native form> (one per line, # = comment).
+# Single native words are translated while reading a script; longer native
+# phrases ("алмазний меч") are matched by the parser's greedy lookups.
+
+# --- flow & structure ---
+when=коли
+every=кожен
+action=дія
+command=команда
+region=регіон
+mark=мітка
+gui=меню
+create=створи
+if=якщо
+repeat=повтори
+loop=цикл
+stop=зупини
+else=інакше
+fire=запусти
+win=виграй
+clear=очисти
+delete=видали
+while=поки
+wait=чекай
+and=і
+or=або
+as=як
+all=всі
+numbers=числа
+from=від
+to=до
+over=над
+up=вгору
+down=вниз
+
+# --- actions ---
+give=дай
+remove=прибери
+set=встанови
+add=додай
+tell=скажи
+announce=оголоси
+warn=попереди
+welcome=привітай
+show=покажи
+kill=убий
+damage=порани
+heal=вилікуй
+feed=нагодуй
+kick=вижени
+launch=запусти
+title=заголовок
+actionbar=бар
+lightning=блискавка
+explode=вибухни
+teleport=телепортуй
+spawn=спавн
+play=грай
+write=напиши
+open=відкрий
+close=закрий
+press=натисни
+pull=потягни
+power=увімкни
+unpower=вимкни
+put=поклади
+take=візьми
+make=зроби
+
+# --- noise / articles ---
+the=цей
+a=якийсь
+an=якийсь
+any=будь-який
+
+# --- prepositions ---
+with=з
+by=по
+at=на
+near=поруч
+named=на ім'я
+because=тому що
+in=в
+on=на
+of=із
+
+# --- values ---
+true=істина
+false=брехня
+nothing=нічого
+none=жоден
+length=довжина
+random=випадковий
+number=число
+count=кількість
+between=між
+contains=містить
+plus=плюс
+minus=мінус
+times=разів
+divided=поділити
+second=секунда
+seconds=секунди
+minute=хвилина
+minutes=хвилини
+hour=година
+hours=години
+tick=тік
+ticks=тіки
+
+# --- variable targets ---
+player=гравець
+world=світ
+temporary=тимчасовий
+list=список
+score=очки
+database=база
+config=конфігурація
+value=значення
+file=файл
+data=дані
+
+# --- conditions & comparisons ---
+has=має
+is=є
+are=є
+not=не
+holding=тримає
+sneaking=крадеться
+flying=летить
+wet=мокрий
+op=оп
+ground=земля
+biome=біом
+permission=дозвіл
+more=більше
+less=менше
+equal=дорівнює
+than=ніж
+least=найменше
+most=найбільше
+above=вище
+below=нижче
+under=під
+health=здоров'я
+hunger=голод
+xp=xp
+level=рівень
+gamemode=режим
+
+# --- player events ---
+joins=приєднується
+joins=заходить
+leaves=виходить
+leaves=покидає
+dies=помирає
+respawns=відроджується
+jumps=стрибає
+sneaks=крадеться
+sneaks=підкрадається
+moves=рухається
+moves=ворушиться
+attacks=атакує
+chats=пише
+fishes=ловить
+levels=підвищує
+clicks=клікає
+eats=їсть
+kills=вбиває
+starts=починає
+stops=зупиняється
+sprinting=біжить
+takes=отримує
+damage=шкода
+breaks=ламає
+places=ставить
+picks=підбирає
+drops=кидає
+uses=використовує
+interacts=взаємодіє
+enters=входить
+reaches=досягає
+types=друкує
+touches=торкається
+walks=ходить
+first=перший
+inventory=інвентар
+mob=моб
+custom=власний
+event=подія
+fires=спрацьовує
+night=ніч
+dawn=світанок
+falls=падає
+game=гра
+server=сервер
+slot=слот
+
+# --- world state ---
+weather=погода
+rain=дощ
+sunny=сонячно
+storm=буря
+stormy=штормовий
+noon=полудень
+dusk=сутінки
+midnight=північ
+morning=ранок
+evening=вечір
+day=день
+daytime=день
+nighttime=ніч
+
+# --- gamemodes ---
+survival=виживання
+creative=креатив
+adventure=пригода
+spectator=спостерігач
+
+# --- dimensions ---
+the end=край
+overworld=звичайний світ
+
+# --- single-word items & blocks ---
+diamond=алмаз
+emerald=смарагд
+iron=залізо
+gold=золото
+coal=вугілля
+bread=хліб
+apple=яблуко
+torch=смолоскип
+water=вода
+lava=лава
+stone=камінь
+dirt=земля
+sand=пісок
+glass=скло
+chest=скриня
+door=двері
+sword=меч
+bow=лук
+arrow=стріла
+shield=щит
+stick=палиця
+bed=ліжко
+boat=човен
+bucket=відро
+compass=компас
+
+# --- multi-word items & blocks (phrases) ---
+diamond sword=алмазний меч
+iron sword=залізний меч
+wooden sword=дерев'яний меч
+golden sword=золотий меч
+netherite sword=незеритовий меч
+diamond block=блок алмазу
+gold block=блок золота
+iron block=блок заліза
+iron ingot=залізний злиток
+gold ingot=золотий злиток
+diamond ore=алмазна руда
+iron ore=залізна руда
+gold ore=золота руда
+coal ore=вугільна руда
+redstone dust=редстоуновий пил
+enchanted golden apple=зачароване золоте яблуко
+golden apple=золоте яблуко
+
+# --- single-word mobs ---
+zombie=зомбі
+skeleton=скелет
+creeper=крипер
+spider=павук
+pig=свиня
+cow=корова
+chicken=курка
+sheep=вівця
+wolf=вовк
+enderman=ендермен
+villager=селянин
+horse=кінь
+cat=кіт
+bee=бджола
+
+# --- multi-word mobs ---
+iron golem=залізний голем
+zombie pigman=зомбі-свинолюд
+
+# --- effects ---
+speed=швидкість
+strength=сила
+jump boost=посилення стрибка
+regeneration=регенерація
+invisibility=невидимість
+poison=отрута
+weakness=слабкість
+slowness=сповільнення
+night vision=нічне бачення
+fire resistance=вогнестійкість
+water breathing=дихання під водою
+haste=прискорення

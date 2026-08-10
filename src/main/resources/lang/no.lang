@@ -1,0 +1,306 @@
+# Norwegian translation pack for Hermes.
+# Format: <canonical english>=<native form> (one per line, # = comment).
+# Single native words are translated while reading a script; longer native
+# phrases ("diamantsverd") are matched by the parser's greedy lookups.
+# You may extend or override anything here by dropping a custom no.lang into
+# plugins/Hermes/lang/.
+
+# --- flow & structure ---
+when=når
+every=hvert
+action=handling
+command=kommando
+region=region
+mark=merke
+gui=meny
+create=lag
+if=hvis
+repeat=gjenta
+loop=iterer
+stop=stopp
+else=ellers
+fire=utløs
+win=vinne
+clear=tøm
+delete=slett
+while=mens
+wait=vent
+and=og
+or=eller
+as=som
+all=alle
+numbers=tall
+from=fra
+to=til
+over=over
+up=opp
+down=ned
+
+# --- actions ---
+give=gi
+remove=fjern
+set=sett
+add=adder
+tell=si
+announce=kunngjør
+warn=advare
+welcome=velkom
+show=vis
+kill= drep
+damage=skad
+heal=helbred
+feed=mata
+kick=spark
+launch=avfyr
+title=tittel
+actionbar=handlingslinje
+lightning=lyn
+explode=eksploder
+teleport=teleporter
+spawn=spawne
+play=spill
+write=skriv
+open=åpne
+close=lukk
+press=trykk
+pull=trekk
+power=aktiver
+unpower=deaktiver
+put=plasser
+take=ta
+make=lag
+
+# --- noise / articles ---
+the=den
+a=en
+an=et
+any=noen
+
+# --- prepositions ---
+with=med
+by=av
+at=ved
+near=nær
+named=kalt
+because=fordi
+in=i
+on=på
+of=av
+
+# --- values ---
+true=sant
+false=usant
+nothing=ingenting
+none=ingen
+length=lengde
+random=tilfeldig
+number=tall
+count=antall
+between=mellom
+contains=inneholder
+plus=pluss
+minus=minus
+times=ganger
+divided=delt
+second=sekund
+seconds=sekunder
+minute=minutt
+minutes=minutter
+hour=time
+hours=timer
+tick=tick
+ticks=ticks
+
+# --- variable targets ---
+player=spiller
+world=verden
+temporary=midlertidig
+list=liste
+score=poeng
+database=database
+config=konfigurasjon
+value=verdi
+file=fil
+data=data
+
+# --- conditions & comparisons ---
+has=har
+is=er
+are=er
+not=ikke
+holding=holder
+sneaking=lurer
+flying=flyr
+wet=våt
+op=op
+ground=bakke
+biome=biom
+permission=tillatelse
+more=mer
+less=mindre
+equal=lik
+than=enn
+least=minst
+most=mest
+above=over
+below=under
+under=under
+health=liv
+hunger=sult
+xp=xp
+level=nivå
+gamemode=modus
+
+# --- player events ---
+joins=deltar
+joins=blir med
+leaves=forlater
+leaves=går
+dies=dør
+respawns=respowner
+jumps=hopper
+sneaks=lurer
+sneaks=sniker
+moves=beveger
+moves=beveger seg
+attacks=angriper
+chats=prater
+fishes=fisker
+levels=stiger
+clicks=klikker
+eats=spiser
+kills=dreper
+starts=starter
+stops=stopper
+sprinting=springer
+takes=tar
+damage=skade
+breaks=bryter
+places=plasserer
+picks=plukker
+drops=slipper
+uses=bruker
+interacts=interagerer
+enters=går inn
+enters=kommer
+reaches=når
+types=skriver
+touches=rører
+walks=går
+first=første
+inventory=inventar
+mob=vesen
+custom=egendefinert
+event=hendelse
+fires=utløses
+night=natt
+dawn=daggry
+falls=faller
+game=spill
+server=server
+slot=plass
+
+# --- world state ---
+weather=vær
+rain=regn
+sunny=solfylt
+storm=storm
+stormy=stormfull
+noon=middag
+dusk=skumring
+midnight=midnatt
+morning=morgen
+evening=kveld
+day=dag
+daytime=dagtid
+nighttime=nattetid
+
+# --- gamemodes ---
+survival=overlevelse
+creative=kreativ
+adventure=eventyr
+spectator=tilskuer
+
+# --- dimensions ---
+the end=slutten
+overworld=oververden
+
+# --- single-word items & blocks ---
+diamond=diamant
+emerald=smaragd
+iron=jern
+gold=gull
+coal=kull
+bread=brød
+apple=eple
+torch=fakkel
+water=vann
+lava=lava
+stone=stein
+dirt=jord
+sand=sand
+glass=glass
+chest=kiste
+door=dør
+sword=sverd
+bow=bue
+arrow=pil
+shield=skjold
+stick=pinne
+bed=seng
+boat=båt
+bucket=bøtte
+compass=kompass
+
+# --- multi-word items & blocks (phrases) ---
+diamond sword=diamantsverd
+iron sword=jernsverd
+wooden sword=tre sverd
+golden sword=gullsverd
+netherite sword=netherittsverd
+diamond block=diamantblokk
+gold block=gullblokk
+iron block=jernblokk
+iron ingot=jernbarre
+gold ingot=gullbarre
+diamond ore=diamantmalm
+iron ore=jernmalm
+gold ore=gullmalm
+coal ore=kullmalm
+redstone dust=redstonestøv
+enchanted golden apple=fortryllet gyllent eple
+golden apple=gyllent eple
+
+# --- single-word mobs ---
+zombie=zombie
+skeleton=skjelett
+creeper=creeper
+spider=edderkopp
+pig=gris
+cow=ku
+chicken=kylling
+sheep=sau
+wolf=ulv
+enderman=enderman
+villager=landsbyboer
+horse=hest
+cat=katt
+bee=bie
+
+# --- multi-word mobs ---
+iron golem=jerngolem
+zombie pigman=zombiegris
+
+# --- effects ---
+speed=fart
+strength=styrke
+jump boost=hoppboost
+regeneration=regenerering
+invisibility=usynlighet
+poison=gift
+weakness=svakhet
+slowness=langsomhet
+night vision=nattesyn
+fire resistance=brannmotstand
+water breathing=vannpusting
+haste=haste

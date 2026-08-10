@@ -53,6 +53,7 @@ public final class BukkitWorld implements WorldAPI {
     private final Scoreboard scoreboard;
     private final Map<String, Region> regions = new HashMap<>();
     private final Map<UUID, List<org.bukkit.permissions.PermissionAttachment>> attachments = new HashMap<>();
+    private final Map<UUID, org.bukkit.boss.BossBar> bossbars = new HashMap<>();
 
     private static final class Region {
         final Vec3 min;
@@ -187,15 +188,15 @@ public final class BukkitWorld implements WorldAPI {
     @Override public void broadcast(String msg) { Bukkit.broadcastMessage(msg); }
     @Override public void welcome(PlayerRef p, String msg) {
         Player player = playerOf(p);
-        player.sendMessage("Â§6[Â§eHermesÂ§6] Â§f" + msg);
+        player.sendMessage("§6[§eHermes§6] §f" + msg);
         player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0f, 1.2f);
     }
     @Override public void warn(PlayerRef p, String msg) {
-        playerOf(p).sendMessage("Â§c[!] Â§7" + msg);
+        playerOf(p).sendMessage("§c[!] §7" + msg);
         playerOf(p).playSound(playerOf(p).getLocation(), Sound.BLOCK_NOTE_BLOCK_HARP, 1.0f, 0.7f);
     }
     @Override public void announce(String msg) {
-        Bukkit.broadcastMessage("Â§d[Hermes] Â§f" + msg);
+        Bukkit.broadcastMessage("§d[Hermes] §f" + msg);
     }
 
     // ------------------------------------------------------------------
@@ -220,6 +221,52 @@ public final class BukkitWorld implements WorldAPI {
     @Override public int level(PlayerRef p) { return playerOf(p).getLevel(); }
     @Override public void giveLevels(PlayerRef p, int amount) { playerOf(p).giveExpLevels(amount); }
 
+    @Override public void setHealth(PlayerRef p, double amount) {
+        Player pl = playerOf(p);
+        double max = pl.getAttribute(org.bukkit.attribute.Attribute.MAX_HEALTH).getValue();
+        pl.setHealth(Math.max(0, Math.min(amount, max)));
+    }
+    @Override public void setHunger(PlayerRef p, int amount) {
+        playerOf(p).setFoodLevel(Math.max(0, Math.min(20, amount)));
+    }
+    @Override public void setXp(PlayerRef p, int amount) {
+        Player pl = playerOf(p);
+        pl.setExp(0);
+        pl.setLevel(0);
+        pl.setTotalExperience(Math.max(0, amount));
+    }
+    @Override public void setLevel(PlayerRef p, int amount) {
+        playerOf(p).setLevel(Math.max(0, amount));
+    }
+
+    @Override public void setBossbar(PlayerRef p, String title, double progress) {
+        Player pl = playerOf(p);
+        org.bukkit.boss.BossBar bar = bossbars.get(pl.getUniqueId());
+        if (bar == null) {
+            NamespacedKey key = new NamespacedKey(plugin, "bossbar-" + pl.getUniqueId());
+            bar = Bukkit.createBossBar(key, title, org.bukkit.boss.BarColor.PURPLE, org.bukkit.boss.BarStyle.SOLID);
+            bossbars.put(pl.getUniqueId(), bar);
+        }
+        bar.setTitle(title);
+        bar.setProgress(Math.max(0, Math.min(100, progress)) / 100.0);
+        bar.addPlayer(pl);
+    }
+    @Override public void clearBossbar(PlayerRef p) {
+        Player pl = playerOf(p);
+        org.bukkit.boss.BossBar bar = bossbars.remove(pl.getUniqueId());
+        if (bar != null) {
+            bar.removePlayer(pl);
+            Bukkit.removeBossBar(new NamespacedKey(plugin, "bossbar-" + pl.getUniqueId()));
+        }
+    }
+    @Override public String heldItem(PlayerRef p) {
+        ItemStack hand = playerOf(p).getInventory().getItemInMainHand();
+        if (hand == null || hand.getType() == Material.AIR) return "nothing";
+        String key = hand.getType().getKey().getKey();
+        String friendly = Dictionary.findItem(key);
+        return friendly != null ? friendly : key.replace('_', ' ');
+    }
+
     // ------------------------------------------------------------------
     // player state
     // ------------------------------------------------------------------
@@ -241,6 +288,12 @@ public final class BukkitWorld implements WorldAPI {
     @Override public boolean isWet(PlayerRef p) { return playerOf(p).isInWater() || playerOf(p).isInRain(); }
     @Override public boolean isFlying(PlayerRef p) { return playerOf(p).isFlying(); }
     @Override public boolean isOp(PlayerRef p) { return playerOf(p).isOp(); }
+    @Override public void setFrozen(PlayerRef p, boolean frozen) {
+        Player player = playerOf(p);
+        player.setWalkSpeed(frozen ? 0f : 0.2f);
+        player.setFlySpeed(frozen ? 0f : 0.1f);
+    }
+    @Override public boolean isFrozen(PlayerRef p) { return playerOf(p).getWalkSpeed() == 0f; }
 
     // ------------------------------------------------------------------
     // inventory
@@ -765,8 +818,13 @@ public final class BukkitWorld implements WorldAPI {
     }
 
     @Override public void spawnParticles(String particle, Vec3 loc) {
+        spawnParticles(particle, loc, 30, 1.0);
+    }
+
+    @Override public void spawnParticles(String particle, Vec3 loc, int count, double size) {
         World w = defaultWorld();
-        w.spawnParticle(particleOf(particle), toBukkit(w, loc), 30, 0.5, 0.5, 0.5, 0);
+        double off = 0.5 * size;
+        w.spawnParticle(particleOf(particle), toBukkit(w, loc), count, off, off, off, 0);
     }
 
     // ------------------------------------------------------------------
@@ -854,5 +912,9 @@ public final class BukkitWorld implements WorldAPI {
             for (org.bukkit.permissions.PermissionAttachment a : list) a.remove();
         }
         attachments.clear();
+        for (org.bukkit.boss.BossBar bar : bossbars.values()) {
+            for (org.bukkit.entity.Player pl : bar.getPlayers()) bar.removePlayer(pl);
+        }
+        bossbars.clear();
     }
 }

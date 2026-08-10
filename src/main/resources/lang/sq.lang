@@ -1,0 +1,313 @@
+# Albanian translation pack for Hermes.
+# Format: <canonical english>=<native form> (one per line, # = comment).
+# Single native words are translated while reading a script; longer native
+# phrases ("shpatë diamanti") are matched by the parser's greedy lookups.
+# You may extend or override anything here by dropping a custom sq.lang into
+# plugins/Hermes/lang/.
+
+# --- flow & structure ---
+when=kur
+every=çdo
+action=veprim
+command=komandë
+region=rajon
+mark=shenjë
+gui=meny
+create=krijo
+if=nëse
+repeat=përsërit
+loop=qark
+stop=ndal
+else=përndryshe
+fire=ndez
+win=fito
+clear=pastro
+delete=fshi
+while=ndërsa
+wait=prite
+and=dhe
+or=ose
+as=si
+all=të gjithë
+numbers=numra
+from=nga
+to=te
+over=mbi
+up=lart
+down=poshtë
+
+# --- actions ---
+give=jep
+remove=hiq
+set=vendos
+add=shto
+tell=thuaj
+announce=shpall
+warn=paralajmëro
+welcome=mirëprit
+show=trego
+kill=vrit
+damage=dëmto
+heal=shëro
+feed=ushqe
+kick=përjashto
+launch=lësho
+title=titull
+actionbar=shirit veprimi
+lightning=vetëtimë
+explode=shpërthe
+teleport=teleporto
+spawn=krijo
+play=luaj
+write=shkruaj
+open=hap
+close=mbyll
+press=shtyp
+pull=tërhiq
+power=aktivizo
+unpower=çaktivizo
+put=vendos
+take=merr
+make=bëj
+freeze=ngri
+unfreeze=shkri
+
+# --- noise / articles ---
+the=e
+a=një
+an=një
+any=çdo
+item=sende
+
+# --- prepositions ---
+with=me
+by=nga
+at=te
+near=afër
+near=pranë
+named=quajtur
+because=sepse
+in=në
+on=mbi
+of=i
+randomly=rastësisht
+within=brenda
+
+# --- values ---
+true=e vërtetë
+false=e rreme
+nothing=asgjë
+none=asnjë
+length=gjatësi
+random=rastësor
+number=numër
+count=numërim
+between=midis
+contains=përmban
+plus=plus
+minus=minus
+times=herë
+divided=pjestuar
+second=sekondë
+seconds=sekonda
+minute=minutë
+minutes=minuta
+hour=orë
+hours=orë
+tick=tik
+ticks=tika
+size=madhësi
+
+# --- variable targets ---
+player=lojtar
+world=bota
+temporary=i përkohshëm
+list=listë
+score=pikë
+database=databazë
+config=konfigurim
+value=vlerë
+file=skedar
+data=të dhëna
+players=lojtarë
+
+# --- conditions & comparisons ---
+has=ka
+is=është
+are=janë
+not=jo
+holding=mban
+sneaking=zvarritet
+flying=fluturon
+wet=i lagur
+op=op
+ground=tokë
+biome=biom
+permission=leje
+more=më shumë
+less=më pak
+equal=i barabartë
+than=se
+least=të paktën
+most=më së shumti
+above=mbi
+below=nën
+under=nën
+health=shëndet
+hunger=uri
+xp=xp
+level=nivel
+gamemode=modalitet
+chance=shans
+
+# --- player events ---
+joins=bashkohet
+joins=hyn
+leaves=largohet
+dies=vdes
+respawns=ringjallet
+jumps=kërcen
+sneaks=zvarritet
+moves=lëviz
+attacks=sulmon
+attacks=godet
+chats=flet
+fishes=peshkon
+levels=ngrihet
+clicks=klikon
+eats=ha
+kills=vret
+starts=fillon
+stops=ndalon
+stops=ndalet
+sprinting=vrullon
+takes=merr
+damage=dëm
+breaks=thyen
+places=vendos
+picks=mbledh
+drops=hedh
+uses=përdor
+interacts=ndërvepron
+enters=hyn
+reaches=arrin
+types=shtyp
+touches=prek
+walks=ecën
+walks=shëtit
+first=i parë
+inventory=inventar
+mob=monster
+custom=personalizuar
+event=ngjarje
+fires=qëllon
+night=natë
+dawn=agim
+falls=bie
+game=lojë
+server=server
+slot=çelës
+
+# --- world state ---
+weather=moti
+rain=shi
+sunny=me diell
+storm=stuhi
+stormy=i stuhishëm
+noon=mesditë
+dusk=muzg
+midnight=mesnatë
+morning=mëngjes
+evening=mbrëmje
+day=ditë
+daytime=dita
+nighttime=nata
+
+# --- gamemodes ---
+survival=mbijetesë
+creative=kreativ
+adventure=aventurë
+spectator=spektator
+
+# --- dimensions ---
+the end=fundi
+overworld=bota sipër
+
+# --- single-word items & blocks ---
+diamond=diamant
+emerald=smerald
+iron=hekur
+gold=ar
+coal=qymyr
+bread=bukë
+apple=mollë
+torch=pishtar
+water=ujë
+lava=lava
+stone=gur
+dirt=dhe
+sand=rërë
+glass=xham
+chest=arka
+door=derë
+sword=shpatë
+bow=hark
+arrow=shigjetë
+shield=mburojë
+stick=shkop
+bed=shtrat
+boat=varkë
+bucket=kovë
+compass=busull
+
+# --- multi-word items & blocks (phrases) ---
+diamond sword=shpatë diamanti
+iron sword=shpatë hekuri
+wooden sword=shpatë druri
+golden sword=shpatë ari
+netherite sword=shpatë netheriti
+diamond block=bllok diamanti
+gold block=bllok ari
+iron block=bllok hekuri
+iron ingot=shufër hekuri
+gold ingot=shufër ari
+diamond ore=xeheror diamanti
+iron ore=xeheror hekuri
+gold ore=xeheror ari
+coal ore=xeheror qymyri
+enchanted golden apple=mollë ari e magjepsur
+golden apple=mollë ari
+
+# --- single-word mobs ---
+zombie=zombi
+skeleton=skelet
+creeper=creeper
+spider=merimangë
+pig=derr
+cow=lopë
+chicken=pulë
+sheep=dele
+wolf=ujk
+enderman=enderman
+villager=fshatar
+horse=kalë
+cat=mace
+bee=bletë
+
+# --- multi-word mobs ---
+iron golem=golem hekuri
+zombie pigman=derr zombie
+
+# --- effects ---
+speed=shpejtësi
+strength=forcë
+jump boost=kërcim i lartë
+regeneration=rigjenerim
+invisibility=pamundësi për t'u parë
+poison=helm
+weakness=dobësi
+slowness=ngadalësi
+night vision=shikim nate
+fire resistance=rezistencë ndaj zjarrit
+water breathing=frymëmarrje nën ujë
+haste=nguti

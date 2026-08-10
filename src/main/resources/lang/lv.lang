@@ -1,0 +1,305 @@
+# Latvian translation pack for Hermes.
+# Format: <canonical english>=<native form> (one per line, # = comment).
+# Single native words are translated while reading a script; longer native
+# phrases ("briljantu zobens") are matched by the parser's greedy lookups.
+# You may extend or override anything here by dropping a custom lv.lang into
+# plugins/Hermes/lang/.
+
+# --- flow & structure ---
+when=kad
+every=katrs
+action=darbība
+command=komanda
+region=reģions
+mark=atzīme
+gui=izvēlne
+create=izveido
+if=ja
+repeat=atkārto
+loop=cikls
+stop=apturi
+else=citādi
+fire=izšauj
+win=uzvar
+clear=notīri
+delete=dzēs
+while=kamēr
+wait=gaidi
+and=un
+or=vai
+as=kā
+all=visi
+numbers=skaitļi
+from=no
+to=līdz
+over=virs
+up=augšā
+down=lejā
+
+# --- actions ---
+give=iedod
+remove=noņem
+set=uzstādi
+add=pieliec
+tell=pasaki
+announce=paziņo
+warn=brīdini
+welcome=sveicini
+show=rādi
+kill=nogalini
+damage=bojā
+heal=dziedē
+feed=baro
+kick=izsit
+launch=palaid
+title=nosaukums
+actionbar=josla
+lightning=zibens
+explode=sprāgsti
+teleport=teleportē
+spawn=izsauc
+play=atskaņo
+write=raksti
+open=atver
+close=aizver
+press=nospied
+pull=velc
+power=aktivizē
+unpower=deaktivizē
+put=ieliec
+take=paņem
+make=taisi
+
+# --- noise / articles ---
+the=šis
+a=viens
+an=viens
+any=jebkurš
+
+# --- prepositions ---
+with=ar
+by=pie
+at=tur
+near=blakus
+named=sauc
+because=jo
+in=iekšā
+on=uz
+of=no
+
+# --- values ---
+true=patiess
+false=nepatiess
+nothing=nekas
+none=neviens
+length=garums
+random=nejaušs
+number=skaitlis
+count=skaits
+between=starp
+contains=satur
+plus=plus
+minus=mīnus
+times=reizes
+divided=dalīts
+second=sekunde
+seconds=sekundes
+minute=minūte
+minutes=minūtes
+hour=stunda
+hours=stundas
+tick=tick
+ticks=tick
+
+# --- variable targets ---
+player=spēlētājs
+world=pasaule
+temporary=īslaicīgs
+list=saraksts
+score=punkti
+database=datubāze
+config=iestatījumi
+value=vērtība
+file=fails
+data=dati
+
+# --- conditions & comparisons ---
+has=ir
+is=ir
+are=ir
+not=ne
+holding=tur
+sneaking=lavījas
+flying=lido
+wet=slapjš
+op=op
+ground=zeme
+biome=bioma
+permission=atļauja
+more=vairāk
+less=mazāk
+equal=vienāds
+than=nekā
+least=vismazāk
+most=visvairāk
+above=augšā
+below=apakšā
+under=zem
+health=veselība
+hunger=bads
+xp=xp
+level=līmenis
+gamemode=režīms
+
+# --- player events ---
+joins=pievienojas
+joins=ienāk
+leaves=pamet
+leaves=aiziet
+dies=mirst
+respawns=atdzimst
+jumps=lec
+sneaks=lavījas
+sneaks=tup
+moves=kustas
+moves=pārvietojas
+attacks=uzbrūk
+chats=runā
+fishes=zvejo
+levels=celas
+clicks=klikšķina
+eats=ēd
+kills=nogalina
+starts=sāk
+stops=apstājas
+sprinting=skrien
+takes=saņem
+damage=bojājums
+breaks=salauž
+places=liek
+picks=paceļ
+drops=nomet
+uses=lieto
+interacts=mijiedarbojas
+enters=ieiet
+reaches=sasniedz
+types=raksta
+touches=skar
+walks=staigā
+first=pirmais
+inventory=inventārs
+mob=radījums
+custom=pielāgots
+event=notikums
+fires=notiek
+night=nakts
+dawn=rītausma
+falls=krīt
+game=spēle
+server=serveris
+slot=vieta
+
+# --- world state ---
+weather=laiks
+rain=lietus
+sunny=saulains
+storm=vētra
+stormy=vētrains
+noon=pusdiena
+dusk=krēsla
+midnight=pusnakts
+morning=rīts
+evening=vakars
+day=diena
+daytime=diena
+nighttime=nakts
+
+# --- gamemodes ---
+survival=izdzīvošana
+creative=radošais
+adventure=piedzīvojums
+spectator=skatītājs
+
+# --- dimensions ---
+the end=beigas
+overworld=virszeme
+
+# --- single-word items & blocks ---
+diamond=briliants
+emerald=smaragds
+iron=dzelzs
+gold=zelts
+coal=ogles
+bread=maize
+apple=ābols
+torch=lāpa
+water=ūdens
+lava=lava
+stone=akmens
+dirt=netīrumi
+sand=smiltis
+glass=stikls
+chest=lāde
+door=durvis
+sword=zobens
+bow=loks
+arrow=bulta
+shield=vairogs
+stick=kociņš
+bed=gulta
+boat=laiva
+bucket=spainis
+compass=kompass
+
+# --- multi-word items & blocks (phrases) ---
+diamond sword=briljantu zobens
+iron sword=dzelzs zobens
+wooden sword=koka zobens
+golden sword=zelta zobens
+netherite sword=netherīta zobens
+diamond block=briljantu bloks
+gold block=zelta bloks
+iron block=dzelzs bloks
+iron ingot=dzelzs lietnis
+gold ingot=zelta lietnis
+diamond ore=briljantu rūda
+iron ore=dzelzs rūda
+gold ore=zelta rūda
+coal ore=ogļu rūda
+redstone dust=redstone putekļi
+enchanted golden apple=apburts zelta ābols
+golden apple=zelta ābols
+
+# --- single-word mobs ---
+zombie=zombijs
+skeleton=skelets
+creeper=creeper
+spider=zirneklis
+pig=cūka
+cow=govs
+chicken=vista
+sheep=aita
+wolf=vilks
+enderman=endermanis
+villager=ciemietis
+horse=zirgs
+cat=kaķis
+bee=bite
+
+# --- multi-word mobs ---
+iron golem=dzelzs golems
+zombie pigman=zombiju cūkcilvēks
+
+# --- effects ---
+speed=ātrums
+strength=spēks
+jump boost=lēciena pastiprinājums
+regeneration=reģenerācija
+invisibility=neredzamība
+poison=inde
+weakness=vājums
+slowness=lēnums
+night vision=tumsas redze
+fire resistance=ugunsizturība
+water breathing=elpošana zem ūdens
+haste=steiga

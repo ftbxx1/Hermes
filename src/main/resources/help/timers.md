@@ -40,3 +40,16 @@ every 300 seconds
 - `every` blocks can only appear at the top level of a script.
 - If a script is reloaded, its timers are removed and re-created — you
   never get doubled timers.
+
+## Delaying a block
+
+To pause a block once (rather than repeating), use `wait`:
+
+```
+when player joins
+    wait 5 seconds
+    give player 1 diamond
+```
+
+The same units work here as for `every`: plain numbers mean seconds, and
+you can say `ticks` explicitly for finer control (1 tick = 1/20 of a second).

@@ -1,0 +1,306 @@
+# Italian translation pack for Hermes.
+# Format: <canonical english>=<native form> (one per line, # = comment).
+# Single native words are translated while reading a script; longer native
+# phrases ("spada di diamante") are matched by the parser's greedy lookups.
+# You may extend or override anything here by dropping a custom it.lang into
+# plugins/Hermes/lang/.
+
+# --- flow & structure ---
+when=quando
+every=ogni
+action=azione
+command=comando
+region=regione
+mark=marca
+gui=menu
+create=creare
+if=se
+repeat=ripetere
+loop=iterare
+stop=fermare
+else=altrimenti
+fire=sparare
+win=vincere
+clear=pulire
+delete=eliminare
+while=mentre
+wait=aspettare
+and=e
+or=o
+as=come
+all=tutti
+numbers=numeri
+from=da
+to=a
+over=sopra
+up=su
+down=giù
+
+# --- actions ---
+give=dare
+remove=rimuovere
+set=impostare
+add=aggiungere
+tell=dire
+announce=annunciare
+warn=avvisare
+welcome=accogliere
+show=mostrare
+kill=uccidere
+damage=danneggiare
+heal=curare
+feed=nutrire
+kick=espellere
+launch=lanciare
+title=titolo
+actionbar=barra
+lightning=fulmine
+explode=esplodere
+teleport=teletrasportare
+spawn=generare
+spawn=apparire
+play=riprodurre
+write=scrivere
+open=aprire
+close=chiudere
+press=premere
+pull=tirare
+power=attivare
+unpower=disattivare
+put=mettere
+take=prendere
+make=fare
+
+# --- noise / articles ---
+the=il
+a=un
+an=un
+any=qualsiasi
+
+# --- prepositions ---
+with=con
+by=da
+at=a
+near=vicino
+named=chiamato
+because=perché
+in=in
+on=su
+of=di
+
+# --- values ---
+true=vero
+false=falso
+nothing=niente
+none=nessuno
+length=lunghezza
+random=casuale
+number=numero
+count=conteggio
+between=tra
+contains=contiene
+plus=più
+minus=meno
+times=volte
+divided=diviso
+second=secondo
+seconds=secondi
+minute=minuto
+minutes=minuti
+hour=ora
+hours=ore
+tick=tick
+ticks=tick
+
+# --- variable targets ---
+player=giocatore
+world=mondo
+temporary=temporaneo
+list=lista
+score=punteggio
+database=database
+config=configurazione
+value=valore
+file=file
+data=dati
+
+# --- conditions & comparisons ---
+has=ha
+is=è
+are=sono
+not=non
+holding=tenendo
+sneaking=accovacciato
+flying=volando
+wet=bagnato
+op=op
+ground=terra
+biome=bioma
+permission=permesso
+more=più
+less=meno
+equal=uguale
+than=che
+least=minimo
+most=massimo
+above=sopra
+below=sotto
+under=sotto
+health=vita
+hunger=fame
+xp=xp
+level=livello
+gamemode=modalità
+
+# --- player events ---
+joins=si unisce
+joins=entra
+leaves=se ne va
+leaves=esce
+dies=muore
+respawns=riappare
+jumps=salta
+sneaks=s'accovaccia
+sneaks=accovaccia
+moves=si muove
+moves=muove
+attacks=attacca
+chats=parla
+fishes=pesca
+levels=sale
+clicks=clicca
+eats=mangia
+kills=uccide
+starts=inizia
+stops=ferma
+sprinting=correndo
+takes=riceve
+damage=danno
+breaks=rompe
+places=posiziona
+picks=raccoglie
+drops=lascia
+uses=usa
+interacts=interagisce
+enters=entra
+reaches=raggiunge
+types=scrive
+touches=tocca
+walks=cammina
+first=prima
+inventory=inventario
+mob=creatura
+custom=personalizzato
+event=evento
+fires=accade
+night=notte
+dawn=alba
+falls=cade
+game=gioco
+server=server
+slot=casella
+
+# --- world state ---
+weather=clima
+rain=pioggia
+sunny=soleggiato
+storm=tempesta
+stormy=tempestoso
+noon=mezzogiorno
+dusk=crepuscolo
+midnight=mezzanotte
+morning=mattina
+evening=sera
+day=giorno
+daytime=giorno
+nighttime=notte
+
+# --- gamemodes ---
+survival=sopravvivenza
+creative=creativo
+adventure=avventura
+spectator=spettatore
+
+# --- dimensions ---
+the end=la fine
+overworld=superficie
+
+# --- single-word items & blocks ---
+diamond=diamante
+emerald=smeraldo
+iron=ferro
+gold=oro
+coal=carbone
+bread=pane
+apple=mela
+torch=torcia
+water=acqua
+lava=lava
+stone=pietra
+dirt=terra
+sand=sabbia
+glass=vetro
+chest=baule
+door=porta
+sword=spada
+bow=arco
+arrow=freccia
+shield=scudo
+stick=bastone
+bed=letto
+boat=barca
+bucket=secchio
+compass=bussola
+
+# --- multi-word items & blocks (phrases) ---
+diamond sword=spada di diamante
+iron sword=spada di ferro
+wooden sword=spada di legno
+golden sword=spada d'oro
+netherite sword=spada di netherite
+diamond block=blocco di diamante
+gold block=blocco d'oro
+iron block=blocco di ferro
+iron ingot=lingotto di ferro
+gold ingot=lingotto d'oro
+diamond ore=minerale di diamante
+iron ore=minerale di ferro
+gold ore=minerale d'oro
+coal ore=carbone minerale
+redstone dust=polvere di redstone
+enchanted golden apple=mela d'oro incantata
+golden apple=mela d'oro
+
+# --- single-word mobs ---
+zombie=zombi
+skeleton=scheletro
+creeper=creeper
+spider=ragno
+pig=maiale
+cow=mucca
+chicken=pollo
+sheep=pecora
+wolf=lupo
+enderman=enderman
+villager=abitante
+horse=cavallo
+cat=gatto
+bee=ape
+
+# --- multi-word mobs ---
+iron golem=golem di ferro
+zombie pigman=maiale zombi
+
+# --- effects ---
+speed=velocità
+strength=forza
+jump boost=salto
+regeneration=rigenerazione
+invisibility=invisibilità
+poison=veleno
+weakness=debolezza
+slowness=lentezza
+night vision=visione notturna
+fire resistance=resistenza al fuoco
+water breathing=respirare sott'acqua
+haste=fretta

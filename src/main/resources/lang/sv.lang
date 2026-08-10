@@ -1,0 +1,306 @@
+# Swedish translation pack for Hermes.
+# Format: <canonical english>=<native form> (one per line, # = comment).
+# Single native words are translated while reading a script; longer native
+# phrases ("diamantsvärd") are matched by the parser's greedy lookups.
+# You may extend or override anything here by dropping a custom sv.lang into
+# plugins/Hermes/lang/.
+
+# --- flow & structure ---
+when=när
+every=varje
+action=åtgärd
+command=kommando
+region=region
+mark=markering
+gui=meny
+create=skapa
+if=om
+repeat=upprepa
+loop=iterera
+stop=stoppa
+else=annars
+fire=utlösa
+win=vinna
+clear=töm
+delete=radera
+while=medan
+wait=vänta
+and=och
+or=eller
+as=som
+all=alla
+numbers=nummer
+from=från
+to=till
+over=över
+up=upp
+down=ner
+
+# --- actions ---
+give=ge
+remove=avlägsna
+set=sätt
+add=addera
+tell=säg
+announce=tillkännage
+warn=varna
+welcome=välkomna
+show=visa
+kill=döda
+damage=skada
+heal=läka
+feed=mata
+kick=sparka
+launch=skjuta
+title=titel
+actionbar=aktionsfält
+lightning=åsknedslag
+explode=explodera
+teleport=teleportera
+spawn=spawna
+play=spela
+write=skriv
+open=öppna
+close=stäng
+press=tryck
+pull=dra
+power=aktivera
+unpower=avaktivera
+put=placera
+take=ta
+make=gör
+
+# --- noise / articles ---
+the=den
+a=en
+an=ett
+any=någon
+
+# --- prepositions ---
+with=med
+by=av
+at=på
+near=nära
+named=kallad
+because=eftersom
+in=i
+on=på
+of=av
+
+# --- values ---
+true=sant
+false=falskt
+nothing=ingenting
+none=ingen
+length=längd
+random=slump
+number=nummer
+count=antal
+between=mellan
+contains=innehåller
+plus=plus
+minus=minus
+times=gånger
+divided=dividerat
+second=sekund
+seconds=sekunder
+minute=minut
+minutes=minuter
+hour=timme
+hours=timmar
+tick=tick
+ticks=ticks
+
+# --- variable targets ---
+player=spelare
+world=värld
+temporary=tillfällig
+list=lista
+score=poäng
+database=databas
+config=konfiguration
+value=värde
+file=fil
+data=data
+
+# --- conditions & comparisons ---
+has=har
+is=är
+are=är
+not=inte
+holding=håller
+sneaking=smyger
+flying=flyger
+wet=våt
+op=op
+ground=mark
+biome=biom
+permission=tillstånd
+more=mer
+less=mindre
+equal=lika
+than=än
+least=minst
+most=mest
+above=ovanför
+below=nedanför
+under=under
+health=liv
+hunger=hunger
+xp=xp
+level=nivå
+gamemode=läge
+
+# --- player events ---
+joins=ansluter
+joins=går med
+leaves=lämnar
+leaves=går
+dies=dör
+respawns=återföds
+jumps=hoppar
+sneaks=smyger
+sneaks=smiter
+moves=rör
+moves=rör sig
+attacks=attackerar
+chats=pratar
+fishes=fiskar
+levels=stiger
+clicks=klickar
+eats=äter
+kills=dödar
+starts=börjar
+stops=stannar
+sprinting=springer
+takes=tar
+damage=skada
+breaks=byter
+places=placerar
+picks=plockar
+drops=släpper
+uses=använder
+interacts=interagerar
+enters=kommer in
+enters=går in
+reaches=når
+types=skriver
+touches=rör
+walks=går
+first=första
+inventory=inventarie
+mob=varelse
+custom=anpassad
+event=händelse
+fires=utlöses
+night=natt
+dawn=gryning
+falls=faller
+game=spel
+server=server
+slot=plats
+
+# --- world state ---
+weather=väder
+rain=regn
+sunny=soligt
+storm=storm
+stormy=stormig
+noon=middag
+dusk=skymning
+midnight=midnatt
+morning=morgon
+evening=kväll
+day=dag
+daytime=dagtid
+nighttime=nattetid
+
+# --- gamemodes ---
+survival=överlevnad
+creative=kreativ
+adventure=äventyr
+spectator=åskådare
+
+# --- dimensions ---
+the end=slutet
+overworld=övervärld
+
+# --- single-word items & blocks ---
+diamond=diamant
+emerald=smaragd
+iron=järn
+gold=guld
+coal=kol
+bread=bröd
+apple=äpple
+torch=fackla
+water=vatten
+lava=lava
+stone=sten
+dirt=jord
+sand=sand
+glass=glas
+chest=kista
+door=dörr
+sword=svärd
+bow=båge
+arrow=pil
+shield=sköld
+stick=pinne
+bed=säng
+boat=båt
+bucket=hink
+compass=kompass
+
+# --- multi-word items & blocks (phrases) ---
+diamond sword=diamantsvärd
+iron sword=järnsvärd
+wooden sword=träsvärd
+golden sword=guldsvärd
+netherite sword=netheritsvärd
+diamond block=diamantblock
+gold block=guldblock
+iron block=järnblock
+iron ingot=järntacka
+gold ingot=guldtacka
+diamond ore=diamantmalm
+iron ore=järnmalm
+gold ore=guldmalm
+coal ore=kolmalm
+redstone dust=redstonedamm
+enchanted golden apple=förtrollat gyllene äpple
+golden apple=gyllene äpple
+
+# --- single-word mobs ---
+zombie=zombie
+skeleton=skelett
+creeper=creeper
+spider=spindel
+pig=gris
+cow=ko
+chicken=kyckling
+sheep=får
+wolf=varg
+enderman=enderman
+villager=bybo
+horse=häst
+cat=katt
+bee=bi
+
+# --- multi-word mobs ---
+iron golem=järngolem
+zombie pigman=zombie gris
+
+# --- effects ---
+speed=hastighet
+strength=styrka
+jump boost=hoppförstärkning
+regeneration=regenerering
+invisibility=osynlighet
+poison=gift
+weakness=svaghet
+slowness=långsamhet
+night vision=nattseende
+fire resistance=eldresistens
+water breathing=vattenandning
+haste=brådska

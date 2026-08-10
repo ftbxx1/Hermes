@@ -1,0 +1,311 @@
+# Turkish translation pack for Hermes.
+# Format: <canonical english>=<native form> (one per line, # = comment).
+# Single native words are translated while reading a script; longer native
+# phrases ("elmas kılıç") are matched by the parser's greedy lookups.
+# You may extend or override anything here by dropping a custom tr.lang into
+# plugins/Hermes/lang/.
+
+# --- flow & structure ---
+when=ne zaman
+when=eğer
+every=her
+action=eylem
+command=komut
+region=bölge
+mark=işaret
+gui=menü
+create=oluştur
+if=eğer
+repeat=tekrarla
+loop=döngü
+stop=dur
+else=değilse
+fire=ateşle
+win=kazan
+clear=temizle
+delete=sil
+while=süresince
+wait=bekle
+and=ve
+or=veya
+as=olarak
+all=hepsi
+numbers=sayılar
+from=dan
+from=den
+to=ye
+to=ya
+over=üzerinde
+up=yukarı
+down=aşağı
+
+# --- actions ---
+give=ver
+remove=kaldır
+set=ayarla
+add=ekle
+tell=söyle
+announce=duyur
+warn=uyar
+welcome=karşıla
+show=göster
+kill=öldür
+damage=hasar
+heal=iyileştir
+feed=besle
+kick=at
+launch=fırlat
+title=başlık
+actionbar=çubuk
+lightning=yıldırım
+explode=patla
+teleport=ışınla
+spawn=doğur
+play=oyna
+write=yaz
+open=aç
+close=kapat
+press=bas
+pull=çek
+power=çalıştır
+unpower=gücü kes
+put=koy
+take=al
+make=yap
+
+# --- noise / articles ---
+the=o
+a=bir
+an=bir
+any=herhangi
+
+# --- prepositions ---
+with=ile
+by=tarafından
+at=de
+at=da
+near=yakın
+named=adlı
+because=çünkü
+in=içinde
+on=üzerinde
+of=nin
+
+# --- values ---
+true=doğru
+false=yanlış
+nothing=hiçbir şey
+none=hiçbiri
+length=uzunluk
+random=rastgele
+number=sayı
+count=adet
+between=arasında
+contains=içerir
+plus=artı
+minus=eksi
+times=kez
+divided=bölü
+second=saniye
+seconds=saniyeler
+minute=dakika
+minutes=dakikalar
+hour=saat
+hours=saatler
+tick=tik
+ticks=tikler
+
+# --- variable targets ---
+player=oyuncu
+world=dünya
+temporary=geçici
+list=liste
+score=skor
+database=veritabanı
+config=ayar
+value=değer
+file=dosya
+data=veri
+
+# --- conditions & comparisons ---
+has=sahip
+has=var
+is=dir
+are=dir
+not=değil
+holding=tutuyor
+sneaking=çömeliyor
+flying=uçuyor
+wet=ıslak
+op=op
+ground=zemin
+biome=biyom
+permission=izin
+more=daha
+less=az
+equal=eşit
+than=den
+than=dan
+least=en az
+most=en çok
+above=yukarıda
+below=aşağıda
+under=altında
+health=sağlık
+hunger=açlık
+xp=xp
+level=seviye
+gamemode=mod
+
+# --- player events ---
+joins=katılıyor
+joins=giriyor
+leaves=ayrılıyor
+leaves=çıkıyor
+dies=ölüyor
+respawns=yeniden doğuyor
+jumps=zıplıyor
+sneaks=çömeliyor
+sneaks=eğiliyor
+moves=hareket ediyor
+moves=taşınıyor
+attacks=saldırıyor
+chats=konuşuyor
+fishes=balık tutuyor
+levels=seviye atlıyor
+clicks=tıklıyor
+eats=yiyor
+kills=öldürüyor
+starts=başlıyor
+stops=duruyor
+sprinting=koşuyor
+takes=alıyor
+damage=hasar
+breaks=kırıyor
+places=yerleştiriyor
+picks=topluyor
+drops=bırakıyor
+uses=kullanıyor
+interacts=etkileşiyor
+enters=giriyor
+reaches=ulaşıyor
+types=yazıyor
+touches=dokunuyor
+walks=yürüyor
+first=ilk
+inventory=envanter
+mob=yaratık
+custom=özel
+event=olay
+fires=gerçekleşiyor
+night=gece
+dawn=şafak
+falls=düşüyor
+game=oyun
+server=sunucu
+slot=yuva
+
+# --- world state ---
+weather=hava
+rain=yağmur
+sunny=güneşli
+storm=fırtına
+stormy=fırtınalı
+noon=öğle
+dusk=alacakaranlık
+midnight=gece yarısı
+morning=sabah
+evening=akşam
+day=gündüz
+daytime=gündüz
+nighttime=gece
+
+# --- gamemodes ---
+survival=hayatta kalma
+creative=yaratıcı
+adventure=macera
+spectator=izleyici
+
+# --- dimensions ---
+the end=son
+overworld=üst dünya
+
+# --- single-word items & blocks ---
+diamond=elmas
+emerald=zümrüt
+iron=demir
+gold=altın
+coal=kömür
+bread=ekmek
+apple=elma
+torch=meşale
+water=su
+lava=lav
+stone=taş
+dirt=toprak
+sand=kum
+glass=cam
+chest=sandık
+door=kapı
+sword=kılıç
+bow=yay
+arrow=ok
+shield=kalkan
+stick=çubuk
+bed=yatak
+boat=tekne
+bucket=kovan
+compass=pusula
+
+# --- multi-word items & blocks (phrases) ---
+diamond sword=elmas kılıç
+iron sword=demir kılıç
+wooden sword=tahta kılıç
+golden sword=altın kılıç
+netherite sword=netherit kılıç
+diamond block=elmas bloğu
+gold block=altın bloğu
+iron block=demir bloğu
+iron ingot=demir külçe
+gold ingot=altın külçe
+diamond ore=elmas cevheri
+iron ore=demir cevheri
+gold ore=altın cevheri
+coal ore=kömür cevheri
+redstone dust=kızıltaş tozu
+enchanted golden apple=büyülü altın elma
+golden apple=altın elma
+
+# --- single-word mobs ---
+zombie=zombi
+skeleton=iskelet
+creeper=creeper
+spider=örümcek
+pig=domuz
+cow=inek
+chicken=tavuk
+sheep=koyun
+wolf=kurt
+enderman=enderman
+villager=köylü
+horse=at
+cat=kedi
+bee=arı
+
+# --- multi-word mobs ---
+iron golem=demir golem
+zombie pigman=zombi domuz adam
+
+# --- effects ---
+speed=hız
+strength=güç
+jump boost=zıplama güçlendirme
+regeneration=yenilenme
+invisibility=görünmezlik
+poison=zehir
+weakness=zayıflık
+slowness=yavaşlık
+night vision=gece görüşü
+fire resistance=ateş direnci
+water breathing=su altında nefes alma
+haste=acele

@@ -1,0 +1,313 @@
+# Macedonian translation pack for Hermes.
+# Format: <canonical english>=<native form> (one per line, # = comment).
+# Single native words are translated while reading a script; longer native
+# phrases are matched by the parser's greedy lookups.
+# You may extend or override anything here by dropping a custom mk.lang into
+# plugins/Hermes/lang/.
+
+# --- flow & structure ---
+when=кога
+every=секој
+action=акција
+command=команда
+region=регион
+mark=ознака
+gui=мени
+create=создај
+if=ако
+repeat=повтори
+loop=јамка
+stop=стоп
+else=инаку
+fire=испали
+win=победи
+clear=исчисти
+delete=избриши
+while=додека
+wait=чекај
+and=и
+or=или
+as=како
+all=сите
+numbers=броеви
+from=од
+to=до
+over=над
+up=горе
+down=долу
+
+# --- actions ---
+give=дај
+remove=отстрани
+set=постави
+add=додади
+tell=кажи
+announce=објави
+warn=предупреди
+welcome=поздрави
+show=прикажи
+kill=убиј
+damage=повреди
+heal=исцели
+feed=нахрани
+kick=истерај
+launch=зафрли
+title=наслов
+actionbar=лента
+lightning=молња
+explode=експлодирај
+teleport=телепортирај
+spawn=спаунирај
+play=играј
+write=напиши
+open=отвори
+close=затвори
+press=притисни
+pull=повлечи
+power=активирај
+unpower=деактивирај
+put=стави
+take=земи
+make=направи
+freeze=замрзни
+unfreeze=одмрзни
+
+# --- noise / articles ---
+the=тој
+a=еден
+an=еден
+any=било кој
+item=предмет
+
+# --- prepositions ---
+with=со
+by=покрај
+at=на
+near=близу
+near=до
+named=именуван
+because=бидејќи
+in=во
+on=на
+of=од
+randomly=случајно
+within=внатре
+
+# --- values ---
+true=точно
+false=неточно
+nothing=ништо
+none=никој
+length=должина
+random=случајно
+number=број
+count=количина
+between=помеѓу
+contains=содржи
+plus=плус
+minus=минус
+times=пати
+divided=поделено
+second=секунда
+seconds=секунди
+minute=минута
+minutes=минути
+hour=час
+hours=часа
+tick=тик
+ticks=тикови
+size=големина
+
+# --- variable targets ---
+player=играч
+world=свет
+temporary=привремено
+list=листа
+score=поени
+database=база
+config=конфигурација
+value=вредност
+file=датотека
+data=податоци
+players=играчи
+
+# --- conditions & comparisons ---
+has=има
+is=е
+are=се
+not=не
+holding=држи
+sneaking=прикрадува
+flying=лета
+wet=мокар
+op=оп
+ground=земја
+biome=биом
+permission=дозвола
+more=повеќе
+less=помалку
+equal=еднакво
+than=од
+least=најмалку
+most=најмногу
+above=над
+below=под
+under=под
+health=здравје
+hunger=глад
+xp=иск
+level=ниво
+gamemode=мод
+chance=шанса
+
+# --- player events ---
+joins=се приклучува
+joins=влегува
+leaves=напушта
+dies=умира
+respawns=се респавнира
+jumps=скока
+sneaks=прикрадува
+moves=се движи
+attacks=напаѓа
+attacks=удри
+chats=разговара
+fishes=пеца
+levels=нивоа
+clicks=клика
+eats=јаде
+kills=убива
+starts=започнува
+stops=престанува
+stops=запира
+sprinting=трча
+takes=зема
+damage=штета
+breaks=крши
+places=поставува
+picks=бере
+drops=фрла
+uses=користи
+interacts=интерактира
+enters=влегува
+reaches=достигнува
+types=пишува
+touches=допира
+walks=оди
+walks=пешачи
+first=прв
+inventory=инвентар
+mob=моб
+custom=прилагодено
+event=настан
+fires=испалува
+night=ноќ
+dawn=зора
+falls=паѓа
+game=игра
+server=сервер
+slot=поле
+
+# --- world state ---
+weather=време
+rain=дожд
+sunny=сончево
+storm=бура
+stormy=бурно
+noon=пладне
+dusk=самрак
+midnight=полноќ
+morning=утро
+evening=вечер
+day=ден
+daytime=ден
+nighttime=ноќ
+
+# --- gamemodes ---
+survival=преживување
+creative=креативно
+adventure=авантура
+spectator=набљудувач
+
+# --- dimensions ---
+the end=крајот
+overworld=површински
+
+# --- single-word items & blocks ---
+diamond=дијамант
+emerald=смарагд
+iron=железо
+gold=злато
+coal=јаглен
+bread=леб
+apple=јаболко
+torch=факел
+water=вода
+lava=лава
+stone=камен
+dirt=земја
+sand=песок
+glass=стакло
+chest=ковчег
+door=врата
+sword=меч
+bow=лак
+arrow=стрела
+shield=штит
+stick=стап
+bed=кревет
+boat=чамец
+bucket=кофа
+compass=компас
+
+# --- multi-word items & blocks (phrases) ---
+diamond sword=дијамантски меч
+iron sword=железен меч
+wooden sword=дрвен меч
+golden sword=златен меч
+netherite sword=нетерски меч
+diamond block=дијамантски блок
+gold block=златен блок
+iron block=железен блок
+iron ingot=железна прачка
+gold ingot=златна прачка
+diamond ore=дијамантска руда
+iron ore=железна руда
+gold ore=златна руда
+coal ore=јагленова руда
+enchanted golden apple=маѓепсана златна јаболка
+golden apple=златна јаболка
+
+# --- single-word mobs ---
+zombie=зомби
+skeleton=скелет
+creeper=крипер
+spider=пајак
+pig=свиња
+cow=крава
+chicken=кокошка
+sheep=овца
+wolf=волк
+enderman=ендерман
+villager=селанец
+horse=коњ
+cat=мачка
+bee=пчела
+
+# --- multi-word mobs ---
+iron golem=железен голем
+zombie pigman=зомби прасе
+
+# --- effects ---
+speed=брзина
+strength=сила
+jump boost=потскок
+regeneration=регенерација
+invisibility=невидливост
+poison=отров
+weakness=слабост
+slowness=бавност
+night vision=ноќен вид
+fire resistance=огнена отпорност
+water breathing=дишење под вода
+haste=забрзување

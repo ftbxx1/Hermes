@@ -1,0 +1,303 @@
+# Japanese translation pack for Hermes.
+# Format: <canonical english>=<native form> (one per line, # = comment).
+# Single native words are translated while reading a script; longer native
+# phrases ("ダイヤモンドの剣") are matched by the parser's greedy lookups.
+
+# --- flow & structure ---
+when=とき
+every=ごと
+action=アクション
+command=コマンド
+region=地域
+mark=マーク
+gui=メニュー
+create=作成する
+if=もし
+repeat=繰り返す
+loop=ループ
+stop=停止する
+else=それ以外
+fire=発火する
+win=勝つ
+clear=クリアする
+delete=削除する
+while=間
+wait=待つ
+and=と
+or=または
+as=として
+all=すべて
+numbers=数字
+from=から
+to=まで
+over=超えて
+up=上へ
+down=下へ
+
+# --- actions ---
+give=渡す
+remove=取り除く
+set=設定する
+add=追加する
+tell=伝える
+announce=告知する
+warn=警告する
+welcome=歓迎する
+show=表示する
+kill=倒す
+damage=ダメージを与える
+heal=回復する
+feed=食べさせる
+kick=追い出す
+launch=打ち上げる
+title=タイトル
+actionbar=アクションバー
+lightning=雷
+explode=爆発する
+teleport=転送する
+spawn=出現する
+play=再生する
+write=書く
+open=開く
+close=閉じる
+press=押す
+pull=引く
+power=通電する
+unpower=通電を切る
+put=置く
+take=取る
+make=作る
+
+# --- noise / articles ---
+the=その
+a=ひとつ
+an=ひとつ
+any=任意
+
+# --- prepositions ---
+with=と
+by=によって
+at=で
+near=近く
+named=という名前の
+because=だから
+in=の中
+on=の上
+of=の
+
+# --- values ---
+true=真
+false=偽
+nothing=何もない
+none=なし
+length=長さ
+random=ランダム
+number=数
+count=個数
+between=の間
+contains=含む
+plus=足す
+minus=引く
+times=倍
+divided=割る
+second=秒
+seconds=秒
+minute=分
+minutes=分
+hour=時間
+hours=時間
+tick=ティック
+ticks=ティック
+
+# --- variable targets ---
+player=プレイヤー
+world=ワールド
+temporary=一時的
+list=リスト
+score=スコア
+database=データベース
+config=設定
+value=値
+file=ファイル
+data=データ
+
+# --- conditions & comparisons ---
+has=所持する
+is=だ
+are=だ
+not=ではない
+holding=持っている
+sneaking=しゃがんでいる
+flying=飛んでいる
+wet=濡れている
+op=オペレーター
+ground=地面
+biome=バイオーム
+permission=権限
+more=もっと
+less=少ない
+equal=等しい
+than=より
+least=最小
+most=最大
+above=上に
+below=下に
+under=下
+health=体力
+hunger=空腹
+xp=経験値
+level=レベル
+gamemode=ゲームモード
+
+# --- player events ---
+joins=参加する
+joins=参加する
+leaves=離れる
+leaves=去る
+dies=死ぬ
+respawns=復活する
+jumps=跳ぶ
+sneaks=しゃがむ
+sneaks=しゃがんでいる
+moves=動く
+moves=移動する
+attacks=攻撃する
+chats=話す
+fishes=釣る
+levels=レベルアップする
+clicks=クリックする
+eats=食べる
+kills=倒す
+starts=始める
+stops=止まる
+sprinting=走っている
+takes=受け取る
+damage=ダメージ
+breaks=壊す
+places=置く
+picks=拾う
+drops=落とす
+uses=使う
+interacts=相互作用する
+enters=入る
+reaches=到達する
+types=入力する
+touches=触る
+walks=歩く
+first=最初
+inventory=インベントリ
+mob=モブ
+custom=カスタム
+event=イベント
+fires=発生する
+night=夜
+dawn=夜明け
+falls=落ちる
+game=ゲーム
+server=サーバー
+slot=スロット
+
+# --- world state ---
+weather=天気
+rain=雨
+sunny=晴れ
+storm=嵐
+stormy=嵐
+noon=正午
+dusk=黄昏
+midnight=真夜中
+morning=朝
+evening=夕方
+day=昼
+daytime=昼
+nighttime=夜
+
+# --- gamemodes ---
+survival=サバイバル
+creative=クリエイティブ
+adventure=アドベンチャー
+spectator=スペクテイター
+
+# --- dimensions ---
+the end=エンド
+overworld=オーバーワールド
+
+# --- single-word items & blocks ---
+diamond=ダイヤモンド
+emerald=エメラルド
+iron=鉄
+gold=金
+coal=石炭
+bread=パン
+apple=リンゴ
+torch=松明
+water=水
+lava=溶岩
+stone=石
+dirt=土
+sand=砂
+glass=ガラス
+chest=チェスト
+door=ドア
+sword=剣
+bow=弓
+arrow=矢
+shield=盾
+stick=棒
+bed=ベッド
+boat=ボート
+bucket=バケツ
+compass=コンパス
+
+# --- multi-word items & blocks (phrases) ---
+diamond sword=ダイヤモンドの剣
+iron sword=鉄の剣
+wooden sword=木の剣
+golden sword=金の剣
+netherite sword=ネザライトの剣
+diamond block=ダイヤモンドブロック
+gold block=金ブロック
+iron block=鉄ブロック
+iron ingot=鉄インゴット
+gold ingot=金インゴット
+diamond ore=ダイヤモンド鉱石
+iron ore=鉄鉱石
+gold ore=金鉱石
+coal ore=石炭鉱石
+redstone dust=レッドストーンダスト
+enchanted golden apple=エンチャントされた金のリンゴ
+golden apple=金のリンゴ
+
+# --- single-word mobs ---
+zombie=ゾンビ
+skeleton=スケルトン
+creeper=クリーパー
+spider=クモ
+pig=ブタ
+cow=ウシ
+chicken=ニワトリ
+sheep=ヒツジ
+wolf=オオカミ
+enderman=エンダーマン
+villager=村人
+horse=ウマ
+cat=ネコ
+bee=ハチ
+
+# --- multi-word mobs ---
+iron golem=アイアンゴーレム
+zombie pigman=ゾンビピッグマン
+
+# --- effects ---
+speed=スピード
+strength=力
+jump boost=跳躍力上昇
+regeneration=再生
+invisibility=透明化
+poison=毒
+weakness=弱体化
+slowness=鈍化
+night vision=暗視
+fire resistance=火炎耐性
+water breathing=水中呼吸
+haste=採掘速度上昇

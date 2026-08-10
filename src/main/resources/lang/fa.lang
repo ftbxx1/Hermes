@@ -1,0 +1,305 @@
+# Persian translation pack for Hermes.
+# Format: <canonical english>=<native form> (one per line, # = comment).
+# Single native words are translated while reading a script; longer native
+# phrases ("شمشیر الماس") are matched by the parser's greedy lookups.
+# You may extend or override anything here by dropping a custom fa.lang into
+# plugins/Hermes/lang/.
+
+# --- flow & structure ---
+when=وقتی
+every=هر
+action=عمل
+command=فرمان
+region=ناحیه
+mark=نشان
+gui=منو
+create=بساز
+if=اگر
+repeat=تکرار
+loop=حلقه
+stop=بایست
+else=وگرنه
+fire=شلیک
+win=ببر
+clear=پاک کن
+delete=حذف
+while=تا زمانی
+wait=صبر کن
+and=و
+or=یا
+as=مانند
+all=همه
+numbers=اعداد
+from=از
+to=به
+over=روی
+up=بالا
+down=پایین
+
+# --- actions ---
+give=بده
+remove=بردار
+set=تنظیم کن
+add=اضافه کن
+tell=بگو
+announce=اعلام کن
+warn=هشدار
+welcome=خوش آمد
+show=نشان بده
+kill=بکش
+damage=آسیب
+heal=درمان
+feed=غذا بده
+kick=اخراج کن
+launch=پرتاب کن
+title=عنوان
+actionbar=نوار
+lightning=صاعقه
+explode=منفجر کن
+teleport=انتقال
+spawn=ظاهر کن
+play=پخش کن
+write=بنویس
+open=باز کن
+close=ببند
+press=فشار
+pull=بکش
+power=فعال کن
+unpower=غیرفعال کن
+put=بگذار
+take=بگیر
+make=درست کن
+
+# --- noise / articles ---
+the=آن
+a=یک
+an=یک
+any=هرکدام
+
+# --- prepositions ---
+with=با
+by=توسط
+at=در
+near=نزدیک
+named=به نام
+because=چون
+in=در
+on=روی
+of=از
+
+# --- values ---
+true=درست
+false=غلط
+nothing=هیچ
+none=هیچکدام
+length=طول
+random=تصادفی
+number=عدد
+count=تعداد
+between=بین
+contains=شامل
+plus=به علاوه
+minus=منفی
+times=بار
+divided=تقسیم
+second=ثانیه
+seconds=ثانیهها
+minute=دقیقه
+minutes=دقیقهها
+hour=ساعت
+hours=ساعتها
+tick=تیک
+ticks=تیکها
+
+# --- variable targets ---
+player=بازیکن
+world=جهان
+temporary=موقت
+list=فهرست
+score=امتیاز
+database=پایگاه
+config=پیکربندی
+value=مقدار
+file=فایل
+data=داده
+
+# --- conditions & comparisons ---
+has=دارد
+is=است
+are=هستند
+not=نه
+holding=در دست
+sneaking=خم شده
+flying=پرواز
+wet=خیس
+op=اپ
+ground=زمین
+biome=زیستگاه
+permission=اجازه
+more=بیشتر
+less=کمتر
+equal=برابر
+than=از
+least=کمترین
+most=بیشترین
+above=بالای
+below=پایین
+under=زیر
+health=سلامت
+hunger=گرسنگی
+xp=تجربه
+level=سطح
+gamemode=حالت
+
+# --- player events ---
+joins=ملحق شد
+joins=وارد شد
+leaves=ترک کرد
+leaves=رفت
+dies=مرد
+respawns=برگشت
+jumps=پرید
+sneaks=خم شد
+sneaks=قوز کرد
+moves=حرکت کرد
+moves=جابهجا شد
+attacks=حمله کرد
+chats=گفتگو کرد
+fishes=ماهیگیری کرد
+levels=ارتقا یافت
+clicks=کلیک کرد
+eats=خورد
+kills=کشت
+starts=شروع کرد
+stops=ایستاد
+sprinting=دوید
+takes=برداشت
+damage=آسیب
+breaks=شکست
+places=گذاشت
+picks=جمع کرد
+drops=انداخت
+uses=استفاده کرد
+interacts=تعامل کرد
+enters=وارد شد
+reaches=رسید
+types=تایپ کرد
+touches=لمس کرد
+walks=راه رفت
+first=اولین
+inventory=موجودی
+mob=موجود
+custom=سفارشی
+event=رویداد
+fires=رخ داد
+night=شب
+dawn=سحر
+falls=افتاد
+game=بازی
+server=سرور
+slot=جایگاه
+
+# --- world state ---
+weather=آب و هوا
+rain=باران
+sunny=آفتابی
+storm=طوفان
+stormy=طوفانی
+noon=ظهر
+dusk=غروب
+midnight=نیمهشب
+morning=صبح
+evening=عصر
+day=روز
+daytime=روز
+nighttime=شب
+
+# --- gamemodes ---
+survival=بقا
+creative=خلاق
+adventure=ماجراجویی
+spectator=ناظر
+
+# --- dimensions ---
+the end=پایان
+overworld=دنیای اصلی
+
+# --- single-word items & blocks ---
+diamond=الماس
+emerald=زمرد
+iron=آهن
+gold=طلا
+coal=زغال سنگ
+bread=نان
+apple=سیب
+torch=مشعل
+water=آب
+lava=گدازه
+stone=سنگ
+dirt=خاک
+sand=شن
+glass=شیشه
+chest=صندوق
+door=در
+sword=شمشیر
+bow=کمان
+arrow=تیر
+shield=سپر
+stick=چوب
+bed=تخت
+boat=قایق
+bucket=سطل
+compass=قطبنما
+
+# --- multi-word items & blocks (phrases) ---
+diamond sword=شمشیر الماس
+iron sword=شمشیر آهن
+wooden sword=شمشیر چوب
+golden sword=شمشیر طلا
+netherite sword=شمشیر نتریت
+diamond block=بلوک الماس
+gold block=بلوک طلا
+iron block=بلوک آهن
+iron ingot=شمش آهن
+gold ingot=شمش طلا
+diamond ore=سنگ معدن الماس
+iron ore=سنگ معدن آهن
+gold ore=سنگ معدن طلا
+coal ore=سنگ معدن زغال
+redstone dust=پودر ردستون
+enchanted golden apple=سیب طلایی جادویی
+golden apple=سیب طلایی
+
+# --- single-word mobs ---
+zombie=زامبی
+skeleton=اسکلت
+creeper=کریپر
+spider=عنکبوت
+pig=خوک
+cow=گاو
+chicken=مرغ
+sheep=گوسفند
+wolf=گرگ
+enderman=اندرمن
+villager=روستایی
+horse=اسب
+cat=گربه
+bee=زنبور
+
+# --- multi-word mobs ---
+iron golem=گولم آهن
+zombie pigman=خوک زامبی
+
+# --- effects ---
+speed=سرعت
+strength=قدرت
+jump boost=پرش
+regeneration=بازسازی
+invisibility=نامرئی
+poison=سم
+weakness=ضعف
+slowness=کندی
+night vision=دید در شب
+fire resistance=مقاومت در برابر آتش
+water breathing=تنفس زیر آب
+haste=شتاب

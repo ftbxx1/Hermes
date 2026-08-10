@@ -1,0 +1,305 @@
+# Greek translation pack for Hermes.
+# Format: <canonical english>=<native form> (one per line, # = comment).
+# Single native words are translated while reading a script; longer native
+# phrases ("σπαθί διαμάντι") are matched by the parser's greedy lookups.
+# You may extend or override anything here by dropping a custom el.lang into
+# plugins/Hermes/lang/.
+
+# --- flow & structure ---
+when=όταν
+every=κάθε
+action=ενέργεια
+command=εντολή
+region=περιοχή
+mark=σημάδι
+gui=μενού
+create=δημιούργησε
+if=αν
+repeat=επανάλαβε
+loop=βρόχος
+stop=σταμάτα
+else=αλλιώς
+fire=πυροβόλησε
+win=κέρδισε
+clear=καθάρισε
+delete=διέγραψε
+while=όσο
+wait=περίμενε
+and=και
+or=ή
+as=ως
+all=όλα
+numbers=αριθμοί
+from=από
+to=σε
+over=πάνω
+up=πάνω
+down=κάτω
+
+# --- actions ---
+give=δώσε
+remove=αφαίρεσε
+set=όρισε
+add=πρόσθεσε
+tell=πες
+announce=ανακοίνωσε
+warn=προειδοποίησε
+welcome=καλωσόρισε
+show=δείξε
+kill=σκότωσε
+damage=ζημία
+heal=θεράπευσε
+feed=τάισε
+kick=διώξε
+launch=εκτόξευσε
+title=τίτλος
+actionbar=μπάρα
+lightning=κεραυνός
+explode=έκρηξη
+teleport=τηλεμεταφορά
+spawn=εμφάνισε
+play=παίξε
+write=γράψε
+open=άνοιξε
+close=κλείσε
+press=πάτησε
+pull=τράβηξε
+power=ενεργοποίησε
+unpower=απενεργοποίησε
+put=βάλε
+take=πάρε
+make=φτιάξε
+
+# --- noise / articles ---
+the=το
+a=ένα
+an=ένα
+any=οποιοδήποτε
+
+# --- prepositions ---
+with=με
+by=από
+at=σε
+near=κοντά
+named=ονόματι
+because=γιατί
+in=σε
+on=πάνω
+of=του
+
+# --- values ---
+true=αληθές
+false=ψευδές
+nothing=τίποτα
+none=κανένα
+length=μήκος
+random=τυχαίο
+number=αριθμός
+count=πλήθος
+between=μεταξύ
+contains=περιέχει
+plus=συν
+minus=πλην
+times=φορές
+divided=διαιρεμένο
+second=δευτερόλεπτο
+seconds=δευτερόλεπτα
+minute=λεπτό
+minutes=λεπτά
+hour=ώρα
+hours=ώρες
+tick=tick
+ticks=ticks
+
+# --- variable targets ---
+player=παίκτης
+world=κόσμος
+temporary=προσωρινό
+list=λίστα
+score=βαθμοί
+database=βάση
+config=ρυθμίσεις
+value=τιμή
+file=αρχείο
+data=δεδομένα
+
+# --- conditions & comparisons ---
+has=έχει
+is=είναι
+are=είναι
+not=όχι
+holding=κρατάει
+sneaking=σκύβει
+flying=πετάει
+wet=βρεγμένος
+op=op
+ground=έδαφος
+biome=βίωμα
+permission=άδεια
+more=περισσότερο
+less=λιγότερο
+equal=ίσο
+than=από
+least=ελάχιστο
+most=μέγιστο
+above=πάνω
+below=κάτω
+under=κάτω
+health=ζωή
+hunger=πείνα
+xp=xp
+level=επίπεδο
+gamemode=τρόπος
+
+# --- player events ---
+joins=μπαίνει
+joins=ενώνεται
+leaves=φεύγει
+leaves=αποχωρεί
+dies=πεθαίνει
+respawns=ξαναγεννιέται
+jumps=πηδάει
+sneaks=σκύβει
+sneaks=γλιστρά
+moves=κινείται
+moves=μετακινείται
+attacks=επιτίθεται
+chats=μιλάει
+fishes=ψαρεύει
+levels=ανεβαίνει
+clicks=κλικ
+eats=τρώει
+kills=σκοτώνει
+starts=αρχίζει
+stops=σταματάει
+sprinting=τρέχει
+takes=λαμβάνει
+damage=ζημιά
+breaks=σπάει
+places=τοποθετεί
+picks=μαζεύει
+drops=ρίχνει
+uses=χρησιμοποιεί
+interacts=αλληλεπιδρά
+enters=μπαίνει
+reaches=φτάνει
+types=πληκτρολογεί
+touches=αγγίζει
+walks=περπατάει
+first=πρώτο
+inventory=αποθήκη
+mob=πλάσμα
+custom=προσαρμοσμένο
+event=συμβάν
+fires=συμβαίνει
+night=νύχτα
+dawn=αυγή
+falls=πέφτει
+game=παιχνίδι
+server=διακομιστής
+slot=θέση
+
+# --- world state ---
+weather=καιρός
+rain=βροχή
+sunny=ηλιόλουστο
+storm=καταιγίδα
+stormy=θυελλώδες
+noon=μεσημέρι
+dusk=σούρουπο
+midnight=μεσάνυχτα
+morning=πρωί
+evening=βράδυ
+day=μέρα
+daytime=μέρα
+nighttime=νύχτα
+
+# --- gamemodes ---
+survival=επιβίωση
+creative=δημιουργικό
+adventure=περιπέτεια
+spectator=θεατής
+
+# --- dimensions ---
+the end=το τέλος
+overworld=πάνω κόσμος
+
+# --- single-word items & blocks ---
+diamond=διαμάντι
+emerald=σμαράγδι
+iron=σίδερο
+gold=χρυσός
+coal=κάρβουνο
+bread=ψωμί
+apple=μήλο
+torch=δαυλός
+water=νερό
+lava=λάβα
+stone=πέτρα
+dirt=χώμα
+sand=άμμος
+glass=γυαλί
+chest=στήθος
+door=πόρτα
+sword=σπαθί
+bow=τόξο
+arrow=βέλος
+shield=ασπίδα
+stick=ραβδί
+bed=κρεβάτι
+boat=βάρκα
+bucket=κουβάς
+compass=πυξίδα
+
+# --- multi-word items & blocks (phrases) ---
+diamond sword=σπαθί διαμάντι
+iron sword=σπαθί σίδερο
+wooden sword=ξύλινο σπαθί
+golden sword=χρυσό σπαθί
+netherite sword=σπαθί νεθερίτη
+diamond block=μπλοκ διαμάντι
+gold block=μπλοκ χρυσού
+iron block=μπλοκ σίδερο
+iron ingot=ράβδος σίδερου
+gold ingot=ράβδος χρυσού
+diamond ore=μετάλλευμα διαμαντιού
+iron ore=μετάλλευμα σιδήρου
+gold ore=μετάλλευμα χρυσού
+coal ore=μετάλλευμα κάρβουνου
+redstone dust=σκόνη ρέντστοουν
+enchanted golden apple=μαγεμένο χρυσό μήλο
+golden apple=χρυσό μήλο
+
+# --- single-word mobs ---
+zombie=ζόμπι
+skeleton=σκελετός
+creeper=κρίπερ
+spider=αράχνη
+pig=γουρούνι
+cow=αγελάδα
+chicken=κότα
+sheep=πρόβατο
+wolf=λύκος
+enderman=έντερμαν
+villager=χωριάτης
+horse=άλογο
+cat=γάτα
+bee=μέλισσα
+
+# --- multi-word mobs ---
+iron golem=σιδερένιος γκόλεμ
+zombie pigman=ζόμπι χοιροάνθρωπος
+
+# --- effects ---
+speed=ταχύτητα
+strength=δύναμη
+jump boost=ενίσχυση άλματος
+regeneration=αναγέννηση
+invisibility=αορατότητα
+poison=δηλητήριο
+weakness=αδυναμία
+slowness=βραδύτητα
+night vision=νυχτερινή όραση
+fire resistance=αντοχή στη φωτιά
+water breathing=αναπνοή στο νερό
+haste=βιασύνη

@@ -3,7 +3,7 @@ package dev.hermes.core;
 import java.util.List;
 
 /**
- * The bridge between the Hermes interpreter and whatever world it runs in â€”
+ * The bridge between the Hermes interpreter and whatever world it runs in —
  * a real Minecraft server (see the Paper plugin) or the headless MockWorld
  * used for demos and tests.
  *
@@ -67,6 +67,17 @@ public interface WorldAPI {
     int level(PlayerRef p);
     void giveLevels(PlayerRef p, int amount);
 
+    // ---------- stat setters & bossbar ----------
+    void setHealth(PlayerRef p, double amount);
+    void setHunger(PlayerRef p, int amount);
+    void setXp(PlayerRef p, int amount);
+    void setLevel(PlayerRef p, int amount);
+    /** progress is 0..100 (percent). */
+    void setBossbar(PlayerRef p, String title, double progress);
+    void clearBossbar(PlayerRef p);
+    /** The friendly name of the item in the player's hand ("nothing" if empty). */
+    String heldItem(PlayerRef p);
+
     // ---------- player state ----------
     void setGamemode(PlayerRef p, String mode);
     String gamemode(PlayerRef p);
@@ -75,6 +86,8 @@ public interface WorldAPI {
     boolean isWet(PlayerRef p);
     boolean isFlying(PlayerRef p);
     boolean isOp(PlayerRef p);
+    void setFrozen(PlayerRef p, boolean frozen);
+    boolean isFrozen(PlayerRef p);
 
     // ---------- inventory ----------
     void giveItem(PlayerRef p, String item, int count);
@@ -148,6 +161,7 @@ public interface WorldAPI {
     // ---------- sound & particles ----------
     void playSound(String sound, Vec3 loc);
     void spawnParticles(String particle, Vec3 loc);
+    void spawnParticles(String particle, Vec3 loc, int count, double size);
 
     // ---------- guis ----------
     /** Opens a virtual inventory for the player. slots is size 1..54; null entries are empty. */

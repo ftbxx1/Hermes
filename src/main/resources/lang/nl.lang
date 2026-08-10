@@ -1,0 +1,306 @@
+# Dutch translation pack for Hermes.
+# Format: <canonical english>=<native form> (one per line, # = comment).
+# Single native words are translated while reading a script; longer native
+# phrases ("diamanten zwaard") are matched by the parser's greedy lookups.
+# You may extend or override anything here by dropping a custom nl.lang into
+# plugins/Hermes/lang/.
+
+# --- flow & structure ---
+when=wanneer
+every=elke
+action=actie
+command=commando
+region=regio
+mark=markering
+gui=menu
+create=maak
+if=als
+repeat=herhaal
+loop=loop
+stop=stop
+else=anders
+fire=schiet
+win=win
+clear=maak leeg
+delete=verwijder
+while=terwijl
+wait=wacht
+and=en
+or=of
+as=als
+all=alle
+numbers=getallen
+from=van
+to=naar
+over=boven
+up=omhoog
+down=omlaag
+
+# --- actions ---
+give=geef
+remove=verwijder
+set=zet
+add=voeg toe
+tell=vertel
+announce=kondig aan
+warn=waarschuw
+welcome=verwelkom
+show=toon
+kill=dood
+damage=beschadig
+heal=genees
+feed=voer
+kick=verban
+launch=lanceer
+title=titel
+actionbar=balk
+lightning=bliksem
+explode=explodeer
+teleport=teleporteer
+spawn=verschijn
+spawn=spawn
+play=speel
+write=schrijf
+open=open
+close=sluit
+press=druk
+pull=trek
+power=activeer
+unpower=deactiveer
+put=plaats
+take=neem
+make=maak
+
+# --- noise / articles ---
+the=de
+a=een
+an=een
+any=elk
+
+# --- prepositions ---
+with=met
+by=door
+at=bij
+near=dichtbij
+named=genaamd
+because=omdat
+in=in
+on=op
+of=van
+
+# --- values ---
+true=waar
+false=onwaar
+nothing=niets
+none=geen
+length=lengte
+random=willekeurig
+number=getal
+count=aantal
+between=tussen
+contains=bevat
+plus=plus
+minus=min
+times=keer
+divided=gedeeld
+second=seconde
+seconds=seconden
+minute=minuut
+minutes=minuten
+hour=uur
+hours=uren
+tick=tick
+ticks=ticks
+
+# --- variable targets ---
+player=speler
+world=wereld
+temporary=tijdelijk
+list=lijst
+score=punten
+database=database
+config=configuratie
+value=waarde
+file=bestand
+data=gegevens
+
+# --- conditions & comparisons ---
+has=heeft
+is=is
+are=zijn
+not=niet
+holding=vasthoudend
+sneaking=sluipend
+flying=vliegend
+wet=nat
+op=op
+ground=grond
+biome=bioom
+permission=toestemming
+more=meer
+less=minder
+equal=gelijk
+than=dan
+least=minst
+most=meest
+above=boven
+below=beneden
+under=onder
+health=gezondheid
+hunger=honger
+xp=xp
+level=niveau
+gamemode=spelmodus
+
+# --- player events ---
+joins=voegt zich
+joins=komt
+leaves=gaat weg
+leaves=verlaat
+dies=sterft
+respawns=herleeft
+jumps=springt
+sneaks=sluipt
+sneaks=sluip
+moves=verplaatst
+moves=beweegt
+attacks=valt aan
+chats=praat
+fishes=vist
+levels=stijgt
+clicks=klikt
+eats=eet
+kills=doodt
+starts=begint
+stops=stopt
+sprinting=sprintend
+takes=ontvangt
+damage=schade
+breaks=breekt
+places=plaatst
+picks=raapt
+drops=laat vallen
+uses=gebruikt
+interacts=interageert
+enters=betreedt
+reaches=bereikt
+types=typt
+touches=raakt
+walks=loopt
+first=eerst
+inventory=inventaris
+mob=wezen
+custom=aangepast
+event=gebeurtenis
+fires=gebeurt
+night=nacht
+dawn=dageraad
+falls=valt
+game=spel
+server=server
+slot=plek
+
+# --- world state ---
+weather=weer
+rain=regen
+sunny=zonnig
+storm=storm
+stormy=stormachtig
+noon=middag
+dusk=schemering
+midnight=middernacht
+morning=ochtend
+evening=avond
+day=dag
+daytime=dag
+nighttime=nacht
+
+# --- gamemodes ---
+survival=overleving
+creative=creatief
+adventure=avontuur
+spectator=toeschouwer
+
+# --- dimensions ---
+the end=de eind
+overworld=bovenwereld
+
+# --- single-word items & blocks ---
+diamond=diamant
+emerald=smaragd
+iron=ijzer
+gold=goud
+coal=steenkool
+bread=brood
+apple=appel
+torch=fakkel
+water=water
+lava=lava
+stone=steen
+dirt=aarde
+sand=zand
+glass=glas
+chest=kist
+door=deur
+sword=zwaard
+bow=boog
+arrow=pijl
+shield=schild
+stick=stok
+bed=bed
+boat=boot
+bucket=emmer
+compass=kompas
+
+# --- multi-word items & blocks (phrases) ---
+diamond sword=diamanten zwaard
+iron sword=ijzeren zwaard
+wooden sword=houten zwaard
+golden sword=gouden zwaard
+netherite sword=netherite zwaard
+diamond block=diamanten blok
+gold block=gouden blok
+iron block=ijzeren blok
+iron ingot=ijzeren staaf
+gold ingot=gouden staaf
+diamond ore=diamanten erts
+iron ore=ijzererts
+gold ore=gouderts
+coal ore=steenkoolerts
+redstone dust=redstone stof
+enchanted golden apple=betoverde gouden appel
+golden apple=gouden appel
+
+# --- single-word mobs ---
+zombie=zombie
+skeleton=skelet
+creeper=creeper
+spider=spin
+pig=varken
+cow=koe
+chicken=kip
+sheep=schaap
+wolf=wolf
+enderman=enderman
+villager=dorpeling
+horse=paard
+cat=kat
+bee=bij
+
+# --- multi-word mobs ---
+iron golem=ijzeren golem
+zombie pigman=zombie varken
+
+# --- effects ---
+speed=snelheid
+strength=kracht
+jump boost=sprongboost
+regeneration=regeneratie
+invisibility=onzichtbaarheid
+poison=vergif
+weakness=zwakte
+slowness=traagheid
+night vision=nachtzicht
+fire resistance=vuurbestendigheid
+water breathing=waterademhaling
+haste=haast

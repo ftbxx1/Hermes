@@ -1,0 +1,305 @@
+# Malay translation pack for Hermes.
+# Format: <canonical english>=<native form> (one per line, # = comment).
+# Single native words are translated while reading a script; longer native
+# phrases ("pedang berlian") are matched by the parser's greedy lookups.
+# You may extend or override anything here by dropping a custom ms.lang into
+# plugins/Hermes/lang/.
+
+# --- flow & structure ---
+when=apabila
+every=setiap
+action=tindakan
+command=arahan
+region=rantau
+mark=tanda
+gui=menu
+create=cipta
+if=jika
+repeat=ulang
+loop=gelung
+stop=berhenti
+else=selain
+fire=nyalakan
+win=menang
+clear=bersihkan
+delete=padam
+while=semasa
+wait=tunggu
+and=dan
+or=atau
+as=sebagai
+all=semua
+numbers=nombor
+from=dari
+to=ke
+over=di atas
+up=naik
+down=turun
+
+# --- actions ---
+give=beri
+remove=buang
+set=tetapkan
+add=tambah
+tell=beritahu
+announce=umumkan
+warn=peringatkan
+welcome=sambut
+show=papar
+kill=bunuh
+damage=rosakkan
+heal=sembuhkan
+feed=beri makan
+kick=tendang
+launch=lancarkan
+title=tajuk
+actionbar=bar tindakan
+lightning=kilat
+explode=meletup
+teleport=pindahkan
+spawn=munculkan
+play=mainkan
+write=tulis
+open=buka
+close=tutup
+press=tekan
+pull=tarik
+power=kuasakan
+unpower=matikan
+put=letak
+take=ambil
+make=buat
+
+# --- noise / articles ---
+the=itu
+a=sebuah
+an=sebuah
+any=mana-mana
+
+# --- prepositions ---
+with=dengan
+by=oleh
+at=di
+near=dekat
+named=bernama
+because=kerana
+in=di
+on=pada
+of=dari
+
+# --- values ---
+true=benar
+false=salah
+nothing=tiada
+none=tiada
+length=panjang
+random=rawak
+number=nombor
+count=bilangan
+between=antara
+contains=mengandungi
+plus=tambah
+minus=tolak
+times=kali
+divided=dibahagi
+second=saat
+seconds=saat
+minute=minit
+minutes=minit
+hour=jam
+hours=jam
+tick=tick
+ticks=tick
+
+# --- variable targets ---
+player=pemain
+world=dunia
+temporary=sementara
+list=senarai
+score=skor
+database=pangkalan data
+config=konfigurasi
+value=nilai
+file=fail
+data=data
+
+# --- conditions & comparisons ---
+has=mempunyai
+is=ialah
+are=ialah
+not=tidak
+holding=memegang
+sneaking=mencangkung
+flying=terbang
+wet=basah
+op=op
+ground=tanah
+biome=bioma
+permission=kebenaran
+more=lebih
+less=kurang
+equal=sama
+than=daripada
+least=paling sedikit
+most=paling banyak
+above=di atas
+below=di bawah
+under=di bawah
+health=kesihatan
+hunger=lapar
+xp=xp
+level=tahap
+gamemode=mod
+
+# --- player events ---
+joins=menyertai
+joins=masuk
+leaves=keluar
+leaves=meninggalkan
+dies=mati
+respawns=hidup semula
+jumps=melompat
+sneaks=mencangkung
+sneaks=menunduk
+moves=bergerak
+moves=berpindah
+attacks=menyerang
+chats=bercakap
+fishes=memancing
+levels=naik tahap
+clicks=mengklik
+eats=makan
+kills=membunuh
+starts=memulakan
+stops=berhenti
+sprinting=berlari
+takes=menerima
+damage=kerosakan
+breaks=memecahkan
+places=meletakkan
+picks=mengambil
+drops=menjatuhkan
+uses=menggunakan
+interacts=berinteraksi
+enters=memasuki
+reaches=mencapai
+types=menaip
+touches=menyentuh
+walks=berjalan
+first=pertama
+inventory=inventori
+mob=makhluk
+custom=tersuai
+event=peristiwa
+fires=berlaku
+night=malam
+dawn=subuh
+falls=jatuh
+game=permainan
+server=pelayan
+slot=slot
+
+# --- world state ---
+weather=cuaca
+rain=hujan
+sunny=cerah
+storm=ribut
+stormy=ribut
+noon=tengah hari
+dusk=senja
+midnight=tengah malam
+morning=pagi
+evening=petang
+day=siang
+daytime=siang
+nighttime=malam
+
+# --- gamemodes ---
+survival=kemandirian
+creative=kreatif
+adventure=pengembaraan
+spectator=penonton
+
+# --- dimensions ---
+the end=penamat
+overworld=dunia atas
+
+# --- single-word items & blocks ---
+diamond=berlian
+emerald=zamrud
+iron=besi
+gold=emas
+coal=arang batu
+bread=roti
+apple=epal
+torch=obor
+water=air
+lava=lava
+stone=batu
+dirt=tanah
+sand=pasir
+glass=kaca
+chest=peti
+door=pintu
+sword=pedang
+bow=busur
+arrow=anak panah
+shield=perisai
+stick=kayu
+bed=katil
+boat=bot
+bucket=baldi
+compass=kompas
+
+# --- multi-word items & blocks (phrases) ---
+diamond sword=pedang berlian
+iron sword=pedang besi
+wooden sword=pedang kayu
+golden sword=pedang emas
+netherite sword=pedang netherite
+diamond block=blok berlian
+gold block=blok emas
+iron block=blok besi
+iron ingot=jongkong besi
+gold ingot=jongkong emas
+diamond ore=bijih berlian
+iron ore=bijih besi
+gold ore=bijih emas
+coal ore=bijih arang batu
+redstone dust=debu redstone
+enchanted golden apple=epal emas terpesona
+golden apple=epal emas
+
+# --- single-word mobs ---
+zombie=zombi
+skeleton=rangka
+creeper=creeper
+spider=labah-labah
+pig=babi
+cow=lembu
+chicken=ayam
+sheep=biri-biri
+wolf=serigala
+enderman=enderman
+villager=penduduk
+horse=kuda
+cat=kucing
+bee=lebah
+
+# --- multi-word mobs ---
+iron golem=golem besi
+zombie pigman=babi zombi
+
+# --- effects ---
+speed=kelajuan
+strength=kekuatan
+jump boost=lompatan
+regeneration=penjanaan semula
+invisibility=halimunan
+poison=racun
+weakness=kelemahan
+slowness=kelambatan
+night vision=penglihatan malam
+fire resistance=rintangan api
+water breathing=pernafasan air
+haste=hasta

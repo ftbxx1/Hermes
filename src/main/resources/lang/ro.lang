@@ -1,0 +1,305 @@
+# Romanian translation pack for Hermes.
+# Format: <canonical english>=<native form> (one per line, # = comment).
+# Single native words are translated while reading a script; longer native
+# phrases ("sabie de diamant") are matched by the parser's greedy lookups.
+# You may extend or override anything here by dropping a custom ro.lang into
+# plugins/Hermes/lang/.
+
+# --- flow & structure ---
+when=când
+every=fiecare
+action=acțiune
+command=comandă
+region=regiune
+mark=marcaj
+gui=meniu
+create=crează
+if=dacă
+repeat=repetă
+loop=buclă
+stop=oprește
+else=altfel
+fire=trage
+win=câștigă
+clear=golește
+delete=șterge
+while=în timp ce
+wait=așteaptă
+and=și
+or=sau
+as=ca
+all=toate
+numbers=numere
+from=de la
+to=la
+over=peste
+up=sus
+down=jos
+
+# --- actions ---
+give=da
+remove=scoate
+set=setează
+add=adaugă
+tell=spune
+announce=anunță
+warn=atenționează
+welcome=întâmpină
+show=arată
+kill=omoară
+damage=rănește
+heal=vindecă
+feed=hrănește
+kick=elimină
+launch=lansează
+title=titlu
+actionbar=bar
+lightning=fulger
+explode=explodează
+teleport=teleportează
+spawn=generează
+play=redă
+write=scrie
+open=deschide
+close=închide
+press=apasă
+pull=trage
+power=activează
+unpower=dezactivează
+put=pune
+take=ia
+make=fă
+
+# --- noise / articles ---
+the=cel
+a=un
+an=un
+any=oricare
+
+# --- prepositions ---
+with=cu
+by=de
+at=la
+near=lângă
+named=numit
+because=deoarece
+in=în
+on=pe
+of=din
+
+# --- values ---
+true=adevărat
+false=fals
+nothing=nimic
+none=niciunul
+length=lungime
+random=aleatoriu
+number=număr
+count=cantitate
+between=între
+contains=conține
+plus=plus
+minus=minus
+times=ori
+divided=împărțit
+second=secundă
+seconds=secunde
+minute=minut
+minutes=minute
+hour=oră
+hours=ore
+tick=tick
+ticks=tick
+
+# --- variable targets ---
+player=jucător
+world=lume
+temporary=temporar
+list=listă
+score=punctaj
+database=bază de date
+config=configurație
+value=valoare
+file=fișier
+data=date
+
+# --- conditions & comparisons ---
+has=are
+is=este
+are=sunt
+not=nu
+holding=ține
+sneaking=furișează
+flying=zboară
+wet=ud
+op=op
+ground=sol
+biome=biom
+permission=permisiune
+more=mult
+less=puțin
+equal=egal
+than=decât
+least=minim
+most=maxim
+above=deasupra
+below=dedesubt
+under=sub
+health=sănătate
+hunger=foame
+xp=xp
+level=nivel
+gamemode=mod
+
+# --- player events ---
+joins=se alătură
+joins=intră
+leaves=părăsește
+leaves=pleacă
+dies=moare
+respawns=reapare
+jumps=sare
+sneaks=furișează
+sneaks=se ghemuiește
+moves=se mișcă
+moves=mișcă
+attacks=atacă
+chats=vorbește
+fishes=pescuiește
+levels=crește
+clicks=face clic
+eats=mănâncă
+kills=omoară
+starts=începe
+stops=se oprește
+sprinting=aleargă
+takes=primește
+damage=daună
+breaks=sparge
+places=plasează
+picks=culege
+drops=scapă
+uses=folosește
+interacts=interacționează
+enters=intră
+reaches=ajunge
+types=tastează
+touches=atinge
+walks=merge
+first=primul
+inventory=inventar
+mob=creatură
+custom=personalizat
+event=eveniment
+fires=se declanșează
+night=noapte
+dawn=zori
+falls=cade
+game=joc
+server=server
+slot=slot
+
+# --- world state ---
+weather=vreme
+rain=ploaie
+sunny=însorit
+storm=furtună
+stormy=furtunos
+noon=amiază
+dusk=amurg
+midnight=miezul nopții
+morning=dimineață
+evening=seară
+day=zi
+daytime=zi
+nighttime=noapte
+
+# --- gamemodes ---
+survival=supraviețuire
+creative=creativ
+adventure=aventură
+spectator=spectator
+
+# --- dimensions ---
+the end=sfârșit
+overworld=suprafață
+
+# --- single-word items & blocks ---
+diamond=diamant
+emerald=smarald
+iron=fier
+gold=aur
+coal=cărbune
+bread=pâine
+apple=măr
+torch=torță
+water=apă
+lava=lava
+stone=piatră
+dirt=pământ
+sand=nisip
+glass=sticlă
+chest=cufăr
+door=ușă
+sword=sabie
+bow=arc
+arrow=săgeată
+shield=scut
+stick=băț
+bed=pat
+boat=barcă
+bucket=găleată
+compass=busolă
+
+# --- multi-word items & blocks (phrases) ---
+diamond sword=sabie de diamant
+iron sword=sabie de fier
+wooden sword=sabie de lemn
+golden sword=sabie de aur
+netherite sword=sabie de netherit
+diamond block=bloc de diamant
+gold block=bloc de aur
+iron block=bloc de fier
+iron ingot=lingou de fier
+gold ingot=lingou de aur
+diamond ore=minereu de diamant
+iron ore=minereu de fier
+gold ore=minereu de aur
+coal ore=minereu de cărbune
+redstone dust=praf de redstone
+enchanted golden apple=măr de aur fermecat
+golden apple=măr de aur
+
+# --- single-word mobs ---
+zombie=zombi
+skeleton=schelet
+creeper=creeper
+spider=păianjen
+pig=porc
+cow=vacă
+chicken=găină
+sheep=oaie
+wolf=lup
+enderman=enderman
+villager=sătean
+horse=cal
+cat=pisică
+bee=albină
+
+# --- multi-word mobs ---
+iron golem=golem de fier
+zombie pigman=porc zombi
+
+# --- effects ---
+speed=viteză
+strength=putere
+jump boost=salt
+regeneration=regenerare
+invisibility=invizibilitate
+poison=otravă
+weakness=slăbiciune
+slowness=încetinire
+night vision=vedere nocturnă
+fire resistance=rezistență la foc
+water breathing=respirație sub apă
+haste=graba

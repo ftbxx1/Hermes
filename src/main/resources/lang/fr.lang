@@ -1,0 +1,309 @@
+# French translation pack for Hermes.
+# Format: <canonical english>=<native form> (one per line, # = comment).
+# Single native words are translated while reading a script; longer native
+# phrases ("epee en diamant") are matched by the parser's greedy lookups.
+# You may extend or override anything here by dropping a custom fr.lang into
+# plugins/Hermes/lang/.
+
+# --- flow & structure ---
+when=quand
+every=chaque
+action=action
+command=commande
+region=region
+mark=marque
+gui=menu
+create=creer
+if=si
+repeat=repetir
+loop=parcourir
+stop=arreter
+else=sinon
+fire=declencher
+win=gagner
+clear=vider
+delete=supprimer
+while=tant que
+while=tant
+wait=attendre
+and=et
+or=ou
+as=comme
+all=tous
+numbers=nombres
+from=de
+to=a
+over=au dessus
+over=sur
+up=haut
+down=bas
+
+# --- actions ---
+give=donner
+remove=retirer
+set=regler
+add=ajouter
+tell=dire
+announce=annoncer
+warn=prevenir
+welcome=accueillir
+show=montrer
+kill=tuer
+damage=blesser
+heal=soigner
+feed=nourrir
+kick=expulser
+launch=propulser
+title=titre
+actionbar=barre
+lightning=foudre
+explode=exploser
+teleport=teleporter
+spawn=apparaitre
+play=jouer
+write=ecrire
+open=ouvrir
+close=fermer
+press=appuyer
+pull=tirer
+power=alimenter
+unpower=couper
+put=mettre
+take=prendre
+make=faire
+
+# --- noise / articles ---
+the=le
+a=un
+an=une
+any=n importe quel
+any=quelconque
+
+# --- prepositions ---
+with=avec
+by=par
+at=a
+near=pres de
+named=appele
+because=parce que
+because=car
+in=dans
+on=sur
+of=de
+
+# --- values ---
+true=vrai
+false=faux
+nothing=rien
+none=aucun
+length=taille
+random=aleatoire
+number=nombre
+count=compte
+between=entre
+contains=contient
+plus=plus
+minus=moins
+times=fois
+divided=divise
+second=seconde
+seconds=secondes
+minute=minute
+minutes=minutes
+hour=heure
+hours=heures
+tick=tick
+ticks=ticks
+
+# --- variable targets ---
+player=joueur
+world=monde
+temporary=temporaire
+list=liste
+score=score
+database=base
+config=configuration
+value=valeur
+file=fichier
+data=donnees
+
+# --- conditions & comparisons ---
+has=a
+is=est
+are=sont
+not=pas
+holding=tient
+sneaking=accroupi
+flying=volant
+wet=mouille
+op=op
+ground=sol
+biome=biome
+permission=permission
+more=plus
+less=moins
+equal=egal
+than=que
+least=minimum
+most=maximum
+above=au dessus
+below=en dessous
+under=sous
+health=vie
+hunger=faim
+xp=xp
+level=niveau
+gamemode=mode
+
+# --- player events ---
+joins=rejoint
+joins=entre
+leaves=part
+dies=meurt
+respawns=reapparait
+jumps=saute
+sneaks=s accroupit
+sneaks=accroupit
+moves=bouge
+attacks=attaque
+chats=parle
+fishes=peche
+levels=monte
+clicks=clique
+eats=mange
+kills=tue
+starts=commence
+stops=arrete
+sprinting=courir
+takes=subit
+damage=degats
+breaks=casse
+places=pose
+picks=ramasse
+drops=lache
+uses=utilise
+interacts=interagit
+enters=entre dans
+enters=entre
+reaches=atteint
+types=tape
+touches=touche
+walks=marche
+first=premiere
+inventory=inventaire
+mob=creature
+custom=personnalise
+event=evenement
+fires=se declenche
+fires=declenche
+night=nuit
+dawn=aube
+falls=tombe
+game=jeu
+server=serveur
+slot=emplacement
+
+# --- world state ---
+weather=temps
+rain=pluie
+sunny=ensoleille
+storm=orage
+stormy=orage
+noon=midi
+dusk=crepuscule
+midnight=minuit
+morning=matin
+evening=soir
+day=jour
+daytime=jour
+nighttime=nuit
+
+# --- gamemodes ---
+survival=survie
+creative=creatif
+adventure=aventure
+spectator=spectateur
+
+# --- dimensions ---
+the end=la fin
+overworld=surface
+
+# --- single-word items & blocks ---
+diamond=diamant
+emerald=emeraude
+iron=fer
+gold=or
+coal=charbon
+bread=pain
+apple=pomme
+torch=torche
+water=eau
+lava=la lave
+lava=lave
+stone=pierre
+dirt=terre
+sand=sable
+glass=verre
+chest=coffre
+door=porte
+sword=epee
+bow=arc
+arrow=fleche
+shield=bouclier
+stick=baton
+bed=lit
+boat=bateau
+bucket=seau
+compass=boussole
+
+# --- multi-word items & blocks (phrases) ---
+diamond sword=epee en diamant
+iron sword=epee en fer
+wooden sword=epee en bois
+golden sword=epee en or
+netherite sword=epee en netherite
+diamond block=bloc de diamant
+gold block=bloc d or
+iron block=bloc de fer
+iron ingot=lingot de fer
+gold ingot=lingot d or
+diamond ore=minerai de diamant
+iron ore=minerai de fer
+gold ore=minerai d or
+coal ore=minerai de charbon
+enchanted golden apple=pomme doree enchantee
+golden apple=pomme doree
+
+# --- single-word mobs ---
+zombie=zombie
+skeleton=squelette
+creeper=creeper
+spider=araignee
+pig=cochon
+cow=vache
+chicken=poulet
+sheep=mouton
+wolf=loup
+enderman=enderman
+villager=villageois
+horse=cheval
+cat=chat
+bee=abeille
+
+# --- multi-word mobs ---
+iron golem=golem de fer
+zombie pigman=cochon zombi
+
+# --- effects ---
+speed=vitesse
+strength=force
+jump boost=saut
+regeneration=regeneration
+invisibility=invisibilite
+poison=poison
+weakness=faiblesse
+slowness=lenteur
+night vision=vision nocturne
+fire resistance=resistance au feu
+water breathing=respiration aquatique
+haste=celerite

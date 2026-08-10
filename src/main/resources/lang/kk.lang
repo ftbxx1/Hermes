@@ -1,0 +1,313 @@
+# Kazakh translation pack for Hermes.
+# Format: <canonical english>=<native form> (one per line, # = comment).
+# Single native words are translated while reading a script; longer native
+# phrases are matched by the parser's greedy lookups.
+# You may extend or override anything here by dropping a custom kk.lang into
+# plugins/Hermes/lang/.
+
+# --- flow & structure ---
+when=кезде
+every=әр
+action=әрекет
+command=команда
+region=аймақ
+mark=белгі
+gui=мәзір
+create=жасау
+if=егер
+repeat=қайталау
+loop=цикл
+stop=тоқтату
+else=әйтпесе
+fire=ату
+win=жеңу
+clear=тазалау
+delete=жою
+while=болғанда
+wait=күту
+and=және
+or=немесе
+as=ретінде
+all=барлық
+numbers=сандар
+from=бастап
+to=дейін
+over=үстінде
+up=жоғары
+down=төмен
+
+# --- actions ---
+give=беру
+remove=жою
+set=орнату
+add=қосу
+tell=айту
+announce=хабарлау
+warn=ескерту
+welcome=қарсы алу
+show=көрсету
+kill=өлтіру
+damage=зақымдау
+heal=емдеу
+feed=тамақтандыру
+kick=қуу
+launch=ұшыру
+title=тақырып
+actionbar=жолақ
+lightning=найзағай
+explode=жарылу
+teleport=телепорттау
+spawn=пайда болу
+play=ойнау
+write=жазу
+open=ашу
+close=жабу
+press=басу
+pull=тарту
+power=қосу
+unpower=өшіру
+put=салу
+take=алу
+make=жасау
+freeze=қатыру
+unfreeze=еріту
+
+# --- noise / articles ---
+the=мына
+a=бір
+an=бір
+any=кез келген
+item=зат
+
+# --- prepositions ---
+with=бірге
+by=жанында
+at=жерінде
+near=жақын
+near=маңында
+named=аталған
+because=себебі
+in=ішінде
+on=үстінде
+of=нің
+randomly=кездейсоқ
+within=аралығында
+
+# --- values ---
+true=шын
+false=жалған
+nothing=ештеңе
+none=ешкім
+length=ұзындық
+random=кездейсоқ
+number=сан
+count=саны
+between=арасында
+contains=қамтиды
+plus=плюс
+minus=минус
+times=есе
+divided=бөлінген
+second=секунд
+seconds=секунд
+minute=минут
+minutes=минут
+hour=сағат
+hours=сағат
+tick=тик
+ticks=тиктер
+size=өлшем
+
+# --- variable targets ---
+player=ойыншы
+world=әлем
+temporary=уақытша
+list=тізім
+score=ұпай
+database=дерекқор
+config=конфигурация
+value=мән
+file=файл
+data=деректер
+players=ойыншылар
+
+# --- conditions & comparisons ---
+has=бар
+is=болады
+are=болу
+not=емес
+holding=ұстап тұр
+sneaking=жасырынып жүр
+flying=ұшып жүр
+wet=су
+op=оп
+ground=жер
+biome=биом
+permission=рұқсат
+more=көп
+less=аз
+equal=тең
+than=қарағанда
+least=кемінде
+most=ең көп
+above=жоғарыда
+below=төменде
+under=астында
+health=денсаулық
+hunger=аштық
+xp=тәжірибе
+level=деңгей
+gamemode=режим
+chance=мүмкіндік
+
+# --- player events ---
+joins=қосылады
+joins=кіреді
+leaves=кетеді
+dies=өледі
+respawns=қайта пайда болады
+jumps=секіреді
+sneaks=жасырынады
+moves=қозғалады
+attacks=шабуылдайды
+attacks=ұрады
+chats=сөйлеседі
+fishes=балық аулайды
+levels=деңгейленеді
+clicks=басады
+eats=жейді
+kills=өлтіреді
+starts=бастайды
+stops=тоқтайды
+stops=тоқтатады
+sprinting=жүгіру
+takes=алады
+damage=зақым
+breaks=сындырады
+places=қояды
+picks=жинайды
+drops=тастайды
+uses=қолданады
+interacts=әрекеттеседі
+enters=кіреді
+reaches=жетеді
+types=тертеді
+touches=тиеді
+walks=жүреді
+walks=басады
+first=бірінші
+inventory=инвентарь
+mob=моб
+custom=жеке
+event=оқиға
+fires=атады
+night=түн
+dawn=таң
+falls=құлайды
+game=ойын
+server=сервер
+slot=ұяшық
+
+# --- world state ---
+weather=ауа райы
+rain=жаңбыр
+sunny=күн ашық
+storm=дауыл
+stormy=дауылды
+noon=түс
+dusk=кешқұрым
+midnight=түн ортасы
+morning=таңертең
+evening=кеш
+day=күн
+daytime=күндіз
+nighttime=түн
+
+# --- gamemodes ---
+survival=өмір сүру
+creative=шығармашылық
+adventure=саяхат
+spectator=көрермен
+
+# --- dimensions ---
+the end=соңы
+overworld=жоғарғы әлем
+
+# --- single-word items & blocks ---
+diamond=алмас
+emerald=зубаржат
+iron=темір
+gold=алтын
+coal=көмір
+bread=нан
+apple=алма
+torch=шам
+water=су
+lava=лава
+stone=тас
+dirt=топырақ
+sand=құм
+glass=әйнек
+chest=сундук
+door=есік
+sword=қылыш
+bow=садақ
+arrow=жебе
+shield=қалқан
+stick=таяқ
+bed=кереует
+boat=қайық
+bucket=шелек
+compass=компас
+
+# --- multi-word items & blocks (phrases) ---
+diamond sword=алмас қылыш
+iron sword=темір қылыш
+wooden sword=ағаш қылыш
+golden sword=алтын қылыш
+netherite sword=нетер қылышы
+diamond block=алмас блок
+gold block=алтын блок
+iron block=темір блок
+iron ingot=темір құйма
+gold ingot=алтын құйма
+diamond ore=алмас кені
+iron ore=темір кені
+gold ore=алтын кені
+coal ore=көмір кені
+enchanted golden apple=сиқырлы алтын алма
+golden apple=алтын алма
+
+# --- single-word mobs ---
+zombie=зомби
+skeleton=қаңқа
+creeper=крипер
+spider=өрмекші
+pig=шошқа
+cow=сиыр
+chicken=тауық
+sheep=қой
+wolf=қасқыр
+enderman=эндермен
+villager=ауыл тұрғыны
+horse=жылқы
+cat=мысық
+bee=ара
+
+# --- multi-word mobs ---
+iron golem=темір голем
+zombie pigman=зомби шошқа
+
+# --- effects ---
+speed=жылдамдық
+strength=күш
+jump boost=секіру күшейту
+regeneration=регенерация
+invisibility=көрінбеушілік
+poison=у
+weakness=әлсіздік
+slowness=баяулық
+night vision=түн көзі
+fire resistance=отқа төзімділік
+water breathing=суда тыныс алу
+haste=жылдамдату

@@ -41,6 +41,7 @@ public final class HermesPlugin extends JavaPlugin implements TabCompleter {
     @Override
     public void onEnable() {
         saveDefaultConfig();
+        applyLanguage();
         world = new BukkitWorld(this);
         engine = new TaleEngine(world, new HermesScheduler(this));
 
@@ -56,6 +57,7 @@ public final class HermesPlugin extends JavaPlugin implements TabCompleter {
 
         int loaded = loadScripts();
         registerScriptCommands();
+        if (engine != null) engine.serverEvent("server starts");
         getLogger().info("Loaded " + loaded + " script" + (loaded == 1 ? "" : "s") + " from "
                 + scriptsFolder().toAbsolutePath());
     }
@@ -67,11 +69,20 @@ public final class HermesPlugin extends JavaPlugin implements TabCompleter {
             Bukkit.getScheduler().cancelTask(tickTaskId);
             tickTaskId = -1;
         }
-        if (engine != null) engine.shutdown();
+        if (engine != null) {
+            engine.serverEvent("server stops");
+            engine.shutdown();
+        }
         if (world != null) {
             world.shutdown();
             world.save();
         }
+    }
+
+    /** Reads the "language" config option and loads the matching translation pack. */
+    private void applyLanguage() {
+        dev.hermes.core.Lang.setOverrideFolder(getDataFolder().toPath().resolve("lang"));
+        dev.hermes.core.Lang.setLanguage(getConfig().getString("language", "en"));
     }
 
     // ------------------------------------------------------------------
@@ -158,6 +169,7 @@ public final class HermesPlugin extends JavaPlugin implements TabCompleter {
             Bukkit.getScheduler().cancelTask(tickTaskId);
             tickTaskId = -1;
         }
+        applyLanguage();
         world.shutdown();
         world = new BukkitWorld(this);
         engine = new TaleEngine(world, new HermesScheduler(this));

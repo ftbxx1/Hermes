@@ -1,0 +1,305 @@
+# Telugu translation pack for Hermes.
+# Format: <canonical english>=<native form> (one per line, # = comment).
+# Single native words are translated while reading a script; longer native
+# phrases ("వజ్రపు ఖడ్గం") are matched by the parser's greedy lookups.
+# You may extend or override anything here by dropping a custom te.lang into
+# plugins/Hermes/lang/.
+
+# --- flow & structure ---
+when=అప్పుడు
+every=ప్రతి
+action=చర్య
+command=ఆదేశం
+region=ప్రాంతం
+mark=గుర్తు
+gui=మెనూ
+create=సృష్టించు
+if=ఉంటే
+repeat=పునరావృతం
+loop=లూప్
+stop=ఆపు
+else=లేకపోతే
+fire=కాల్చు
+win=గెలవండి
+clear=తొలగించు
+delete=తొలగించు
+while=అయినంతవరకు
+wait=వేచి ఉండు
+and=మరియు
+or=లేదా
+as=గా
+all=అన్ని
+numbers=సంఖ్యలు
+from=నుండి
+to=వరకు
+over=పైన
+up=పైకి
+down=క్రింద
+
+# --- actions ---
+give=ఇవ్వు
+remove=తీసివేయి
+set=ఉంచు
+add=కలుపు
+tell=చెప్పు
+announce=ప్రకటించు
+warn=హెచ్చరించు
+welcome=స్వాగతించు
+show=చూపించు
+kill=చంపు
+damage=నష్టం చేయి
+heal=నయం చేయి
+feed=తినిపించు
+kick=తరిమేయి
+launch=ప్రయోగించు
+title=శీర్షిక
+actionbar=చర్య పట్టీ
+lightning=మెరుపు
+explode=పేల్చు
+teleport=తెలిపోర్ట్ చేయి
+spawn=సృష్టించు
+play=ఆడించు
+write=రాయి
+open=తెరువు
+close=మూయి
+press=నొక్కు
+pull=లాగు
+power=ఆన్ చేయి
+unpower=ఆఫ్ చేయి
+put=పెట్టు
+take=తీసుకో
+make=చేయి
+
+# --- noise / articles ---
+the=ఈ
+a=ఒక
+an=ఒక
+any=ఏదైనా
+
+# --- prepositions ---
+with=తో
+by=ద్వారా
+at=వద్ద
+near=దగ్గర
+named=అనే పేరు
+because=ఎందుకంటే
+in=లో
+on=మీద
+of=యొక్క
+
+# --- values ---
+true=నిజం
+false=తప్పు
+nothing=ఏమీ లేదు
+none=ఏదీ లేదు
+length=పొడవు
+random=యాదృచ్ఛిక
+number=సంఖ్య
+count=లెక్క
+between=మధ్య
+contains=కలిగి ఉంది
+plus=కలపడం
+minus=తీసివేత
+times=సార్లు
+divided=భాగించబడింది
+second=సెకను
+seconds=సెకన్లు
+minute=నిమిషం
+minutes=నిమిషాలు
+hour=గంట
+hours=గంటలు
+tick=టిక్
+ticks=టిక్
+
+# --- variable targets ---
+player=ఆటగాడు
+world=ప్రపంచం
+temporary=తాత్కాలిక
+list=జాబితా
+score=స్కోరు
+database=డేటాబేస్
+config=ఆకృతీకరణ
+value=విలువ
+file=ఫైల్
+data=డేటా
+
+# --- conditions & comparisons ---
+has=ఉంది
+is=అవుతుంది
+are=ఉన్నాయి
+not=కాదు
+holding=పట్టుకొని
+sneaking=దాగి
+flying=ఎగురుతోంది
+wet=తడి
+op=ఓపి
+ground=భూమి
+biome=బయోమ్
+permission=అనుమతి
+more=ఎక్కువ
+less=తక్కువ
+equal=సమానం
+than=కంటే
+least=కనిష్ట
+most=గరిష్ట
+above=పైన
+below=కింద
+under=క్రింద
+health=ఆరోగ్యం
+hunger=ఆకలి
+xp=అనుభవం
+level=స్థాయి
+gamemode=గేమ్ మోడ్
+
+# --- player events ---
+joins=చేరాడు
+joins=వస్తాడు
+leaves=వెళ్లిపోతాడు
+leaves=వదిలేస్తాడు
+dies=చనిపోతాడు
+respawns=మళ్లీ పుడతాడు
+jumps=దూకుతాడు
+sneaks=దాగుతాడు
+sneaks=మెల్లిగా వెళ్తాడు
+moves=కదులుతాడు
+moves=కదిలిస్తాడు
+attacks=దాడి చేస్తాడు
+chats=మాట్లాడతాడు
+fishes=చేపలు పడతాడు
+levels=స్థాయి పెంచుతాడు
+clicks=క్లిక్ చేస్తాడు
+eats=తింటాడు
+kills=చంపుతాడు
+starts=మొదలుపెడతాడు
+stops=ఆపుతాడు
+sprinting=పరుగెడుతున్నాడు
+takes=తీసుకుంటాడు
+damage=నష్టం
+breaks=విరిచాడు
+places=ఉంచుతాడు
+picks=ఎత్తుతాడు
+drops=వదులుతాడు
+uses=వాడుతాడు
+interacts=సంభాషిస్తాడు
+enters=ప్రవేశిస్తాడు
+reaches=చేరుకుంటాడు
+types=టైప్ చేస్తాడు
+touches=తాకుతాడు
+walks=నడుస్తాడు
+first=మొదటి
+inventory=జాబితా
+mob=జీవి
+custom=అనుకూల
+event=ఈవెంట్
+fires=జరుగుతుంది
+night=రాత్రి
+dawn=తెల్లవారుజాము
+falls=పడతాడు
+game=ఆట
+server=సర్వర్
+slot=స్లాట్
+
+# --- world state ---
+weather=వాతావరణం
+rain=వర్షం
+sunny=ఎండ
+storm=తుఫాను
+stormy=తుఫానుగా
+noon=మధ్యాహ్నం
+dusk=సాయంత్రం
+midnight=అర్ధరాత్రి
+morning=ఉదయం
+evening=సాయంత్రం
+day=పగలు
+daytime=పగటి
+nighttime=రాత్రి
+
+# --- gamemodes ---
+survival=సర్వైవల్
+creative=క్రియేటివ్
+adventure=అడ్వెంచర్
+spectator=వీక్షకుడు
+
+# --- dimensions ---
+the end=అంతం
+overworld=భూలోకం
+
+# --- single-word items & blocks ---
+diamond=వజ్రం
+emerald=పచ్చ
+iron=ఇనుము
+gold=బంగారం
+coal=బొగ్గు
+bread=రొట్టె
+apple=ఆపిల్
+torch=దీపం
+water=నీరు
+lava=లావా
+stone=రాయి
+dirt=మట్టి
+sand=ఇసుక
+glass=గాజు
+chest=పెట్టె
+door=తలుపు
+sword=ఖడ్గం
+bow=విల్లు
+arrow=బాణం
+shield=డాలు
+stick=కర్ర
+bed=మంచం
+boat=పడవ
+bucket=బకెట్
+compass=దిక్సూచి
+
+# --- multi-word items & blocks (phrases) ---
+diamond sword=వజ్రపు ఖడ్గం
+iron sword=ఇనుప ఖడ్గం
+wooden sword=కర్ర ఖడ్గం
+golden sword=బంగారు ఖడ్గం
+netherite sword=నెథరైట్ ఖడ్గం
+diamond block=వజ్రపు బ్లాక్
+gold block=బంగారు బ్లాక్
+iron block=ఇనుప బ్లాక్
+iron ingot=ఇనుప కడ్డీ
+gold ingot=బంగారు కడ్డీ
+diamond ore=వజ్రపు ఖనిజం
+iron ore=ఇనుప ఖనిజం
+gold ore=బంగారు ఖనిజం
+coal ore=బొగ్గు ఖనిజం
+redstone dust=రెడ్స్టోన్ ధూళి
+enchanted golden apple=మంత్రించిన బంగారు ఆపిల్
+golden apple=బంగారు ఆపిల్
+
+# --- single-word mobs ---
+zombie=జోంబీ
+skeleton=అస్థిపంజరం
+creeper=క్రీపర్
+spider=సాలీడు
+pig=పంది
+cow=ఆవు
+chicken=కోడి
+sheep=గొర్రె
+wolf=తోడేలు
+enderman=ఎండర్మాన్
+villager=గ్రామస్థుడు
+horse=గుర్రం
+cat=పిల్లి
+bee=తేనెటీగ
+
+# --- multi-word mobs ---
+iron golem=ఇనుప గోలెమ్
+zombie pigman=జోంబీ పంది మనిషి
+
+# --- effects ---
+speed=వేగం
+strength=బలం
+jump boost=దూకుడు పెంపు
+regeneration=పునరుత్పత్తి
+invisibility=అదృశ్యత
+poison=విషం
+weakness=బలహీనత
+slowness=నెమ్మది
+night vision=రాత్రి దృష్టి
+fire resistance=అగ్ని నిరోధకం
+water breathing=నీటిలో ఊపిరి
+haste=త్వర

@@ -1,0 +1,305 @@
+# Thai translation pack for Hermes.
+# Format: <canonical english>=<native form> (one per line, # = comment).
+# Single native words are translated while reading a script; longer native
+# phrases ("ดาบเพชร") are matched by the parser's greedy lookups.
+# You may extend or override anything here by dropping a custom th.lang into
+# plugins/Hermes/lang/.
+
+# --- flow & structure ---
+when=เมื่อ
+every=ทุก
+action=การกระทำ
+command=คำสั่ง
+region=ภูมิภาค
+mark=ทำเครื่องหมาย
+gui=เมนู
+create=สร้าง
+if=ถ้า
+repeat=ทำซ้ำ
+loop=วน
+stop=หยุด
+else=มิฉะนั้น
+fire=ยิง
+win=ชนะ
+clear=ล้าง
+delete=ลบ
+while=ในขณะที่
+wait=รอ
+and=และ
+or=หรือ
+as=เป็น
+all=ทั้งหมด
+numbers=ตัวเลข
+from=จาก
+to=ถึง
+over=เหนือ
+up=ขึ้น
+down=ลง
+
+# --- actions ---
+give=ให้
+remove=เอาออก
+set=ตั้ง
+add=เพิ่ม
+tell=บอก
+announce=ประกาศ
+warn=เตือน
+welcome=ต้อนรับ
+show=แสดง
+kill=ฆ่า
+damage=ทำความเสียหาย
+heal=รักษา
+feed=ให้อาหาร
+kick=เตะ
+launch=ส่ง
+title=ไตเติล
+actionbar=แถบการกระทำ
+lightning=สายฟ้า
+explode=ระเบิด
+teleport=เทเลพอร์ต
+spawn=เรียก
+play=เล่น
+write=เขียน
+open=เปิด
+close=ปิด
+press=กด
+pull=ดึง
+power=ให้พลังงาน
+unpower=ตัดไฟ
+put=วาง
+take=หยิบ
+make=ทำ
+
+# --- noise / articles ---
+the=นั้น
+a=หนึ่ง
+an=หนึ่ง
+any=ใดก็ได้
+
+# --- prepositions ---
+with=กับ
+by=โดย
+at=ที่
+near=ใกล้
+named=ชื่อ
+because=เพราะ
+in=ใน
+on=บน
+of=ของ
+
+# --- values ---
+true=จริง
+false=เท็จ
+nothing=ไม่มี
+none=ไม่มี
+length=ความยาว
+random=สุ่ม
+number=จำนวน
+count=นับ
+between=ระหว่าง
+contains=มี
+plus=บวก
+minus=ลบ
+times=คูณ
+divided=หาร
+second=วินาที
+seconds=วินาที
+minute=นาที
+minutes=นาที
+hour=ชั่วโมง
+hours=ชั่วโมง
+tick=ทิค
+ticks=ทิค
+
+# --- variable targets ---
+player=ผู้เล่น
+world=โลก
+temporary=ชั่วคราว
+list=รายการ
+score=คะแนน
+database=ฐานข้อมูล
+config=การตั้งค่า
+value=ค่า
+file=ไฟล์
+data=ข้อมูล
+
+# --- conditions & comparisons ---
+has=มี
+is=คือ
+are=คือ
+not=ไม่
+holding=ถือ
+sneaking=ย่อ
+flying=บิน
+wet=เปียก
+op=โอพี
+ground=พื้น
+biome=ไบโอม
+permission=สิทธิ์
+more=มากกว่า
+less=น้อยกว่า
+equal=เท่ากับ
+than=กว่า
+least=น้อยที่สุด
+most=มากที่สุด
+above=เหนือ
+below=ต่ำกว่า
+under=ใต้
+health=เลือด
+hunger=ความหิว
+xp=xp
+level=เลเวล
+gamemode=โหมดเกม
+
+# --- player events ---
+joins=เข้าสู่เกม
+joins=เข้าร่วม
+leaves=ออกจากเกม
+leaves=ออก
+dies=ตาย
+respawns=เกิดใหม่
+jumps=กระโดด
+sneaks=ย่อตัว
+sneaks=หมอบ
+moves=เคลื่อนที่
+moves=ขยับ
+attacks=โจมตี
+chats=พูดคุย
+fishes=ตกปลา
+levels=เลเวลอัพ
+clicks=คลิก
+eats=กิน
+kills=ฆ่า
+starts=เริ่ม
+stops=หยุด
+sprinting=วิ่ง
+takes=รับ
+damage=ความเสียหาย
+breaks=ทำลาย
+places=วาง
+picks=เก็บ
+drops=ทิ้ง
+uses=ใช้
+interacts=โต้ตอบ
+enters=เข้า
+reaches=ถึง
+types=พิมพ์
+touches=สัมผัส
+walks=เดิน
+first=แรก
+inventory=คลัง
+mob=ม็อบ
+custom=กำหนดเอง
+event=เหตุการณ์
+fires=เกิดขึ้น
+night=กลางคืน
+dawn=รุ่งอรุณ
+falls=ตก
+game=เกม
+server=เซิร์ฟเวอร์
+slot=ช่อง
+
+# --- world state ---
+weather=สภาพอากาศ
+rain=ฝน
+sunny=แดดจ้า
+storm=พายุ
+stormy=พายุ
+noon=เที่ยง
+dusk=พลบค่ำ
+midnight=เที่ยงคืน
+morning=เช้า
+evening=เย็น
+day=กลางวัน
+daytime=กลางวัน
+nighttime=กลางคืน
+
+# --- gamemodes ---
+survival=เซอร์ไววัล
+creative=ครีเอทีฟ
+adventure=ผจญภัย
+spectator=สเปกเตเตอร์
+
+# --- dimensions ---
+the end=ดิเอนด์
+overworld=โลกปกติ
+
+# --- single-word items & blocks ---
+diamond=เพชร
+emerald=มรกต
+iron=เหล็ก
+gold=ทอง
+coal=ถ่านหิน
+bread=ขนมปัง
+apple=แอปเปิล
+torch=คบเพลิง
+water=น้ำ
+lava=ลาวา
+stone=หิน
+dirt=ดิน
+sand=ทราย
+glass=แก้ว
+chest=หีบ
+door=ประตู
+sword=ดาบ
+bow=ธนู
+arrow=ลูกธนู
+shield=โล่
+stick=แท่งไม้
+bed=เตียง
+boat=เรือ
+bucket=ถัง
+compass=เข็มทิศ
+
+# --- multi-word items & blocks (phrases) ---
+diamond sword=ดาบเพชร
+iron sword=ดาบเหล็ก
+wooden sword=ดาบไม้
+golden sword=ดาบทอง
+netherite sword=ดาบเนเธอไรต์
+diamond block=บล็อกเพชร
+gold block=บล็อกทอง
+iron block=บล็อกเหล็ก
+iron ingot=แท่งเหล็ก
+gold ingot=แท่งทอง
+diamond ore=แร่เพชร
+iron ore=แร่เหล็ก
+gold ore=แร่ทอง
+coal ore=แร่ถ่านหิน
+redstone dust=ฝุ่นเรดสโตน
+enchanted golden apple=แอปเปิลทองคำเสน่ห์
+golden apple=แอปเปิลทอง
+
+# --- single-word mobs ---
+zombie=ซอมบี้
+skeleton=โครงกระดูก
+creeper=ครีปเปอร์
+spider=แมงมุม
+pig=หมู
+cow=วัว
+chicken=ไก่
+sheep=แกะ
+wolf=หมาป่า
+enderman=เอนเดอร์แมน
+villager=ชาวบ้าน
+horse=ม้า
+cat=แมว
+bee=ผึ้ง
+
+# --- multi-word mobs ---
+iron golem=โกเลมเหล็ก
+zombie pigman=หมูซอมบี้
+
+# --- effects ---
+speed=ความเร็ว
+strength=ความแข็งแกร่ง
+jump boost=กระโดดแรง
+regeneration=ฟื้นฟู
+invisibility=ล่องหน
+poison=พิษ
+weakness=อ่อนแอ
+slowness=เชื่องช้า
+night vision=มองเห็นกลางคืน
+fire resistance=ทนไฟ
+water breathing=หายใจใต้น้ำ
+haste=เร่งความเร็ว

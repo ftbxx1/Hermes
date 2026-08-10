@@ -37,6 +37,7 @@ public final class Interpreter {
     private final Script script;
     private final TaleEngine engine;
     private final WorldAPI world;
+    private final Scheduler scheduler;
     private final Map<String, ActionDef> actions = new HashMap<>();
 
     private static final String[] KNOWN_VERBS = {
@@ -44,13 +45,15 @@ public final class Interpreter {
         "kill", "damage", "heal", "feed", "teleport", "spawn", "play", "write", "open", "close",
         "press", "pull", "power", "unpower", "put", "take", "make", "win", "fire", "clear",
         "create", "stop", "repeat", "loop", "if", "kick", "launch", "title", "actionbar",
-        "lightning", "explode", "delete", "particles",
+        "lightning", "explode", "delete", "particles", "while", "wait",
+        "freeze", "unfreeze", "randomly",
     };
 
     Interpreter(Script script, TaleEngine engine) {
         this.script = script;
         this.engine = engine;
         this.world = engine.world;
+        this.scheduler = engine.scheduler;
         for (Stmt s : script.body) {
             if (s instanceof ActionDef a) {
                 if (actions.containsKey(a.name)) {
@@ -85,6 +88,8 @@ public final class Interpreter {
                 if (i.elseBody != null) validateCalls(i.elseBody);
             } else if (s instanceof RepeatStmt r) {
                 validateCalls(r.body);
+            } else if (s instanceof WhileStmt wh) {
+                validateCalls(wh.body);
             } else if (s instanceof LoopStmt l) {
                 validateCalls(l.body);
             } else if (s instanceof ActionDef a) {
@@ -115,12 +120,34 @@ public final class Interpreter {
     // ------------------------------------------------------------------
 
     void runBlock(List<Stmt> body, RunContext ctx) {
-        for (Stmt s : body) {
+        runBlockFrom(body, ctx, 0);
+    }
+
+    private void runBlockFrom(List<Stmt> body, RunContext ctx, int start) {
+        for (int i = start; i < body.size(); i++) {
             if (ctx.stopped) return;
             if (++ctx.steps > MAX_STEPS) {
-                throw new VerseError(s.line,
+                throw new VerseError(body.get(i).line,
                         "This script is stuck in a loop. I stopped it so the server doesn't freeze.",
                         "Use 'stop' to leave a loop early.");
+            }
+            Stmt s = body.get(i);
+            if (s instanceof WaitStmt w) {
+                long millis = Math.max(50, (long) (w.seconds * 1000));
+                Map<String, Value> snapshot = new HashMap<>(ctx.temps);
+                int next = i + 1;
+                scheduler.runLater(millis, () -> {
+                    RunContext c2 = new RunContext(ctx.scriptName, ctx.player, ctx.mob);
+                    c2.temps.putAll(snapshot);
+                    try {
+                        runBlockFrom(body, c2, next);
+                    } catch (VerseError e) {
+                        reportError(e, c2.player);
+                    } catch (RuntimeException e) {
+                        world.log("Hermes error: " + e);
+                    }
+                });
+                return;
             }
             run(s, ctx);
         }
@@ -180,8 +207,29 @@ public final class Interpreter {
             for (int i = 0; i < (int) rep.times && !ctx.stopped; i++) {
                 runBlock(rep.body, ctx);
             }
+        } else if (s instanceof WhileStmt wh) {
+            while (!ctx.stopped && evalCond(wh.cond, ctx)) {
+                runBlock(wh.body, ctx);
+            }
         } else if (s instanceof LoopStmt loop) {
             runLoop(loop, ctx);
+        } else if (s instanceof SetPlayerStatStmt stat) {
+            PlayerRef p = needPlayer(s, ctx);
+            double v = eval(stat.value, ctx).num;
+            switch (stat.stat) {
+                case "health": world.setHealth(p, v); break;
+                case "hunger": world.setHunger(p, (int) v); break;
+                case "xp": world.setXp(p, (int) v); break;
+                case "level": world.setLevel(p, (int) v); break;
+                default: break;
+            }
+        } else if (s instanceof SetBossbarStmt bb) {
+            PlayerRef p = needPlayer(s, ctx);
+            String title = eval(bb.title, ctx).display();
+            double progress = bb.progress != null ? eval(bb.progress, ctx).num : 100;
+            world.setBossbar(p, title, progress);
+        } else if (s instanceof ClearBossbarStmt cb) {
+            world.clearBossbar(needPlayer(s, ctx));
         } else if (s instanceof StopStmt) {
             ctx.stopped = true;
         } else if (s instanceof SetStmt set) {
@@ -233,7 +281,7 @@ public final class Interpreter {
         } else if (s instanceof ExplodeStmt ex) {
             world.explode(resolveLoc(ex.where, s, ctx), ex.power);
         } else if (s instanceof ParticleStmt pa) {
-            world.spawnParticles(pa.particle, resolveLoc(pa.where, s, ctx));
+            world.spawnParticles(pa.particle, resolveLoc(pa.where, s, ctx), pa.count, pa.size);
         } else if (s instanceof ShowStmt show) {
             Value v = getVar(show.target, ctx);
             PlayerRef p = needPlayer(s, ctx);
@@ -253,8 +301,11 @@ public final class Interpreter {
             if (h.target == TargetRef.MOB) world.healMob(needMob(s, ctx), h.amount);
             else world.heal(needPlayer(s, ctx), h.amount);
         } else if (s instanceof GiveItemStmt g) {
-            PlayerRef p = needPlayer(s, ctx);
-            world.giveItemSpec(p, g.spec);
+            if (g.target == TargetRef.ALL_PLAYERS) {
+                for (PlayerRef each : world.onlinePlayers()) world.giveItemSpec(each, g.spec);
+            } else {
+                world.giveItemSpec(needPlayer(s, ctx), g.spec);
+            }
         } else if (s instanceof GiveBookStmt gb) {
             WorldAPI.BookDef book = engine.book(gb.book);
             if (book == null) {
@@ -262,7 +313,11 @@ public final class Interpreter {
                         "There is no book called '" + gb.book + "'.",
                         "Create it first:\n\ncreate book \"" + gb.book + "\" with page \"...\"");
             }
-            world.giveBook(needPlayer(s, ctx), book);
+            if (gb.target == TargetRef.ALL_PLAYERS) {
+                for (PlayerRef each : world.onlinePlayers()) world.giveBook(each, book);
+            } else {
+                world.giveBook(needPlayer(s, ctx), book);
+            }
         } else if (s instanceof OpenGuiStmt og) {
             engine.openGui(og.gui, needPlayer(s, ctx));
         } else if (s instanceof SetGuiSlotStmt gs) {
@@ -282,16 +337,34 @@ public final class Interpreter {
         } else if (s instanceof ConfigSetStmt cs) {
             world.setConfigValue(cs.file, cs.key, eval(cs.value, ctx).display());
         } else if (s instanceof TakeItemStmt t) {
-            PlayerRef p = needPlayer(s, ctx);
-            if (!world.takeItem(p, t.item, t.count)) {
-                world.warn(p, "You don't have " + t.count + " " + t.item + ".");
+            if (t.target == TargetRef.ALL_PLAYERS) {
+                for (PlayerRef each : world.onlinePlayers()) {
+                    if (!world.takeItem(each, t.item, t.count)) {
+                        world.warn(each, "You don't have " + t.count + " " + t.item + ".");
+                    }
+                }
+            } else {
+                PlayerRef p = needPlayer(s, ctx);
+                if (!world.takeItem(p, t.item, t.count)) {
+                    world.warn(p, "You don't have " + t.count + " " + t.item + ".");
+                }
             }
         } else if (s instanceof GiveXpStmt xp) {
-            world.giveXp(needPlayer(s, ctx), (int) xp.amount);
+            if (xp.target == TargetRef.ALL_PLAYERS) {
+                for (PlayerRef each : world.onlinePlayers()) world.giveXp(each, (int) xp.amount);
+            } else {
+                world.giveXp(needPlayer(s, ctx), (int) xp.amount);
+            }
         } else if (s instanceof GiveLevelsStmt lv) {
-            world.giveLevels(needPlayer(s, ctx), (int) lv.amount);
+            if (lv.target == TargetRef.ALL_PLAYERS) {
+                for (PlayerRef each : world.onlinePlayers()) world.giveLevels(each, (int) lv.amount);
+            } else {
+                world.giveLevels(needPlayer(s, ctx), (int) lv.amount);
+            }
         } else if (s instanceof EffectStmt ef) {
-            if (ef.target == TargetRef.MOB) world.effectOnMob(needMob(s, ctx), ef.effect, ef.seconds);
+            if (ef.target == TargetRef.ALL_PLAYERS) {
+                for (PlayerRef each : world.onlinePlayers()) world.effectOnPlayer(each, ef.effect, ef.seconds);
+            } else if (ef.target == TargetRef.MOB) world.effectOnMob(needMob(s, ctx), ef.effect, ef.seconds);
             else world.effectOnPlayer(needPlayer(s, ctx), ef.effect, ef.seconds);
         } else if (s instanceof RemoveEffectStmt re) {
             if (re.target == TargetRef.MOB) world.removeEffectFromMob(needMob(s, ctx), re.effect);
@@ -300,9 +373,16 @@ public final class Interpreter {
             if (me.target == TargetRef.MOB) world.effectOnMob(needMob(s, ctx), me.effect, 10);
             else world.effectOnPlayer(needPlayer(s, ctx), me.effect, 10);
         } else if (s instanceof PermissionStmt perm) {
-            PlayerRef p = needPlayer(s, ctx);
-            if (perm.grant) world.grantPermission(p, perm.perm);
-            else world.revokePermission(p, perm.perm);
+            if (perm.target == TargetRef.ALL_PLAYERS) {
+                for (PlayerRef each : world.onlinePlayers()) {
+                    if (perm.grant) world.grantPermission(each, perm.perm);
+                    else world.revokePermission(each, perm.perm);
+                }
+            } else {
+                PlayerRef p = needPlayer(s, ctx);
+                if (perm.grant) world.grantPermission(p, perm.perm);
+                else world.revokePermission(p, perm.perm);
+            }
         } else if (s instanceof TellStmt tell) {
             PlayerRef p = needPlayer(s, ctx);
             Value v = eval(tell.text, ctx);
@@ -321,6 +401,19 @@ public final class Interpreter {
                 if (tp.where.kind.equals("spawn")) world.teleportToSpawn(p);
                 else world.teleport(p, resolveLoc(tp.where, s, ctx));
             }
+        } else if (s instanceof TeleportRandomStmt rtp) {
+            if (rtp.target == TargetRef.MOB) {
+                world.teleportMob(needMob(s, ctx), randomNear(world.mobLocation(needMob(s, ctx)), rtp.radius));
+            } else {
+                PlayerRef p = needPlayer(s, ctx);
+                world.teleport(p, randomNear(world.playerLocation(p), rtp.radius));
+            }
+        } else if (s instanceof FreezeStmt fz) {
+            if (fz.target == TargetRef.MOB) {
+                throw new VerseError(s.line,
+                        "I can only freeze players.", "freeze player");
+            }
+            world.setFrozen(needPlayer(s, ctx), fz.frozen);
         } else if (s instanceof SpawnMobStmt sm) {
             Vec3 loc = resolveLoc(sm.where, s, ctx);
             for (int i = 0; i < sm.count; i++) {
@@ -557,6 +650,16 @@ public final class Interpreter {
 
     private Value eval(ValueExpr e, RunContext ctx) {
         if (e instanceof NumExpr n) return Value.number(n.v);
+        if (e instanceof BinaryExpr b) {
+            double a = numericValue(eval(b.left, ctx));
+            double c = numericValue(eval(b.right, ctx));
+            switch (b.op) {
+                case "+": return Value.number(a + c);
+                case "-": return Value.number(a - c);
+                case "*": return Value.number(a * c);
+                default: return c == 0 ? Value.number(0) : Value.number(a / c);
+            }
+        }
         if (e instanceof TextExpr t) return Value.text(t.v);
         if (e instanceof TemplateExpr tm) {
             StringBuilder sb = new StringBuilder();
@@ -612,13 +715,38 @@ public final class Interpreter {
             }
             return Value.number(lo + Math.random() * (hi - lo));
         }
+        if (e instanceof RandomListExpr rl) {
+            List<Value> items = engine.vars.list(rl.list).items;
+            if (items.isEmpty()) return Value.none();
+            return items.get((int) (Math.random() * items.size()));
+        }
         if (e instanceof OnlineCountExpr) {
             return Value.number(world.onlinePlayers().size());
         }
         if (e instanceof CountItemExpr ci) {
             return Value.number(world.countItem(needPlayerForExpr(e, ctx), ci.item));
         }
+        if (e instanceof HeldItemExpr) {
+            return Value.text(world.heldItem(needPlayerForExpr(e, ctx)));
+        }
         throw new VerseError(e.line, "I can't work out that value.");
+    }
+
+    private static double numericValue(Value v) {
+        if (v.isNumber()) return v.num;
+        if (v.isTruth()) return v.truth ? 1 : 0;
+        if (v.isText()) {
+            try { return Double.parseDouble(v.text.trim()); }
+            catch (NumberFormatException ex) { return 0; }
+        }
+        return 0;
+    }
+
+    /** A random spot within radius of a location, on the same height. */
+    private static Vec3 randomNear(Vec3 base, double radius) {
+        double angle = Math.random() * 2 * Math.PI;
+        double dist = Math.random() * radius;
+        return new Vec3(base.x() + Math.cos(angle) * dist, base.y(), base.z() + Math.sin(angle) * dist);
     }
 
     private PlayerRef needPlayerForExpr(ValueExpr e, RunContext ctx) {
@@ -630,12 +758,22 @@ public final class Interpreter {
         return ctx.player;
     }
 
+    private void reportError(VerseError e, PlayerRef p) {
+        world.log("Hermes error in " + scriptName() + ": " + e.message
+                + (e.line > 0 ? " (line " + e.line + ")" : ""));
+        if (p != null) {
+            world.sendMessage(p, "§c§lHermes error: §7" + e.message
+                    + (e.suggestion != null ? " §cTry: §7" + e.suggestion.replace('\n', ' ') : ""));
+        }
+    }
+
     // ------------------------------------------------------------------
     // conditions
     // ------------------------------------------------------------------
 
     boolean evalCond(Condition c, RunContext ctx) {
         if (c instanceof TruthCond t) return t.v;
+        if (c instanceof ChanceCond cc) return Math.random() * 100 < cc.percent;
         if (c instanceof NotCond n) return !evalCond(n.inner, ctx);
         if (c instanceof AndCond a) {
             for (Condition p : a.parts) if (!evalCond(p, ctx)) return false;
@@ -696,6 +834,7 @@ public final class Interpreter {
                 case "wet": return world.isWet(ctx.player);
                 case "ground": return world.isOnGround(ctx.player);
                 case "op": return world.isOp(ctx.player);
+                case "frozen": return world.isFrozen(ctx.player);
                 default: return false;
             }
         }

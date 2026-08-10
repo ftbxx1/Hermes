@@ -1,0 +1,311 @@
+# Uzbek translation pack for Hermes.
+# Format: <canonical english>=<native form> (one per line, # = comment).
+# Single native words are translated while reading a script; longer native
+# phrases ("qilich") are matched by the parser's greedy lookups.
+
+# --- flow & structure ---
+when=qachon
+every=har
+action=harakat
+command=buyruq
+region=hudud
+mark=belgi
+gui=menyu
+create=yarat
+if=agar
+repeat=takrorla
+loop=sikl
+stop=to'xtat
+else=aks holda
+fire=ot
+win=yut
+clear=tozala
+delete=o'chir
+while=paytda
+wait=kut
+and=va
+or=yoki
+as=sifatida
+all=hammasi
+numbers=raqamlar
+from=dan
+to=gacha
+over=ustidan
+up=yuqoriga
+down=pastga
+
+# --- actions ---
+give=ber
+remove=olib tashla
+set=o'rnat
+add=qo'sh
+tell=ayt
+announce=e'lon qil
+warn=ogohlantir
+welcome=qarshi ol
+show=ko'rsat
+kill=o'ldir
+damage=zarar
+heal=davola
+feed=ovqatlantir
+kick=hayda
+launch=uchir
+title=sarlavha
+actionbar=harakat paneli
+lightning=chaqmoq
+explode=portlat
+teleport=teleport qil
+spawn=paydo qil
+play=o'yna
+write=yoz
+open=och
+close=yop
+press=bos
+pull=tort
+power=yoq
+unpower=quvvatsizlantir
+put=qo'y
+take=ol
+make=yas
+freeze=muzlat
+unfreeze=erit
+
+# --- noise / articles ---
+the=shu
+a=bir
+an=bir
+any=istalgan
+item=buyum
+
+# --- prepositions ---
+with=bilan
+by=orqali
+at=da
+near=yaqinida
+near=yonida
+named=nomli
+because=chunki
+in=ichida
+on=ustida
+of=ning
+randomly=tasodifan
+within=orasida
+
+# --- values ---
+true=to'g'ri
+false=noto'g'ri
+nothing=hech narsa
+none=yo'q
+length=uzunlik
+random=tasodifiy
+number=son
+count=soni
+between=orasida
+contains=o'z ichiga oladi
+plus=plyus
+minus=ayirish
+times=marta
+divided=bo'lingan
+second=soniya
+seconds=soniyalar
+minute=daqiqa
+minutes=daqiqalar
+hour=soat
+hours=soatlar
+tick=tik
+ticks=tiklar
+size=o'lcham
+
+# --- variable targets ---
+player=o'yinchi
+world=dunyo
+temporary=vaqtinchalik
+list=ro'yxat
+score=ball
+database=ma'lumotlar bazasi
+config=konfiguratsiya
+value=qiymat
+file=fayl
+data=ma'lumotlar
+players=o'yinchilar
+
+# --- conditions & comparisons ---
+has=ega
+is=bu
+are=bor
+not=emas
+holding=ushlab turibdi
+sneaking=yashirincha
+flying=uchmoqda
+wet=ho'l
+op=op
+ground=yer
+biome=biom
+permission=ruxsat
+more=ko'proq
+less=kamroq
+equal=teng
+than=ko'ra
+least=kamida
+most=ko'pi bilan
+above=tepasida
+below=ostida
+under=tagida
+health=sog'liq
+hunger=ochlik
+xp=xp
+level=daraja
+gamemode=o'yin rejimi
+chance=imkoniyat
+
+# --- player events ---
+joins=qo'shiladi
+joins=kiradi
+leaves=ketadi
+dies=o'ladi
+respawns=qayta tug'iladi
+jumps=sakraydi
+sneaks=yashirinadi
+moves=harakat qiladi
+attacks=hujum qiladi
+attacks=uriladi
+chats=suhbatlashadi
+fishes=baliq ovlaydi
+levels=daraja ko'taradi
+clicks=bosadi
+eats=yeydi
+kills=o'ldiradi
+starts=boshlaydi
+stops=to'xtaydi
+stops=to'xtab qoladi
+sprinting=yuguradi
+takes=oladi
+damage=shikast
+breaks=sindiradi
+places=joylashtiradi
+picks=teradi
+drops=tashlaydi
+uses=ishlatadi
+interacts=aloqa qiladi
+enters=kirib keladi
+reaches=erishadi
+types=kiritadi
+touches=tegadi
+walks=yuradi
+walks=piyoda yuradi
+first=birinchi
+inventory=inventar
+mob=maxluq
+custom=moslashtirilgan
+event=hodisa
+fires=otadi
+night=tun
+dawn=tong
+falls=yiqiladi
+game=o'yin
+server=server
+slot=joy
+
+# --- world state ---
+weather=ob-havo
+rain=yomg'ir
+sunny=quyoshli
+storm=bo'ron
+stormy=bo'ronli
+noon=peshin
+dusk=oqshom
+midnight=yarim tun
+morning=ertalab
+evening=kechqurun
+day=kun
+daytime=kunduzi
+nighttime=tungi vaqt
+
+# --- gamemodes ---
+survival=omon qolish
+creative=ijodiy
+adventure=sarguzasht
+spectator=tomoshabin
+
+# --- dimensions ---
+the end=oxiri
+overworld=ustki dunyo
+
+# --- single-word items & blocks ---
+diamond=olmos
+emerald=zumrad
+iron=temir
+gold=oltin
+coal=ko'mir
+bread=non
+apple=olma
+torch=mash'al
+water=suv
+lava=lava
+stone=tosh
+dirt=tuproq
+sand=qum
+glass=shisha
+chest=sandiq
+door=eshik
+sword=qilich
+bow=kamon
+arrow=o'q
+shield=qalqon
+stick=tayoq
+bed=karavot
+boat=qayiq
+bucket=chelak
+compass=kompas
+
+# --- multi-word items & blocks (phrases) ---
+diamond sword=olmos qilich
+iron sword=temir qilich
+wooden sword=yog'och qilich
+golden sword=oltin qilich
+netherite sword=netherit qilich
+diamond block=olmos blok
+gold block=oltin blok
+iron block=temir blok
+iron ingot=temir quyma
+gold ingot=oltin quyma
+diamond ore=olmos rudasi
+iron ore=temir rudasi
+gold ore=oltin rudasi
+coal ore=ko'mir rudasi
+enchanted golden apple=sehrlangan oltin olma
+golden apple=oltin olma
+
+# --- single-word mobs ---
+zombie=zombi
+skeleton=skelet
+creeper=creeper
+spider=o'rgimchak
+pig=cho'chqa
+cow=sigir
+chicken=tovuq
+sheep=qo'y
+wolf=bo'ri
+enderman=enderman
+villager=qishloq
+horse=ot
+cat=mushuk
+bee=asalari
+
+# --- multi-word mobs ---
+iron golem=temir golem
+zombie pigman=zombi cho'chqa
+
+# --- effects ---
+speed=tezlik
+strength=kuch
+jump boost=sakrash kuchayishi
+regeneration=regeneratsiya
+invisibility=ko'rinmaslik
+poison=zahar
+weakness=zaiflik
+slowness=sekinlik
+night vision=tungi ko'rish
+fire resistance=olovga chidamlilik
+water breathing=suv ostida nafas olish
+haste=chaqqonlik

@@ -1,0 +1,305 @@
+# Urdu translation pack for Hermes.
+# Format: <canonical english>=<native form> (one per line, # = comment).
+# Single native words are translated while reading a script; longer native
+# phrases ("ہیرے کی تلوار") are matched by the parser's greedy lookups.
+# You may extend or override anything here by dropping a custom ur.lang into
+# plugins/Hermes/lang/.
+
+# --- flow & structure ---
+when=جب
+every=ہر
+action=عمل
+command=حکم
+region=علاقہ
+mark=نشان
+gui=مینیو
+create=بناؤ
+if=اگر
+repeat=دہراؤ
+loop=لوپ
+stop=روکو
+else=ورنہ
+fire=گولی مار
+win=جیتو
+clear=صاف کرو
+delete=حذف کرو
+while=جب تک
+wait=انتظار کرو
+and=اور
+or=یا
+as=جیسا
+all=سب
+numbers=اعداد
+from=سے
+to=تک
+over=اوپر
+up=بالا
+down=نیچے
+
+# --- actions ---
+give=دو
+remove=ہٹاؤ
+set=رکھو
+add=شامل کرو
+tell=بتاؤ
+announce=اعلان کرو
+warn=خبردار کرو
+welcome=خوش آمدید
+show=دکھاؤ
+kill=مارو
+damage=نقصان
+heal=شفا دو
+feed=کھلاؤ
+kick=نکال دو
+launch=چھوڑو
+title=عنوان
+actionbar=بار
+lightning=بجلی
+explode=دھماکا
+teleport=منتقل کرو
+spawn=پیدا کرو
+play=چلاؤ
+write=لکھو
+open=کھولو
+close=بند کرو
+press=دباؤ
+pull=کھینچو
+power=فعال کرو
+unpower=غیر فعال کرو
+put=رکھ دو
+take=لو
+make=تیار کرو
+
+# --- noise / articles ---
+the=یہ
+a=ایک
+an=ایک
+any=کوئی
+
+# --- prepositions ---
+with=ساتھ
+by=کے ذریعے
+at=پر
+near=قریب
+named=نام
+because=کیونکہ
+in=میں
+on=پر
+of=کا
+
+# --- values ---
+true=سچ
+false=جھوٹ
+nothing=کچھ نہیں
+none=کوئی نہیں
+length=لمبائی
+random=بے ترتیب
+number=نمبر
+count=تعداد
+between=درمیان
+contains=شامل ہے
+plus=جمع
+minus=منفی
+times=بار
+divided=تقسیم
+second=سیکنڈ
+seconds=سیکنڈز
+minute=منٹ
+minutes=منٹس
+hour=گھنٹہ
+hours=گھنٹے
+tick=ٹک
+ticks=ٹکس
+
+# --- variable targets ---
+player=کھلاڑی
+world=دنیا
+temporary=عارضی
+list=فہرست
+score=اسکور
+database=ڈیٹا بیس
+config=کنفیگریشن
+value=قدر
+file=فائل
+data=ڈیٹا
+
+# --- conditions & comparisons ---
+has=رکھتا ہے
+is=ہے
+are=ہیں
+not=نہیں
+holding=پکڑا ہوا
+sneaking=جھکا ہوا
+flying=اڑتا ہوا
+wet=گیلا
+op=او پی
+ground=زمین
+biome=بایوم
+permission=اجازت
+more=زیادہ
+less=کم
+equal=برابر
+than=سے
+least=کم از کم
+most=سب سے زیادہ
+above=اوپر
+below=نیچے
+under=تلے
+health=صحت
+hunger=بھوک
+xp=تجربہ
+level=سطح
+gamemode=موڈ
+
+# --- player events ---
+joins=شامل ہوا
+joins=داخل ہوا
+leaves=چھوڑ گیا
+leaves=رخصت ہوا
+dies=مر گیا
+respawns=واپس آیا
+jumps=کودا
+sneaks=جھکا
+sneaks=چپکے چلا
+moves=حرکت کی
+moves=منتقل ہوا
+attacks=حملہ کیا
+chats=باتیں کی
+fishes=مچھلی پکڑی
+levels=بڑھا
+clicks=کلک کیا
+eats=کھایا
+kills=مارا
+starts=شروع کیا
+stops=رک گیا
+sprinting=بھاگا
+takes=لیا
+damage=نقصان
+breaks=توڑا
+places=رکھا
+picks=اٹھایا
+drops=گرا دیا
+uses=استعمال کیا
+interacts=تعامل کیا
+enters=داخل ہوا
+reaches=پہنچا
+types=ٹائپ کیا
+touches=چھوا
+walks=چلا
+first=پہلا
+inventory=انوینٹری
+mob=مخلوق
+custom=کسٹم
+event=واقعہ
+fires=رونما ہوا
+night=رات
+dawn=فجر
+falls=گرا
+game=کھیل
+server=سرور
+slot=سلاٹ
+
+# --- world state ---
+weather=موسم
+rain=بارش
+sunny=دھوپ
+storm=طوفان
+stormy=طوفانی
+noon=دوپہر
+dusk=غروب
+midnight=آدھی رات
+morning=صبح
+evening=شام
+day=دن
+daytime=دن
+nighttime=رات
+
+# --- gamemodes ---
+survival=بقا
+creative=تخلیقی
+adventure=مہم جوئی
+spectator=تماشائی
+
+# --- dimensions ---
+the end=آخر
+overworld=اوپری دنیا
+
+# --- single-word items & blocks ---
+diamond=ہیرا
+emerald=زمرد
+iron=لوہا
+gold=سونا
+coal=کوئلہ
+bread=روٹی
+apple=سیب
+torch=مشعل
+water=پانی
+lava=لاوا
+stone=پتھر
+dirt=مٹی
+sand=ریت
+glass=شیشہ
+chest=صندوق
+door=دروازہ
+sword=تلوار
+bow=کمان
+arrow=تیر
+shield=ڈھال
+stick=چھڑی
+bed=بستر
+boat=کشتی
+bucket=بالٹی
+compass=قطب نما
+
+# --- multi-word items & blocks (phrases) ---
+diamond sword=ہیرے کی تلوار
+iron sword=لوہے کی تلوار
+wooden sword=لکڑی کی تلوار
+golden sword=سنہری تلوار
+netherite sword=نیدرائیٹ تلوار
+diamond block=ہیرے کا بلاک
+gold block=سونے کا بلاک
+iron block=لوہے کا بلاک
+iron ingot=لوہے کی ڈلی
+gold ingot=سونے کی ڈلی
+diamond ore=ہیرے کی دھات
+iron ore=لوہے کی دھات
+gold ore=سونے کی دھات
+coal ore=کوئلے کی دھات
+redstone dust=ریڈسٹون دھول
+enchanted golden apple=جادوئی سنہری سیب
+golden apple=سنہری سیب
+
+# --- single-word mobs ---
+zombie=زومبی
+skeleton=کنکال
+creeper=کریپر
+spider=مکڑی
+pig=خنزیر
+cow=گائے
+chicken=مرغی
+sheep=بھیڑ
+wolf=بھیڑیا
+enderman=اینڈر مین
+villager=گاؤں والا
+horse=گھوڑا
+cat=بلی
+bee=شہد کی مکھی
+
+# --- multi-word mobs ---
+iron golem=لوہے کا گولم
+zombie pigman=زومبی خنزیر
+
+# --- effects ---
+speed=رفتار
+strength=طاقت
+jump boost=چھلانگ
+regeneration=بحالی
+invisibility=پوشیدگی
+poison=زہر
+weakness=کمزوری
+slowness=سستی
+night vision=رات کی بینائی
+fire resistance=آگ سے مزاحمت
+water breathing=پانی میں سانس
+haste=تیزی

@@ -1,0 +1,304 @@
+# Slovak translation pack for Hermes.
+# Format: <canonical english>=<native form> (one per line, # = comment).
+# Single native words are translated while reading a script; longer native
+# phrases ("diamantový meč") are matched by the parser's greedy lookups.
+
+# --- flow & structure ---
+when=keď
+every=každý
+action=akcia
+command=príkaz
+region=región
+mark=značka
+gui=menu
+create=vytvor
+if=ak
+if=keď
+repeat=zopakuj
+loop=slučka
+stop=zastav
+else=inak
+fire=vystrel
+win=vyhraj
+clear=vyčisti
+delete=zmaž
+while=kým
+wait=čakaj
+and=a
+or=alebo
+as=ako
+all=všetky
+numbers=čísla
+from=od
+to=do
+over=nad
+up=hore
+down=dole
+
+# --- actions ---
+give=daj
+remove=odober
+set=nastav
+add=pridaj
+tell=povedz
+announce=oznám
+warn=varuj
+welcome=privítaj
+show=ukáž
+kill=zabij
+damage=zrani
+heal=uzdrav
+feed=nakŕm
+kick=vyhoď
+launch=vystrel
+title=titul
+actionbar=lišta
+lightning=blesk
+explode=vybuchni
+teleport=teleportuj
+spawn=objav
+play=hraj
+write=napíš
+open=otvor
+close=zatvor
+press=stlač
+pull=potiahni
+power=zapni
+unpower=vypni
+put=polož
+take=vezmi
+make=urob
+
+# --- noise / articles ---
+the=ten
+a=nejaký
+an=nejaký
+any=akýkoľvek
+
+# --- prepositions ---
+with=s
+by=podľa
+at=na
+near=blízko
+named=pomenovaný
+because=pretože
+in=v
+on=na
+of=z
+
+# --- values ---
+true=pravda
+false=nepravda
+nothing=nič
+none=žiadny
+length=dĺžka
+random=náhodný
+number=číslo
+count=počet
+between=medzi
+contains=obsahuje
+plus=plus
+minus=mínus
+times=krát
+divided=delené
+second=sekunda
+seconds=sekundy
+minute=minúta
+minutes=minúty
+hour=hodina
+hours=hodiny
+tick=tick
+ticks=ticky
+
+# --- variable targets ---
+player=hráč
+world=svet
+temporary=dočasný
+list=zoznam
+score=skóre
+database=databáza
+config=konfigurácia
+value=hodnota
+file=súbor
+data=dáta
+
+# --- conditions & comparisons ---
+has=má
+is=je
+are=sú
+not=nie
+holding=drží
+sneaking=plíži sa
+flying=letí
+wet=mokrý
+op=op
+ground=zem
+biome=bióm
+permission=oprávnenie
+more=viac
+less=menej
+equal=rovné
+than=ako
+least=najmenej
+most=najviac
+above=nad
+below=nižšie
+under=pod
+health=zdravie
+hunger=hlad
+xp=xp
+level=úroveň
+gamemode=režim
+
+# --- player events ---
+joins=sa pripája
+joins=vchádza
+leaves=odchádza
+leaves=opúšťa
+dies=zomiera
+respawns=ožíva
+jumps=skáče
+sneaks=plíži sa
+sneaks=krči sa
+moves=hýbe sa
+moves=pohybuje sa
+attacks=útočí
+chats=píše
+fishes=rybárči
+levels=postupuje
+clicks=kliká
+eats=je
+kills=zabíja
+starts=začína
+stops=prestáva
+sprinting=šprintuje
+takes=berie
+damage=poškodenie
+breaks=rozbíja
+places=umiestňuje
+picks=zbiera
+drops=púšťa
+uses=používa
+interacts=interaguje
+enters=vstupuje
+reaches=dosahuje
+types=píše
+touches=dotýka sa
+walks=chodí
+first=prvý
+inventory=inventár
+mob=stvorenie
+custom=vlastný
+event=udalosť
+fires=nastane
+night=noc
+dawn=úsvit
+falls=padá
+game=hra
+server=server
+slot=slot
+
+# --- world state ---
+weather=počasie
+rain=dážď
+sunny=slnečno
+storm=búrka
+stormy=búrlivé
+noon=poludnie
+dusk=súmrak
+midnight=polnoc
+morning=ráno
+evening=večer
+day=deň
+daytime=deň
+nighttime=noc
+
+# --- gamemodes ---
+survival=prežitie
+creative=kreatívny
+adventure=dobrodružstvo
+spectator=pozorovateľ
+
+# --- dimensions ---
+the end=koniec
+overworld=svet
+
+# --- single-word items & blocks ---
+diamond=diamant
+emerald=smaragd
+iron=železo
+gold=zlato
+coal=uhlie
+bread=chlieb
+apple=jablko
+torch=pochodeň
+water=voda
+lava=láva
+stone=kameň
+dirt=hlina
+sand=piesok
+glass=sklo
+chest=truhla
+door=dvere
+sword=meč
+bow=luk
+arrow=šíp
+shield=štít
+stick=palica
+bed=posteľ
+boat=loď
+bucket=vedro
+compass=kompas
+
+# --- multi-word items & blocks (phrases) ---
+diamond sword=diamantový meč
+iron sword=železný meč
+wooden sword=drevený meč
+golden sword=zlatý meč
+netherite sword=netheritový meč
+diamond block=blok diamantu
+gold block=blok zlata
+iron block=blok železa
+iron ingot=železný ingot
+gold ingot=zlatý ingot
+diamond ore=diamantová ruda
+iron ore=železná ruda
+gold ore=zlatá ruda
+coal ore=uhoľná ruda
+redstone dust=redstone prach
+enchanted golden apple=očarované zlaté jablko
+golden apple=zlaté jablko
+
+# --- single-word mobs ---
+zombie=zombie
+skeleton=kostlivec
+creeper=creeper
+spider=pavúk
+pig=prasa
+cow=krava
+chicken=kura
+sheep=ovca
+wolf=vlk
+enderman=enderman
+villager=dedinčan
+horse=kôň
+cat=mačka
+bee=včela
+
+# --- multi-word mobs ---
+iron golem=železný golem
+zombie pigman=zombie pigman
+
+# --- effects ---
+speed=rýchlosť
+strength=sila
+jump boost=posilnenie skoku
+regeneration=regenerácia
+invisibility=neviditeľnosť
+poison=jed
+weakness=slabosť
+slowness=spomalenie
+night vision=videnie v tme
+fire resistance=odolnosť voči ohňu
+water breathing=dýchanie pod vodou
+haste=urýchlenie

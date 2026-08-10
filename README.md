@@ -56,18 +56,24 @@ is also in the [README](README.md) feature table below.
 
 | Feature | Example |
 | --- | --- |
-| Event triggers | `when player joins`, `when player breaks diamond ore`, `when zombie dies`, `when player types "home"` |
+| Event triggers | `when player joins`, `when player breaks diamond ore`, `when zombie dies`, `when player types "home"`, `when server starts` / `stops` |
 | First joins | `when player first joins` — runs once per player, ever |
 | State triggers | `when player is flying`, `when it is nighttime`, `when player has 100 coins` |
 | Timers | `every 5 seconds` |
 | Custom commands | `command "/pay" with argument <amount> and argument <target>` with optional `permission "..."` |
 | Reusable actions | `action greet <name> the player` ... `greet "Steve" the player` |
-| Loops | `loop over list "quests" as task`, `loop over all players as p`, `loop over numbers from 1 to 10 as i`, `loop over player's inventory as item` |
+| Loops | `loop over list "quests" as task`, `loop over all players as p`, `loop over numbers from 1 to 10 as i`, `loop over player's inventory as item`, `while player's health is above 5` |
+| Delays | `wait 3 seconds` / `wait 20 ticks` — pauses the rest of the block |
+| Math | `set player's coins to 3 plus 4 times 2` — `plus`, `minus`, `times`, `divided by` |
+| Player stats | `set player's health to 20`, `set player's food to 10`, `set player's experience to 5`, `set player's level to 10` |
+| Bossbars | `set player's bossbar to "The Queen" with progress 50`, `clear player's bossbar` |
+| Item checks | `player's held item` as a value |
 | Text interpolation | `tell player "You have ${player's coins} coins!"` |
 | Variables | player, world, scoreboard, lists, loop variables — saved to `state.txt` on shutdown |
 | Effects | teleport, damage, heal, feed, give/remove items, potions, title/actionbar, sounds, particles, lightning, explosions, launch, gamemode, XP, scoreboards, teams, permissions |
 | World | weather, time, regions, marks, signs, doors, buttons, levers, chests, blocks, mobs |
-| Flow | `if / else`, `repeat 5 times`, `stop`, custom events (`fire event "boss_killed"`) |
+| Flow | `if / else`, `repeat 5 times`, `while`, `stop`, custom events (`fire event "boss_killed"`) |
+| Multi-language | scripts can be written in 45+ languages including Spanish, French, German, Russian, Arabic, Chinese, Japanese, Hindi, and more (see below) |
 
 ### Triggers the plugin bridges
 
@@ -90,6 +96,38 @@ is also in the [README](README.md) feature table below.
 | `when player enters region "<name>"` | crossing into a region |
 | `when <mob> dies / spawns / attacks` | mob lifecycle |
 | `when it is nighttime` and other states | polled every 10 ticks |
+
+## Writing scripts in your language
+
+Hermes keywords and events are written in English, but a translation layer lets
+you write scripts in your own language:
+
+```
+cuando jugador se une
+    dar jugador 1 pan
+    poner jugador's monedas a 0
+
+every 5 seconds
+    anunciar "¡Hola a todos!"
+```
+
+Built-in languages (set `language` in `config.yml`, then `/hermes reload`):
+
+| Region | `language` codes |
+| --- | --- |
+| Europe | `en`, `es`, `pt`, `fr`, `it`, `de`, `nl`, `ca`, `gl`, `pl`, `cs`, `sk`, `ru`, `uk`, `bg`, `hr`, `sr`, `sl`, `sv`, `da`, `no`, `fi`, `et`, `lt`, `lv`, `hu`, `ro`, `el`, `tr`, `is` |
+| Middle East | `ar`, `he`, `fa`, `ur` |
+| Asia | `zh`, `ja`, `ko`, `hi`, `bn`, `ta`, `te`, `id`, `ms`, `th`, `vi`, `fil` |
+| Americas | covered by `en`, `es`, `fr`, `pt` |
+
+```yaml
+language: en
+```
+
+You can also add your own language: drop a `yourlang.lang` file into
+`plugins/Hermes/lang/` (one mapping per line, `english=native`), set
+`language: yourlang`, and reload. Anything the pack doesn't translate stays
+in English, so your script can mix both freely.
 
 ## Reporting Issues
 
@@ -131,7 +169,7 @@ dependency:
 <dependency>
     <groupId>com.github.ftbxx1</groupId>
     <artifactId>Hermes</artifactId>
-    <version>1.2.0</version>
+    <version>1.3.0</version>
     <scope>provided</scope>
 </dependency>
 ```
