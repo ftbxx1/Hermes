@@ -70,9 +70,12 @@ is also in the [README](README.md) feature table below.
 | Item checks | `player's held item` as a value |
 | Text interpolation | `tell player "You have ${player's coins} coins!"` |
 | Variables | player, world, scoreboard, lists, loop variables — saved to `state.txt` on shutdown |
+| Global variables | `world's flag` or `global "flag"` — one value for the whole server |
+| Functions | `function "tax" with argument <amount>` ... `return <value>` — reusable, value-returning helpers callable in any expression |
 | Effects | teleport, damage, heal, feed, give/remove items, potions, title/actionbar, sounds, particles, lightning, explosions, launch, gamemode, XP, scoreboards, teams, permissions |
 | World | weather, time, regions, marks, signs, doors, buttons, levers, chests, blocks, mobs |
 | Flow | `if / else`, `repeat 5 times`, `while`, `stop`, custom events (`fire event "boss_killed"`) |
+| Forgiving English | case-insensitive keywords, filler words (`the`, `a`, `an`), and plain-English synonyms — `say player` = `tell player`, `grant` = `give`, `tp` = `teleport`, `each` = `every`, `broadcast` = `announce`, ... |
 | Multi-language | scripts can be written in 45+ languages including Spanish, French, German, Russian, Arabic, Chinese, Japanese, Hindi, and more (see below) |
 
 ### Triggers the plugin bridges

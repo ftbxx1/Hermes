@@ -111,7 +111,8 @@ public final class Lexer {
         return out;
     }
 
-    /** Replaces native words with their English forms when a language pack is active. */
+    /** Replaces native words with their English forms when a language pack is
+     *  active, then folds forgiving-English synonyms back onto their keywords. */
     private static void translateWords(List<Token> out) {
         for (Token t : out) {
             if (t.type != Type.WORD) continue;
@@ -119,6 +120,7 @@ public final class Lexer {
             if (english != null && !english.equals(t.text)) {
                 t.text = english;
             }
+            t.text = Synonyms.canonical(t.text);
         }
     }
 

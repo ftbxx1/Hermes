@@ -24,6 +24,8 @@ public final class Interpreter {
         public final Map<String, Value> temps = new HashMap<>();
         public boolean stopped;
         public int steps;
+        /** Set by a "return <value>" statement inside a function or action. */
+        public Value returnValue;
 
         RunContext(String scriptName, PlayerRef player, MobRef mob) {
             this.scriptName = scriptName;
@@ -39,6 +41,7 @@ public final class Interpreter {
     private final WorldAPI world;
     private final Scheduler scheduler;
     private final Map<String, ActionDef> actions = new HashMap<>();
+    private final Map<String, FunctionDef> functions = new HashMap<>();
 
     private static final String[] KNOWN_VERBS = {
         "give", "remove", "set", "add", "tell", "announce", "warn", "welcome", "show",
@@ -63,8 +66,96 @@ public final class Interpreter {
                 }
                 actions.put(a.name, a);
             }
+            if (s instanceof FunctionDef f) {
+                if (functions.containsKey(f.name)) {
+                    throw new VerseError(f.line,
+                            "There are two functions called '" + f.name + "'. Each function needs its own name.",
+                            null, null);
+                }
+                functions.put(f.name, f);
+            }
         }
         validateCalls(script.body);
+        validateValueCalls(script.body);
+    }
+
+    /** Every function call in a value must have a matching definition, so
+     *  a misspelt name is caught at reload time, not mid-game. */
+    private void validateValueCalls(List<Stmt> body) {
+        for (Stmt s : body) {
+            if (s instanceof SetStmt set) checkValue(set.value);
+            else if (s instanceof AddStmt a) checkValue(a.amount);
+            else if (s instanceof RemoveStmt r) checkValue(r.amount);
+            else if (s instanceof ListAddStmt la) checkValue(la.value);
+            else if (s instanceof ListRemoveStmt lr) checkValue(lr.value);
+            else if (s instanceof TellStmt t) checkValue(t.text);
+            else if (s instanceof AnnounceStmt a) checkValue(a.text);
+            else if (s instanceof WarnStmt w) checkValue(w.text);
+            else if (s instanceof WelcomeStmt w) checkValue(w.text);
+            else if (s instanceof TitleStmt t) { checkValue(t.title); if (t.subtitle != null) checkValue(t.subtitle); }
+            else if (s instanceof ActionbarStmt a) checkValue(a.text);
+            else if (s instanceof SetPlayerStatStmt sp) checkValue(sp.value);
+            else if (s instanceof SetBossbarStmt bb) { checkValue(bb.title); if (bb.progress != null) checkValue(bb.progress); }
+            else if (s instanceof ConfigSetStmt cs) checkValue(cs.value);
+            else if (s instanceof ActionCallStmt ac) { for (ValueExpr v : ac.args) checkValue(v); }
+            if (s instanceof IfStmt i) {
+                checkCond(i.cond);
+                validateValueCalls(i.thenBody);
+                if (i.elseBody != null) validateValueCalls(i.elseBody);
+            } else if (s instanceof WhileStmt wh) {
+                checkCond(wh.cond);
+                validateValueCalls(wh.body);
+            } else if (s instanceof RepeatStmt rep) {
+                validateValueCalls(rep.body);
+            } else if (s instanceof LoopStmt l) {
+                validateValueCalls(l.body);
+            } else if (s instanceof WhenBlock w) {
+                for (Condition c : w.trigger.conditions) checkCond(c);
+                validateValueCalls(w.body);
+            } else if (s instanceof EveryBlock ev) {
+                validateValueCalls(ev.body);
+            } else if (s instanceof ActionDef a) {
+                validateValueCalls(a.body);
+            } else if (s instanceof FunctionDef f) {
+                validateValueCalls(f.body);
+            } else if (s instanceof CommandDef c) {
+                validateValueCalls(c.body);
+            }
+        }
+    }
+
+    private void checkCond(Condition c) {
+        if (c instanceof CmpCond cmp) {
+            checkValue(cmp.left);
+            checkValue(cmp.right);
+        } else if (c instanceof NotCond n) {
+            checkCond(n.inner);
+        } else if (c instanceof AndCond and) {
+            for (Condition p : and.parts) checkCond(p);
+        } else if (c instanceof OrCond or) {
+            for (Condition p : or.parts) checkCond(p);
+        }
+    }
+
+    private void checkValue(ValueExpr expr) {
+        if (expr instanceof FunctionCallExpr fc) {
+            if (!functions.containsKey(fc.name)) {
+                String closest = Dictionary.suggest(fc.name, functions.keySet().toArray(new String[0]));
+                throw new VerseError(fc.line, "There is no function called '" + fc.name + "'.",
+                        closest != null
+                                ? "Did you mean '" + closest + "'?\n\nTo make it, define it:\n\nfunction \"" + fc.name + "\" with argument <amount>\n    return 0"
+                                : "Define it first:\n\nfunction \"" + fc.name + "\" with argument <amount>\n    return 0",
+                        null);
+            }
+        }
+        if (expr instanceof BinaryExpr b) {
+            checkValue(b.left);
+            checkValue(b.right);
+        } else if (expr instanceof TemplateExpr t) {
+            for (Object part : t.parts) {
+                if (part instanceof ValueExpr ve) checkValue(ve);
+            }
+        }
     }
 
     /** Every call to an action must match a defined action. */
@@ -94,6 +185,8 @@ public final class Interpreter {
                 validateCalls(l.body);
             } else if (s instanceof ActionDef a) {
                 validateCalls(a.body);
+            } else if (s instanceof FunctionDef f) {
+                validateCalls(f.body);
             } else if (s instanceof CommandDef c) {
                 validateCalls(c.body);
             }
@@ -231,6 +324,9 @@ public final class Interpreter {
         } else if (s instanceof ClearBossbarStmt cb) {
             world.clearBossbar(needPlayer(s, ctx));
         } else if (s instanceof StopStmt) {
+            ctx.stopped = true;
+        } else if (s instanceof ReturnStmt ret) {
+            ctx.returnValue = eval(ret.value, ctx);
             ctx.stopped = true;
         } else if (s instanceof SetStmt set) {
             Value v = eval(set.value, ctx);
@@ -709,6 +805,9 @@ public final class Interpreter {
         if (e instanceof DatabaseGetExpr dg) {
             return engine.vars.getDatabase(dg.db, dg.key);
         }
+        if (e instanceof FunctionCallExpr fc) {
+            return callFunction(fc, ctx);
+        }
         if (e instanceof ConfigGetExpr cg) {
             return Value.text(world.configValue(cg.file, cg.key));
         }
@@ -756,6 +855,25 @@ public final class Interpreter {
             return Value.text(world.heldItem(needPlayerForExpr(e, ctx)));
         }
         throw new VerseError(e.line, "I can't work out that value.");
+    }
+
+    /** Runs a user-defined function and hands back what it returned. */
+    private Value callFunction(FunctionCallExpr fc, RunContext ctx) {
+        FunctionDef def = functions.get(fc.name);
+        if (def == null) {
+            String closest = Dictionary.suggest(fc.name, functions.keySet().toArray(new String[0]));
+            throw new VerseError(fc.line, "There is no function called '" + fc.name + "'.",
+                    closest != null
+                            ? "Did you mean '" + closest + "'?\n\nTo make it, define it:\n\nfunction \"" + fc.name + "\" with argument <amount>\n    return 0"
+                            : "Define it first:\n\nfunction \"" + fc.name + "\" with argument <amount>\n    return 0");
+        }
+        RunContext sub = new RunContext(ctx.scriptName, ctx.player, ctx.mob);
+        sub.steps = ctx.steps;
+        for (int i = 0; i < def.params.size() && i < fc.args.size(); i++) {
+            sub.temps.put(def.params.get(i), eval(fc.args.get(i), ctx));
+        }
+        runBlock(def.body, sub);
+        return sub.returnValue != null ? sub.returnValue : Value.none();
     }
 
     private static double numericValue(Value v) {

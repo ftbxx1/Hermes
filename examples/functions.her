@@ -1,0 +1,35 @@
+# Functions: name a little job once, reuse it anywhere.
+# A function hands back a value with "return". Plain English, no brackets.
+
+# ---------- a function that doubles a number ----------
+
+function "double" with argument <value>
+    return temporary value times 2
+
+# ---------- a function with a couple of arguments ----------
+
+function "score" with argument <kills> and argument <deaths>
+    set temporary kills to temporary kills plus 1
+    return temporary kills times 100
+
+when player joins
+    # call a function as a value anywhere
+    set player's coins to function "double" with argument 21
+    tell player "Doubled: ${player's coins} coins"
+
+    # and inside a condition too
+    if function "score" with argument 5 and argument 2 is at least 500
+        say player "Your hidden score is high!"
+
+# ---------- early return ----------
+
+function "price" with argument <item>
+    if temporary item is "diamond"
+        return 100
+    if temporary item is "emerald"
+        return 50
+    return 10
+
+command "/price" with argument <item>
+    set temporary price to function "price" with argument temporary item
+    tell player "${item} costs ${temporary price} coins."

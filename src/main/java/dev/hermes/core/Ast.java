@@ -74,6 +74,20 @@ public final class Ast {
         }
     }
 
+    /** A value-returning function: "function \"tax\" with argument <amount>". */
+    public static final class FunctionDef extends Stmt {
+        public final String name; public final List<String> params; public final List<Stmt> body;
+        public FunctionDef(int line, String name, List<String> params, List<Stmt> body) {
+            super(line); this.name = name; this.params = params; this.body = body;
+        }
+    }
+
+    /** "return <value>" inside a function or action. */
+    public static final class ReturnStmt extends Stmt {
+        public final ValueExpr value;
+        public ReturnStmt(int line, ValueExpr value) { super(line); this.value = value; }
+    }
+
     public static final class IfStmt extends Stmt {
         public final Condition cond; public final List<Stmt> thenBody; public final List<Stmt> elseBody;
         public IfStmt(int line, Condition cond, List<Stmt> thenBody, List<Stmt> elseBody) {
@@ -593,7 +607,7 @@ public final class Ast {
         public String describe() {
             switch (kind) {
                 case "player": return "player's " + name;
-                case "world": return "world's " + name;
+                case "world": return "global \"" + name + "\"";
                 case "temp": return "temporary " + name;
                 case "score": return "score \"" + name + "\"";
                 case "database": return "database \"" + name + "\" at \"" + key + "\"";
@@ -649,6 +663,14 @@ public final class Ast {
     public static final class RandomExpr extends ValueExpr {
         public final double a; public final double b;
         public RandomExpr(int line, double a, double b) { super(line); this.a = a; this.b = b; }
+    }
+
+    /** A call to a value-returning function: "function \"tax\" with argument 100". */
+    public static final class FunctionCallExpr extends ValueExpr {
+        public final String name; public final List<ValueExpr> args;
+        public FunctionCallExpr(int line, String name, List<ValueExpr> args) {
+            super(line); this.name = name; this.args = args;
+        }
     }
 
     /** "random item from list \"quests\"": a random element of a list. */

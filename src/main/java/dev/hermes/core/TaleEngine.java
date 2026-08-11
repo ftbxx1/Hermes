@@ -134,7 +134,7 @@ public final class TaleEngine {
             for (Stmt s : script.body) {
                 if (s instanceof WhenBlock || s instanceof EveryBlock
                         || s instanceof ActionDef || s instanceof RegionDef || s instanceof MarkDef
-                        || s instanceof GuiDef || s instanceof CommandDef) {
+                        || s instanceof GuiDef || s instanceof CommandDef || s instanceof FunctionDef) {
                     register(s, interp, fileName + "#" + idx.getAndIncrement());
                 } else {
                     startup.add(s);
@@ -188,6 +188,7 @@ public final class TaleEngine {
         } else if (s instanceof CommandDef c) {
             commands.put(c.name.toLowerCase(), new RegisteredCommand(c, interp));
         }
+        // FunctionDef is collected by the Interpreter itself, so calls resolve.
     }
 
     /** Removes everything one script file contributed, so it can be reloaded. */

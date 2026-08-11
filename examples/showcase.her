@@ -1,0 +1,132 @@
+# ================================================================
+#  Hermes showcase - a welcome hub
+#  One file that shows off a lot of Hermes features at once:
+#  triggers, commands, guis, books, databases, player data,
+#  math, loops, chance, particles, sounds, titles, weather,
+#  effects, teleports and custom events.
+#  Save it in plugins/Hermes/hermes/ and run /hermes reload.
+# ================================================================
+
+# ---------- world setup: marks, regions, worlds, teams ----------
+
+mark home at 100 64 200
+region "spawn" from 90 63 190 to 110 67 210
+
+create world "arena"
+create team "red"
+create list "quests"
+create database "data"
+
+create book "Guide" with title "Hermes Guide" with author "Hermes" with page "Welcome! Type /shop to open the shop." with page "Collect coins, then pay your friends!"
+
+gui "Shop" with 9 slots
+    slot 0 has 1 diamond named "Diamond" with lore "Costs 5 coins"
+    slot 1 has 1 golden apple named "Golden apple" with lore "Costs 10 coins"
+    slot 2 has 1 iron helmet named "Iron helmet" with lore "Costs 15 coins"
+
+# ---------- first join: starter kit ----------
+
+when player first joins
+    give player 1 bread
+    give player book "Guide"
+    set player's coins to 10
+    welcome player with "Welcome, ${player's name}!"
+    tell player "You got a starter kit."
+
+# ---------- every join: fanfare ----------
+
+when player joins
+    welcome player with "Welcome back, ${player's name}!"
+    add 1 to player's score "joins"
+    add 1 to player's coins
+    announce "${player's name} joined the server!"
+    play sound "level up" near player
+    spawn particles "heart" near player with count 30 with size 1
+    title player "Welcome!" with subtitle "Have fun, ${player's name}!"
+    set player's respawn point to 100 64 200
+    loop over all players as p
+        tell player "Hi ${p}, ${player's name} just joined!"
+
+# ---------- chat triggers ----------
+
+when player types "hello"
+    tell player "Hi ${player's name}! Type /shop to open the shop."
+
+when player types "coin"
+    tell player "You have ${player's coins} coins."
+
+# ---------- commands ----------
+
+command "/shop" permission "shop.use"
+    open gui "Shop" to player
+
+command "/pay" with argument <amount>
+    if player's coins is below temporary amount
+        warn player "You need more coins!"
+    else
+        set player's coins to player's coins minus temporary amount
+        announce "${player's name} just paid ${temporary amount} coins!"
+        title player "Paid!" with subtitle "Now you have ${player's coins} coins."
+
+command "/party"
+    set weather to rain
+    set time to night
+    launch firework at player
+    spawn particles "heart" near player with count 50 with size 2
+    give all players 1 bread
+    play sound "level up" near player
+    tell player "Party time!"
+
+command "/reset"
+    set player's coins to 0
+    set player data "joined" to 0
+    set player's score "joins" to 0
+    tell player "Reset done."
+
+# ---------- persistence: databases & player data ----------
+
+when player types "save"
+    add 1 to database "data" at "coins"
+    set temporary saved to database "data" at "coins"
+    tell player "Saved ${temporary saved} coins to the database."
+
+# ---------- mini-game: zombie rush ----------
+
+when player breaks stone
+    add 1 to database "data" at "zombies_killed"
+    if chance 20
+        spawn 2 zombies near player
+        warn player "A zombie rush!"
+
+when player dies
+    announce "${player's name} died. Respawning at spawn."
+    set player's respawn point to home
+
+when custom event "boss_killed" fires
+    announce "A boss was killed!"
+    launch firework at player
+    wait 2 seconds
+    launch firework at player
+
+when zombie dies
+    add "kill 10 zombies" to list "quests"
+
+command "/quests"
+    loop over list "quests" as quest
+        tell player "Quest: ${quest}"
+
+# ---------- functions + global variables ----------
+
+function "rank of" with argument <kills>
+    if temporary kills is at least 100
+        return "Legend"
+    if temporary kills is at least 50
+        return "Hero"
+    return "Rookie"
+
+when player joins
+    set global "joins_total" to global "joins_total" plus 1
+
+command "/rank"
+    set temporary rank to function "rank of" with argument player's score "kills"
+    tell player "Your rank is ${temporary rank}."

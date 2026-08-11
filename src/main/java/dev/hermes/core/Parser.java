@@ -26,12 +26,15 @@ public final class Parser {
         "create", "stop", "repeat", "loop", "if", "when", "every", "action", "region", "mark",
         "kick", "launch", "title", "actionbar", "lightning", "explode", "delete", "particles",
         "while", "wait", "freeze", "unfreeze", "randomly", "push", "throw", "drop",
+        "return", "function",
     };
 
     private final List<Token> toks;
     private final String fileName;
     private int pos;
     private int blockDepth;
+    /** How many action/function definitions are open (allows 'return' only inside them). */
+    private int defDepth;
 
     public Parser(List<Token> toks, String fileName) {
         this.toks = toks;
@@ -198,6 +201,13 @@ public final class Parser {
                 }
                 return actionDef();
             }
+            case "function": {
+                if (blockDepth > 0) {
+                    throw err("'function' can only appear at the top of the script.");
+                }
+                return functionDef();
+            }
+            case "return": return returnStmt();
             case "command": {
                 if (blockDepth > 0) {
                     throw err("'command' can only appear at the top of the script.");
@@ -1162,8 +1172,40 @@ public final class Parser {
             eatNoise();
         }
         if (at("player") || at("mob")) pos++;
+        defDepth++;
         List<Stmt> body = block();
+        defDepth--;
         return new ActionDef(line, name, params, body);
+    }
+
+    /** function "tax" with argument <amount> and argument <bonus> */
+    private Stmt functionDef() {
+        int line = cur().line;
+        pos++;
+        String name = nameOrString("a function name");
+        List<String> params = new ArrayList<>();
+        while (at("with") || at("and")) {
+            pos++;
+            expect("argument", "function \"tax\" with argument <amount>");
+            params.add(word("an argument name"));
+        }
+        defDepth++;
+        List<Stmt> body = block();
+        defDepth--;
+        return new FunctionDef(line, name, params, body);
+    }
+
+    /** "return <value>" — hands a value back from a function (or action). */
+    private Stmt returnStmt() {
+        int line = cur().line;
+        pos++;
+        if (defDepth == 0) {
+            throw err("'return' can only be used inside a function or an action.",
+                    "function \"tax\" with argument <amount>\n    return player's coins times 2");
+        }
+        ValueExpr value = value("a value to return");
+        endStatement();
+        return new ReturnStmt(line, value);
     }
 
     /** command "/pay" with argument <amount> and argument <target> permission "vip" */
@@ -1687,9 +1729,24 @@ public final class Parser {
             VarTarget vt = varTarget(what);
             return new VarGetExpr(line, vt);
         }
+        if (at("global")) {
+            VarTarget vt = varTarget(what);
+            return new VarGetExpr(line, vt);
+        }
         if (at("temporary")) {
             VarTarget vt = varTarget(what);
             return new VarGetExpr(line, vt);
+        }
+        if (at("function")) {
+            pos++;
+            String name = nameOrString("a function name");
+            List<ValueExpr> args = new ArrayList<>();
+            while (at("with") || at("and")) {
+                pos++;
+                expect("argument", "function \"tax\" with argument 100");
+                args.add(value("an argument value"));
+            }
+            return new FunctionCallExpr(line, name, args);
         }
         if (at("length")) {
             pos++;
@@ -1807,6 +1864,11 @@ public final class Parser {
         if (at("world") && peek(1).type == Type.POSSESSIVE) {
             pos += 2;
             String name = word("a variable name");
+            return new VarTarget("world", name);
+        }
+        if (at("global")) {
+            pos++;
+            String name = nameOrString("a global name");
             return new VarTarget("world", name);
         }
         if (at("temporary")) {
@@ -2000,6 +2062,18 @@ public final class Parser {
             ValueExpr right = value("a value");
             return new CmpCond(new VarGetExpr(line, new VarTarget("world", name)), op, right);
         }
+        if (at("global")) {
+            pos++;
+            String name = nameOrString("a global name");
+            if (eat("is") || eat("are")) { /* nothing */ }
+            String op = cmpOpOrNull();
+            if (op == null) {
+                ValueExpr right = value("a value to compare with");
+                return new CmpCond(new VarGetExpr(line, new VarTarget("world", name)), "==", right);
+            }
+            ValueExpr right = value("a value");
+            return new CmpCond(new VarGetExpr(line, new VarTarget("world", name)), op, right);
+        }
 
         if (at("it")) {
             pos++;
@@ -2047,7 +2121,9 @@ public final class Parser {
         }
 
         ValueExpr left = value("a value");
+        boolean sawIs = eat("is") || eat("are");
         String op = cmpOpOrNull();
+        if (op == null && sawIs) op = "==";
         if (op == null) {
             if (left instanceof TruthExpr) return new TruthCond(((TruthExpr) left).v);
             throw new VerseError(line,
@@ -2362,6 +2438,20 @@ public final class Parser {
         if (at("world") && peek(1).type == Type.POSSESSIVE) {
             pos += 2;
             String name = word("a variable name");
+            if (eat("is") || eat("are")) { /* nothing */ }
+            String op = cmpOpOrNull();
+            if (op == null) {
+                ValueExpr right = value("a value to compare with");
+                return stateTrigger(new CmpCond(new VarGetExpr(line, new VarTarget("world", name)),
+                        "==", right), false);
+            }
+            ValueExpr right = value("a value");
+            return stateTrigger(new CmpCond(new VarGetExpr(line, new VarTarget("world", name)),
+                    op, right), false);
+        }
+        if (at("global")) {
+            pos++;
+            String name = nameOrString("a global name");
             if (eat("is") || eat("are")) { /* nothing */ }
             String op = cmpOpOrNull();
             if (op == null) {

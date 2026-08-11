@@ -49,16 +49,19 @@ when player's level is at least 10
 
 ---
 
-## 2. World variables — `world's <name>`
+## 2. Global variables — `world's <name>` or `global "<name>"`
 
 One value for the whole server, shared by every player and every script.
+Both spellings mean the same thing — `global` reads like Skript's
+`{global::...}` but stays plain English, quotes optional.
 
 ```
 set world's flag to true
 add 1 to world's kills
-set world's greeting to "Welcome back!"
+set global "greeting" to "Welcome back!"
+set global inflation to 2
 
-when world's flag is true
+when global "flag" is true
     announce "The event has started!"
 ```
 
@@ -165,6 +168,40 @@ Script commands bind their arguments the same way:
 command "/pay" with argument <amount> and argument <target>
     tell player "You paid ${amount} to ${target}!"
 ```
+
+---
+
+## 6. Functions — name a little job, reuse it anywhere
+
+A **function** is like a recipe of statements that hands back a value. Define
+it once at the top of your script, call it by name anywhere a value is
+expected (a `set`, a `tell`, a condition...). No brackets, no punctuation —
+just English.
+
+```
+function "tax" with argument <amount>
+    return temporary amount times 2
+
+when player joins
+    set temporary tax to function "tax" with argument 20
+    set player's coins to player's coins minus temporary tax
+    tell player "You just paid ${temporary tax} coins in tax."
+```
+
+- `function "name" with argument <x> and argument <y>` defines the function.
+- `return <value>` stops it and sends the value back.
+- Arguments become **temporary variables** inside the function.
+- A `return` before the end lets you bail out early:
+
+```
+function "price" with argument <item>
+    if temporary item is "diamond"
+        return 100
+    return 10
+```
+
+Missing function names are caught when the script loads, so a typo is
+pointed out by `/hermes reload` before anyone notices in-game.
 
 ---
 
