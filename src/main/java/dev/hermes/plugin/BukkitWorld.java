@@ -25,6 +25,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.GameMode;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -298,6 +299,39 @@ public final class BukkitWorld implements WorldAPI {
         player.setFlySpeed(frozen ? 0f : 0.1f);
     }
     @Override public boolean isFrozen(PlayerRef p) { return playerOf(p).getWalkSpeed() == 0f; }
+    @Override public boolean isSprinting(PlayerRef p) { return playerOf(p).isSprinting(); }
+    @Override public boolean isSwimming(PlayerRef p) { return playerOf(p).isSwimming(); }
+    @Override public boolean isSleeping(PlayerRef p) { return playerOf(p).isSleeping(); }
+    @Override public boolean isBurning(PlayerRef p) { return playerOf(p).getFireTicks() > 0; }
+    @Override public boolean isBlocking(PlayerRef p) { return playerOf(p).isBlocking(); }
+
+    // ------------------------------------------------------------------
+    // player info
+    // ------------------------------------------------------------------
+
+    @Override public int ping(PlayerRef p) { return playerOf(p).getPing(); }
+    @Override public String ip(PlayerRef p) {
+        java.net.InetSocketAddress addr = playerOf(p).getAddress();
+        return addr == null ? "unknown" : addr.getAddress().getHostAddress();
+    }
+    @Override public String targetEntity(PlayerRef p) {
+        Entity target = playerOf(p).getTargetEntity(8);
+        if (target == null) return null;
+        String type = Dictionary.findMob(target.getType().getKey().getKey());
+        return type != null ? type : target.getType().getKey().getKey();
+    }
+    @Override public String lastDamager(PlayerRef p) {
+        Entity dmgr = playerOf(p).getLastDamageCause() instanceof EntityDamageByEntityEvent d
+                ? d.getDamager() : null;
+        if (dmgr instanceof Player pl) return pl.getName();
+        return dmgr == null ? null : dmgr.getName();
+    }
+    @Override public String blockStandingIn(PlayerRef p) {
+        Material m = playerOf(p).getLocation().getBlock().getType();
+        String key = m.getKey().getKey();
+        String friendly = Dictionary.findItem(key);
+        return friendly != null ? friendly : key.replace('_', ' ');
+    }
 
     // ------------------------------------------------------------------
     // inventory
@@ -486,6 +520,10 @@ public final class BukkitWorld implements WorldAPI {
     @Override public void runCommand(PlayerRef p, String command) {
         String cmd = command.startsWith("/") ? command.substring(1) : command;
         playerOf(p).performCommand(cmd);
+    }
+
+    @Override public void sendResourcePack(PlayerRef p, String url) {
+        playerOf(p).setResourcePack(url);
     }
 
     @Override public void setRespawnPoint(PlayerRef p, Vec3 loc) {

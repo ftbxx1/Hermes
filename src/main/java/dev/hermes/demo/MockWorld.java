@@ -32,6 +32,15 @@ public final class MockWorld implements WorldAPI {
         public boolean flying = false;
         public boolean op = false;
         public boolean frozen = false;
+        public boolean sprinting = false;
+        public boolean swimming = false;
+        public boolean sleeping = false;
+        public boolean burning = false;
+        public boolean blocking = false;
+        public int ping = 0;
+        public String ip = "unknown";
+        public String target;
+        public String lastDamager;
         public String kicked;
         public final Map<String, Integer> inventory = new HashMap<>();
         public final List<String> messages = new ArrayList<>();
@@ -192,6 +201,19 @@ public final class MockWorld implements WorldAPI {
     @Override public boolean isOp(PlayerRef p) { return player(p).op; }
     @Override public void setFrozen(PlayerRef p, boolean frozen) { player(p).frozen = frozen; }
     @Override public boolean isFrozen(PlayerRef p) { return player(p).frozen; }
+    @Override public boolean isSprinting(PlayerRef p) { return player(p).sprinting; }
+    @Override public boolean isSwimming(PlayerRef p) { return player(p).swimming; }
+    @Override public boolean isSleeping(PlayerRef p) { return player(p).sleeping; }
+    @Override public boolean isBurning(PlayerRef p) { return player(p).burning; }
+    @Override public boolean isBlocking(PlayerRef p) { return player(p).blocking; }
+    @Override public int ping(PlayerRef p) { return player(p).ping; }
+    @Override public String ip(PlayerRef p) { return player(p).ip; }
+    @Override public String targetEntity(PlayerRef p) { return player(p).target; }
+    @Override public String lastDamager(PlayerRef p) { return player(p).lastDamager; }
+    @Override public String blockStandingIn(PlayerRef p) {
+        Vec3 loc = player(p).location;
+        return blockAt(new Vec3(loc.x(), loc.y(), loc.z()));
+    }
 
     @Override public void clearInventory(PlayerRef p) { player(p).inventory.clear(); }
 
@@ -220,6 +242,7 @@ public final class MockWorld implements WorldAPI {
         log.add("firework@" + (long) loc.x() + "," + (long) loc.z());
     }
     @Override public void runCommand(PlayerRef p, String command) { player(p).commands.add(command); }
+    @Override public void sendResourcePack(PlayerRef p, String url) { log.add("resourcePack " + p.name() + " <- " + url); }
     @Override public void setRespawnPoint(PlayerRef p, Vec3 loc) { player(p).respawn = loc; }
     @Override public void swingHand(PlayerRef p) { log.add("swung " + p.name() + " hand"); }
     @Override public void lookAt(PlayerRef p, Vec3 loc) {

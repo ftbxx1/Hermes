@@ -56,6 +56,7 @@ when player joins
 
 when player joins
     make player run command "/spawn"
+    send player resource pack "https://example.com/pack.zip"
     set player's speed to 0.5          # walk speed, 0..1
     set player's fly speed to 0.3      # fly speed, 0..1
     set player's respawn point to 100 64 200

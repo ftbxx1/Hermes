@@ -321,6 +321,17 @@ public final class Parser {
                 endStatement();
                 return new ShowStmt(line, t);
             }
+            case "send": {
+                pos++;
+                TargetRef t = targetRef();
+                if (eat("resource")) {
+                    expect("pack", "send player resource pack \"https://example.com/pack.zip\"");
+                    String url = string("the resource pack url");
+                    endStatement();
+                    return new SendResourcePackStmt(line, t, url);
+                }
+                throw err("I can send a resource pack: 'send player resource pack \"url\"'.");
+            }
             case "kill": {
                 pos++;
                 TargetRef t = targetRef();
@@ -1821,6 +1832,14 @@ public final class Parser {
             case "hunger": return new HungerExpr(line);
             case "xp": return new XpExpr(line);
             case "level": return new LevelExpr(line);
+            case "ping": return new PingExpr(line);
+            case "ip": return new IpExpr(line);
+            case "target": {
+                if (eat("entity")) { /* "player's target entity" */ }
+                return new TargetExpr(line);
+            }
+            case "damager": return new LastDamagerExpr(line);
+            case "standing": return new StandingBlockExpr(line);
             default: return new VarGetExpr(line, new VarTarget("player", name));
         }
     }
@@ -1978,6 +1997,11 @@ public final class Parser {
                         expect("ground", "player is on the ground");
                         return new PlayerStateCond("ground");
                     }
+                    if (eat("sprinting")) return new PlayerStateCond("sprinting");
+                    if (eat("swimming")) return new PlayerStateCond("swimming");
+                    if (eat("sleeping")) return new PlayerStateCond("sleeping");
+                    if (eat("burning")) return new PlayerStateCond("burning");
+                    if (eat("blocking")) return new PlayerStateCond("blocking");
                     if (eat("in")) {
                         eatNoise();
                         if (at("world")) {
@@ -2385,6 +2409,11 @@ public final class Parser {
                         expect("ground", "when player is on the ground");
                         return stateTrigger(new PlayerStateCond("ground"), true);
                     }
+                    if (eat("sprinting")) return stateTrigger(new PlayerStateCond("sprinting"), true);
+                    if (eat("swimming")) return stateTrigger(new PlayerStateCond("swimming"), true);
+                    if (eat("sleeping")) return stateTrigger(new PlayerStateCond("sleeping"), true);
+                    if (eat("burning")) return stateTrigger(new PlayerStateCond("burning"), true);
+                    if (eat("blocking")) return stateTrigger(new PlayerStateCond("blocking"), true);
                     if (eat("in")) {
                         eatNoise();
                         if (at("world")) {
@@ -2490,6 +2519,25 @@ public final class Parser {
             if (at("attacks")) { pos++; return eventTrigger("mob attacks", null, Trigger.Filter.NONE); }
             throw new VerseError(line, "I expected 'dies' or 'spawns' after 'mob'.",
                     "when mob dies\n    announce \"A mob died!\"", null);
+        }
+
+        if ((at("a") || at("an") || at("the") || at("any")) && (peek(1).type == Type.WORD)
+                && (peek(1).text.equalsIgnoreCase("projectile") || peek(1).text.equalsIgnoreCase("arrow"))) {
+            pos += 2;
+            if (eat("hits")) {
+                eatNoise();
+                if (eat("player")) {
+                    eatNoise();
+                    if (at("named") || at("called")) {
+                        String name = string("the player's name");
+                        return eventTrigger("projectile hits player", name, Trigger.Filter.TEXT);
+                    }
+                    return eventTrigger("projectile hits player", null, Trigger.Filter.NONE);
+                }
+                return eventTrigger("projectile hits", null, Trigger.Filter.NONE);
+            }
+            throw new VerseError(line, "I expected 'hits' after the projectile.",
+                    "when a projectile hits\n    announce \"Direct hit!\"", null);
         }
 
         if (at("custom") || at("event")) {

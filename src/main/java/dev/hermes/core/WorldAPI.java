@@ -88,6 +88,16 @@ public interface WorldAPI {
     boolean isOp(PlayerRef p);
     void setFrozen(PlayerRef p, boolean frozen);
     boolean isFrozen(PlayerRef p);
+    /** Whether the player is holding the sprint key (Skript's "is sprinting"). */
+    boolean isSprinting(PlayerRef p);
+    /** Whether the player is swimming in water. */
+    boolean isSwimming(PlayerRef p);
+    /** Whether the player is asleep (e.g. in a bed). */
+    boolean isSleeping(PlayerRef p);
+    /** Whether the player has the on-fire state. */
+    boolean isBurning(PlayerRef p);
+    /** Whether the player is blocking with a shield. */
+    boolean isBlocking(PlayerRef p);
     /** Makes the player perform a command as if they typed it. */
     void runCommand(PlayerRef p, String command);
     /** Where the player respawns after death. */
@@ -98,6 +108,18 @@ public interface WorldAPI {
     void lookAt(PlayerRef p, Vec3 loc);
     /** Sets walk or fly speed ("walk"|"fly"); speed is 0..1. */
     void setSpeed(PlayerRef p, String kind, double speed);
+
+    // ---------- player info (Skript-style expressions) ----------
+    /** The player's ping in milliseconds. */
+    int ping(PlayerRef p);
+    /** The player's IPv4 address as text, or "unknown". */
+    String ip(PlayerRef p);
+    /** The name of the entity the player is looking at, or null. */
+    String targetEntity(PlayerRef p);
+    /** The name of the player who last damaged this one, or null. */
+    String lastDamager(PlayerRef p);
+    /** The friendly name of the block the player's feet are inside, or "air". */
+    String blockStandingIn(PlayerRef p);
 
     // ---------- inventory ----------
     void giveItem(PlayerRef p, String item, int count);
@@ -114,6 +136,8 @@ public interface WorldAPI {
     void sendTitle(PlayerRef p, String title, String subtitle);
     void sendActionbar(PlayerRef p, String msg);
     void kick(PlayerRef p, String reason);
+    /** Sends the player a resource pack to download and apply. */
+    void sendResourcePack(PlayerRef p, String url);
 
     // ---------- world events ----------
     void strikeLightning(Vec3 loc);

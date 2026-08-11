@@ -224,6 +224,18 @@ public final class HermesListener implements Listener {
         }
     }
 
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void onProjectileHit(org.bukkit.event.entity.ProjectileHitEvent e) {
+        org.bukkit.projectiles.ProjectileSource source = e.getEntity().getShooter();
+        PlayerRef shooterRef = source instanceof Player sp ? of(sp) : null;
+        Entity hit = e.getHitEntity();
+        if (hit instanceof Player hp) {
+            plugin.engine().projectileHitPlayer(of(hp),
+                    shooterRef != null ? shooterRef.name() : null);
+        }
+        plugin.engine().projectileHit(shooterRef);
+    }
+
     // ------------------------------------------------------------------
     // chat
     // ------------------------------------------------------------------

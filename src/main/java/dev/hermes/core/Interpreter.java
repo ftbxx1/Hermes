@@ -374,6 +374,10 @@ public final class Interpreter {
             if (rc.target == TargetRef.MOB) throw new VerseError(s.line,
                     "I can only make players run commands.", "make player run command \"/spawn\"");
             world.runCommand(needPlayer(s, ctx), rc.command);
+        } else if (s instanceof SendResourcePackStmt rp) {
+            if (rp.target == TargetRef.MOB) throw new VerseError(s.line,
+                    "I can only send resource packs to players.", "send player resource pack \"https://example.com/pack.zip\"");
+            world.sendResourcePack(needPlayer(s, ctx), rp.url);
         } else if (s instanceof SetRespawnStmt sr) {
             world.setRespawnPoint(needPlayer(s, ctx), resolveLoc(sr.where, s, ctx));
         } else if (s instanceof SetEquipmentStmt eq) {
@@ -854,6 +858,23 @@ public final class Interpreter {
         if (e instanceof HeldItemExpr) {
             return Value.text(world.heldItem(needPlayerForExpr(e, ctx)));
         }
+        if (e instanceof PingExpr) {
+            return Value.number(world.ping(needPlayerForExpr(e, ctx)));
+        }
+        if (e instanceof IpExpr) {
+            return Value.text(world.ip(needPlayerForExpr(e, ctx)));
+        }
+        if (e instanceof TargetExpr) {
+            String t = world.targetEntity(needPlayerForExpr(e, ctx));
+            return t == null ? Value.none() : Value.text(t);
+        }
+        if (e instanceof LastDamagerExpr) {
+            String d = world.lastDamager(needPlayerForExpr(e, ctx));
+            return d == null ? Value.none() : Value.text(d);
+        }
+        if (e instanceof StandingBlockExpr) {
+            return Value.text(world.blockStandingIn(needPlayerForExpr(e, ctx)));
+        }
         throw new VerseError(e.line, "I can't work out that value.");
     }
 
@@ -979,6 +1000,11 @@ public final class Interpreter {
                 case "ground": return world.isOnGround(ctx.player);
                 case "op": return world.isOp(ctx.player);
                 case "frozen": return world.isFrozen(ctx.player);
+                case "sprinting": return world.isSprinting(ctx.player);
+                case "swimming": return world.isSwimming(ctx.player);
+                case "sleeping": return world.isSleeping(ctx.player);
+                case "burning": return world.isBurning(ctx.player);
+                case "blocking": return world.isBlocking(ctx.player);
                 default: return false;
             }
         }

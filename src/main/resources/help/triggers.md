@@ -37,6 +37,8 @@ when player joins
 | sneaks | `when player sneaks` |
 | moves | `when player moves` |
 | enters a region | `when player enters region "Castle"` |
+| a projectile hits | `when a projectile hits` |
+| a projectile hits a player | `when a projectile hits player` |
 
 ## Mob events
 
@@ -65,6 +67,7 @@ when it is nighttime
 | State | Example |
 | --- | --- |
 | flying / sneaking / wet | `when player is flying` |
+| sprinting / swimming / sleeping / burning / blocking | `when player is sprinting` |
 | on the ground | `when player is on the ground` |
 | operator | `when player is op` |
 | in a gamemode | `when player is in creative` |

@@ -1130,6 +1130,28 @@ class EngineTest {
     }
 
     @Test
+    void sendPlayerResourcePack() {
+        Harness h = new Harness("""
+                when player joins
+                    send player resource pack "https://example.com/pack.zip"
+                """);
+        h.engine.playerEvent("joins", h.p1);
+        assertTrue(h.world.log.stream().anyMatch(l -> l.contains("resourcePack")
+                        && l.contains("https://example.com/pack.zip")),
+                "log: " + h.world.log);
+    }
+
+    @Test
+    void whenProjectileHitsPlayer() {
+        Harness h = new Harness("""
+                when a projectile hits player
+                    damage player by 3
+                """);
+        h.engine.projectileHitPlayer(h.p1, "Archer");
+        assertEquals(20.0 - 3.0, h.world.health(h.p1), 0.001);
+    }
+
+    @Test
     void setPlayerRespawnPoint() {
         Harness h = new Harness("""
                 when player joins
@@ -1192,5 +1214,88 @@ class EngineTest {
         h.engine.playerEvent("joins", h.p1);
         assertEquals(0.5, h.p1.walkSpeed, 0.001);
         assertEquals(0.3, h.p1.flySpeed, 0.001);
+    }
+
+    // ------------------------------------------------------------------
+    // Skript-style player states & info expressions
+    // ------------------------------------------------------------------
+
+    @Test
+    void playerStateConditionsSprintingAndBurning() {
+        Harness h = new Harness("""
+                when player joins
+                    if player is sprinting
+                        give player 1 diamond
+                    else
+                        give player 1 coal
+                """);
+        h.p1.sprinting = true;
+        h.engine.playerEvent("joins", h.p1);
+        assertEquals(1, h.p1.inventory.getOrDefault("diamond", 0));
+
+        Harness h2 = new Harness("""
+                when player joins
+                    if player is burning
+                        give player 1 gold ingot
+                    else
+                        give player 1 coal
+                """);
+        h2.p1.burning = true;
+        h2.engine.playerEvent("joins", h2.p1);
+        assertEquals(1, h2.p1.inventory.getOrDefault("gold ingot", 0));
+    }
+
+    @Test
+    void playerSleepingAndBlockingConditions() {
+        Harness h = new Harness("""
+                when player joins
+                    if player is sleeping
+                        give player 1 bread
+                    if player is blocking
+                        give player 1 shield
+                """);
+        h.p1.sleeping = true;
+        h.p1.blocking = true;
+        h.engine.playerEvent("joins", h.p1);
+        assertEquals(1, h.p1.inventory.getOrDefault("bread", 0));
+        assertEquals(1, h.p1.inventory.getOrDefault("shield", 0));
+    }
+
+    @Test
+    void playerStateTriggerFiresOnTrueEdge() {
+        Harness h = new Harness("""
+                when player is sprinting
+                    tell player "You're sprinting!"
+                """);
+        // start false, then true: the state trigger fires once
+        h.p1.sprinting = true;
+        h.engine.tick();
+        assertTrue(h.world.messageContains("PlayerOne", "sprinting"));
+        // stays true: must not fire twice
+        h.p1.messages.clear();
+        h.engine.tick();
+        assertTrue(h.p1.messages.isEmpty(), "messages: " + h.p1.messages);
+    }
+
+    @Test
+    void playerInfoExpressions() {
+        Harness h = new Harness("""
+                when player joins
+                    tell player "ping ${player's ping}"
+                    tell player "ip ${player's ip}"
+                    tell player "target ${player's target}"
+                    tell player "damager ${player's damager}"
+                    tell player "block ${player's standing}"
+                """);
+        h.p1.ping = 42;
+        h.p1.ip = "192.168.0.10";
+        h.p1.target = "zombie";
+        h.p1.lastDamager = "PlayerTwo";
+        h.engine.playerEvent("joins", h.p1);
+        assertTrue(h.world.messageContains("PlayerOne", "ping 42"));
+        assertTrue(h.world.messageContains("PlayerOne", "ip 192.168.0.10"));
+        assertTrue(h.world.messageContains("PlayerOne", "target zombie"));
+        assertTrue(h.world.messageContains("PlayerOne", "damager PlayerTwo"));
+        assertTrue(h.world.messageContains("PlayerOne", "block "));
     }
 }

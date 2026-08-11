@@ -285,6 +285,12 @@ public final class Ast {
         public RunCommandStmt(int line, TargetRef target, String command) { super(line); this.target = target; this.command = command; }
     }
 
+    /** "send player resource pack \"https://...\"": prompts the player to apply a resource pack. */
+    public static final class SendResourcePackStmt extends Stmt {
+        public final TargetRef target; public final String url;
+        public SendResourcePackStmt(int line, TargetRef target, String url) { super(line); this.target = target; this.url = url; }
+    }
+
     /** "set player's respawn point to 10 64 20". */
     public static final class SetRespawnStmt extends Stmt {
         public final LocRef where;
@@ -649,6 +655,31 @@ public final class Ast {
     public static final class PlayerCoordExpr extends ValueExpr {
         public final String axis; // x | y | z
         public PlayerCoordExpr(int line, String axis) { super(line); this.axis = axis; }
+    }
+
+    /** "player's ping": connection latency in ms. */
+    public static final class PingExpr extends ValueExpr {
+        public PingExpr(int line) { super(line); }
+    }
+
+    /** "player's ip": the player's address. */
+    public static final class IpExpr extends ValueExpr {
+        public IpExpr(int line) { super(line); }
+    }
+
+    /** "player's target": the name of the entity they're looking at. */
+    public static final class TargetExpr extends ValueExpr {
+        public TargetExpr(int line) { super(line); }
+    }
+
+    /** "player's last damager": who last hurt them. */
+    public static final class LastDamagerExpr extends ValueExpr {
+        public LastDamagerExpr(int line) { super(line); }
+    }
+
+    /** "block player is standing in": the block at the player's feet. */
+    public static final class StandingBlockExpr extends ValueExpr {
+        public StandingBlockExpr(int line) { super(line); }
     }
 
     public static final class GamemodeExpr extends ValueExpr {

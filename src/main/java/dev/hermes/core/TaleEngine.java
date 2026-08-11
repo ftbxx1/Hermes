@@ -274,6 +274,17 @@ public final class TaleEngine {
         dispatch(event, Trigger.Filter.REGION, region, p, null);
     }
 
+    /** A projectile fired by the given shooter hit something. Shooter may be null. */
+    public void projectileHit(PlayerRef shooter) {
+        dispatch("projectile hits", Trigger.Filter.NONE, null, shooter, null);
+    }
+
+    /** A projectile hit the given player; shooter is the firer's name (may be null). */
+    public void projectileHitPlayer(PlayerRef hit, String shooterName) {
+        dispatch("projectile hits player", Trigger.Filter.TEXT,
+                shooterName != null ? shooterName : "", hit, null);
+    }
+
     public void playerEventMob(String event, PlayerRef p, String mobType) {
         dispatch(event, Trigger.Filter.MOB, mobType, p, null);
     }
