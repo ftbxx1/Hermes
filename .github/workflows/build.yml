@@ -19,9 +19,9 @@ jobs:
           cache: maven
       - name: Build with Maven
         run: mvn -B -ntp clean package
-      - name: Upload Hermes.jar
+      - name: Upload jar
         uses: actions/upload-artifact@v4
         with:
-          name: Hermes.jar
-          path: target/Hermes.jar
+          name: Hermes-jar
+          path: target/Hermes-*.jar
           if-no-files-found: error
