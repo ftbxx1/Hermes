@@ -1,0 +1,31 @@
+# ================================================================
+#  Hermes - "Ring of Fire"
+#  An animated magic circle in plain English.
+#  Every 2 ticks it draws a ring of flame particles around
+#  (100 64 100), with a heart pulsing at the center, so it looks
+#  like a spinning circle of fire.
+#  Save in plugins/Hermes/hermes/ and run /hermes reload.
+# ================================================================
+
+every 2 ticks
+    spawn particles "flame" at 106 65 100 with count 1
+    spawn particles "flame" at 105.2 65 103 with count 1
+    spawn particles "flame" at 103 65 105.2 with count 1
+    spawn particles "flame" at 100 65 106 with count 1
+    spawn particles "flame" at 97 65 105.2 with count 1
+    spawn particles "flame" at 94.8 65 103 with count 1
+    spawn particles "flame" at 94 65 100 with count 1
+    spawn particles "flame" at 94.8 65 97 with count 1
+    spawn particles "flame" at 97 65 94.8 with count 1
+    spawn particles "flame" at 100 65 94 with count 1
+    spawn particles "flame" at 103 65 94.8 with count 1
+    spawn particles "flame" at 105.2 65 97 with count 1
+    spawn particles "heart" at 100 65 100 with count 2
+
+command "/ring"
+    spawn particles "flame" at 106 66 100 with count 3 with size 1.5
+    spawn particles "flame" at 94 66 100 with count 3 with size 1.5
+    spawn particles "flame" at 100 66 106 with count 3 with size 1.5
+    spawn particles "flame" at 100 66 94 with count 3 with size 1.5
+    play sound "explosion" near player
+    tell player "Ignited! Fire ring is on."

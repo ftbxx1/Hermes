@@ -1,0 +1,50 @@
+# ================================================================
+#  Hermes 2.3.0 - "Cerchio di Fiamme" (Ring of Fire)
+#  Un piccolo cerchio magico animato, scritto in italiano.
+#
+#  Ogni 2 tick disegna un anello completo di particelle di fuoco
+#  attorno al punto (100 64 100), con un cuore centrale al centro:
+#  così sembra un cerchio di fiamme che pulsa e ruota.
+#
+#  Come usarlo:
+#    - Salva questo file in  plugins/Hermes/hermes/
+#    - Ricarica con il comando  /hermes reload
+#    - Prova il comando  /cerchio
+# ================================================================
+
+ogni 2 tick
+    # anello esterno: 24 punti distribuiti su un cerchio completo
+    generare particles "flame" presso 106 65 100 con conteggio 1
+    generare particles "flame" presso 105.8 65 101.6 con conteggio 1
+    generare particles "flame" presso 105.2 65 103 con conteggio 1
+    generare particles "flame" presso 104.2 65 104.2 con conteggio 1
+    generare particles "flame" presso 103 65 105.2 con conteggio 1
+    generare particles "flame" presso 101.6 65 105.8 con conteggio 1
+    generare particles "flame" presso 100 65 106 con conteggio 1
+    generare particles "flame" presso 98.4 65 105.8 con conteggio 1
+    generare particles "flame" presso 97 65 105.2 con conteggio 1
+    generare particles "flame" presso 95.8 65 104.2 con conteggio 1
+    generare particles "flame" presso 94.8 65 103 con conteggio 1
+    generare particles "flame" presso 94.2 65 101.6 con conteggio 1
+    generare particles "flame" presso 94 65 100 con conteggio 1
+    generare particles "flame" presso 94.2 65 98.4 con conteggio 1
+    generare particles "flame" presso 94.8 65 97 con conteggio 1
+    generare particles "flame" presso 95.8 65 95.8 con conteggio 1
+    generare particles "flame" presso 97 65 94.8 con conteggio 1
+    generare particles "flame" presso 98.4 65 94.2 con conteggio 1
+    generare particles "flame" presso 100 65 94 con conteggio 1
+    generare particles "flame" presso 101.6 65 94.2 con conteggio 1
+    generare particles "flame" presso 103 65 94.8 con conteggio 1
+    generare particles "flame" presso 104.2 65 95.8 con conteggio 1
+    generare particles "flame" presso 105.2 65 97 con conteggio 1
+    generare particles "flame" presso 105.8 65 98.4 con conteggio 1
+    generare particles "heart" presso 100 65 100 con conteggio 2
+
+command "/cerchio"
+    # burst di particelle sui quattro lati cardinali
+    generare particles "flame" presso 106 66 100 con conteggio 3 con size 1.5
+    generare particles "flame" presso 94 66 100 con conteggio 3 con size 1.5
+    generare particles "flame" presso 100 66 106 con conteggio 3 con size 1.5
+    generare particles "flame" presso 100 66 94 con conteggio 3 con size 1.5
+    riprodurre sound "explosion" vicino giocatore
+    dire giocatore "Acceso! Cerchio di fiamme attivo."
