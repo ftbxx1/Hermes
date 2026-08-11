@@ -26,11 +26,12 @@ every 5 seconds
 
 | Region | `language` codes |
 | --- | --- |
-| Europe | `en`, `es`, `pt`, `fr`, `it`, `de`, `nl`, `ca`, `gl`, `eu`, `cy`, `pl`, `cs`, `sk`, `ru`, `uk`, `bg`, `hr`, `sr`, `sl`, `mk`, `bs`, `sq`, `mt`, `sv`, `da`, `no`, `fi`, `et`, `lt`, `lv`, `hu`, `ro`, `el`, `tr`, `is` |
-| Middle East | `ar`, `he`, `fa`, `ur`, `hy`, `ka` |
-| Asia | `zh`, `ja`, `ko`, `hi`, `bn`, `ta`, `te`, `id`, `ms`, `th`, `vi`, `fil`, `uz`, `kk` |
-| Africa | `af`, `sw` |
-| Americas | covered by `en`, `es`, `fr`, `pt` |
+| Europe | `en`, `es`, `pt`, `fr`, `it`, `de`, `nl`, `ca`, `gl`, `eu`, `cy`, `ga`, `gd`, `gv`, `fy`, `fo`, `lb`, `co`, `la`, `pl`, `cs`, `sk`, `ru`, `uk`, `bg`, `hr`, `sr`, `sl`, `mk`, `bs`, `sq`, `mt`, `sv`, `da`, `no`, `fi`, `et`, `lt`, `lv`, `hu`, `ro`, `el`, `tr`, `is`, `be`, `eo`, `tt` |
+| Middle East | `ar`, `he`, `fa`, `ur`, `hy`, `ka`, `ku`, `ps` |
+| Asia | `zh`, `ja`, `ko`, `hi`, `bn`, `ta`, `te`, `id`, `ms`, `th`, `vi`, `fil`, `uz`, `kk`, `az`, `ceb`, `gu`, `jv`, `km`, `kn`, `ky`, `lo`, `ml`, `mn`, `mr`, `my`, `ne`, `pa`, `sa`, `sd`, `si`, `su`, `tg`, `tk`, `ug` |
+| Africa | `af`, `sw`, `am`, `ha`, `ig`, `mg`, `sn`, `so`, `st`, `ti`, `wo`, `xh`, `yo`, `zu` |
+| Americas | `ht`, `haw`, plus `en`, `es`, `fr`, `pt` |
+| Oceania | `mi`, `sm` |
 
 ## Your own language
 
